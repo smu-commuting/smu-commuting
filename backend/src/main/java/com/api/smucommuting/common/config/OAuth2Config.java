@@ -1,7 +1,7 @@
 package com.api.smucommuting.common.config;
 
 
-import com.api.smucommuting.auth.oauth.domain.CustomOAuth2Provider;
+import com.api.smucommuting.auth.domain.oauth.CustomOAuth2Provider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package com.api.smucommuting.auth.token.domain;
+package com.api.smucommuting.auth.domain.token;
 
 import lombok.Getter;
 import lombok.Setter;

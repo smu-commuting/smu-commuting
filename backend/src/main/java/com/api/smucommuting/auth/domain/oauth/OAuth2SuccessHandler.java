@@ -1,7 +1,7 @@
-package com.api.smucommuting.auth.oauth.handler;
+package com.api.smucommuting.auth.domain.oauth;
 
-import com.api.smucommuting.auth.token.domain.Token;
-import com.api.smucommuting.auth.token.service.TokenProvider;
+import com.api.smucommuting.auth.domain.token.Token;
+import com.api.smucommuting.auth.domain.token.TokenProvider;
 import com.api.smucommuting.user.domain.SocialLoginProvider;
 import com.api.smucommuting.user.domain.User;
 import com.api.smucommuting.user.domain.repository.UserRepository;

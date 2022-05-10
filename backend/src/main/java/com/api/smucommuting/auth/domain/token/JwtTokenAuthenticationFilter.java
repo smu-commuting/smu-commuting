@@ -1,7 +1,6 @@
-package com.api.smucommuting.auth.token.domain;
+package com.api.smucommuting.auth.domain.token;
 
-import com.api.smucommuting.auth.security.service.CustomUserDetailsService;
-import com.api.smucommuting.auth.token.service.TokenProvider;
+import com.api.smucommuting.auth.domain.security.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.flywaydb.core.internal.util.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

@@ -1,6 +1,5 @@
-package com.api.smucommuting.auth.oauth.service;
+package com.api.smucommuting.auth.domain.oauth;
 
-import com.api.smucommuting.auth.oauth.domain.OAuthAttributes;
 import com.api.smucommuting.user.domain.User;
 import com.api.smucommuting.user.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.api.smucommuting.auth.security.domain;
+package com.api.smucommuting.auth.domain.security;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 

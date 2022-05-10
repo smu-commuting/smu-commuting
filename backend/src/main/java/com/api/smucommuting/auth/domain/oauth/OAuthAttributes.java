@@ -1,4 +1,4 @@
-package com.api.smucommuting.auth.oauth.domain;
+package com.api.smucommuting.auth.domain.oauth;
 
 import com.api.smucommuting.user.domain.Role;
 import com.api.smucommuting.user.domain.SocialLoginProvider;

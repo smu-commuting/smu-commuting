@@ -1,4 +1,4 @@
-package com.api.smucommuting.auth.security.domain;
+package com.api.smucommuting.auth.domain.security;
 
 import com.api.smucommuting.user.domain.User;
 import lombok.Getter;

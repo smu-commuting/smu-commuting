@@ -1,11 +1,11 @@
 package com.api.smucommuting.common.config;
 
-import com.api.smucommuting.auth.oauth.handler.OAuth2SuccessHandler;
-import com.api.smucommuting.auth.oauth.service.CustomOAuth2UserService;
-import com.api.smucommuting.auth.security.service.CustomUserDetailsService;
-import com.api.smucommuting.auth.token.domain.JwtAuthEntryPoint;
-import com.api.smucommuting.auth.token.domain.JwtTokenAuthenticationFilter;
-import com.api.smucommuting.auth.token.service.TokenProvider;
+import com.api.smucommuting.auth.domain.oauth.OAuth2SuccessHandler;
+import com.api.smucommuting.auth.domain.oauth.CustomOAuth2UserService;
+import com.api.smucommuting.auth.domain.security.CustomUserDetailsService;
+import com.api.smucommuting.auth.domain.token.JwtAuthEntryPoint;
+import com.api.smucommuting.auth.domain.token.JwtTokenAuthenticationFilter;
+import com.api.smucommuting.auth.domain.token.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

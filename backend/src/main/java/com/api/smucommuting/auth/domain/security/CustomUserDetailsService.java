@@ -1,6 +1,5 @@
-package com.api.smucommuting.auth.security.service;
+package com.api.smucommuting.auth.domain.security;
 
-import com.api.smucommuting.auth.security.domain.CustomUserDetails;
 import com.api.smucommuting.user.domain.User;
 import com.api.smucommuting.user.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

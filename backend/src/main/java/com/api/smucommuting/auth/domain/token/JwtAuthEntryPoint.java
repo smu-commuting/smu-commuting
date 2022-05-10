@@ -1,4 +1,4 @@
-package com.api.smucommuting.auth.token.domain;
+package com.api.smucommuting.auth.domain.token;
 
 import com.api.smucommuting.common.dto.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;

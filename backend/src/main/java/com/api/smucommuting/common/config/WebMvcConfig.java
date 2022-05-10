@@ -1,16 +1,20 @@
 package com.api.smucommuting.common.config;
 
+import com.api.smucommuting.auth.domain.token.JwtRefreshTokenInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @RequiredArgsConstructor
 public class WebMvcConfig implements WebMvcConfigurer {
+    private final JwtRefreshTokenInterceptor jwtTokenInterceptor;
+
     /****************************************************************************************
      * CORS 설정
      * 모두 허용함
@@ -37,6 +41,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return characterEncodingFilter;
     }
 
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(jwtTokenInterceptor).addPathPatterns("/api/user/refreshtoken");
+    }
 
     @Bean
     public RestTemplate restTemplate() {

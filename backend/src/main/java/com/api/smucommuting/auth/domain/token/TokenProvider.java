@@ -1,7 +1,5 @@
-package com.api.smucommuting.auth.token.service;
+package com.api.smucommuting.auth.domain.token;
 
-import com.api.smucommuting.auth.token.domain.JwtProps;
-import com.api.smucommuting.auth.token.domain.Token;
 import com.api.smucommuting.user.domain.User;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
@@ -68,5 +66,26 @@ public class TokenProvider {
         }
 
         return claims;
+    }
+
+    public boolean isValidToken(String token) {
+        SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtProps.getRefreshTokenProps().getSecret()));
+        Jws<Claims> claims = null;
+        try {
+            claims = Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token);
+            return true;
+        } catch (ExpiredJwtException exception) {
+            log.error("Token Expired");
+            return false;
+        } catch (JwtException exception) {
+            log.error("Token Tampered");
+            return false;
+        } catch (NullPointerException exception) {
+            log.error("Token is null");
+            return false;
+        }
     }
 }
