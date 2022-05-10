@@ -1,0 +1,41 @@
+spring:
+  profiles:
+    group:
+      local:
+        - local
+        - oauth
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+logging.level:
+  org.hibernate.SQL: debug
+
+---
+spring.config.activate.on-profile: local
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: 'jdbc:mysql://127.0.0.1:3306/smucommuting?serverTimezone=Asia/Seoul&charset=UTF-8'
+    username: root
+    password: pass
+
+jwt:
+  access-token-props:
+    secret: 'ZlLHyRf4Ru3CnpVVl6hk9InHkAcHG07x82PufcFR4S4pKnLn0WJgtu4VQERoJauKi2hNIgWCuQF9aFQM7VJGlw=='
+    expiration-time-milli-sec: 3600000
+  refresh-token-props:
+    secret: '3NuzNV3kkmNln/fqxyjqxKDA/1WaaS+V83KYTT8jmX1VpKsMskbqS+xFR3Cv1P9MmskDX3WdHcWka/dgvkGMQg=='
+    expiration-time-milli-sec: 864000000
+
+oauth2:
+  success:
+    redirect:
+      url: http://localhost:3000/callback/
