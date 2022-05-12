@@ -5,6 +5,10 @@ spring:
         - local
         - oauth
         - mail
+      dev:
+        - dev
+        - oauth
+        - mail
   jpa:
     hibernate:
       ddl-auto: validate
