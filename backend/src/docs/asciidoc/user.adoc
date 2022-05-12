@@ -1,0 +1,24 @@
+= 샘물로 API 문서 (User)
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:snippets: ../../../build/generated-snippets
+
+= User
+---
+== 기본 API
+
+=== 회원가입
+
+`POST /api/user/signup`
+
+요청 HTTP
+include::{snippets}/user_signup/http-request.adoc[]
+include::{snippets}/user_signup/request-fields.adoc[]
+
+성공 응답 HTTP
+include::{snippets}/user_signup/http-response.adoc[]
+include::{snippets}/user_signup/response-fields.adoc[]

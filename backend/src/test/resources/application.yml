@@ -1,0 +1,34 @@
+spring:
+  profiles:
+    active: test
+  flyway:
+    enabled: false
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: test
+            client-secret: test
+            scope: profile, email
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: test
+    password: test
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+kakao:
+  client:
+    id: test
+    secret: test
+
+oauth2:
+  success:
+    redirect:
+      url: http://localhost:3000/callback/
