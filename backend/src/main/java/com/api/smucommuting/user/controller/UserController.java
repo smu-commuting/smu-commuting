@@ -20,4 +20,9 @@ public class UserController {
     public void signup(@RequestBody UserRequest.Signup request, @CurrentUser CustomUserDetails customUserDetails) {
         userService.signup(request, customUserDetails.getUser());
     }
+
+    @PostMapping("/email")
+    public void sendEmailCode(@CurrentUser CustomUserDetails customUserDetails) {
+        userService.sendEmailCode(customUserDetails.getUser());
+    }
 }

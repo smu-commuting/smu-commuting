@@ -5,3 +5,12 @@ Content-Type: application/json;charset=UTF-8
 {
   "email": "test@test.com"
 }
+
+###
+POST {{apiUrl}}/user/email
+Authorization: {{authorizationToken}}
+Content-Type: application/json;charset=UTF-8
+
+{
+  "email": "test@test.com"
+}
