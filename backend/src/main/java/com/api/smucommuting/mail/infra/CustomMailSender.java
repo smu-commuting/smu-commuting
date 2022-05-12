@@ -1,5 +1,6 @@
 package com.api.smucommuting.mail.infra;
 
+import com.api.smucommuting.common.exception.mail.MailSendException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
@@ -18,15 +19,12 @@ public class CustomMailSender {
 
     @Async
     public <T> void mailSend(String toEmail, T data) {
-        MimeMessage mimeMessage = null;
         try {
-            mimeMessage = makeMessage(toEmail, data);
+            MimeMessage message = makeMessage(toEmail, data);
+            mailSender.send(message);
         } catch (MessagingException e) {
-            //TODO 런타임 에러로 변환하고 에러 핸들링
-            e.printStackTrace();
+            throw new MailSendException(e);
         }
-
-        mailSender.send(mimeMessage);
     }
 
     private <T> MimeMessage makeMessage(String toEmail, T data) throws MessagingException {

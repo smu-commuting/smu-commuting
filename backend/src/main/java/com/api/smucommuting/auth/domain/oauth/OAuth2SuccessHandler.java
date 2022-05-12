@@ -2,6 +2,7 @@ package com.api.smucommuting.auth.domain.oauth;
 
 import com.api.smucommuting.auth.domain.token.Token;
 import com.api.smucommuting.auth.domain.token.TokenProvider;
+import com.api.smucommuting.common.exception.user.UserNotFoundException;
 import com.api.smucommuting.user.domain.SocialLoginProvider;
 import com.api.smucommuting.user.domain.User;
 import com.api.smucommuting.user.domain.repository.UserRepository;
@@ -12,7 +13,6 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -40,10 +40,10 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
     private User findUser(OAuth2User oauth2User) {
         if (oauth2User.getAttributes().get("sub") != null) {
             String oAuthId = String.valueOf(oauth2User.getAttributes().get("sub"));
-            return userRepository.findBySocialLoginProviderAndOauthId(SocialLoginProvider.GOOGLE, oAuthId).orElseThrow(EntityNotFoundException::new);
+            return userRepository.findBySocialLoginProviderAndOauthId(SocialLoginProvider.GOOGLE, oAuthId).orElseThrow(UserNotFoundException::new);
         } else {
             String oAuthId = String.valueOf(oauth2User.getAttributes().get("id"));
-            return userRepository.findBySocialLoginProviderAndOauthId(SocialLoginProvider.KAKAO, oAuthId).orElseThrow(EntityNotFoundException::new);
+            return userRepository.findBySocialLoginProviderAndOauthId(SocialLoginProvider.KAKAO, oAuthId).orElseThrow(UserNotFoundException::new);
         }
     }
 }

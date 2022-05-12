@@ -23,7 +23,7 @@ public class User extends BaseTimeEntity {
     private String email;
 
     @Column(name = "student_id")
-    private int studentId;
+    private Integer studentId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "social_login_provider")

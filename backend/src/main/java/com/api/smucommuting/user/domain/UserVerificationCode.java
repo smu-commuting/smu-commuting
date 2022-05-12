@@ -27,6 +27,12 @@ public class UserVerificationCode {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public UserVerificationCode update(UserVerificationCode userVerificationCode) {
+        this.code = userVerificationCode.getCode();
+        this.expirationDate = userVerificationCode.getExpirationDate();
+        return this;
+    }
+
     public static UserVerificationCode create(User user) {
         String code = createCode();
 
