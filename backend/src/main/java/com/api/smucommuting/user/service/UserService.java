@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -28,5 +30,9 @@ public class UserService {
     public void sendEmailCode(User user) {
         UserVerificationCode userVerificationCode = userVerificationCodeService.create(user);
         mailSender.mailSend(user.getEmail(), userVerificationCode);
+    }
+
+    public void codeVerification(UserRequest.EmailVerification request, User user, LocalDateTime now) {
+        userVerificationCodeService.validateCode(user, request.getCode(), now);
     }
 }

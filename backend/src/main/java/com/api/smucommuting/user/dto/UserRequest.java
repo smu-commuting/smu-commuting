@@ -8,4 +8,9 @@ public class UserRequest {
         private String email;
         private int studentId;
     }
+
+    @Getter
+    public static class EmailVerification{
+        private String code;
+    }
 }

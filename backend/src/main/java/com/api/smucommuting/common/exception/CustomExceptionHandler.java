@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 @RestControllerAdvice
 public class CustomExceptionHandler {
     @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<ErrorResponse> businessExceptionHandler(EntityNotFoundException ex) {
+    public ResponseEntity<ErrorResponse> businessExceptionHandler(BusinessException ex) {
         ErrorResponse response = ErrorResponse.build(HttpServletResponse.SC_BAD_REQUEST, ex);
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
