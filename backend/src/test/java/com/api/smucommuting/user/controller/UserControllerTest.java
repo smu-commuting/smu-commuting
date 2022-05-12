@@ -30,6 +30,7 @@ class UserControllerTest extends MvcTest {
 
     private static final String EMAIL = "test@test.com";
     private static final Integer STUDENT_ID = 123456;
+    private static final String EMAIL_VERIFICATION_CDE = "CODE";
 
     @BeforeEach
     public void setup() {
@@ -59,6 +60,50 @@ class UserControllerTest extends MvcTest {
                         requestFields(
                                 fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
                                 fieldWithPath("studentId").type(JsonFieldType.NUMBER).description("학번")
+                        ),
+                        responseFields(
+                                fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
+                                fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
+                                fieldWithPath("data").description("응답 데이터가 없다면 null")
+                        )
+                ));
+    }
+
+    @Test
+    @DisplayName("인증코드 이메일 전송 문서화")
+    public void sendEmailCode() throws Exception {
+        ResultActions results = mvc.perform(RestDocumentationRequestBuilders
+                .post("/api/user/email")
+        );
+
+        results.andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("user_email_code_send",
+                        responseFields(
+                                fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
+                                fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
+                                fieldWithPath("data").description("응답 데이터가 없다면 null")
+                        )
+                ));
+    }
+
+    @Test
+    @DisplayName("인증코드 검사")
+    public void codeVerification() throws Exception {
+        UserRequest.EmailVerification request = UserRequest.EmailVerification.builder().code(EMAIL_VERIFICATION_CDE).build();
+
+        ResultActions results = mvc.perform(RestDocumentationRequestBuilders
+                .post("/api/user/email/verification")
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(objectMapper.writeValueAsString(request))
+        );
+
+        results.andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("user_email_code_verification",
+                        requestFields(
+                                fieldWithPath("code").type(JsonFieldType.STRING).description("인증 코드")
                         ),
                         responseFields(
                                 fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),

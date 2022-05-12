@@ -3,7 +3,7 @@ Authorization: {{authorizationToken}}
 Content-Type: application/json;charset=UTF-8
 
 {
-  "email": "donup088@gmail.com"
+  "email": "test@test.com"
 }
 
 ###
@@ -12,7 +12,7 @@ Authorization: {{authorizationToken}}
 Content-Type: application/json;charset=UTF-8
 
 {
-  "email": "donup088@gmail.com"
+  "email": "test@test.com"
 }
 
 ###

@@ -13,6 +13,9 @@ public class UserRequest {
     }
 
     @Getter
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class EmailVerification{
         private String code;
     }

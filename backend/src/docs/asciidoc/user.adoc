@@ -22,3 +22,26 @@ include::{snippets}/user_signup/request-fields.adoc[]
 성공 응답 HTTP
 include::{snippets}/user_signup/http-response.adoc[]
 include::{snippets}/user_signup/response-fields.adoc[]
+
+=== 이메일 인증 코드 전송
+
+`POST /api/user/email`
+
+요청 HTTP
+include::{snippets}/user_email_code_send/http-request.adoc[]
+
+성공 응답 HTTP
+include::{snippets}/user_email_code_send/http-response.adoc[]
+include::{snippets}/user_email_code_send/response-fields.adoc[]
+
+=== 이메일 인증 코드 검사
+
+`POST /api/user/email/verification`
+
+요청 HTTP
+include::{snippets}/user_email_code_verification/http-request.adoc[]
+include::{snippets}/user_email_code_verification/request-fields.adoc[]
+
+성공 응답 HTTP
+include::{snippets}/user_email_code_verification/http-response.adoc[]
+include::{snippets}/user_email_code_verification/response-fields.adoc[]

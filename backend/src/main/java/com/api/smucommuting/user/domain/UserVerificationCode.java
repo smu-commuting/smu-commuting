@@ -23,7 +23,7 @@ public class UserVerificationCode {
     @Column(name = "expiration_date")
     private LocalDateTime expirationDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id")
     private User user;
 
