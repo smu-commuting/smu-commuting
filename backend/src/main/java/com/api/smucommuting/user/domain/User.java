@@ -33,5 +33,9 @@ public class User extends BaseTimeEntity {
     @Column(name = "role")
     private Role role;
 
-
+    public void signup(String email, int studentId, UserValidator userValidator) {
+        userValidator.emailValidate(email);
+        this.email = email;
+        this.studentId = studentId;
+    }
 }

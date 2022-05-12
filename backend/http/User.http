@@ -1,0 +1,7 @@
+POST {{apiUrl}}/user/signup
+Authorization: {{authorizationToken}}
+Content-Type: application/json;charset=UTF-8
+
+{
+  "email": "test@test.com"
+}

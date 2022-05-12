@@ -16,11 +16,17 @@ public class RefreshTokenService {
     private final UserRepository userRepository;
     private final TokenProvider tokenProvider;
 
+    //테스트용
+    public AuthResponse loginTest(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
+        Token refreshToken = tokenProvider.generateRefreshToken(user);
+
+        return AuthResponse.build(user, tokenProvider.generateAccessToken(user), refreshToken);
+    }
+
     public AuthResponse createAccessTokenAndRefreshToken(String refreshToken) {
         Long userId = tokenProvider.getUserIdFromRefreshToken(refreshToken);
-
         User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
-
         Token createdRefreshToken = tokenProvider.generateRefreshToken(user);
 
         return AuthResponse.build(user, tokenProvider.generateAccessToken(user), createdRefreshToken);

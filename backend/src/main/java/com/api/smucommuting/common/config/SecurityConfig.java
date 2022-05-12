@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(jwtAuthEntryPoint)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/docs/**").permitAll()
+                .antMatchers("/docs/**","/api/auth/{userId}").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login()
