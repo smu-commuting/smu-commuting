@@ -33,5 +33,16 @@ http://localhost:3000/callback/userId/accessToken/studentId 으로 redirect
 |학번 회원가입을 안했다면 null
 |===
 
+=== access token 재발급
+
+`POST /api/auth/refresh`
+
+요청 HTTP
+include::{snippets}/auth_refresh/http-request.adoc[]
+
+성공 응답 HTTP
+include::{snippets}/auth_refresh/http-response.adoc[]
+include::{snippets}/auth_refresh/response-fields.adoc[]
+
 
 

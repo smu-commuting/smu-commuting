@@ -26,7 +26,7 @@ public class AuthController {
         return ResponseEntity.ok().body(authResponse);
     }
 
-    @PostMapping("/refreshtoken")
+    @PostMapping("/refresh")
     public ResponseEntity<ApiResult<AuthResponse>> refreshToken(@CookieValue(REFRESH_TOKEN) String refreshToken, HttpServletResponse response) {
         AuthResponse tokenResponse = refreshTokenService.createAccessTokenAndRefreshToken(refreshToken);
 

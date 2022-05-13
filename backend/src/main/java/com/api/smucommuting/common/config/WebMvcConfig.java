@@ -42,7 +42,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(jwtTokenInterceptor).addPathPatterns("/api/user/refreshtoken");
+        registry.addInterceptor(jwtTokenInterceptor).addPathPatterns("/api/auth/refresh");
     }
 
     @Bean

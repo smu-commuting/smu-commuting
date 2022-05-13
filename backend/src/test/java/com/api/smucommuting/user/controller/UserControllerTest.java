@@ -26,7 +26,7 @@ class UserControllerTest extends MvcTest {
     @MockBean
     private UserService userService;
 
-    private User user1;
+    private User user;
 
     private static final String EMAIL = "test@test.com";
     private static final Integer STUDENT_ID = 123456;
@@ -34,7 +34,7 @@ class UserControllerTest extends MvcTest {
 
     @BeforeEach
     public void setup() {
-        user1 = User.builder()
+        user = User.builder()
                 .id(1L)
                 .email(EMAIL)
                 .studentId(STUDENT_ID)
