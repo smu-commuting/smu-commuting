@@ -1,5 +1,24 @@
 @import '../../styles/utils.scss'; 
 
-.mk{
-    @include font-face('NotoSansKR-Bold',2rem, 20px, red); 
+.loginpage-wrapper{
+    .sammulro{ 
+        display: block;
+        margin: 6.3rem auto 1.3rem auto;
+    }
+    .sumung{
+        display: block;
+        width : 70%;
+        margin : 1.3rem auto; 
+    }
+    .login-btn{
+        margin-top : 2.1rem; 
+        img:nth-child(1){
+            display : block;
+            margin : 0 auto 1.8rem auto; 
+        }
+        img:nth-child(2){
+            display: block;
+            margin : 0 auto; 
+        }
+    }
 }
