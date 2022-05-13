@@ -1,0 +1,37 @@
+= 샘물로 API 문서 (Auth)
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:snippets: ../../../build/generated-snippets
+
+= Auth
+---
+
+== 소셜로그인 (카카오,구글)
+
+`Redirect /oauth2/authorization/kakao`
+
+`Redirect /oauth2/authorization/google`
+
+성공 응답 HTTP
+
+[source]
+----
+http://localhost:3000/callback/userId/accessToken/studentId 으로 redirect
+----
+
+[cols=2*]
+|===
+|userId
+|유저 식별자
+|accessToken
+|accessToken
+|studentId
+|학번 회원가입을 안했다면 null
+|===
+
+
+

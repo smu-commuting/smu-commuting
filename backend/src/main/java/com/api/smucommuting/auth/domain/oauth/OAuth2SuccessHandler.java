@@ -32,9 +32,11 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
         Token token = tokenProvider.generateAccessToken(user);
 
+        response.sendRedirect(createCallback(user, token));
+    }
 
-        response.sendRedirect(url + user.getId() + "/" + token.getToken());
-
+    private String createCallback(User user, Token token) {
+        return url + user.getId() + "/" + token.getToken() + "/" + user.getStudentId();
     }
 
     private User findUser(OAuth2User oauth2User) {
