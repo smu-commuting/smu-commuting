@@ -7,10 +7,9 @@
 :sectlinks:
 :snippets: ../../../build/generated-snippets
 
-= Auth
----
+== Auth
 
-== 소셜로그인 (카카오,구글)
+=== 소셜로그인 (카카오,구글)
 
 `Redirect /oauth2/authorization/kakao`
 

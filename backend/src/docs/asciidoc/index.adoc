@@ -1,3 +1,5 @@
 = 샘물로 API 문서
 
+- link:/docs/auth.html[인증(Auth) API]
 - link:/docs/user.html[사용자(User) API]
+
