@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import App from './pages/App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import './styles/_reset.scss';
-import './styles/utils.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
