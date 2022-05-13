@@ -1,0 +1,5 @@
+@import '../../styles/utils.scss'; 
+
+.mk{
+    @include font-face('NotoSansKR-Bold',2rem, 20px, red); 
+}

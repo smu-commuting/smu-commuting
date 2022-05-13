@@ -1,7 +1,15 @@
-import React from "react";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LogInPage from './LogInPage/LogInPage';
 
 function App() {
-  return <div className="App">통학 APP</div>;
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<LogInPage />} />
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;
