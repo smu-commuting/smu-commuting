@@ -72,13 +72,21 @@ class UserControllerTest extends MvcTest {
     @Test
     @DisplayName("인증코드 이메일 전송 문서화")
     public void sendEmailCode() throws Exception {
+        UserRequest.Email request = UserRequest.Email.builder().email(EMAIL).build();
+
         ResultActions results = mvc.perform(RestDocumentationRequestBuilders
                 .post("/api/user/email")
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(objectMapper.writeValueAsString(request))
         );
 
         results.andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("user_email_code_send",
+                        requestFields(
+                                fieldWithPath("email").type(JsonFieldType.STRING).description("이메일")
+                        ),
                         responseFields(
                                 fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
                                 fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),

@@ -27,9 +27,9 @@ public class UserService {
         findUser.signup(request.getEmail(), request.getStudentId(), userValidator);
     }
 
-    public void sendEmailCode(User user) {
+    public void sendEmailCode(UserRequest.Email request, User user) {
         UserVerificationCode userVerificationCode = userVerificationCodeService.create(user);
-        mailSender.mailSend(user.getEmail(), userVerificationCode);
+        mailSender.mailSend(request.getEmail(), userVerificationCode);
     }
 
     public void codeVerification(UserRequest.EmailVerification request, User user, LocalDateTime now) {

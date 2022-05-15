@@ -8,7 +8,10 @@ import com.api.smucommuting.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 
@@ -25,8 +28,8 @@ public class UserController {
     }
 
     @PostMapping("/email")
-    public ResponseEntity<ApiResult<Void>> sendEmailCode(@CurrentUser CustomUserDetails customUserDetails) {
-        userService.sendEmailCode(customUserDetails.getUser());
+    public ResponseEntity<ApiResult<Void>> sendEmailCode(@RequestBody UserRequest.Email request, @CurrentUser CustomUserDetails customUserDetails) {
+        userService.sendEmailCode(request, customUserDetails.getUser());
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
     }
 

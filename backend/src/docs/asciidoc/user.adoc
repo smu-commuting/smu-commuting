@@ -27,6 +27,7 @@ include::{snippets}/user_signup/response-fields.adoc[]
 
 요청 HTTP
 include::{snippets}/user_email_code_send/http-request.adoc[]
+include::{snippets}/user_email_code_send/request-fields.adoc[]
 
 성공 응답 HTTP
 include::{snippets}/user_email_code_send/http-response.adoc[]
