@@ -10,9 +10,13 @@ function LogInProcess() {
     useEffect(() => {
         localStorage.setItem('accessToken', accessToken);
         if (studentId === 'null') {
-            navigate('/signup');
+            setTimeout(() => {
+                navigate('/signup');
+            }, 1500);
         } else {
-            navigate('/home');
+            setTimeout(() => {
+                navigate('/home');
+            }, 1500);
         }
     }, []);
     return (
