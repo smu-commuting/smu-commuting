@@ -2,4 +2,5 @@
 
 - link:/docs/auth.html[인증(Auth) API]
 - link:/docs/user.html[사용자(User) API]
+- link:/docs/taxi.html[택시합승(Taxi) API]
 
