@@ -1,16 +1,21 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { postAuthNumAPI, sendNumberAPI } from '../../modules/api';
 import './SignUpPage.scss';
-import axios from 'axios';
 import Search from '../../assets/SignUpPage/검색.png';
+import { signupRequest } from '../../modules/reducers/user';
 
 function SignUpPage() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { signupDone } = useSelector(state => state.user);
     const [checkSend, setCheckSend] = useState(false);
     const [studentId, setStudentId] = useState(''); // 학번
     const [authNum, setAuthNum] = useState(''); // 인증번호
 
+    console.log(signupDone);
     const onStudentIdChange = e => {
         if (studentId.length > 8) {
             alert('학번은 9자리 이내로 입력 가능합니다.');
@@ -24,57 +29,25 @@ function SignUpPage() {
         setAuthNum(e.target.value);
     };
 
+    // 인증번호 요청 API
     const sendNumber = async () => {
-        const response = await axios.post(
-            'http://13.124.109.54/api/user/email',
-            JSON.stringify(`${studentId}@sangmyung.kr`),
-            {
-                headers: {
-                    'Content-Type': `application/json`,
-                    Authorization: `Bearer ${localStorage.getItem(
-                        'accessToken',
-                    )}`,
-                },
-            },
-        );
-        if (response.data.success) {
-            setCheckSend(true);
-        }
+        const response = await sendNumberAPI(studentId);
+        if (response.data.success) setCheckSend(true);
     };
 
     const postAuthNum = async () => {
-        const response = await axios.post(
-            'http://13.124.109.54/api/user/email/verification',
-            JSON.stringify(authNum),
-            {
-                headers: {
-                    'Content-Type': `application/json`,
-                    Authorization: `Bearer ${localStorage.getItem(
-                        'accessToken',
-                    )}`,
-                },
-            },
-        );
+        const response = await postAuthNumAPI(authNum);
         if (response.data.success) {
             const userInfo = {
                 email: `${studentId}@sangmyung.kr`,
                 studentId,
             };
-            const responseSignup = await axios.post(
-                'http://13.124.109.54/api/user/signup',
-                JSON.stringify(userInfo),
-                {
-                    headers: {
-                        'Content-Type': `application/json`,
-                        Authorization: `Bearer ${localStorage.getItem(
-                            'accessToken',
-                        )}`,
-                    },
-                },
-            );
-            if (responseSignup.data.success) {
-                alert('회원가입이 완료되었습니다.');
-                navigate('/home');
+            dispatch(signupRequest(userInfo));
+            alert('회원가입이 완료되었습니다.');
+            if (signupDone === true) {
+                navigate(`/home`);
+            } else {
+                alert('회원가입 실패');
             }
         }
     };
