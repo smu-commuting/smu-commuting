@@ -2,7 +2,6 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import './LogInProcess.scss';
 import sumungLoading from '../../assets/LogInProcess/수뭉이-뱃지2.png';
 import { loginRequest } from '../../modules/reducers/user';
 import LoadingPage from '../LoadingPage/LoadingPage';
