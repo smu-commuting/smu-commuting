@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import './LogInProcess.scss';
 import sumungLoading from '../../assets/LogInProcess/수뭉이-뱃지2.png';
 import { loginRequest } from '../../modules/reducers/user';
+import LoadingPage from '../LoadingPage/LoadingPage';
 
 function LogInProcess() {
     const navigate = useNavigate();
@@ -28,11 +29,7 @@ function LogInProcess() {
             }, 1500);
         }
     }, []);
-    return (
-        <div className="loginprocess-wrapper">
-            <img src={sumungLoading} alt="loading" />
-        </div>
-    );
+    return <LoadingPage />;
 }
 
 export default LogInProcess;

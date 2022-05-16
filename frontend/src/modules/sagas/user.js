@@ -37,15 +37,15 @@ function signupAPI(data) {
 
 function* signup(action) {
     try {
-        const result = yield call(signupAPI, action.data);
+        yield call(signupAPI, action.data);
         yield put({
             type: USER_SIGN_UP_SUCCESS,
-            data: result,
+            data: action.data,
         });
     } catch (err) {
         yield put({
             type: USER_SIGN_UP_FAILURE,
-            error: err.response.data,
+            error: err,
         });
     }
 }

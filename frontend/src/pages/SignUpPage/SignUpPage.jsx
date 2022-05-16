@@ -15,7 +15,7 @@ function SignUpPage() {
     const [studentId, setStudentId] = useState(''); // 학번
     const [authNum, setAuthNum] = useState(''); // 인증번호
 
-    console.log(signupDone);
+    // console.log(signupDone);
     const onStudentIdChange = e => {
         if (studentId.length > 8) {
             alert('학번은 9자리 이내로 입력 가능합니다.');
@@ -35,6 +35,7 @@ function SignUpPage() {
         if (response.data.success) setCheckSend(true);
     };
 
+    // 인증번호 검사 API
     const postAuthNum = async () => {
         const response = await postAuthNumAPI(authNum);
         if (response.data.success) {
@@ -43,12 +44,10 @@ function SignUpPage() {
                 studentId,
             };
             dispatch(signupRequest(userInfo));
-            alert('회원가입이 완료되었습니다.');
-            if (signupDone === true) {
-                navigate(`/home`);
-            } else {
-                alert('회원가입 실패');
-            }
+            alert('가입을 축하합니다.');
+            navigate(`/home`);
+        } else {
+            alert('올바른 인증번호가 아닙니다.');
         }
     };
     return (

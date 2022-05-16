@@ -31,6 +31,7 @@ export const loginRequest = data => {
 };
 
 export const signupRequest = data => {
+    console.log('action', data);
     return {
         type: USER_SIGN_UP_REQUEST,
         data,
@@ -67,10 +68,11 @@ const reducer = (state = initialState, action) => {
                 draft.signupError = null;
                 break;
             case USER_SIGN_UP_SUCCESS:
+                console.log(action.data);
                 draft.signupLoading = false;
                 draft.signupDone = true;
                 draft.signupError = null;
-                draft.me = action.data.data;
+                draft.me = action.data;
                 break;
             case USER_SIGN_UP_FAILURE:
                 draft.signupLoading = false;
