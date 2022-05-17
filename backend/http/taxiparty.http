@@ -7,3 +7,9 @@ Content-Type: application/json;charset=UTF-8
   "headcount": 5,
   "meetingDate": "2022-05-17T15:00"
 }
+
+###
+POST {{apiUrl}}/taxi/party/1
+Authorization: {{authorizationToken}}
+Content-Type: application/json;charset=UTF-8
+

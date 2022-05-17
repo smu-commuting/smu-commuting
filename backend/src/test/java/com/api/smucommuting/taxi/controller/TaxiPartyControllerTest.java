@@ -17,6 +17,8 @@ import java.time.LocalDateTime;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -53,6 +55,22 @@ class TaxiPartyControllerTest extends MvcTest {
                                 fieldWithPath("placeId").type(JsonFieldType.NUMBER).description("택시합승장소 식별자"),
                                 fieldWithPath("headcount").type(JsonFieldType.NUMBER).description("최대 인원"),
                                 fieldWithPath("meetingDate").type(JsonFieldType.STRING).description("택시합승 시간")
+                        )
+                ));
+    }
+
+    @Test
+    @DisplayName("택시 파티 참여 문서화")
+    public void join() throws Exception {
+        ResultActions results = mvc.perform(RestDocumentationRequestBuilders
+                .post("/api/taxi/party/{taxiPartyId}", 1)
+        );
+
+        results.andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("taxi_party_join",
+                        pathParameters(
+                                parameterWithName("taxiPartyId").description("참여할 택시파티 식별자")
                         )
                 ));
     }

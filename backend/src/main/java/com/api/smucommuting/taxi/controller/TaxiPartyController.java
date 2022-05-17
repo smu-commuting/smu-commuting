@@ -8,10 +8,7 @@ import com.api.smucommuting.taxi.service.TaxiPartyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,6 +20,13 @@ public class TaxiPartyController {
     public ResponseEntity<ApiResult<Void>> create(@RequestBody TaxiPartyRequest.Create request,
                                                   @CurrentUser CustomUserDetails customUserDetails) {
         taxiPartyService.create(request, customUserDetails.getUser());
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
+    }
+
+    @PostMapping("/party/{taxiPartyId}")
+    public ResponseEntity<ApiResult<Void>> join(@PathVariable Long taxiPartyId,
+                                                @CurrentUser CustomUserDetails customUserDetails) {
+        taxiPartyService.join(taxiPartyId, customUserDetails.getUser());
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
     }
 }

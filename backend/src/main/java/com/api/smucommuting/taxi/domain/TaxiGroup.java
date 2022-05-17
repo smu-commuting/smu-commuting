@@ -28,10 +28,11 @@ public class TaxiGroup extends BaseTimeEntity {
         taxiParty.getTaxiGroupList().add(this);
     }
 
-    protected static void create(Long userId, TaxiParty taxiParty) {
+    public static TaxiGroup create(Long userId, TaxiParty taxiParty) {
         TaxiGroup taxiGroup = TaxiGroup.builder()
                 .userId(userId)
                 .build();
         taxiGroup.assignTaxiParty(taxiParty);
+        return taxiGroup;
     }
 }

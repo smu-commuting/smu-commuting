@@ -33,3 +33,13 @@ include::{snippets}/taxi_party_create/request-fields.adoc[]
 성공 응답 HTTP
 include::{snippets}/taxi_party_create/http-response.adoc[]
 
+=== 파티 참여
+
+`POST /api/taxi/party/{taxiPartyId}`
+
+요청 HTTP
+include::{snippets}/taxi_party_join/http-request.adoc[]
+include::{snippets}/taxi_party_join/path-parameters.adoc[]
+
+성공 응답 HTTP
+include::{snippets}/taxi_party_join/http-response.adoc[]
