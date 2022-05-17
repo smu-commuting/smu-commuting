@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Builder
+@Builder(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity
@@ -30,6 +30,16 @@ public class TaxiParty extends BaseTimeEntity {
     private LocalDateTime meetingTime;
 
     @Builder.Default
-    @OneToMany(mappedBy = "taxiParty",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "taxiParty", cascade = CascadeType.ALL)
     private List<TaxiGroup> taxiGroupList = new ArrayList<>();
+
+    public static TaxiParty create(TaxiPlace taxiPlace, int headcount, LocalDateTime meetingTime, Long userId) {
+        TaxiParty taxiParty = TaxiParty.builder()
+                .taxiPlace(taxiPlace)
+                .headcount(headcount)
+                .meetingTime(meetingTime)
+                .build();
+        TaxiGroup.create(userId, taxiParty);
+        return taxiParty;
+    }
 }

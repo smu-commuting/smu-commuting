@@ -6,7 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Getter
-@Builder
+@Builder(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity
@@ -23,4 +23,15 @@ public class TaxiGroup extends BaseTimeEntity {
     @JoinColumn(name = "taxi_party_id")
     private TaxiParty taxiParty;
 
+    private void assignTaxiParty(TaxiParty taxiParty) {
+        this.taxiParty = taxiParty;
+        taxiParty.getTaxiGroupList().add(this);
+    }
+
+    protected static void create(Long userId, TaxiParty taxiParty) {
+        TaxiGroup taxiGroup = TaxiGroup.builder()
+                .userId(userId)
+                .build();
+        taxiGroup.assignTaxiParty(taxiParty);
+    }
 }

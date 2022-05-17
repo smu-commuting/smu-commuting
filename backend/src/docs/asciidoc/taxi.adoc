@@ -7,11 +7,11 @@
 :sectlinks:
 :snippets: ../../../build/generated-snippets
 
-= Taxi
+== 택시합승장소
 
 === 택시합승장소 목록 조회
 
-`POST /api/taxi/places`
+`GET /api/taxi/places`
 
 요청 HTTP
 include::{snippets}/taxi_place_list/http-request.adoc[]
@@ -19,3 +19,17 @@ include::{snippets}/taxi_place_list/http-request.adoc[]
 성공 응답 HTTP
 include::{snippets}/taxi_place_list/http-response.adoc[]
 include::{snippets}/taxi_place_list/response-fields.adoc[]
+
+== 택시합승파티
+
+=== 파티 생성
+
+`POST /api/taxi/party`
+
+요청 HTTP
+include::{snippets}/taxi_party_create/http-request.adoc[]
+include::{snippets}/taxi_party_create/request-fields.adoc[]
+
+성공 응답 HTTP
+include::{snippets}/taxi_party_create/http-response.adoc[]
+
