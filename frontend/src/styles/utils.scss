@@ -1,0 +1,40 @@
+// UI 개발에 사용될 Font에 대해서 정의하는 공간
+// font-family 정의
+
+// 이름, 글씨크기, 자간, 색깔 순
+@mixin font-face($name, $size, $line, $color) {
+    font-family: $name;
+    font-size: $size;
+    line-height: $line;
+    color: $color;
+}
+
+@font-face {
+    font-family: 'NotoSansKR-Bold';
+    src: url(./fonts/NotoSansKR-Bold.otf);
+}
+
+@font-face {
+    font-family: 'NotoSansKR-Medium';
+    src: url(./fonts/NotoSansKR-Medium.otf);
+}
+
+@font-face {
+    font-family: 'NotoSansKR-Regular';
+    src: url(./fonts/NotoSansKR-Regular.otf);
+}
+
+@font-face {
+    font-family: 'NotoSansKR-Light';
+    src: url(./fonts/NotoSansKR-Light.otf);
+}
+
+@font-face {
+    font-family: 'NotoSansKR-Black';
+    src: url(./fonts/NotoSansKR-Black.otf);
+}
+
+@font-face {
+    font-family: 'NotoSansKR-Thin';
+    src: url(./fonts/NotoSansKR-Thin.otf);
+}
