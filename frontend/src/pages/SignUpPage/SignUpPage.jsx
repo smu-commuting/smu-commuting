@@ -2,10 +2,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { postAuthNumAPI, sendNumberAPI } from '../../modules/api';
+// import { postAuthNumAPI, sendNumberAPI } from '../../modules/api';
 import './SignUpPage.scss';
 import Search from '../../assets/SignUpPage/검색.png';
 import { signupRequest } from '../../modules/reducers/user';
+import { sendNumberApi, verificationNumApi } from '../../utils';
 
 function SignUpPage() {
     const navigate = useNavigate();
@@ -31,13 +32,13 @@ function SignUpPage() {
 
     // 인증번호 요청 API
     const sendNumber = async () => {
-        const response = await sendNumberAPI(studentId);
+        const response = await sendNumberApi(studentId);
         if (response.data.success) setCheckSend(true);
     };
 
     // 인증번호 검사 API
     const postAuthNum = async () => {
-        const response = await postAuthNumAPI(authNum);
+        const response = await verificationNumApi(authNum);
         if (response.data.success) {
             const userInfo = {
                 email: `${studentId}@sangmyung.kr`,

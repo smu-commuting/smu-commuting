@@ -1,5 +1,4 @@
 import { all, fork, put, takeLatest, call } from 'redux-saga/effects';
-import axios from 'axios';
 
 import {
     USER_LOG_IN_REQUEST,
@@ -9,6 +8,7 @@ import {
     USER_SIGN_UP_SUCCESS,
     USER_SIGN_UP_FAILURE,
 } from '../reducers/user';
+import { signupApi } from '../../utils';
 
 function* login(action) {
     // console.log('saga In action', action);
@@ -25,19 +25,19 @@ function* login(action) {
     }
 }
 
-function signupAPI(data) {
-    return axios.post(`/api/user/signup`, JSON.stringify(data), {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-            'Content-Type': `application/json`,
-        },
-    });
-}
+// function signupAPI(data) {
+//     return axios.post(`/api/user/signup`, JSON.stringify(data), {
+//         headers: {
+//             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+//             'Content-Type': `application/json`,
+//         },
+//     });
+// }
 // dispatch할 때 넘겨준 data === action
 
 function* signup(action) {
     try {
-        yield call(signupAPI, action.data);
+        yield call(signupApi, action.data);
         yield put({
             type: USER_SIGN_UP_SUCCESS,
             data: action.data,

@@ -8,7 +8,7 @@ import Kakao from '../../assets/LogInPage/Kakao.png';
 function LogInPage() {
     const onKakaoLogIn = useCallback(() => {
         window.location.replace(
-            'http://13.124.109.54/oauth2/authorization/kakao',
+            `${process.env.REACT_APP_API_URL}/oauth2/authorization/kakao`,
         );
     }, []);
 
