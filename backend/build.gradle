@@ -23,6 +23,16 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	/**
+	 * QueryDSL
+	 */
+	implementation("com.querydsl:querydsl-core") // querydsl
+	implementation("com.querydsl:querydsl-jpa") // querydsl
+	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa" // querydsl JPAAnnotationProcessor 사용 지정
+	annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+	annotationProcessor("jakarta.annotation:jakarta.annotation-api")
+
 	/**
 	 * Security
 	 */
@@ -111,6 +121,23 @@ bootJar {
 		into 'static/docs'
 	}
 }
+
+/*************************
+ * Query DSL
+ *************************/
+def generated='src/main/generated'
+sourceSets {
+	main.java.srcDirs += [ generated ]
+}
+
+tasks.withType(JavaCompile) {
+	options.annotationProcessorGeneratedSourcesDirectory = file(generated)
+}
+
+clean.doLast {
+	file(generated).deleteDir()
+}
+
 
 /*************************
  * Flyway
