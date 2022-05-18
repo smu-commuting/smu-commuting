@@ -11,7 +11,7 @@ const { API_USER } = API_URLS;
 // 인증번호 요청 API
 export const sendNumberApi = async studentId => {
     const data = {
-        email: studentId,
+        email: `${studentId}@sangmyung.kr`,
     };
     return await withAuthInstance.post(
         `${process.env.REACT_APP_API_URL}${API_USER}email`,
@@ -30,9 +30,8 @@ export const verificationNumApi = async authNum => {
     );
 };
 
-// saga 회원가입 API
+// 회원가입 API -> saga
 export const signupApi = data => {
-    console.log(data);
     return withAuthInstance.post(
         `${process.env.REACT_APP_API_URL}${API_USER}signup`,
         data,
