@@ -7,6 +7,7 @@ import './SignUpPage.scss';
 import Search from '../../assets/SignUpPage/검색.png';
 import { signupRequest } from '../../modules/reducers/user';
 import { sendNumberApi, verificationNumApi } from '../../utils';
+import Timer from '../../components/SignupPage/Timer';
 
 function SignUpPage() {
     const navigate = useNavigate();
@@ -89,7 +90,7 @@ function SignUpPage() {
                             onChange={onAuthNumChange}
                             required
                         />
-                        <p>5:00</p>
+                        <Timer mm={0} ss={10} />
                     </div>
                     <button
                         className="student-id-btn"
