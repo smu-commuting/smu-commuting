@@ -23,7 +23,7 @@ public class TaxiPartyResponse {
             return GetList.builder()
                     .taxiPartyId(taxiParty.getId())
                     .headcount(taxiParty.getTaxiGroupList().size())
-                    .maximum(taxiParty.getHeadcount())
+                    .maximum(taxiParty.getMaximum())
                     .time(taxiParty.getMeetingTime())
                     .build();
         }

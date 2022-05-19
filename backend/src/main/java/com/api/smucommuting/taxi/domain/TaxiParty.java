@@ -23,8 +23,8 @@ public class TaxiParty extends BaseTimeEntity {
     @JoinColumn(name = "taxi_place_id")
     private TaxiPlace taxiPlace;
 
-    @Column(name = "headcount")
-    private int headcount;
+    @Column(name = "maximum")
+    private int maximum;
 
     @Column(name = "meeting_time")
     private LocalDateTime meetingTime;
@@ -33,10 +33,10 @@ public class TaxiParty extends BaseTimeEntity {
     @OneToMany(mappedBy = "taxiParty", cascade = CascadeType.ALL)
     private List<TaxiGroup> taxiGroupList = new ArrayList<>();
 
-    public static TaxiParty create(TaxiPlace taxiPlace, int headcount, LocalDateTime meetingTime, Long userId) {
+    public static TaxiParty create(TaxiPlace taxiPlace, int maximum, LocalDateTime meetingTime, Long userId) {
         TaxiParty taxiParty = TaxiParty.builder()
                 .taxiPlace(taxiPlace)
-                .headcount(headcount)
+                .maximum(maximum)
                 .meetingTime(meetingTime)
                 .build();
         TaxiGroup.create(userId, taxiParty);
