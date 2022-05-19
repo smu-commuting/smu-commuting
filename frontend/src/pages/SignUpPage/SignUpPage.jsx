@@ -17,7 +17,6 @@ function SignUpPage() {
     const [studentId, setStudentId] = useState(''); // 학번
     const [authNum, setAuthNum] = useState(''); // 인증번호
 
-    // console.log(signupDone);
     const onStudentIdChange = e => {
         if (studentId.length > 8) {
             alert('학번은 9자리 이내로 입력 가능합니다.');
@@ -90,7 +89,7 @@ function SignUpPage() {
                             onChange={onAuthNumChange}
                             required
                         />
-                        <Timer mm={0} ss={10} />
+                        <Timer mm={5} ss={0} />
                     </div>
                     <button
                         className="student-id-btn"

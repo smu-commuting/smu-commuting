@@ -7,7 +7,7 @@ import {
     USER_SIGN_UP_REQUEST,
     USER_SIGN_UP_SUCCESS,
     USER_SIGN_UP_FAILURE,
-} from '../reducers/user';
+} from '../../constants';
 import { signupApi } from '../../utils';
 
 function* login(action) {

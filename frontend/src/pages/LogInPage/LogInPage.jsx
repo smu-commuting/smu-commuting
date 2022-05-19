@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import './LogInPage.scss';
-import { ReactComponent as Sammulro } from '../../assets/LogInPage/샘물로.svg';
-import Sumung from '../../assets/LogInPage/수뭉이-뱃지1.png';
+import { ReactComponent as Sumuro } from '../../assets/LogInPage/스뮤로.svg';
 import Google from '../../assets/LogInPage/Google.png';
 import Kakao from '../../assets/LogInPage/Kakao.png';
 
@@ -14,8 +13,7 @@ function LogInPage() {
 
     return (
         <div className="loginpage-wrapper">
-            <Sammulro className="sammulro" />
-            <img className="sumung" src={Sumung} alt="Sumung" />
+            <Sumuro className="sammulro" />
             <div className="login-btn">
                 <img src={Google} alt="Google" />
                 <img
