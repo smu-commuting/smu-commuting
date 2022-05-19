@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 public class TaxiPartyResponse {
     @Getter
-    @Builder(access = AccessLevel.PRIVATE)
+    @Builder
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class GetList {

@@ -43,3 +43,15 @@ include::{snippets}/taxi_party_join/path-parameters.adoc[]
 
 성공 응답 HTTP
 include::{snippets}/taxi_party_join/http-response.adoc[]
+
+=== 파티 목록 조회
+
+`GET /api/taxi/partise`
+
+요청 HTTP
+include::{snippets}/taxi_party_list/http-request.adoc[]
+include::{snippets}/taxi_party_list/request-parameters.adoc[]
+
+성공 응답 HTTP
+include::{snippets}/taxi_party_list/http-response.adoc[]
+include::{snippets}/taxi_party_list/response-fields.adoc[]
