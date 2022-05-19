@@ -1,6 +1,8 @@
 // UI 개발에 사용될 Font에 대해서 정의하는 공간
 // font-family 정의
 
+$modal-background: rgba(6, 2, 19, 0.4);
+
 // 이름, 글씨크기, 자간, 색깔 순
 @mixin font-face($name, $size, $line, $color) {
     font-family: $name;

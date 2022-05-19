@@ -1,0 +1,43 @@
+@import '../../../styles/utils.scss';
+.busmodal-wrapper {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: $modal-background;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .busmodal {
+        width: 29.5rem;
+        border-radius: 1.2rem;
+        background-color: #ffffff;
+        padding: 1.1rem;
+        .cancel {
+            float: right;
+            display: block;
+            width: 2rem;
+            height: 2rem;
+        }
+        .inner-wrapper {
+            margin-top : 0.5rem;
+            p {
+                text-align: center;
+                @include font-face('NotoSansKR-Medium', 1.8rem, 0, #000000);
+            }
+            .bus-wrapper {
+                display: flex;
+                justify-content: space-between;
+                margin-top : 2rem;
+                padding : 0 3.3rem 1.9rem 3.3rem;
+                div{
+                    margin-top : 2rem;
+                    width : 40%;
+                    img{
+                        width : 100%;
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}

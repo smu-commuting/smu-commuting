@@ -1,5 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import BusModal from '../components/BusPage/BusModal/BusModal';
 import Header from '../components/common/Header/Header';
 import HomePage from './HomePage/HomePage';
 import LogInPage from './LogInPage/LogInPage';
@@ -7,6 +9,7 @@ import LogInProcess from './LogInProcess/LogInProcess';
 import SignUpPage from './SignUpPage/SignUpPage';
 
 function App() {
+    const { isBusModalOpen } = useSelector(state => state.user);
     return (
         <Router>
             <Routes>
@@ -20,6 +23,7 @@ function App() {
                     path="/home"
                     element={
                         <>
+                            {isBusModalOpen && <BusModal />}
                             <Header />
                             <HomePage />
                         </>
