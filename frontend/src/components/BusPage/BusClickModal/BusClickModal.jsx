@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import './BusModal.scss';
+import './BusClickModal.scss';
 import bus7016 from '../../../assets/BusPage/7016.png';
 import bus08 from '../../../assets/BusPage/서대문08.png';
 import cancel from '../../../assets/BusPage/cancel.png';

@@ -1,8 +1,10 @@
 @import '../../../styles/utils.scss';
 .busmodal-wrapper {
-    position: absolute;
+    position: fixed;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
+    overflow: hidden;
+    touch-action: none;
     background: $modal-background;
     display: flex;
     align-items: center;
@@ -19,7 +21,7 @@
             height: 2rem;
         }
         .inner-wrapper {
-            margin-top : 0.5rem;
+            margin-top: 0.5rem;
             p {
                 text-align: center;
                 @include font-face('NotoSansKR-Medium', 1.8rem, 0, #000000);
@@ -27,13 +29,13 @@
             .bus-wrapper {
                 display: flex;
                 justify-content: space-between;
-                margin-top : 2rem;
-                padding : 0 3.3rem 1.9rem 3.3rem;
-                div{
-                    margin-top : 2rem;
-                    width : 40%;
-                    img{
-                        width : 100%;
+                margin-top: 2rem;
+                padding: 0 3.3rem 1.9rem 3.3rem;
+                div {
+                    margin-top: 2rem;
+                    width: 45%;
+                    img {
+                        width: 100%;
                         display: block;
                     }
                 }

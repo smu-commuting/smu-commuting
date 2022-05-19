@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import BusModal from '../components/BusPage/BusModal/BusModal';
+import BusModal from '../components/BusPage/BusClickModal/BusClickModal';
 import Header from '../components/common/Header/Header';
 import HomePage from './HomePage/HomePage';
 import LogInPage from './LogInPage/LogInPage';
