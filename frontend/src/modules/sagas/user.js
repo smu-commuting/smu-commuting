@@ -11,7 +11,7 @@ import {
 import { signupApi } from '../../utils';
 
 function* login(action) {
-    // console.log('saga In action', action);
+    console.log('saga In action', action);
     try {
         yield put({
             type: USER_LOG_IN_SUCCESS,

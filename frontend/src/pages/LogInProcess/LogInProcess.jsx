@@ -13,8 +13,7 @@ function LogInProcess() {
     const { id, accessToken, studentId } = useParams();
     useEffect(() => {
         axios.defaults.headers.common['Authorization'] = accessToken;
-        // localStorage.setItem('accessToken', accessToken);
-        if (studentId) {
+        if (studentId === 'null') {
             setTimeout(() => {
                 navigate('/signup');
             }, 1500);
