@@ -1,18 +1,17 @@
 package com.api.smucommuting.taxi.dto;
 
+import com.api.smucommuting.taxi.domain.TaxiParty;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.querydsl.core.annotations.QueryProjection;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 
 public class TaxiPartyResponse {
     @Getter
+    @Builder(access = AccessLevel.PRIVATE)
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class GetList {
         private Long taxiPartyId;
         private int headcount;
@@ -20,13 +19,13 @@ public class TaxiPartyResponse {
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "Asia/Seoul")
         private LocalDateTime time;
 
-        @Builder
-        @QueryProjection
-        public GetList(Long taxiPartyId, int headcount, int maximum, LocalDateTime time) {
-            this.taxiPartyId = taxiPartyId;
-            this.headcount = headcount;
-            this.maximum = maximum;
-            this.time = time;
+        public static TaxiPartyResponse.GetList build(TaxiParty taxiParty) {
+            return GetList.builder()
+                    .taxiPartyId(taxiParty.getId())
+                    .headcount(taxiParty.getTaxiGroupList().size())
+                    .maximum(taxiParty.getHeadcount())
+                    .time(taxiParty.getMeetingTime())
+                    .build();
         }
     }
 }

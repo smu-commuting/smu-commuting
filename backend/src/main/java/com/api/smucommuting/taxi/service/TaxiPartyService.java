@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -41,6 +42,7 @@ public class TaxiPartyService {
 
     @Transactional(readOnly = true)
     public List<TaxiPartyResponse.GetList> getList(Long placeId, LocalDate meetingDate, LocalDateTime now, PageDto pageDto) {
-        return taxiPartyRepository.findAllByPlaceAndDate(placeId, meetingDate, now, pageDto.of());
+        List<TaxiParty> taxiParties = taxiPartyRepository.findAllByPlaceAndDate(placeId, meetingDate, now, pageDto.of());
+        return taxiParties.stream().map(TaxiPartyResponse.GetList::build).collect(Collectors.toList());
     }
 }

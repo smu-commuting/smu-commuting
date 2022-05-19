@@ -63,7 +63,7 @@ class TaxiPartyControllerTest extends MvcTest {
     @DisplayName("택시 파티 참여 문서화")
     public void join() throws Exception {
         ResultActions results = mvc.perform(RestDocumentationRequestBuilders
-                .post("/api/taxi/party/{taxiPartyId}", 1)
+                .post("/api/taxi/party/{taxiPartyId}.", 1)
         );
 
         results.andExpect(status().isOk())
