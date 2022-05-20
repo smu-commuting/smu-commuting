@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BusModal from '../components/BusPage/BusClickModal/BusClickModal';
 import Header from '../components/common/Header/Header';
+import BusPage from './BusPage/BusPage';
 import HomePage from './HomePage/HomePage';
 import LogInPage from './LogInPage/LogInPage';
 import LogInProcess from './LogInProcess/LogInProcess';
@@ -26,6 +27,16 @@ function App() {
                             {isBusModalOpen && <BusModal />}
                             <Header />
                             <HomePage />
+                        </>
+                    }
+                />
+                <Route
+                    path="/bus/:busNum"
+                    element={
+                        <>
+                            {isBusModalOpen && <BusModal />}
+                            <Header />
+                            <BusPage />
                         </>
                     }
                 />
