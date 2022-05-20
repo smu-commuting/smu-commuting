@@ -1,6 +1,8 @@
 @import '../../../styles/utils.scss';
+
 .bus7016-wrapper {
     padding-top: 5rem;
+    position: relative;
     p {
         @include font-face('NotoSansKR-Regular', 1.3rem, 0, #000000);
     }
@@ -57,8 +59,8 @@
         .search {
             display: block;
             position: absolute;
-            top : -6rem;
-            right : -4rem;
+            top: -6rem;
+            right: -4rem;
         }
     }
 }

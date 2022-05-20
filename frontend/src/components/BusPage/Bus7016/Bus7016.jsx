@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import './Bus7016.scss';
+import { useDispatch, useSelector } from 'react-redux';
 import BusRight from '../../../assets/BusPage/bus-right.png';
 import BusLeft from '../../../assets/BusPage/bus-left.png';
 import Search from '../../../assets/BusPage/search.png';
+import BusInfoModal from '../BusInfoModal/BusInfoModal';
+import { isBusInfoModalClick } from '../../../modules/reducers/bus';
 
 function Bus7016() {
+    const dispatch = useDispatch();
+    const { isBusInfoModalOpen } = useSelector(state => state.bus);
+    const onBusInfoClick = useCallback(() => {
+        dispatch(isBusInfoModalClick());
+    }, [dispatch]);
+
     return (
         <div className="bus7016-wrapper">
+            {isBusInfoModalOpen && <BusInfoModal />}
             <div className="first-bus-line">
-                <div className="bus-img-wrapper">
+                <div
+                    className="bus-img-wrapper"
+                    onClick={onBusInfoClick}
+                    aria-hidden
+                >
                     <img src={BusRight} alt="남영역" />
                 </div>
                 <div className="bus-img-wrapper">
