@@ -1,14 +1,16 @@
 /* eslint-disable no-unused-vars */
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './BusClickModal.scss';
 import { useNavigate } from 'react-router-dom';
 import bus7016 from '../../../assets/BusPage/7016.png';
 import bus08 from '../../../assets/BusPage/서대문08.png';
 import cancel from '../../../assets/BusPage/cancel.png';
 import { busModalClick } from '../../../modules/reducers/user';
+import { isBusInfoModalClick } from '../../../modules/reducers/bus';
 
 function BusModal() {
+    const { isBusInfoModalOpen } = useSelector(state => state.bus);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const onCancelClick = useCallback(() => {
@@ -18,12 +20,14 @@ function BusModal() {
     const on7016Click = useCallback(() => {
         navigate('/bus/7016');
         dispatch(busModalClick());
+        if (isBusInfoModalOpen) dispatch(isBusInfoModalClick());
     }, [dispatch]);
 
-    const on08Click = () => {
+    const on08Click = useCallback(() => {
         navigate('/bus/08');
         dispatch(busModalClick());
-    };
+        if (isBusInfoModalOpen) dispatch(isBusInfoModalClick());
+    }, [dispatch]);
     return (
         <div className="busmodal-wrapper">
             <div className="busmodal">
