@@ -17,7 +17,7 @@ function BusInfoModal({ station }) {
     useEffect(() => {
         axios
             .get(
-                `/api/rest/arrive/getArrInfoByRouteAll?serviceKey=${process.env.REACT_APP_BUS_OPEN_DATA_KEY}&busRouteId=100100447&resultType=json`,
+                `arrive/getArrInfoByRouteAll?serviceKey=${process.env.REACT_APP_BUS_OPEN_DATA_KEY}&busRouteId=100100447&resultType=json`,
             )
             .then(res => {
                 console.log(res.data.msgBody.itemList);

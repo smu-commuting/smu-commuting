@@ -1,11 +1,14 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './Bus7016.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import BusRight from '../../../assets/BusPage/bus-right.png';
 import BusLeft from '../../../assets/BusPage/bus-left.png';
 import Search from '../../../assets/BusPage/search.png';
 import BusInfoModal from '../BusInfoModal/BusInfoModal';
-import { isBusInfoModalClick } from '../../../modules/reducers/bus';
+import {
+    isBusInfoFetch,
+    isBusInfoModalClick,
+} from '../../../modules/reducers/bus';
 
 function Bus7016() {
     const dispatch = useDispatch();
@@ -18,7 +21,9 @@ function Bus7016() {
         },
         [dispatch],
     );
-
+    useEffect(() => {
+        dispatch(isBusInfoFetch('100100447'));
+    }, []);
     return (
         <div className="bus7016-wrapper">
             {isBusInfoModalOpen && <BusInfoModal station={station} />}

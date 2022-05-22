@@ -8,6 +8,7 @@ import HomePage from './HomePage/HomePage';
 import LogInPage from './LogInPage/LogInPage';
 import LogInProcess from './LogInProcess/LogInProcess';
 import SignUpPage from './SignUpPage/SignUpPage';
+import ChatPage from './Chat/chat';
 
 function App() {
     const { isBusModalOpen } = useSelector(state => state.user);
@@ -40,6 +41,7 @@ function App() {
                         </>
                     }
                 />
+                <Route path="/chat/test" element={<ChatPage />} />
             </Routes>
         </Router>
     );

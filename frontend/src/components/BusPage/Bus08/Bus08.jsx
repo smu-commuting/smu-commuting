@@ -1,10 +1,13 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './Bus08.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import BusRight from '../../../assets/BusPage/bus-right.png';
 import BusLeft from '../../../assets/BusPage/bus-left.png';
 import Search from '../../../assets/BusPage/search.png';
-import { isBusInfoModalClick } from '../../../modules/reducers/bus';
+import {
+    isBusInfoFetch,
+    isBusInfoModalClick,
+} from '../../../modules/reducers/bus';
 import BusInfoModal from '../BusInfoModal/BusInfoModal';
 
 function Bus08() {
@@ -18,6 +21,9 @@ function Bus08() {
         },
         [dispatch],
     );
+    useEffect(() => {
+        dispatch(isBusInfoFetch('100900012'));
+    }, []);
     return (
         <div className="bus08-wrapper">
             {isBusInfoModalOpen && <BusInfoModal station={station} />}

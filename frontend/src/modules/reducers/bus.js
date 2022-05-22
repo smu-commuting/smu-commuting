@@ -6,18 +6,29 @@ import {
     BUS_INFO_MODAL_OPEN,
     BUS_INFO_MODAL_OPEN_SUCCESS,
     BUS_INFO_MODAL_OPEN_FAILURE,
-    BUS_INFO_MODAL_FETCH_REQUEST,
-    BUS_INFO_MODAL_FETCH_SUCCESS,
-    BUS_INFO_MODAL_FETCH_FAILURE,
+    BUS_INFO_FETCH_REQUEST,
+    BUS_INFO_FETCH_SUCCESS,
+    BUS_INFO_FETCH_FAILURE,
 } from '../../constants';
 
 export const initialState = {
     isBusInfoModalOpen: false,
+    busData: null,
+    busDataLoading: false,
+    busDataDone: false,
+    busDataError: false,
 };
 
 export const isBusInfoModalClick = () => {
     return {
         type: BUS_INFO_MODAL_OPEN,
+    };
+};
+
+export const isBusInfoFetch = data => {
+    return {
+        type: BUS_INFO_FETCH_REQUEST,
+        data,
     };
 };
 
@@ -31,6 +42,23 @@ const reducer = (state = initialState, action) => {
                 break;
             case BUS_INFO_MODAL_OPEN_FAILURE:
                 draft.isBusModalOpen = false;
+                break;
+            case BUS_INFO_FETCH_REQUEST:
+                console.log('BUS_request', action.data);
+                draft.busDataLoading = true;
+                draft.busDataDone = false;
+                draft.busDataError = null;
+                break;
+            case BUS_INFO_FETCH_SUCCESS:
+                console.log(action.data);
+                draft.busDataLoading = false;
+                draft.busDataDone = true;
+                draft.busDataError = null;
+                draft.busData = action.data;
+                break;
+            case BUS_INFO_FETCH_FAILURE:
+                draft.busDataLoading = false;
+                draft.busDataError = action.err;
                 break;
             default:
                 break;

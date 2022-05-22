@@ -1,0 +1,2 @@
+GET {{apiUrl}}/chat/rooms
+Authorization: {{authorizationToken}}
