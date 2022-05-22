@@ -1,7 +1,7 @@
 package com.api.smucommuting.common.config;
 
-import com.api.smucommuting.auth.domain.oauth.OAuth2SuccessHandler;
 import com.api.smucommuting.auth.domain.oauth.CustomOAuth2UserService;
+import com.api.smucommuting.auth.domain.oauth.OAuth2SuccessHandler;
 import com.api.smucommuting.auth.domain.security.CustomUserDetailsService;
 import com.api.smucommuting.auth.domain.token.JwtAuthEntryPoint;
 import com.api.smucommuting.auth.domain.token.JwtTokenAuthenticationFilter;
@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(jwtAuthEntryPoint)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/docs/**","/api/auth/{userId}").permitAll()
+                .antMatchers("/docs/**", "/api/auth/{userId}", "/api/auth/refresh").permitAll()
                 .antMatchers("/chat/**").permitAll() //임시
                 .anyRequest().authenticated()
                 .and()
@@ -53,6 +53,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .successHandler(oAuth2SuccessHandler)
                 .and()
-                .addFilterBefore(tokenAuthenticationFilter(), OAuth2LoginAuthenticationFilter.class);
+                .addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 }
