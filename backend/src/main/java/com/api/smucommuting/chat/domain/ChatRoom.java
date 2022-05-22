@@ -21,9 +21,22 @@ public class ChatRoom extends BaseTimeEntity {
     @Column(name = "chat_room_id")
     private Long id;
 
+    @Column(name = "taxi_party_id")
+    private Long taxiPartyId;
+
+    @Builder.Default
     @OneToMany(mappedBy = "chatRoom", cascade = CascadeType.ALL)
     private List<Message> messages = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "chatRoom", cascade = CascadeType.ALL)
     private Set<ChatUser> users = new HashSet<>();
+
+    public static ChatRoom create(Long taxiPartyId, Long userId) {
+        ChatRoom chatRoom = ChatRoom.builder()
+                .taxiPartyId(taxiPartyId)
+                .build();
+        ChatUser.create(userId, chatRoom);
+        return chatRoom;
+    }
 }

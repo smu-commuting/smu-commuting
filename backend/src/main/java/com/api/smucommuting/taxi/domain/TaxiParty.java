@@ -1,6 +1,8 @@
 package com.api.smucommuting.taxi.domain;
 
 import com.api.smucommuting.common.entity.BaseTimeEntity;
+import com.api.smucommuting.common.event.Events;
+import com.api.smucommuting.taxi.domain.event.TaxiPartyCreatedEvent;
 import lombok.*;
 
 import javax.persistence.*;
@@ -32,6 +34,10 @@ public class TaxiParty extends BaseTimeEntity {
     @Builder.Default
     @OneToMany(mappedBy = "taxiParty", cascade = CascadeType.ALL)
     private List<TaxiGroup> taxiGroupList = new ArrayList<>();
+
+    public void created(Long taxiPartyId, Long userId) {
+        Events.raise(new TaxiPartyCreatedEvent(taxiPartyId, userId));
+    }
 
     public static TaxiParty create(TaxiPlace taxiPlace, int maximum, LocalDateTime meetingTime, Long userId) {
         TaxiParty taxiParty = TaxiParty.builder()

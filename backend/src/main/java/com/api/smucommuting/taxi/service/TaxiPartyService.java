@@ -31,8 +31,9 @@ public class TaxiPartyService {
 
     public void create(TaxiPartyRequest.Create request, User loginUser) {
         TaxiPlace taxiPlace = taxiPlaceRepository.findById(request.getPlaceId()).orElseThrow(TaxiPlaceNotFoundException::new);
-        TaxiParty taxiParty = TaxiParty.create(taxiPlace, request.getHeadcount(), request.getMeetingDate(), loginUser.getId());
-        taxiPartyRepository.save(taxiParty);
+        TaxiParty createdParty = TaxiParty.create(taxiPlace, request.getHeadcount(), request.getMeetingDate(), loginUser.getId());
+        TaxiParty party = taxiPartyRepository.save(createdParty);
+        party.created(party.getId(), loginUser.getId());
     }
 
     public void join(Long taxiPartyId, User user) {
