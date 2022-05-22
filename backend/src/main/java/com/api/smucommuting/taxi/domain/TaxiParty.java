@@ -36,8 +36,10 @@ public class TaxiParty extends BaseTimeEntity {
     @OneToMany(mappedBy = "taxiParty", cascade = CascadeType.ALL)
     private List<TaxiGroup> taxiGroupList = new ArrayList<>();
 
-    public void created(Long taxiPartyId, Long userId) {
-        Events.raise(new TaxiPartyCreatedEvent(taxiPartyId, userId));
+    public void created(String place, Long userId) {
+        Events.raise(new TaxiPartyCreatedEvent(this.getId(),
+                place, this.meetingTime, this.maximum, userId)
+        );
     }
 
     public void joined(Long taxiPartyId, Long userId) {

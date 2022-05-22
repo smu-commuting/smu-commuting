@@ -33,7 +33,7 @@ public class TaxiPartyService {
         TaxiPlace taxiPlace = taxiPlaceRepository.findById(request.getPlaceId()).orElseThrow(TaxiPlaceNotFoundException::new);
         TaxiParty createdParty = TaxiParty.create(taxiPlace, request.getHeadcount(), request.getMeetingDate(), loginUser.getId());
         TaxiParty party = taxiPartyRepository.save(createdParty);
-        party.created(party.getId(), loginUser.getId());
+        party.created(taxiPlace.getName(), loginUser.getId());
     }
 
     public void join(Long taxiPartyId, User loginUser) {

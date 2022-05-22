@@ -16,7 +16,7 @@ public class TaxiPartyCreatedEventHandler {
     @EventListener
     @Transactional
     public void handle(TaxiPartyCreatedEvent event) {
-        ChatRoom chatRoom = ChatRoom.create(event.getTaxiPartyId(), event.getUserId());
+        ChatRoom chatRoom = ChatRoom.create(event.getPlace(), event.getMaximum(), event.getMeetingTime(), event.getTaxiPartyId(), event.getUserId());
         chatRoomRepository.save(chatRoom);
     }
 }
