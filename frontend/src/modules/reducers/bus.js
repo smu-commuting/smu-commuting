@@ -13,15 +13,17 @@ import {
 
 export const initialState = {
     isBusInfoModalOpen: false,
+    isUserClickStationNumber: -1,
     busData: null,
     busDataLoading: false,
     busDataDone: false,
     busDataError: false,
 };
 
-export const isBusInfoModalClick = () => {
+export const isBusInfoModalClick = data => {
     return {
         type: BUS_INFO_MODAL_OPEN,
+        data,
     };
 };
 
@@ -39,6 +41,7 @@ const reducer = (state = initialState, action) => {
                 break;
             case BUS_INFO_MODAL_OPEN_SUCCESS:
                 draft.isBusInfoModalOpen = !draft.isBusInfoModalOpen;
+                draft.isUserClickStationNumber = action.data;
                 break;
             case BUS_INFO_MODAL_OPEN_FAILURE:
                 draft.isBusModalOpen = false;
@@ -50,7 +53,6 @@ const reducer = (state = initialState, action) => {
                 draft.busDataError = null;
                 break;
             case BUS_INFO_FETCH_SUCCESS:
-                console.log(action.data);
                 draft.busDataLoading = false;
                 draft.busDataDone = true;
                 draft.busDataError = null;

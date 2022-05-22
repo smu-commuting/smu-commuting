@@ -11,10 +11,12 @@ import {
 } from '../../constants';
 import { busApi } from '../../utils/busApi';
 
-function* businfomodal() {
+function* businfomodal(action) {
+    console.log(action.data);
     try {
         yield put({
             type: BUS_INFO_MODAL_OPEN_SUCCESS,
+            data: action.data,
         });
     } catch (err) {
         yield put({

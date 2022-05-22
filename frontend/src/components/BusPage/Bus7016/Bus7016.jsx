@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import './Bus7016.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import BusRight from '../../../assets/BusPage/bus-right.png';
@@ -12,12 +12,11 @@ import {
 
 function Bus7016() {
     const dispatch = useDispatch();
-    const [station, setStation] = useState();
     const { isBusInfoModalOpen } = useSelector(state => state.bus);
     const onBusInfoClick = useCallback(
         value => {
-            setStation(value);
-            dispatch(isBusInfoModalClick());
+            console.log(value);
+            dispatch(isBusInfoModalClick(value));
         },
         [dispatch],
     );
@@ -26,18 +25,18 @@ function Bus7016() {
     }, []);
     return (
         <div className="bus7016-wrapper">
-            {isBusInfoModalOpen && <BusInfoModal station={station} />}
+            {isBusInfoModalOpen && <BusInfoModal />}
             <div className="first-bus-line">
                 <div
                     className="bus-img-wrapper"
-                    onClick={() => onBusInfoClick('남영역')}
+                    onClick={() => onBusInfoClick(parseInt(40, 10))}
                     aria-hidden
                 >
                     <img src={BusRight} alt="남영역" />
                 </div>
                 <div
                     className="bus-img-wrapper"
-                    onClick={() => onBusInfoClick('서울역')}
+                    onClick={() => onBusInfoClick(parseInt(43, 10))}
                     aria-hidden
                 >
                     <img src={BusRight} alt="서울역" />
@@ -50,14 +49,14 @@ function Bus7016() {
             <div className="third-bus-line">
                 <div
                     className="bus-img-wrapper"
-                    onClick={() => onBusInfoClick('KT 광화문지사')}
+                    onClick={() => onBusInfoClick(parseInt(46, 10))}
                     aria-hidden
                 >
                     <img src={BusLeft} alt="KT 광화문지사" />
                 </div>
                 <div
                     className="bus-img-wrapper"
-                    onClick={() => onBusInfoClick('시청역')}
+                    onClick={() => onBusInfoClick(parseInt(44, 10))}
                     aria-hidden
                 >
                     <img src={BusLeft} alt="시청역" />
@@ -70,7 +69,7 @@ function Bus7016() {
             <div className="fifth-bus-line">
                 <div
                     className="bus-img-wrapper"
-                    onClick={() => onBusInfoClick('경복궁역')}
+                    onClick={() => onBusInfoClick(parseInt(47, 10))}
                     aria-hidden
                 >
                     <img src={BusRight} alt="경복궁역" />
