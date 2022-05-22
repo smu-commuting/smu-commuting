@@ -9,7 +9,7 @@ Content-Type: application/json;charset=UTF-8
 }
 
 ###
-POST {{apiUrl}}/taxi/party/3
+POST {{apiUrl}}/taxi/party/9
 Authorization: {{authorizationToken}}
 Content-Type: application/json;charset=UTF-8
 

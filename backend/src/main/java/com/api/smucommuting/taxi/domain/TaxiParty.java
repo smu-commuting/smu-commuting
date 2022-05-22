@@ -3,6 +3,7 @@ package com.api.smucommuting.taxi.domain;
 import com.api.smucommuting.common.entity.BaseTimeEntity;
 import com.api.smucommuting.common.event.Events;
 import com.api.smucommuting.taxi.domain.event.TaxiPartyCreatedEvent;
+import com.api.smucommuting.taxi.domain.event.TaxiPartyJoinedEvent;
 import lombok.*;
 
 import javax.persistence.*;
@@ -37,6 +38,10 @@ public class TaxiParty extends BaseTimeEntity {
 
     public void created(Long taxiPartyId, Long userId) {
         Events.raise(new TaxiPartyCreatedEvent(taxiPartyId, userId));
+    }
+
+    public void joined(Long taxiPartyId, Long userId) {
+        Events.raise(new TaxiPartyJoinedEvent(taxiPartyId, userId));
     }
 
     public static TaxiParty create(TaxiPlace taxiPlace, int maximum, LocalDateTime meetingTime, Long userId) {

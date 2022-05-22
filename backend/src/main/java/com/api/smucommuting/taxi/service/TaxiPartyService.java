@@ -36,9 +36,10 @@ public class TaxiPartyService {
         party.created(party.getId(), loginUser.getId());
     }
 
-    public void join(Long taxiPartyId, User user) {
+    public void join(Long taxiPartyId, User loginUser) {
         TaxiParty taxiParty = taxiPartyRepository.findById(taxiPartyId).orElseThrow(TaxiPartyNotFoundException::new);
-        taxiGroupRepository.save(TaxiGroup.create(user.getId(), taxiParty));
+        taxiParty.joined(taxiPartyId, loginUser.getId());
+        taxiGroupRepository.save(TaxiGroup.create(loginUser.getId(), taxiParty));
     }
 
     @Transactional(readOnly = true)

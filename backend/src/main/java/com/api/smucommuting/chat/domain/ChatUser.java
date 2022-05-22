@@ -29,10 +29,11 @@ public class ChatUser extends BaseTimeEntity {
         chatRoom.getUsers().add(this);
     }
 
-    protected static void create(Long userId, ChatRoom chatRoom) {
+    public static ChatUser create(Long userId, ChatRoom chatRoom) {
         ChatUser chatUser = ChatUser.builder()
                 .userId(userId)
                 .build();
         chatUser.assignChatRoom(chatRoom);
+        return chatUser;
     }
 }
