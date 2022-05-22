@@ -1,7 +1,6 @@
 package com.api.smucommuting.chat.dto;
 
-import com.api.smucommuting.taxi.domain.TaxiParty;
-import com.api.smucommuting.taxi.dto.TaxiPartyResponse;
+import com.api.smucommuting.chat.domain.ChatRoom;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
@@ -22,12 +21,14 @@ public class ChatRoomResponse {
         private int headcount;
         private int maximum;
 
-        public static TaxiPartyResponse.GetList build(TaxiParty taxiParty) {
-            return TaxiPartyResponse.GetList.builder()
-                    .taxiPartyId(taxiParty.getId())
-                    .headcount(taxiParty.getTaxiGroupList().size())
-                    .maximum(taxiParty.getMaximum())
-                    .time(taxiParty.getMeetingTime())
+        public static ChatRoomResponse.GetList build(ChatRoom chatRoom) {
+            return GetList.builder()
+                    .chatRoomId(chatRoom.getId())
+                    .place(chatRoom.getPlace())
+                    .headcount(chatRoom.getUsers().size())
+                    .maximum(chatRoom.getMaximum())
+                    .date(chatRoom.getMeetingTime())
+                    .time(chatRoom.getMeetingTime())
                     .build();
         }
     }
