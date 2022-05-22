@@ -1,4 +1,4 @@
-package com.api.smucommuting.chat.domain;
+package com.api.smucommuting.chatmessage.domain;
 
 import com.api.smucommuting.common.entity.BaseTimeEntity;
 import lombok.*;
@@ -17,13 +17,15 @@ public class Message extends BaseTimeEntity {
     @Column(name = "message_id")
     private Long id;
 
-    @Column(name = "user_id")
-    private Long userId;
+    @Column(name = "sender_id")
+    private Long senderId;
+
+    @Column(name = "sender_student_id")
+    private Integer senderStudentId;
 
     @Column(name = "content")
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "chat_room_id")
-    private ChatRoom chatRoom;
+    @Column(name = "chat_room_id")
+    private Long chatRoomId;
 }

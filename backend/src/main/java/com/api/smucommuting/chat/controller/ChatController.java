@@ -25,4 +25,5 @@ public class ChatController {
         List<ChatRoomResponse.GetList> response = chatService.getRoomList(customUserDetails.getUser());
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
     }
+
 }

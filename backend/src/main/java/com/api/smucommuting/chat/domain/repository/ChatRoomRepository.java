@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
     Optional<ChatRoom> findByTaxiPartyId(Long taxiPartyId);
 
-    @Query("select distinct room from ChatRoom room join room.users chatUser where chatUser.userId=:userId")
+    @Query("select distinct room from ChatRoom room join room.users chatUser where chatUser.userId=:userId order by room.createdAt desc")
     List<ChatRoom> findAllByUser(@Param("userId") Long userId);
 }

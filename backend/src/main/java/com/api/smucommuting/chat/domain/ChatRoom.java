@@ -5,9 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -33,10 +31,6 @@ public class ChatRoom extends BaseTimeEntity {
 
     @Column(name = "meeting_time")
     private LocalDateTime meetingTime;
-
-    @Builder.Default
-    @OneToMany(mappedBy = "chatRoom", cascade = CascadeType.ALL)
-    private List<Message> messages = new ArrayList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "chatRoom", cascade = CascadeType.ALL)
