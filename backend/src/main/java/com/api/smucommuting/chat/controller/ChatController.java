@@ -8,9 +8,7 @@ import com.api.smucommuting.common.dto.ApiResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,4 +24,10 @@ public class ChatController {
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
     }
 
+    @DeleteMapping("/room/{roomId}")
+    public ResponseEntity<ApiResult<Void>> exitRoom(@PathVariable Long roomId, @CurrentUser CustomUserDetails customUserDetails) {
+        //TODO 택시방과 같이 나가는 경우 로직 추가
+        chatService.exit(roomId, customUserDetails.getUser().getId());
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
+    }
 }

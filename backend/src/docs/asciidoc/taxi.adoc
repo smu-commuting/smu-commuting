@@ -43,6 +43,7 @@ include::{snippets}/taxi_party_join/path-parameters.adoc[]
 
 성공 응답 HTTP
 include::{snippets}/taxi_party_join/http-response.adoc[]
+include::{snippets}/taxi_party_join/response-fields.adoc[]
 
 === 파티 목록 조회
 

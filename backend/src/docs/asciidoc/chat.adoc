@@ -19,3 +19,15 @@ include::{snippets}/chat_room_list/http-request.adoc[]
 성공 응답 HTTP
 include::{snippets}/chat_room_list/http-response.adoc[]
 include::{snippets}/chat_room_list/response-fields.adoc[]
+
+=== 채팅방 나가기
+
+`DELETE /api/chat/room/{roomId}`
+
+요청 HTTP
+include::{snippets}/chat_room_exit/http-request.adoc[]
+include::{snippets}/chat_room_exit/path-parameters.adoc[]
+
+성공 응답 HTTP
+include::{snippets}/chat_room_exit/http-response.adoc[]
+include::{snippets}/chat_room_exit/response-fields.adoc[]

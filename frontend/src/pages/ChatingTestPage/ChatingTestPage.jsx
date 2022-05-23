@@ -1,25 +1,51 @@
 import React, { useState } from 'react';
-// import SockJS from 'sockjs-client';
-// import Stomp from 'stompjs';
+import SockJS from 'sockjs-client';
+import Stomp from 'stompjs';
 import './ChatingTestPage.scss';
 import talkList from '../../assets/ChatingTestPage/talkList.png';
 import out from '../../assets/ChatingTestPage/out.png';
 import block from '../../assets/ChatingTestPage/block.png';
 
 function ChatingTestPage() {
-    // const sock = new SockJS('http://localhost:8080/chat');
-    // const client = Stomp.over(sock);
-    // console.log(client);
+    const sock = new SockJS('http://localhost:8080/chat');
+    const ws = Stomp.over(sock);
     const [chatList, setChatList] = useState([]);
     const [myAsk, setMyAsk] = useState();
     const myAskChange = e => {
-        console.log(e.target.value);
+        // console.log(e.target.value);
         setMyAsk(e.target.value);
     };
     const myChatSend = () => {
         setMyAsk('');
         setChatList([...chatList, { me: true, talk: myAsk }]);
     };
+
+    function connect() {
+        ws.connect(
+            {},
+            function (frame) {
+                console.log(frame);
+                ws.subscribe('/sub/chat/room/1', function (msg) {
+                    const recv = JSON.parse(msg.body);
+                    console.log(recv);
+                });
+                ws.send(
+                    '/pub/chat/message',
+                    {},
+                    JSON.stringify({
+                        messageType: 'ENTER',
+                        roomId: 1,
+                        senderId: 1,
+                        studentId: 1234,
+                    }),
+                );
+            },
+            function (error) {
+                console.log(error);
+            },
+        );
+    }
+    connect();
     return (
         <div className="chatingtestpage-wrapper">
             <div className="chat-header">

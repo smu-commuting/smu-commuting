@@ -19,6 +19,8 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -58,6 +60,27 @@ class ChatControllerTest extends MvcTest {
                                 fieldWithPath("data.[].time").type(JsonFieldType.STRING).description("만나는 시간"),
                                 fieldWithPath("data.[].headcount").type(JsonFieldType.NUMBER).description("현재 인원 수"),
                                 fieldWithPath("data.[].maximum").type(JsonFieldType.NUMBER).description("최대 인원 수")
+                        )
+                ));
+    }
+
+    @Test
+    @DisplayName("채팅방 나가기 문서화")
+    public void exitRoom() throws Exception {
+        ResultActions results = mvc.perform(RestDocumentationRequestBuilders
+                .delete("/api/chat/room/{roomId}", 1)
+        );
+
+        results.andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("chat_room_exit",
+                        pathParameters(
+                                parameterWithName("roomId").description("나갈 채팅방 식별자")
+                        ),
+                        responseFields(
+                                fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
+                                fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
+                                fieldWithPath("data").description("응답 데이터가 없다면 null")
                         )
                 ));
     }

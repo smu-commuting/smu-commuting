@@ -73,6 +73,11 @@ class TaxiPartyControllerTest extends MvcTest {
                 .andDo(document("taxi_party_join",
                         pathParameters(
                                 parameterWithName("taxiPartyId").description("참여할 택시파티 식별자")
+                        ),
+                        responseFields(
+                                fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
+                                fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
+                                fieldWithPath("data").description("응답 데이터가 없다면 null")
                         )
                 ));
     }
