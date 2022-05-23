@@ -1,12 +1,11 @@
 .chatingtestpage-wrapper {
+    overflow: hidden;
     .chat-header {
         width: 100%;
-        height : 20%;
+        height: 20%;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 100%;
-        // height: 6rem;
         border-bottom: 3px solid black;
         div {
             width: 50%;
@@ -27,15 +26,36 @@
         }
     }
     .chat-body {
-        height : 60%; 
-        .my{
-
+        height: 60%;
+        .my {
+            width: 210px;
+            padding: 15px 41.2px 15px 48.2px;
+            border-radius: 12px;
+            background-color: yellow;
+            float: right;
+            margin: 1rem 0;
+            ::after {
+                display: block;
+                clear: both;
+            }
         }
-        .not-mine{
-            
+        .not-mine {
+            float: left;
+            width: 210px;
+            padding: 15px 41.2px 15px 48.2px;
+            border-radius: 12px;
+            background-color: #e0e0e0;
+            margin: 1rem 0;
+            ::after {
+                display: block;
+                clear: both;
+            }
         }
     }
     .user-input {
-        height : 20%;
+        position: fixed;
+        bottom : 0px; 
+        height: 20%;
+        z-index: 1;
     }
 }
