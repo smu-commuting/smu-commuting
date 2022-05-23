@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import './HomePage.scss';
+import { useDispatch } from 'react-redux';
 import Bus from '../../assets/HomePage/버스-2.png';
 import Taxi from '../../assets/HomePage/택시-2.png';
 import Community from '../../assets/HomePage/커뮤니티-2.png';
 import Manual from '../../assets/HomePage/매뉴얼-3.png';
+import { busModalClick } from '../../modules/reducers/user';
 
 function HomePage() {
+    const dispatch = useDispatch();
+    const onBusClick = useCallback(() => {
+        dispatch(busModalClick());
+    }, [dispatch]);
     return (
-        <div className="homepage-wrapper">
+        <div className="homepage-inner-wrapper">
             <div className="homepage-top-line">
                 <div>
-                    <img src={Bus} alt="버스" />
+                    <img
+                        src={Bus}
+                        alt="버스"
+                        onClick={onBusClick}
+                        aria-hidden="true"
+                    />
                 </div>
                 <div>
                     <img src={Taxi} alt="택시" />
@@ -27,5 +38,4 @@ function HomePage() {
         </div>
     );
 }
-
 export default HomePage;

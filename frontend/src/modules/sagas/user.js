@@ -7,6 +7,9 @@ import {
     USER_SIGN_UP_REQUEST,
     USER_SIGN_UP_SUCCESS,
     USER_SIGN_UP_FAILURE,
+    USER_BUS_MODAL,
+    USER_BUS_MODAL_SUCCESS,
+    USER_BUS_MODAL_FAILURE,
 } from '../../constants';
 import { signupApi } from '../../utils';
 
@@ -50,6 +53,19 @@ function* signup(action) {
     }
 }
 
+function* busmodal() {
+    try {
+        yield put({
+            type: USER_BUS_MODAL_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: USER_BUS_MODAL_FAILURE,
+            error: err,
+        });
+    }
+}
+
 // function logoutAPI() {
 //     return axios.post('user/logout');
 // }
@@ -81,6 +97,10 @@ function* watchSignUp() {
     yield takeLatest(USER_SIGN_UP_REQUEST, signup);
 }
 
+function* watchBusModal() {
+    yield takeLatest(USER_BUS_MODAL, busmodal);
+}
+
 export default function* userSaga() {
-    yield all([fork(watchLogin), fork(watchSignUp)]);
+    yield all([fork(watchLogin), fork(watchSignUp), fork(watchBusModal)]);
 }

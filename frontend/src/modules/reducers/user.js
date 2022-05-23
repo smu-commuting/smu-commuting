@@ -8,6 +8,9 @@ import {
     USER_SIGN_UP_FAILURE,
     USER_SIGN_UP_REQUEST,
     USER_SIGN_UP_SUCCESS,
+    USER_BUS_MODAL,
+    USER_BUS_MODAL_SUCCESS,
+    USER_BUS_MODAL_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -22,6 +25,10 @@ export const initialState = {
     signupLoading: false,
     signupDone: false,
     signupError: null,
+
+    isBusModalOpen: false,
+    isTaxiModalOpen: false,
+    isCommunityModalOpen: false,
 };
 
 export const loginRequest = data => {
@@ -36,6 +43,12 @@ export const signupRequest = data => {
     return {
         type: USER_SIGN_UP_REQUEST,
         data,
+    };
+};
+
+export const busModalClick = () => {
+    return {
+        type: USER_BUS_MODAL,
     };
 };
 
@@ -79,6 +92,14 @@ const reducer = (state = initialState, action) => {
             case USER_SIGN_UP_FAILURE:
                 draft.signupLoading = false;
                 draft.signupError = action.err;
+                break;
+            case USER_BUS_MODAL:
+                break;
+            case USER_BUS_MODAL_SUCCESS:
+                draft.isBusModalOpen = !draft.isBusModalOpen;
+                break;
+            case USER_BUS_MODAL_FAILURE:
+                draft.isBusModalOpen = false;
                 break;
             default:
                 break;
