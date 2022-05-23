@@ -3,7 +3,6 @@
 /* eslint-disable react/prop-types */
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import { isBusInfoModalClick } from '../../../modules/reducers/bus';
 import './BusInfoModal.scss';
 import Cancel from '../../../assets/BusPage/cancel.png';
@@ -13,7 +12,6 @@ function BusInfoModal() {
         state => state.bus,
     );
     const dispatch = useDispatch();
-    const [arrTime, setArrTime] = useState();
     const [cumCongest, setCumCongest] = useState();
     const onModalClick = useCallback(() => {
         dispatch(isBusInfoModalClick());
@@ -22,7 +20,11 @@ function BusInfoModal() {
     useEffect(() => {
         let target = 0;
         for (let i = 0; i < isUserClickStationNumber; i++) {
-            if (busData[i].reride_Num1 === '5') {
+            if (
+                busData[i].reride_Num1 === '5' &&
+                busData[i].plainNo1 ===
+                    busData[isUserClickStationNumber].plainNo1
+            ) {
                 target = i;
                 break;
             }
