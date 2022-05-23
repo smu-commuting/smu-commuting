@@ -18,6 +18,7 @@ function BusInfoModal() {
     }, [dispatch]);
 
     useEffect(() => {
+        console.log(busData);
         let target = 0;
         for (let i = 0; i < isUserClickStationNumber; i++) {
             if (
