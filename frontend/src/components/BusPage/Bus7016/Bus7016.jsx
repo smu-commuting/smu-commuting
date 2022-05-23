@@ -15,13 +15,15 @@ function Bus7016() {
     const { isBusInfoModalOpen } = useSelector(state => state.bus);
     const onBusInfoClick = useCallback(
         value => {
-            console.log(value);
             dispatch(isBusInfoModalClick(value));
         },
         [dispatch],
     );
     useEffect(() => {
+        // setInterval(() => {
+        // window.location.reload();
         dispatch(isBusInfoFetch('100100447'));
+        // }, 10000);
     }, []);
     return (
         <div className="bus7016-wrapper">

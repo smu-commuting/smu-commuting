@@ -30,6 +30,7 @@
         border-left: 1px solid black;
         border-bottom: 1px solid black;
         p {
+            margin: 0;
             text-align: center;
             @include font-face('NotoSansKR-Regular', 1.3rem, 1.5rem, #a19fad);
         }
