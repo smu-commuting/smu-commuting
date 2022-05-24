@@ -5,7 +5,7 @@ Content-Type: application/json;charset=UTF-8
 {
   "placeId": 1,
   "headcount": 3,
-  "meetingDate": "2022-05-21T22:00"
+  "meetingDate": "2022-05-26T09:00"
 }
 
 ###

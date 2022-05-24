@@ -1,0 +1,22 @@
+= 샘물로 API 문서 (BlockedUser)
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:snippets: ../../../build/generated-snippets
+
+== BlockedUser
+
+=== 합승거부하기
+
+`POST /api/block/user`
+
+요청 HTTP
+include::{snippets}/block_user_create/http-request.adoc[]
+include::{snippets}/block_user_create/request-fields.adoc[]
+
+성공 응답 HTTP
+include::{snippets}/block_user_create/http-response.adoc[]
+include::{snippets}/block_user_create/response-fields.adoc[]
