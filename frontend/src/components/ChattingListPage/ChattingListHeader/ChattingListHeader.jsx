@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 import './ChattingListHeader.scss';
 import { useNavigate } from 'react-router-dom';
-import Back from '../../../assets/common/ChattingListHeader/Back.png';
-import Talk from '../../../assets/common/ChattingListHeader/talk1.png';
+import Back from '../../../assets/ChattingList/ChattingListHeader/Back.png';
+import Talk from '../../../assets/ChattingList/ChattingListHeader/talk1.png';
 
 function ChattingListHeader() {
     const navigate = useNavigate();

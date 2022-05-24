@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
 import './Header.scss';
 import { useNavigate } from 'react-router-dom';
-import headerLogo from '../../../assets/common/Header/headerlogo.png';
-import headerMypage from '../../../assets/common/Header/headersetting.png';
-import headerTalk from '../../../assets/common/Header/headertalk.png';
+import headerLogo from '../../assets/common/Header/headerlogo.png';
+import headerMypage from '../../assets/common/Header/headersetting.png';
+import headerTalk from '../../assets/common/Header/headertalk.png';
 
 function Header() {
     const navigate = useNavigate();
