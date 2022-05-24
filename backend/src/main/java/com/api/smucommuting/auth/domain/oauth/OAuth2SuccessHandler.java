@@ -32,7 +32,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
     private final static Integer MAX_COOKIE_TIME_S = 7 * 24 * 60 * 60;
     private static final String REFRESH_TOKEN = "refresh_token";
     private static final String DEV = "dev";
-    private static final String DEV_URL = "https://smulo.site/callback";
+    private static final String DEV_URL = "https://smulo.site/callback/";
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
