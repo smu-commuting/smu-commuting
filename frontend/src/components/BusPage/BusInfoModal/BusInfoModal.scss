@@ -19,13 +19,20 @@
     }
     .station {
         font-family: 'NotoSansKR-Bold';
-        font-size: 2rem;
+        font-size: 1.8rem;
         color: #000000;
         text-align: center;
     }
     .arr-info {
         width: 100%;
-        padding: 5rem 0 0 0;
-        text-align: center;
+        padding: 5rem 0 0 5.5rem;
+    }
+    .bus-bottom{
+        width : 100%;
+        img{
+            width : 35%;
+            float : right;
+            display: block;
+        }
     }
 }
