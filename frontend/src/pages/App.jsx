@@ -9,6 +9,9 @@ import LogInPage from './LogInPage/LogInPage';
 import LogInProcess from './LogInProcess/LogInProcess';
 import SignUpPage from './SignUpPage/SignUpPage';
 import ChatingTestPage from './ChatingTestPage/ChatingTestPage';
+import ChattingListPage from './ChattingListPage/ChattingListPage';
+import ChattingListHeader from '../components/common/ChattingListHeader/ChattingListHeader';
+import ChattingListFooter from '../components/common/ChattingListFooter/ChattingListFooter';
 
 function App() {
     const { isBusModalOpen } = useSelector(state => state.user);
@@ -42,6 +45,16 @@ function App() {
                     }
                 />
                 <Route path="/chat/test" element={<ChatingTestPage />} />
+                <Route
+                    path="/chatlist"
+                    element={
+                        <>
+                            <ChattingListHeader />
+                            <ChattingListPage />
+                            <ChattingListFooter />
+                        </>
+                    }
+                />
             </Routes>
         </Router>
     );

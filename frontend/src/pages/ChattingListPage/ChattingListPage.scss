@@ -1,0 +1,12 @@
+@import '../../styles/utils.scss';
+.chattinglist-wrapper {
+    padding: 1rem 3rem;
+    li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2rem 0;
+        border-bottom: 1px solid #a19fad;
+        @include font-face('NotoSansKR-Medium', 1.5rem, 0, #000000); 
+    }
+}

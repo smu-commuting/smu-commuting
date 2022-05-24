@@ -1,0 +1,30 @@
+@import '../../../styles/utils.scss';
+.chattinglistheader-wrapper {
+    padding-top : 0.7rem;
+    .logo-wrapper {
+        height : 5rem; 
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        div:nth-child(1){
+            padding : 0 0 0 1.7rem;
+            flex:1;
+        }
+        div:nth-child(2){
+            flex:1;
+            display: flex;
+            justify-content: center;
+            padding-right : 1.5rem;
+            img{
+                display: block;
+            }
+        }
+        div:nth-child(3){
+            flex:1;
+        }
+    }
+    p{
+        text-align: center;
+        @include font-face('NotoSansKR-Bold', 1.7rem, 0, #000000); 
+    }
+}

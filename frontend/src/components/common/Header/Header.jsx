@@ -10,9 +10,17 @@ function Header() {
     const onLogoClick = useCallback(() => {
         navigate('/home');
     }, []);
+    const onChattingClick = useCallback(() => {
+        navigate('/chatlist');
+    }, []);
     return (
         <div className="header-wrapper">
-            <img src={headerTalk} alt="대화" />
+            <img
+                src={headerTalk}
+                alt="대화"
+                onClick={onChattingClick}
+                aria-hidden
+            />
             <img
                 src={headerLogo}
                 alt="로고"
