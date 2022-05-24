@@ -20,21 +20,23 @@
             }
         }
         div:nth-child(3) {
-            display: flex;
-            align-items: flex-end;
-            justify-content: end;
-            img:nth-child(1) {
+            text-align: right;
+            p {
+                text-align: right;
+                @include font-face('NotoSansKR-Bold', 1.5rem, 0, #000000);   
+            }
+            img {
                 width: 3rem;
                 height: 3rem;
             }
         }
     }
-    .gototaxi{
-        margin-top : 7.5rem;
-        width : 100%;
-        background : #7b88f2;
+    .gototaxi {
+        margin-top: 7.5rem;
+        width: 100%;
+        background: #7b88f2;
         border-radius: 1.2rem;
-        padding : 2.3rem 0; 
+        padding: 2.3rem 0;
         @include font-face('NotoSansKR-Regular', 1.6rem, 0, #fff);
     }
 }

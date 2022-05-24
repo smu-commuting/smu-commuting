@@ -1,13 +1,15 @@
-import React, { useCallback } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useCallback, useEffect, useState } from 'react';
 import './BusPage.scss';
 import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import bus7016 from '../../assets/BusPage/7016.png';
 import bus08 from '../../assets/BusPage/서대문08.png';
 import refresh from '../../assets/BusPage/refresh.png';
 import { busModalClick } from '../../modules/reducers/user';
 import Bus7016 from '../../components/BusPage/Bus7016/Bus7016';
 import Bus08 from '../../components/BusPage/Bus08/Bus08';
+import Timer from '../../components/common/Timer';
 
 function BusPage() {
     const { busNum } = useParams();
@@ -15,6 +17,10 @@ function BusPage() {
     const onBusClick = useCallback(() => {
         dispatch(busModalClick());
     }, [dispatch]);
+    const onRefreshPage = useCallback(() => {
+        window.location.reload();
+    }, []);
+
     return (
         <div className="buspage-wrapper">
             <div className="bus-logo-box">
@@ -28,7 +34,13 @@ function BusPage() {
                     />
                 </div>
                 <div>
-                    <img src={refresh} alt="refresh" />
+                    <Timer mm={0} ss={10} />
+                    <img
+                        src={refresh}
+                        alt="refresh"
+                        onClick={onRefreshPage}
+                        aria-hidden
+                    />
                 </div>
             </div>
             {busNum === '7016' ? <Bus7016 /> : <Bus08 />}
