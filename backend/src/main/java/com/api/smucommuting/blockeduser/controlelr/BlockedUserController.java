@@ -30,4 +30,10 @@ public class BlockedUserController {
         List<BlockedUserResponse> response = blockedUserService.getList(customUserDetails.getUser());
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
     }
+
+    @DeleteMapping("/user/{userId}")
+    public ResponseEntity<ApiResult<Void>> blockCancel(@PathVariable Long userId, @CurrentUser CustomUserDetails customUserDetails) {
+        blockedUserService.cancel(userId, customUserDetails.getUser());
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
+    }
 }

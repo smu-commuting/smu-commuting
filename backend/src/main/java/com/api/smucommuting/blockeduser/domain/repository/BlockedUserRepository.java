@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface BlockedUserRepository extends JpaRepository<BlockedUser, Long> {
     List<BlockedUser> findAllByUserId(Long loginUserId);
+
+    void deleteByBlockedUserIdAndUserId(Long blockedUserId, Long id);
 }

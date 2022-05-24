@@ -14,10 +14,12 @@
 `POST /api/block/user`
 
 요청 HTTP
+
 include::{snippets}/block_user_create/http-request.adoc[]
 include::{snippets}/block_user_create/request-fields.adoc[]
 
 성공 응답 HTTP
+
 include::{snippets}/block_user_create/http-response.adoc[]
 include::{snippets}/block_user_create/response-fields.adoc[]
 
@@ -26,8 +28,25 @@ include::{snippets}/block_user_create/response-fields.adoc[]
 `GET /api/block/users`
 
 요청 HTTP
+
 include::{snippets}/block_user_list/http-request.adoc[]
 
 성공 응답 HTTP
+
 include::{snippets}/block_user_list/http-response.adoc[]
 include::{snippets}/block_user_list/response-fields.adoc[]
+
+=== 합승거부 취소
+
+`DELETE /api/block/user/{userId}`
+
+요청 HTTP
+
+include::{snippets}/block_user_cancel/http-request.adoc[]
+include::{snippets}/block_user_cancel/path-parameters.adoc[]
+
+성공 응답 HTTP
+
+include::{snippets}/block_user_cancel/http-response.adoc[]
+
+include::{snippets}/block_user_cancel/response-fields.adoc[]

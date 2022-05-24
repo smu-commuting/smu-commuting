@@ -33,4 +33,8 @@ public class BlockedUserService {
 
         return BlockedUserResponse.listsOf(findBlockedUserList);
     }
+
+    public void cancel(Long blockedUserId, User loginUser) {
+        blockedUserRepository.deleteByBlockedUserIdAndUserId(blockedUserId, loginUser.getId());
+    }
 }

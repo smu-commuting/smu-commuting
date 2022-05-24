@@ -9,3 +9,7 @@ Content-Type: application/json;charset=UTF-8
 ###
 GET {{apiUrl}}/block/users
 Authorization: {{authorizationToken}}
+
+###
+DELETE {{apiUrl}}/block/user/2
+Authorization: {{authorizationToken}}
