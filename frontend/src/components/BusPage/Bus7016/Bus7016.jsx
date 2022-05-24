@@ -20,10 +20,7 @@ function Bus7016() {
         [dispatch],
     );
     useEffect(() => {
-        // setInterval(() => {
-        // window.location.reload();
         dispatch(isBusInfoFetch('100100447'));
-        // }, 10000);
     }, []);
     return (
         <div className="bus7016-wrapper">

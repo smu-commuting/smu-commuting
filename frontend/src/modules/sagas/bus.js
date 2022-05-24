@@ -27,11 +27,15 @@ function* businfomodal(action) {
 }
 
 function* businfofetch(action) {
+    console.log('action', action.data);
     const result = yield call(busApi, action.data);
     try {
         yield put({
             type: BUS_INFO_FETCH_SUCCESS,
-            data: result.data.msgBody.itemList.slice(0, 55),
+            data:
+                action.data === '100100447'
+                    ? result.data.msgBody.itemList.slice(0, 55)
+                    : result.data.msgBody.itemList,
         });
     } catch (err) {
         yield put({

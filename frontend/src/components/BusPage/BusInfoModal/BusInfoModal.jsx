@@ -67,7 +67,8 @@ function BusInfoModal() {
                 <img src={Cancel} alt="cancel" />
             </div>
             <div className="station">
-                {busData[isUserClickStationNumber].stNm}
+                {busData[isUserClickStationNumber].stNm &&
+                    busData[isUserClickStationNumber].stNm}
             </div>
             <div className="arr-info">
                 <p>
