@@ -14,6 +14,7 @@ import ChattingListHeader from '../components/ChattingListPage/ChattingListHeade
 import ChattingListFooter from '../components/ChattingListPage/ChattingListFooter/ChattingListFooter';
 import ChattingRoomPage from './ChattingRoomPage/ChattingRoomPage';
 import ChattingRoomHeader from '../components/ChattingRoomPage/ChattingRoomHeader/ChattingRoomHeader';
+import ChatInputArea from '../components/ChattingRoomPage/ChatInputArea/ChatInputArea';
 
 function App() {
     const { isBusModalOpen } = useSelector(state => state.user);
@@ -63,6 +64,7 @@ function App() {
                         <>
                             <ChattingRoomHeader />
                             <ChattingRoomPage />
+                            <ChatInputArea />
                         </>
                     }
                 />
