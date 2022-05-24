@@ -5,3 +5,7 @@ Content-Type: application/json;charset=UTF-8
 {
   "blockUserId": 2
 }
+
+###
+GET {{apiUrl}}/block/users
+Authorization: {{authorizationToken}}
