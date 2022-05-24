@@ -37,7 +37,7 @@ class ChatControllerTest extends MvcTest {
     private static final String PLACE2 = "남영역";
 
     @Test
-    @DisplayName("택시 합승방 목록 조회 문서화")
+    @DisplayName("택시 합승 채팅방 목록 조회 문서화")
     public void getList() throws Exception {
         ChatRoomResponse.GetList response1 = ChatRoomResponse.GetList.builder().chatRoomId(1L).date(DATE).headcount(HEADCOUNT).maximum(MAXIMUM).place(PLACE).time(DATE).build();
         ChatRoomResponse.GetList response2 = ChatRoomResponse.GetList.builder().chatRoomId(2L).date(DATE).headcount(HEADCOUNT).maximum(MAXIMUM).place(PLACE2).time(DATE).build();

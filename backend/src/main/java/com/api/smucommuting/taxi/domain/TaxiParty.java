@@ -37,8 +37,8 @@ public class TaxiParty extends BaseTimeEntity {
     private List<TaxiGroup> taxiGroupList = new ArrayList<>();
 
     public void created(String place, Long userId) {
-        Events.raise(new TaxiPartyCreatedEvent(this.getId(),
-                place, this.meetingTime, this.maximum, userId)
+        Events.raise(new TaxiPartyCreatedEvent(
+                this.getId(), place, this.meetingTime, this.maximum, userId)
         );
     }
 

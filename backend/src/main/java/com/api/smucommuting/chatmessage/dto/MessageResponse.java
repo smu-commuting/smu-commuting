@@ -1,10 +1,11 @@
 package com.api.smucommuting.chatmessage.dto;
 
 import com.api.smucommuting.chatmessage.domain.Message;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Getter
@@ -13,16 +14,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MessageResponse {
     private Long messageId;
-
     private Long senderId;
-
     private Integer senderStudentId;
-
     private String content;
-
     private Long roomId;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm", timezone = "Asia/Seoul")
     private LocalDateTime createdTime;
 
     public static MessageResponse build(Message message) {
@@ -34,5 +29,9 @@ public class MessageResponse {
                 .content(message.getContent())
                 .createdTime(message.getCreatedAt())
                 .build();
+    }
+
+    public static List<MessageResponse> listOf(List<Message> messages) {
+        return messages.stream().map(MessageResponse::build).collect(Collectors.toList());
     }
 }
