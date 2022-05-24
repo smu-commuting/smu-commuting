@@ -9,7 +9,6 @@ import com.api.smucommuting.user.domain.User;
 import com.api.smucommuting.user.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -18,8 +17,6 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -28,11 +25,9 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
     private final UserRepository userRepository;
     @Value("${oauth2.success.redirect.url}")
     private String url;
-    private final Environment env;
     private final static Integer MAX_COOKIE_TIME_S = 7 * 24 * 60 * 60;
     private static final String REFRESH_TOKEN = "refresh_token";
-    private static final String DEV = "dev";
-    private static final String DEV_URL = "https://smulo.site/callback/";
+
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
@@ -48,10 +43,6 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
     }
 
     private String createCallback(User user, Token token) {
-        List<String> deployProfiles = List.of(DEV);
-        if (Arrays.stream(env.getActiveProfiles()).anyMatch(deployProfiles::contains)) {
-            url = DEV_URL;
-        }
         return url + user.getId() + "/" + token.getToken() + "/" + user.getStudentId();
     }
 
