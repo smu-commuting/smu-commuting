@@ -17,6 +17,13 @@
             height: 100%;
         }
     }
+    .end {
+        text-align: center;
+        font-size: 2rem;
+        padding-top: 7rem;
+        font-weight: 500;
+        color: red;
+    }
     .station {
         font-family: 'NotoSansKR-Bold';
         font-size: 1.8rem;
@@ -27,11 +34,11 @@
         width: 100%;
         padding: 5rem 0 0 5.5rem;
     }
-    .bus-bottom{
-        width : 100%;
-        img{
-            width : 35%;
-            float : right;
+    .bus-bottom {
+        width: 100%;
+        img {
+            width: 35%;
+            float: right;
             display: block;
         }
     }

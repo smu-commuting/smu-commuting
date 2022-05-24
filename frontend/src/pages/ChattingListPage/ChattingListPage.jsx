@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { deleteMyChatRoom, getMyChatRooms } from '../../modules/reducers/chat';
 import './ChattingListPage.scss';
 import getOut from '../../assets/ChattingList/ChattingListPage/첫줄.png';
+import sumung from '../../assets/ChattingList/ChattingListPage/sample_sumung.png';
 import { prevent } from '../../constants';
 
 function ChattingListPage() {
@@ -33,7 +34,7 @@ function ChattingListPage() {
                             aria-hidden
                         >
                             <div>
-                                <img src={getOut} alt="스뭉이 임시" />
+                                <img src={sumung} alt="스뭉이 임시" />
                             </div>
                             <div>{myChatRoom.date}</div>
                             <div>{myChatRoom.place}</div>

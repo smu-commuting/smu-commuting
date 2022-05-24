@@ -70,16 +70,22 @@ function BusInfoModal() {
                 {busData[isUserClickStationNumber].stNm &&
                     busData[isUserClickStationNumber].stNm}
             </div>
-            <div className="arr-info">
-                <p>
-                    {busData && busData[isUserClickStationNumber].plainNo1}번이
-                    올거에요
-                </p>
-                <br />
-                <p>{busData && busData[isUserClickStationNumber].arrmsg1}</p>
-                <br />
-                <p>{busData && cumCongest}</p>
-            </div>
+            {busData[isUserClickStationNumber].arrmsg1 === '운행종료' ? (
+                <p className="end">운행종료</p>
+            ) : (
+                <div className="arr-info">
+                    <p>
+                        {busData && busData[isUserClickStationNumber].plainNo1}
+                        번이 올거에요
+                    </p>
+                    <br />
+                    <p>
+                        {busData && busData[isUserClickStationNumber].arrmsg1}
+                    </p>
+                    <br />
+                    <p>{busData && cumCongest}</p>
+                </div>
+            )}
             <div className="bus-bottom">
                 <img src={sumung} alt="sumung" />
             </div>
