@@ -34,7 +34,7 @@ function BusPage() {
                     />
                 </div>
                 <div>
-                    <Timer mm={0} ss={10} />
+                    <Timer mm={0} ss={15} />
                     <img
                         src={refresh}
                         alt="refresh"

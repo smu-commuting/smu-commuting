@@ -65,6 +65,7 @@ const reducer = (state = initialState, action) => {
                 draft.deleteChatRoomError = null;
                 break;
             case CHAT_ROOM_DELETE_FAILURE:
+                console.log(action.err);
                 draft.deleteChatRoomLoading = false;
                 draft.deleteChatRoomError = action.err;
                 break;

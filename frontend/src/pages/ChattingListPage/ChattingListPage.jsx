@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,7 +24,7 @@ function ChattingListPage() {
     }, []);
     return (
         <ul className="chattinglist-wrapper">
-            {myChatRooms &&
+            {myChatRooms ? (
                 myChatRooms.map(myChatRoom => {
                     return (
                         <li
@@ -52,7 +53,10 @@ function ChattingListPage() {
                             </div>
                         </li>
                     );
-                })}
+                })
+            ) : (
+                <div> 대화 없음 </div>
+            )}
         </ul>
     );
 }

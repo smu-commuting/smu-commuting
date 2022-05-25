@@ -12,7 +12,9 @@ function LogInProcess() {
     const dispatch = useDispatch();
     const { id, accessToken, studentId } = useParams();
     useEffect(() => {
+        // console.log(accessToken);
         axios.defaults.headers.common['Authorization'] = accessToken;
+        // console.log(axios.defaults.headers.common['Authorization']);
         if (studentId === 'null') {
             setTimeout(() => {
                 navigate('/signup');
