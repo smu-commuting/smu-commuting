@@ -12,6 +12,7 @@ import Refusal from '../../assets/ChattingList/ChatInputArea/합승거부.png';
 
 function ChattingUnionPage() {
     const userId = useSelector(state => state.user.me.id);
+
     const studentId = useSelector(state => state.user.me.studentId);
     const { id } = useParams();
     const sock = new SockJS(`https://smulo.site/chat`);
