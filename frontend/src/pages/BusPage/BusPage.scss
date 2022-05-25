@@ -1,0 +1,40 @@
+@import '../../styles/utils.scss';
+.buspage-wrapper {
+    padding: 1.5rem 3.1rem 2rem 3.1rem;
+    overflow: hidden;
+    .bus-logo-box {
+        width: 100%;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid black;
+        display: flex;
+        justify-content: space-between;
+        div {
+            flex: 1;
+        }
+        div:nth-child(2) {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            img:nth-child(1) {
+                width: 70%;
+            }
+        }
+        div:nth-child(3) {
+            display: flex;
+            align-items: flex-end;
+            justify-content: end;
+            img:nth-child(1) {
+                width: 3rem;
+                height: 3rem;
+            }
+        }
+    }
+    .gototaxi{
+        margin-top : 7.5rem;
+        width : 100%;
+        background : #7b88f2;
+        border-radius: 1.2rem;
+        padding : 2.3rem 0; 
+        @include font-face('NotoSansKR-Regular', 1.6rem, 0, #fff);
+    }
+}

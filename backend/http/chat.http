@@ -1,0 +1,6 @@
+GET {{apiUrl}}/chat/rooms
+Authorization: {{authorizationToken}}
+
+###
+DELETE {{apiUrl}}/chat/room/1
+Authorization: {{authorizationToken}}

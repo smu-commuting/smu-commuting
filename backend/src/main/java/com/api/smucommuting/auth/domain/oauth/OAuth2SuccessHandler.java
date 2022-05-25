@@ -3,6 +3,7 @@ package com.api.smucommuting.auth.domain.oauth;
 import com.api.smucommuting.auth.domain.token.Token;
 import com.api.smucommuting.auth.domain.token.TokenProvider;
 import com.api.smucommuting.common.exception.user.UserNotFoundException;
+import com.api.smucommuting.common.utils.CookieUtils;
 import com.api.smucommuting.user.domain.SocialLoginProvider;
 import com.api.smucommuting.user.domain.User;
 import com.api.smucommuting.user.domain.repository.UserRepository;
@@ -24,6 +25,9 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
     private final UserRepository userRepository;
     @Value("${oauth2.success.redirect.url}")
     private String url;
+    private final static Integer MAX_COOKIE_TIME_S = 7 * 24 * 60 * 60;
+    private static final String REFRESH_TOKEN = "refresh_token";
+
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
@@ -31,6 +35,9 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
         User user = findUser(oauth2User);
 
         Token token = tokenProvider.generateAccessToken(user);
+        Token refreshToken = tokenProvider.generateRefreshToken(user);
+
+        CookieUtils.addCookie(response, REFRESH_TOKEN, refreshToken.getToken(), MAX_COOKIE_TIME_S);
 
         response.sendRedirect(createCallback(user, token));
     }

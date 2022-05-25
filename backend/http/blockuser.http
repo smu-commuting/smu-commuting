@@ -1,0 +1,15 @@
+POST {{apiUrl}}/block/user
+Authorization: {{authorizationToken}}
+Content-Type: application/json;charset=UTF-8
+
+{
+  "blockUserId": 2
+}
+
+###
+GET {{apiUrl}}/block/users
+Authorization: {{authorizationToken}}
+
+###
+DELETE {{apiUrl}}/block/user/2
+Authorization: {{authorizationToken}}

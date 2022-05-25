@@ -1,5 +1,4 @@
 import { all, fork, put, takeLatest, call } from 'redux-saga/effects';
-import axios from 'axios';
 
 import {
     USER_LOG_IN_REQUEST,
@@ -8,10 +7,14 @@ import {
     USER_SIGN_UP_REQUEST,
     USER_SIGN_UP_SUCCESS,
     USER_SIGN_UP_FAILURE,
-} from '../reducers/user';
+    USER_BUS_MODAL,
+    USER_BUS_MODAL_SUCCESS,
+    USER_BUS_MODAL_FAILURE,
+} from '../../constants';
+import { signupApi } from '../../utils';
 
 function* login(action) {
-    // console.log('saga In action', action);
+    console.log('saga In action', action);
     try {
         yield put({
             type: USER_LOG_IN_SUCCESS,
@@ -25,19 +28,19 @@ function* login(action) {
     }
 }
 
-function signupAPI(data) {
-    return axios.post(`/api/user/signup`, JSON.stringify(data), {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-            'Content-Type': `application/json`,
-        },
-    });
-}
+// function signupAPI(data) {
+//     return axios.post(`/api/user/signup`, JSON.stringify(data), {
+//         headers: {
+//             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+//             'Content-Type': `application/json`,
+//         },
+//     });
+// }
 // dispatch할 때 넘겨준 data === action
 
 function* signup(action) {
     try {
-        yield call(signupAPI, action.data);
+        yield call(signupApi, action.data);
         yield put({
             type: USER_SIGN_UP_SUCCESS,
             data: action.data,
@@ -45,6 +48,19 @@ function* signup(action) {
     } catch (err) {
         yield put({
             type: USER_SIGN_UP_FAILURE,
+            error: err,
+        });
+    }
+}
+
+function* busmodal() {
+    try {
+        yield put({
+            type: USER_BUS_MODAL_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: USER_BUS_MODAL_FAILURE,
             error: err,
         });
     }
@@ -81,6 +97,10 @@ function* watchSignUp() {
     yield takeLatest(USER_SIGN_UP_REQUEST, signup);
 }
 
+function* watchBusModal() {
+    yield takeLatest(USER_BUS_MODAL, busmodal);
+}
+
 export default function* userSaga() {
-    yield all([fork(watchLogin), fork(watchSignUp)]);
+    yield all([fork(watchLogin), fork(watchSignUp), fork(watchBusModal)]);
 }

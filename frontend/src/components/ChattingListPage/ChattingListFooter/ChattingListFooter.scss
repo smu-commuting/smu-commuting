@@ -1,0 +1,9 @@
+@import '../../../styles/utils.scss';
+.chattinglistfooter-wrapper {
+    width: 100%;
+    padding: 1.2rem;
+    position : fixed;
+    bottom : 0px;
+    @include font-face('NotoSansKR-Medium', 1.4rem, 2rem, #a19fad);
+    text-align: center;
+}

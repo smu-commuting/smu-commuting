@@ -1,0 +1,48 @@
+= 샘물로 API 문서 (Chat)
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:snippets: ../../../build/generated-snippets
+
+== Chat
+
+=== 자신이 속해있는 채팅방 목록 조회
+
+`GET /api/chat/rooms`
+
+요청 HTTP
+include::{snippets}/chat_room_list/http-request.adoc[]
+
+성공 응답 HTTP
+include::{snippets}/chat_room_list/http-response.adoc[]
+include::{snippets}/chat_room_list/response-fields.adoc[]
+
+=== 채팅방 나가기
+
+`DELETE /api/chat/room/{roomId}`
+
+요청 HTTP
+include::{snippets}/chat_room_exit/http-request.adoc[]
+include::{snippets}/chat_room_exit/path-parameters.adoc[]
+
+성공 응답 HTTP
+include::{snippets}/chat_room_exit/http-response.adoc[]
+include::{snippets}/chat_room_exit/response-fields.adoc[]
+
+== Message
+
+=== 채팅방 메시지 목록 조회
+
+`GET /api/chat/room/{roomId}/messages`
+
+요청 HTTP
+include::{snippets}/chat_room_message_list/http-request.adoc[]
+include::{snippets}/chat_room_message_list/path-parameters.adoc[]
+include::{snippets}/chat_room_message_list/request-parameters.adoc[]
+
+성공 응답 HTTP
+include::{snippets}/chat_room_message_list/http-response.adoc[]
+include::{snippets}/chat_room_message_list/response-fields.adoc[]

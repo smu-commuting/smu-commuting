@@ -1,27 +1,35 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable default-param-last */
 import produce from 'immer';
+import {
+    USER_LOG_IN_FAILURE,
+    USER_LOG_IN_REQUEST,
+    USER_LOG_IN_SUCCESS,
+    USER_SIGN_UP_FAILURE,
+    USER_SIGN_UP_REQUEST,
+    USER_SIGN_UP_SUCCESS,
+    USER_BUS_MODAL,
+    USER_BUS_MODAL_SUCCESS,
+    USER_BUS_MODAL_FAILURE,
+} from '../../constants';
 
 export const initialState = {
     me: null,
 
     // 로그인 관련 상태 state
-    logInLoading: false, // 로그인 시도중
-    logInDone: false,
-    logInError: null,
+    loginLoading: false, // 로그인 시도중
+    loginDone: false,
+    loginError: null,
 
     // 회원가입 관련 상태 state
     signupLoading: false,
     signupDone: false,
     signupError: null,
-};
 
-export const USER_LOG_IN_REQUEST = 'USER_LOG_IN_REQUEST';
-export const USER_LOG_IN_SUCCESS = 'USER_LOG_IN_SUCCESS';
-export const USER_LOG_IN_FAILURE = 'USER_LOG_IN_FAILURE';
-export const USER_SIGN_UP_REQUEST = 'USER_SIGN_UP_REQUEST';
-export const USER_SIGN_UP_SUCCESS = 'USER_SIGN_UP_SUCCESS';
-export const USER_SIGN_UP_FAILURE = 'USER_SIGN_UP_FAILURE';
+    isBusModalOpen: false,
+    isTaxiModalOpen: false,
+    isCommunityModalOpen: false,
+};
 
 export const loginRequest = data => {
     return {
@@ -38,6 +46,12 @@ export const signupRequest = data => {
     };
 };
 
+export const busModalClick = () => {
+    return {
+        type: USER_BUS_MODAL,
+    };
+};
+
 const reducer = (state = initialState, action) => {
     return produce(state, draft => {
         switch (action.type) {
@@ -49,11 +63,12 @@ const reducer = (state = initialState, action) => {
                 break;
 
             case USER_LOG_IN_SUCCESS:
-                // console.log('LOG_IN_SUCCESS', action.data);
+                console.log('LOG_IN_SUCCESS', action.data);
                 draft.loginLoading = false;
                 draft.loginDone = true;
                 draft.loginError = null;
                 draft.me = action.data.data;
+                console.log(draft.me);
                 break;
 
             case USER_LOG_IN_FAILURE:
@@ -77,6 +92,14 @@ const reducer = (state = initialState, action) => {
             case USER_SIGN_UP_FAILURE:
                 draft.signupLoading = false;
                 draft.signupError = action.err;
+                break;
+            case USER_BUS_MODAL:
+                break;
+            case USER_BUS_MODAL_SUCCESS:
+                draft.isBusModalOpen = !draft.isBusModalOpen;
+                break;
+            case USER_BUS_MODAL_FAILURE:
+                draft.isBusModalOpen = false;
                 break;
             default:
                 break;

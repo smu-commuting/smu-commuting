@@ -3,19 +3,20 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
-import store from './modules/store/configureStore';
+import axios from 'axios';
+import configureStore from './modules/store/configureStore';
 import App from './pages/App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import './styles/_reset.scss';
 
-const persistor = persistStore(store());
+axios.defaults.withCredentials = true;
+const store = configureStore();
+const persistor = persistStore(store);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Provider store={store()}>
+    <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-            <React.StrictMode>
-                <App />
-            </React.StrictMode>
+            <App />
         </PersistGate>
     </Provider>,
 );

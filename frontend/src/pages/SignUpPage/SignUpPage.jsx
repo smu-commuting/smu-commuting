@@ -2,11 +2,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { postAuthNumAPI, sendNumberAPI } from '../../modules/api';
+// import { postAuthNumAPI, sendNumberAPI } from '../../modules/api';
 import './SignUpPage.scss';
 import Search from '../../assets/SignUpPage/검색.png';
 import { signupRequest } from '../../modules/reducers/user';
-// import MyPage from '../MyPage/MyPage';
+import { sendNumberApi, verificationNumApi } from '../../utils';
+import Timer from '../../components/SignupPage/Timer';
 
 function SignUpPage() {
     const navigate = useNavigate();
@@ -16,10 +17,9 @@ function SignUpPage() {
     const [studentId, setStudentId] = useState(''); // 학번
     const [authNum, setAuthNum] = useState(''); // 인증번호
 
-    // console.log(signupDone);
     const onStudentIdChange = e => {
         if (studentId.length > 8) {
-            // alert('학번은 9자리 이내로 입력 가능합니다.');
+            alert('학번은 9자리 이내로 입력 가능합니다.');
             setStudentId('');
         } else {
             setStudentId(e.target.value);
@@ -32,23 +32,23 @@ function SignUpPage() {
 
     // 인증번호 요청 API
     const sendNumber = async () => {
-        const response = await sendNumberAPI(studentId);
+        const response = await sendNumberApi(studentId);
         if (response.data.success) setCheckSend(true);
     };
 
     // 인증번호 검사 API
     const postAuthNum = async () => {
-        const response = await postAuthNumAPI(authNum);
+        const response = await verificationNumApi(authNum);
         if (response.data.success) {
             const userInfo = {
                 email: `${studentId}@sangmyung.kr`,
                 studentId,
             };
             dispatch(signupRequest(userInfo));
-            // alert('가입을 축하합니다.');
+            alert('가입을 축하합니다.');
             navigate(`/home`);
         } else {
-            // alert('올바른 인증번호가 아닙니다.');
+            alert('올바른 인증번호가 아닙니다.');
         }
     };
     return (
@@ -89,7 +89,7 @@ function SignUpPage() {
                             onChange={onAuthNumChange}
                             required
                         />
-                        <p>5:00</p>
+                        <Timer mm={5} ss={0} />
                     </div>
                     <button
                         className="student-id-btn"
