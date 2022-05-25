@@ -1,8 +1,8 @@
-package com.api.smucommuting.chatmessage.controller;
+package com.api.smucommuting.taxichat.controller;
 
-import com.api.smucommuting.chatmessage.dto.MessageRequest;
-import com.api.smucommuting.chatmessage.dto.MessageResponse;
-import com.api.smucommuting.chatmessage.service.MessageService;
+import com.api.smucommuting.taxichat.dto.TaxiMessageRequest;
+import com.api.smucommuting.taxichat.dto.TaxiMessageResponse;
+import com.api.smucommuting.taxichat.service.TaxiMessageService;
 import com.api.smucommuting.common.dto.ApiResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,21 +18,21 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class MessageController {
+public class TaxiMessageController {
     private final SimpMessageSendingOperations messageTemplate;
-    private final MessageService messageService;
+    private final TaxiMessageService taxiMessageService;
 
     @MessageMapping("/chat/message")
-    public void message(MessageRequest message) {
-        MessageResponse response = messageService.save(message);
+    public void message(TaxiMessageRequest message) {
+        TaxiMessageResponse response = taxiMessageService.save(message);
         messageTemplate.convertAndSend("/sub/chat/room/" + response.getRoomId(), response);
     }
 
     @GetMapping("/api/chat/room/{roomId}/messages")
-    public ResponseEntity<ApiResult<List<MessageResponse>>> getMessages(@PathVariable Long roomId,
-                                                                        @RequestParam int size,
-                                                                        @RequestParam String lastMessageDate) {
-        List<MessageResponse> response = messageService.getMessages(roomId, size, lastMessageDate);
+    public ResponseEntity<ApiResult<List<TaxiMessageResponse>>> getMessages(@PathVariable Long roomId,
+                                                                            @RequestParam int size,
+                                                                            @RequestParam String lastMessageDate) {
+        List<TaxiMessageResponse> response = taxiMessageService.getMessages(roomId, size, lastMessageDate);
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
     }
 }

@@ -20,3 +20,7 @@ Authorization: {{authorizationToken}}
 ###
 GET {{apiUrl}}/taxi/my-parties
 Authorization: {{authorizationToken}}
+
+###
+DELETE {{apiUrl}}/taxi/party/1
+Authorization: {{authorizationToken}}

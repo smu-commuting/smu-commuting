@@ -1,8 +1,8 @@
-package com.api.smucommuting.chatmessage.controller;
+package com.api.smucommuting.taxichat.controller;
 
 import com.api.smucommuting.MvcTest;
-import com.api.smucommuting.chatmessage.dto.MessageResponse;
-import com.api.smucommuting.chatmessage.service.MessageService;
+import com.api.smucommuting.taxichat.dto.TaxiMessageResponse;
+import com.api.smucommuting.taxichat.service.TaxiMessageService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -26,20 +26,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @DisplayName("채팅 메시지 API 문서화")
-@WebMvcTest(MessageController.class)
-class MessageControllerTest extends MvcTest {
+@WebMvcTest(TaxiMessageController.class)
+class TaxiTaxiMessageControllerTest extends MvcTest {
     @MockBean
-    private MessageService messageService;
+    private TaxiMessageService taxiMessageService;
     @MockBean
     private SimpMessageSendingOperations messageTemplate;
 
     @Test
     @DisplayName("채팅 메시지 목록 조회 문서화")
     public void getMessages() throws Exception {
-        MessageResponse response1 = MessageResponse.builder().messageId(1L).roomId(1L).content("안녕하세요").createdTime(LocalDateTime.of(2022, 5, 24, 10, 0, 1, 11)).senderId(1L).senderStudentId(123456).build();
-        MessageResponse response2 = MessageResponse.builder().messageId(2L).roomId(1L).content("네 안녕하세요").createdTime(LocalDateTime.of(2022, 5, 24, 10, 0, 2, 22)).senderId(2L).senderStudentId(111111).build();
+        TaxiMessageResponse response1 = TaxiMessageResponse.builder().messageId(1L).roomId(1L).content("안녕하세요").createdTime(LocalDateTime.of(2022, 5, 24, 10, 0, 1, 11)).senderId(1L).senderStudentId(123456).build();
+        TaxiMessageResponse response2 = TaxiMessageResponse.builder().messageId(2L).roomId(1L).content("네 안녕하세요").createdTime(LocalDateTime.of(2022, 5, 24, 10, 0, 2, 22)).senderId(2L).senderStudentId(111111).build();
 
-        given(messageService.getMessages(any(), eq(10), any())).willReturn(Arrays.asList(response1, response2));
+        given(taxiMessageService.getMessages(any(), eq(10), any())).willReturn(Arrays.asList(response1, response2));
 
         ResultActions results = mvc.perform(RestDocumentationRequestBuilders
                 .get("/api/chat/room/{roomId}/messages",1)

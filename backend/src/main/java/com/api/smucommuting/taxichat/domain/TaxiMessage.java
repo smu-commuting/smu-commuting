@@ -1,4 +1,4 @@
-package com.api.smucommuting.chatmessage.domain;
+package com.api.smucommuting.taxichat.domain;
 
 import com.api.smucommuting.common.entity.BaseTimeEntity;
 import lombok.*;
@@ -10,11 +10,11 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "message")
-public class Message extends BaseTimeEntity {
+@Table(name = "taxi_message")
+public class TaxiMessage extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "message_id")
+    @Column(name = "taxi_message_id")
     private Long id;
 
     @Column(name = "sender_id")
@@ -26,6 +26,6 @@ public class Message extends BaseTimeEntity {
     @Column(name = "content")
     private String content;
 
-    @Column(name = "chat_room_id")
-    private Long chatRoomId;
+    @Column(name = "taxi_party_id")
+    private Long taxiPartyId;
 }

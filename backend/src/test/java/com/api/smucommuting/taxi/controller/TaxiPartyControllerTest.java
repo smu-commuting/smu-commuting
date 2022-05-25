@@ -146,4 +146,25 @@ class TaxiPartyControllerTest extends MvcTest {
                         )
                 ));
     }
+
+    @Test
+    @DisplayName("채팅방 나가기 문서화")
+    public void exitTaxiParty() throws Exception {
+        ResultActions results = mvc.perform(RestDocumentationRequestBuilders
+                .delete("/api/taxi/party/{taxiPartyId}", 1)
+        );
+
+        results.andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("taxi_party_exit",
+                        pathParameters(
+                                parameterWithName("taxiPartyId").description("나갈 택시파티 식별자")
+                        ),
+                        responseFields(
+                                fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
+                                fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
+                                fieldWithPath("data").description("응답 데이터가 없다면 null")
+                        )
+                ));
+    }
 }

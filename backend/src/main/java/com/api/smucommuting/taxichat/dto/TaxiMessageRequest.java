@@ -1,10 +1,10 @@
-package com.api.smucommuting.chatmessage.dto;
+package com.api.smucommuting.taxichat.dto;
 
-import com.api.smucommuting.chatmessage.domain.Message;
+import com.api.smucommuting.taxichat.domain.TaxiMessage;
 import lombok.Getter;
 
 @Getter
-public class MessageRequest {
+public class TaxiMessageRequest {
     public enum MessageType {
         ENTER, TALK
     }
@@ -15,12 +15,12 @@ public class MessageRequest {
     private Long senderId;
     private int studentId;
 
-    public Message toEntity() {
-        if (this.getMessageType().equals(MessageRequest.MessageType.ENTER)) {
+    public TaxiMessage toEntity() {
+        if (this.getMessageType().equals(TaxiMessageRequest.MessageType.ENTER)) {
             this.message = this.studentId + "님이 입장하셨습니다.";
         }
-        return Message.builder()
-                .chatRoomId(roomId)
+        return TaxiMessage.builder()
+                .taxiPartyId(roomId)
                 .senderId(senderId)
                 .senderStudentId(studentId)
                 .content(message)
