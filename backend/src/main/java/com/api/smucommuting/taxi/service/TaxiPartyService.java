@@ -47,4 +47,9 @@ public class TaxiPartyService {
         List<TaxiParty> taxiParties = taxiPartyRepository.findAllByPlaceAndDate(placeId, meetingDate, now, pageDto.of());
         return taxiParties.stream().map(TaxiPartyResponse.GetList::build).collect(Collectors.toList());
     }
+
+    public List<TaxiPartyResponse.GetMyList> getMyList(User loginUser) {
+        List<TaxiParty> taxiParties = taxiPartyRepository.findAllByUser(loginUser.getId());
+        return taxiParties.stream().map(TaxiPartyResponse.GetMyList::build).collect(Collectors.toList());
+    }
 }

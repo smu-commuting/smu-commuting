@@ -44,4 +44,10 @@ public class TaxiPartyController {
         List<TaxiPartyResponse.GetList> response = taxiPartyService.getList(placeId, meetingDate, LocalDateTime.now(), pageDto);
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
     }
+
+    @GetMapping("/my-parties")
+    public ResponseEntity<ApiResult<List<TaxiPartyResponse.GetMyList>>> getMyList(@CurrentUser CustomUserDetails customUserDetails) {
+        List<TaxiPartyResponse.GetMyList> response = taxiPartyService.getMyList(customUserDetails.getUser());
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
+    }
 }
