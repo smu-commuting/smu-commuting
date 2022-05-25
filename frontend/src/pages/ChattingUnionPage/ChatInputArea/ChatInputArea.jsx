@@ -1,17 +1,10 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import './ChatInputArea.scss';
 import Refusal from '../../../assets/ChattingList/ChatInputArea/합승거부.png';
 
-function ChatInputArea() {
-    const [myChat, setMyChat] = useState();
-    const myChatChange = e => {
-        setMyChat(e.target.value);
-    };
-    const onSendMyChat = () => {
-        console.log(myChat);
-        setMyChat('');
-        // 채팅 기능 개발 여기서 부터 하면 될 듯
-    };
+function ChatInputArea({ myChat, setMyChat, myChatChange, onSendMyChat }) {
     return (
         <div className="chatinputarea-wrapper">
             <div>
