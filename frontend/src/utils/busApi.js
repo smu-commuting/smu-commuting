@@ -4,7 +4,6 @@ import { API_URLS } from '../constants';
 
 const { API_BUS } = API_URLS;
 
-// 회원가입 API -> saga
 export const busApi = data => {
     console.log('api 도착', data);
     return axios.get(

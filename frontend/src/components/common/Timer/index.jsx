@@ -7,7 +7,6 @@ function Timer({ mm, ss }) {
 
     useEffect(() => {
         if (minutes === 0 && seconds === 0) {
-            alert('유효시간 만료');
             window.location.reload();
         }
         const countdown = setInterval(() => {

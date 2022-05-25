@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import './Bus08.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import BusRight from '../../../assets/BusPage/bus-right.png';
@@ -12,12 +12,10 @@ import BusInfoModal from '../BusInfoModal/BusInfoModal';
 
 function Bus08() {
     const dispatch = useDispatch();
-    const [station, setStation] = useState();
     const { isBusInfoModalOpen } = useSelector(state => state.bus);
     const onBusInfoClick = useCallback(
         value => {
-            setStation(value);
-            dispatch(isBusInfoModalClick());
+            dispatch(isBusInfoModalClick(value));
         },
         [dispatch],
     );
@@ -26,18 +24,18 @@ function Bus08() {
     }, []);
     return (
         <div className="bus08-wrapper">
-            {isBusInfoModalOpen && <BusInfoModal station={station} />}
+            {isBusInfoModalOpen && <BusInfoModal />}
             <div className="first-bus-line">
                 <div
                     className="bus-img-wrapper"
-                    onClick={() => onBusInfoClick('유진상가')}
+                    onClick={() => onBusInfoClick(parseInt(12, 10))}
                     aria-hidden
                 >
                     <img src={BusLeft} alt="유진상가" />
                 </div>
                 <div
                     className="bus-img-wrapper"
-                    onClick={() => onBusInfoClick('홍제역')}
+                    onClick={() => onBusInfoClick(parseInt(10, 10))}
                     aria-hidden
                 >
                     <img src={BusLeft} alt="홍제역" />
@@ -50,7 +48,7 @@ function Bus08() {
             <div className="third-bus-line">
                 <div
                     className="bus-img-wrapper"
-                    onClick={() => onBusInfoClick('서울여자간호대학교')}
+                    onClick={() => onBusInfoClick(parseInt(15, 10))}
                     aria-hidden
                 >
                     <img src={BusRight} alt="간호대" />
