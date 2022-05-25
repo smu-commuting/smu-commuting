@@ -47,4 +47,14 @@ public class TaxiPartyService {
         List<TaxiParty> taxiParties = taxiPartyRepository.findAllByPlaceAndDate(placeId, meetingDate, now, pageDto.of());
         return taxiParties.stream().map(TaxiPartyResponse.GetList::build).collect(Collectors.toList());
     }
+
+    public List<TaxiPartyResponse.GetMyList> getMyList(User loginUser) {
+        List<TaxiParty> taxiParties = taxiPartyRepository.findAllByUser(loginUser.getId());
+        return taxiParties.stream().map(TaxiPartyResponse.GetMyList::build).collect(Collectors.toList());
+    }
+
+    public void exit(Long taxiPartyId, Long loginUserId) {
+        taxiGroupRepository.deleteByTaxiPartyIdAndUserId(taxiPartyId, loginUserId);
+        //TODO 나가고 채팅방에 있는 사람이 없다면 채팅방 삭제
+    }
 }

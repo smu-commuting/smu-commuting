@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.api.smucommuting.taxi.domain.QTaxiGroup.taxiGroup;
 import static com.api.smucommuting.taxi.domain.QTaxiParty.taxiParty;
 
 @RequiredArgsConstructor
@@ -27,6 +28,16 @@ public class TaxiPartyRepositoryImpl implements TaxiPartyRepositoryCustom {
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .orderBy(taxiParty.meetingTime.asc())
+                .fetch();
+    }
+
+    @Override
+    public List<TaxiParty> findAllByUser(Long userId) {
+        return queryFactory.selectFrom(taxiParty)
+                .join(taxiParty.taxiPlace).fetchJoin()
+                .join(taxiParty.taxiGroupList, taxiGroup)
+                .where(taxiGroup.userId.eq(userId))
+                .orderBy(taxiParty.createdAt.desc())
                 .fetch();
     }
 }

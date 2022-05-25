@@ -2,7 +2,6 @@
 
 - link:/docs/auth.html[인증(Auth) API]
 - link:/docs/user.html[사용자(User) API]
-- link:/docs/taxi.html[택시합승(Taxi) API]
-- link:/docs/chat.html[채팅(Chat) API]
+- link:/docs/taxi.html[택시합승(TaxiParty) API]
 - link:/docs/blockuser.html[합승거부(BlockedUser) API]
 
