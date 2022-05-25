@@ -6,6 +6,7 @@ import { postAuthNumAPI, sendNumberAPI } from '../../modules/api';
 import './SignUpPage.scss';
 import Search from '../../assets/SignUpPage/검색.png';
 import { signupRequest } from '../../modules/reducers/user';
+// import MyPage from '../MyPage/MyPage';
 
 function SignUpPage() {
     const navigate = useNavigate();
@@ -18,7 +19,7 @@ function SignUpPage() {
     // console.log(signupDone);
     const onStudentIdChange = e => {
         if (studentId.length > 8) {
-            alert('학번은 9자리 이내로 입력 가능합니다.');
+            // alert('학번은 9자리 이내로 입력 가능합니다.');
             setStudentId('');
         } else {
             setStudentId(e.target.value);
@@ -44,10 +45,10 @@ function SignUpPage() {
                 studentId,
             };
             dispatch(signupRequest(userInfo));
-            alert('가입을 축하합니다.');
+            // alert('가입을 축하합니다.');
             navigate(`/home`);
         } else {
-            alert('올바른 인증번호가 아닙니다.');
+            // alert('올바른 인증번호가 아닙니다.');
         }
     };
     return (

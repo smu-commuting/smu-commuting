@@ -1,0 +1,37 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import Arrow from '../../assets/MyPage/arrow.png';
+import './InquiryPage.scss';
+
+function InquiryPage() {
+    const navigate = useNavigate();
+
+    const myPage = async () => {
+        navigate(`/mypage`);
+    };
+
+    return (
+        <div className="inquirypage-wrapper">
+            <div className="inquirypage-header">
+                <img
+                    src={Arrow}
+                    alt="화살표"
+                    onClick={myPage}
+                    aria-hidden="true"
+                />
+                <div>문의하기</div>
+            </div>
+            <div className="inquirypage-content">
+                <select>
+                    <option value="날짜">날짜</option>
+                    <option value="제목">제목</option>
+                    <option value="답변여부">답변여부</option>
+                </select>
+                <input type="number" />
+                <button type="submit">검색</button>
+            </div>
+        </div>
+    );
+}
+
+export default InquiryPage;
