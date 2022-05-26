@@ -28,7 +28,6 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
     private final static Integer MAX_COOKIE_TIME_S = 7 * 24 * 60 * 60;
     private static final String REFRESH_TOKEN = "refresh_token";
 
-
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();

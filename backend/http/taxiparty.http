@@ -9,7 +9,7 @@ Content-Type: application/json;charset=UTF-8
 }
 
 ###
-POST {{apiUrl}}/taxi/party/3
+POST {{apiUrl}}/taxi/party/7
 Authorization: {{authorizationToken}}
 Content-Type: application/json;charset=UTF-8
 
@@ -22,5 +22,5 @@ GET {{apiUrl}}/taxi/my-parties
 Authorization: {{authorizationToken}}
 
 ###
-DELETE {{apiUrl}}/taxi/party/1
+DELETE {{apiUrl}}/taxi/party/6
 Authorization: {{authorizationToken}}

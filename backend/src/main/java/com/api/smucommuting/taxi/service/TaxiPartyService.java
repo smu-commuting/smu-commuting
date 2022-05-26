@@ -1,16 +1,18 @@
 package com.api.smucommuting.taxi.service;
 
 import com.api.smucommuting.common.dto.PageDto;
-import com.api.smucommuting.common.exception.taxi.TaxiPartyNotFoundException;
 import com.api.smucommuting.common.exception.taxi.TaxiPlaceNotFoundException;
+import com.api.smucommuting.taxi.domain.TaxiExitGroup;
 import com.api.smucommuting.taxi.domain.TaxiGroup;
 import com.api.smucommuting.taxi.domain.TaxiParty;
 import com.api.smucommuting.taxi.domain.TaxiPlace;
+import com.api.smucommuting.taxi.domain.repository.TaxiExitGroupRepository;
 import com.api.smucommuting.taxi.domain.repository.TaxiGroupRepository;
 import com.api.smucommuting.taxi.domain.repository.TaxiPartyRepository;
 import com.api.smucommuting.taxi.domain.repository.TaxiPlaceRepository;
 import com.api.smucommuting.taxi.dto.TaxiPartyRequest;
 import com.api.smucommuting.taxi.dto.TaxiPartyResponse;
+import com.api.smucommuting.taxi.service.integrate.TaxiParties;
 import com.api.smucommuting.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,19 +28,19 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class TaxiPartyService {
     private final TaxiPartyRepository taxiPartyRepository;
+    private final TaxiParties taxiParties;
     private final TaxiPlaceRepository taxiPlaceRepository;
     private final TaxiGroupRepository taxiGroupRepository;
+    private final TaxiExitGroupRepository taxiExitGroupRepository;
 
     public void create(TaxiPartyRequest.Create request, User loginUser) {
         TaxiPlace taxiPlace = taxiPlaceRepository.findById(request.getPlaceId()).orElseThrow(TaxiPlaceNotFoundException::new);
         TaxiParty createdParty = TaxiParty.create(taxiPlace, request.getHeadcount(), request.getMeetingDate(), loginUser.getId());
-        TaxiParty party = taxiPartyRepository.save(createdParty);
-        party.created(taxiPlace.getName(), loginUser.getId());
+        taxiPartyRepository.save(createdParty);
     }
 
     public void join(Long taxiPartyId, User loginUser) {
-        TaxiParty taxiParty = taxiPartyRepository.findById(taxiPartyId).orElseThrow(TaxiPartyNotFoundException::new);
-        taxiParty.joined(taxiPartyId, loginUser.getId());
+        TaxiParty taxiParty = taxiParties.getOne(taxiPartyId);
         taxiGroupRepository.save(TaxiGroup.create(loginUser.getId(), taxiParty));
     }
 
@@ -54,7 +56,12 @@ public class TaxiPartyService {
     }
 
     public void exit(Long taxiPartyId, Long loginUserId) {
-        taxiGroupRepository.deleteByTaxiPartyIdAndUserId(taxiPartyId, loginUserId);
-        //TODO 나가고 채팅방에 있는 사람이 없다면 채팅방 삭제
+        TaxiParty taxiParty = taxiParties.getOne(taxiPartyId);
+        if (taxiParty.getTaxiGroupList().size() == 1) {
+            taxiPartyRepository.deleteById(taxiPartyId);
+        } else {
+            taxiGroupRepository.deleteByTaxiPartyIdAndUserId(taxiPartyId, loginUserId);
+            taxiExitGroupRepository.save(TaxiExitGroup.create(loginUserId, taxiParty));
+        }
     }
 }
