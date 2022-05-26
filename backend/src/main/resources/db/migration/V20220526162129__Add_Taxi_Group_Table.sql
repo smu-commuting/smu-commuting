@@ -1,0 +1,1 @@
+alter table `taxi_group` add column `status` varchar(20);
