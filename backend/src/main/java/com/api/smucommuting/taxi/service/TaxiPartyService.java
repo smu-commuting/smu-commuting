@@ -1,6 +1,7 @@
 package com.api.smucommuting.taxi.service;
 
 import com.api.smucommuting.common.dto.PageDto;
+import com.api.smucommuting.common.exception.taxi.TaxiGroupNotFoundException;
 import com.api.smucommuting.common.exception.taxi.TaxiPlaceNotFoundException;
 import com.api.smucommuting.taxi.domain.TaxiGroup;
 import com.api.smucommuting.taxi.domain.TaxiGroupUserStatus;
@@ -56,18 +57,20 @@ public class TaxiPartyService {
         return taxiParties.stream().map(TaxiPartyResponse.GetMyList::build).collect(Collectors.toList());
     }
 
-//    @Transactional(readOnly = true)
-//    public List<TaxiPartyResponse.TaxiPartyUsers> getExitUsers(Long taxiPartyId) {
-//        List<User> users = this.users.findAllByUserIdIn(userIds);
-//        return TaxiPartyResponse.TaxiPartyUsers.listsOf(users);
-//    }
+
+    @Transactional(readOnly = true)
+    public List<TaxiPartyResponse.TaxiPartyUsers> getTaxiPartyUsers(Long taxiPartyId, TaxiGroupUserStatus status) {
+        List<Long> userIds = taxiGroupRepository.findAllByTaxiPartyIdAndStatus(taxiPartyId, status).stream().map(TaxiGroup::getUserId).collect(Collectors.toList());
+        List<User> users = this.users.findAllByUserIdIn(userIds);
+        return TaxiPartyResponse.TaxiPartyUsers.listsOf(users);
+    }
 
     public void exit(Long taxiPartyId, Long loginUserId) {
         List<TaxiGroup> allByTaxiPartyIdAndStatus = taxiGroupRepository.findAllByTaxiPartyIdAndStatus(taxiPartyId, TaxiGroupUserStatus.IN);
         if (allByTaxiPartyIdAndStatus.size() == 1) {
             taxiPartyRepository.deleteById(taxiPartyId);
         } else {
-            TaxiGroup taxiGroup = taxiGroupRepository.findByTaxiPartyIdAndUserId(taxiPartyId, loginUserId).orElseThrow();
+            TaxiGroup taxiGroup = taxiGroupRepository.findByTaxiPartyIdAndUserId(taxiPartyId, loginUserId).orElseThrow(TaxiGroupNotFoundException::new);
             taxiGroup.exit();
         }
     }
