@@ -33,10 +33,6 @@ public class TaxiParty extends BaseTimeEntity {
     @OneToMany(mappedBy = "taxiParty", cascade = CascadeType.ALL)
     private List<TaxiGroup> taxiGroupList = new ArrayList<>();
 
-    @Builder.Default
-    @OneToMany(mappedBy = "taxiParty", cascade = CascadeType.REMOVE)
-    private List<TaxiExitGroup> taxiExitGroups = new ArrayList<>();
-
     public static TaxiParty create(TaxiPlace taxiPlace, int maximum, LocalDateTime meetingTime, Long userId) {
         TaxiParty taxiParty = TaxiParty.builder()
                 .taxiPlace(taxiPlace)

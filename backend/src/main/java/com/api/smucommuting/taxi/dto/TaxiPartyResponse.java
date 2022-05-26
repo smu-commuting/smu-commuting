@@ -1,10 +1,13 @@
 package com.api.smucommuting.taxi.dto;
 
 import com.api.smucommuting.taxi.domain.TaxiParty;
+import com.api.smucommuting.user.domain.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class TaxiPartyResponse {
@@ -52,6 +55,26 @@ public class TaxiPartyResponse {
                     .date(taxiParty.getMeetingTime())
                     .time(taxiParty.getMeetingTime())
                     .build();
+        }
+    }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
+    public static class TaxiPartyUsers {
+        private Long userId;
+        private Integer studentId;
+
+        public static TaxiPartyUsers build(User user) {
+            return TaxiPartyUsers.builder()
+                    .userId(user.getId())
+                    .studentId(user.getStudentId())
+                    .build();
+        }
+
+        public static List<TaxiPartyUsers> listsOf(List<User> userList) {
+            return userList.stream().map(TaxiPartyUsers::build).collect(Collectors.toList());
         }
     }
 }

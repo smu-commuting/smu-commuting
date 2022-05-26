@@ -2,11 +2,10 @@ package com.api.smucommuting.taxi.service;
 
 import com.api.smucommuting.common.dto.PageDto;
 import com.api.smucommuting.common.exception.taxi.TaxiPlaceNotFoundException;
-import com.api.smucommuting.taxi.domain.TaxiExitGroup;
 import com.api.smucommuting.taxi.domain.TaxiGroup;
+import com.api.smucommuting.taxi.domain.TaxiGroupUserStatus;
 import com.api.smucommuting.taxi.domain.TaxiParty;
 import com.api.smucommuting.taxi.domain.TaxiPlace;
-import com.api.smucommuting.taxi.domain.repository.TaxiExitGroupRepository;
 import com.api.smucommuting.taxi.domain.repository.TaxiGroupRepository;
 import com.api.smucommuting.taxi.domain.repository.TaxiPartyRepository;
 import com.api.smucommuting.taxi.domain.repository.TaxiPlaceRepository;
@@ -14,6 +13,7 @@ import com.api.smucommuting.taxi.dto.TaxiPartyRequest;
 import com.api.smucommuting.taxi.dto.TaxiPartyResponse;
 import com.api.smucommuting.taxi.service.integrate.TaxiParties;
 import com.api.smucommuting.user.domain.User;
+import com.api.smucommuting.user.service.integrate.Users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +31,7 @@ public class TaxiPartyService {
     private final TaxiParties taxiParties;
     private final TaxiPlaceRepository taxiPlaceRepository;
     private final TaxiGroupRepository taxiGroupRepository;
-    private final TaxiExitGroupRepository taxiExitGroupRepository;
+    private final Users users;
 
     public void create(TaxiPartyRequest.Create request, User loginUser) {
         TaxiPlace taxiPlace = taxiPlaceRepository.findById(request.getPlaceId()).orElseThrow(TaxiPlaceNotFoundException::new);
@@ -50,18 +50,25 @@ public class TaxiPartyService {
         return taxiParties.stream().map(TaxiPartyResponse.GetList::build).collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public List<TaxiPartyResponse.GetMyList> getMyList(User loginUser) {
         List<TaxiParty> taxiParties = taxiPartyRepository.findAllByUser(loginUser.getId());
         return taxiParties.stream().map(TaxiPartyResponse.GetMyList::build).collect(Collectors.toList());
     }
 
+//    @Transactional(readOnly = true)
+//    public List<TaxiPartyResponse.TaxiPartyUsers> getExitUsers(Long taxiPartyId) {
+//        List<User> users = this.users.findAllByUserIdIn(userIds);
+//        return TaxiPartyResponse.TaxiPartyUsers.listsOf(users);
+//    }
+
     public void exit(Long taxiPartyId, Long loginUserId) {
-        TaxiParty taxiParty = taxiParties.getOne(taxiPartyId);
-        if (taxiParty.getTaxiGroupList().size() == 1) {
+        List<TaxiGroup> allByTaxiPartyIdAndStatus = taxiGroupRepository.findAllByTaxiPartyIdAndStatus(taxiPartyId, TaxiGroupUserStatus.IN);
+        if (allByTaxiPartyIdAndStatus.size() == 1) {
             taxiPartyRepository.deleteById(taxiPartyId);
         } else {
-            taxiGroupRepository.deleteByTaxiPartyIdAndUserId(taxiPartyId, loginUserId);
-            taxiExitGroupRepository.save(TaxiExitGroup.create(loginUserId, taxiParty));
+            TaxiGroup taxiGroup = taxiGroupRepository.findByTaxiPartyIdAndUserId(taxiPartyId, loginUserId).orElseThrow();
+            taxiGroup.exit();
         }
     }
 }

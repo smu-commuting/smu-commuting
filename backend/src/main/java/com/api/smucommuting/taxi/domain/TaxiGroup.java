@@ -23,6 +23,14 @@ public class TaxiGroup extends BaseTimeEntity {
     @JoinColumn(name = "taxi_party_id")
     private TaxiParty taxiParty;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private TaxiGroupUserStatus status;
+
+    public void exit() {
+        this.status = TaxiGroupUserStatus.OUT;
+    }
+
     private void assignTaxiParty(TaxiParty taxiParty) {
         this.taxiParty = taxiParty;
         taxiParty.getTaxiGroupList().add(this);
@@ -31,6 +39,7 @@ public class TaxiGroup extends BaseTimeEntity {
     public static TaxiGroup create(Long userId, TaxiParty taxiParty) {
         TaxiGroup taxiGroup = TaxiGroup.builder()
                 .userId(userId)
+                .status(TaxiGroupUserStatus.IN)
                 .build();
         taxiGroup.assignTaxiParty(taxiParty);
         return taxiGroup;

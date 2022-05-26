@@ -51,9 +51,13 @@ public class TaxiPartyController {
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
     }
 
+//    @GetMapping("/party/{taxiPartyId}/exit/users")
+//    public void getTaxiPartyExitUsers(@PathVariable Long taxiPartyId){
+//        final List<TaxiPartyResponse.TaxiPartyUsers> response = taxiPartyService.getExitUsers(taxiPartyId);
+//    }
+
     @DeleteMapping("/party/{taxiPartyId}")
     public ResponseEntity<ApiResult<Void>> exitParty(@PathVariable Long taxiPartyId, @CurrentUser CustomUserDetails customUserDetails) {
-        //TODO 택시방과 같이 나가는 경우 로직 추가
         taxiPartyService.exit(taxiPartyId, customUserDetails.getUser().getId());
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
     }
