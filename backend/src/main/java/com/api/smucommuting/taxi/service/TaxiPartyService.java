@@ -2,10 +2,7 @@ package com.api.smucommuting.taxi.service;
 
 import com.api.smucommuting.common.dto.PageDto;
 import com.api.smucommuting.common.exception.taxi.TaxiGroupNotFoundException;
-import com.api.smucommuting.taxi.domain.TaxiGroup;
-import com.api.smucommuting.taxi.domain.TaxiGroupUserStatus;
-import com.api.smucommuting.taxi.domain.TaxiParty;
-import com.api.smucommuting.taxi.domain.TaxiPlace;
+import com.api.smucommuting.taxi.domain.*;
 import com.api.smucommuting.taxi.domain.repository.TaxiGroupRepository;
 import com.api.smucommuting.taxi.domain.repository.TaxiPartyRepository;
 import com.api.smucommuting.taxi.dto.TaxiPartyRequest;
@@ -29,11 +26,12 @@ public class TaxiPartyService {
     private final TaxiPartyRepository taxiPartyRepository;
     private final TaxiGroupRepository taxiGroupRepository;
     private final TaxiPartyInfo taxiPartyInfo;
+    private final TaxiPartyValidator taxiPartyValidator;
     private final Users users;
 
     public void create(TaxiPartyRequest.Create request, User loginUser) {
         TaxiPlace taxiPlace = taxiPartyInfo.getTaxiPlace(request.getPlaceId());
-        TaxiParty createdParty = TaxiParty.create(taxiPlace, request.getHeadcount(), request.getMeetingDate(), loginUser.getId());
+        TaxiParty createdParty = TaxiParty.create(taxiPlace, request.getHeadcount(), request.getMeetingDate(), loginUser.getId(), taxiPartyValidator);
         taxiPartyRepository.save(createdParty);
     }
 
