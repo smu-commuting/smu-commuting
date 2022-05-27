@@ -40,7 +40,7 @@ public class TaxiParty extends BaseTimeEntity {
                 .maximum(maximum)
                 .meetingTime(meetingTime)
                 .build();
-        TaxiGroup.create(userId, taxiParty);
+        TaxiGroup.createWithOutValidate(userId, taxiParty);
         return taxiParty;
     }
 }

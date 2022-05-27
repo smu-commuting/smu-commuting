@@ -36,7 +36,16 @@ public class TaxiGroup extends BaseTimeEntity {
         taxiParty.getTaxiGroupList().add(this);
     }
 
-    public static TaxiGroup create(Long userId, TaxiParty taxiParty) {
+    public static void createWithOutValidate(Long userId, TaxiParty taxiParty) {
+        TaxiGroup taxiGroup = TaxiGroup.builder()
+                .userId(userId)
+                .status(TaxiGroupUserStatus.IN)
+                .build();
+        taxiGroup.assignTaxiParty(taxiParty);
+    }
+
+    public static TaxiGroup createWithValidate(Long userId, TaxiParty taxiParty, TaxiPartyValidator taxiPartyValidator) {
+        taxiPartyValidator.joinValidate(taxiParty.getId(), userId, taxiParty.getMeetingTime());
         TaxiGroup taxiGroup = TaxiGroup.builder()
                 .userId(userId)
                 .status(TaxiGroupUserStatus.IN)

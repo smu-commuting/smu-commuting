@@ -37,7 +37,7 @@ public class TaxiPartyService {
 
     public void join(Long taxiPartyId, User loginUser) {
         TaxiParty taxiParty = taxiPartyInfo.getTaxiParty(taxiPartyId);
-        taxiGroupRepository.save(TaxiGroup.create(loginUser.getId(), taxiParty));
+        taxiGroupRepository.save(TaxiGroup.createWithValidate(loginUser.getId(), taxiParty, taxiPartyValidator));
     }
 
     @Transactional(readOnly = true)
