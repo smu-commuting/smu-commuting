@@ -49,7 +49,7 @@ function ChattingUnionPage() {
         );
     }
 
-    const onSendMyChat = () => {
+    const onSendMyChatHandler = e => {
         // Todo : axios
         console.log('클릭', myChat);
         waitForConnection(ws, function () {
@@ -77,7 +77,7 @@ function ChattingUnionPage() {
                     <img src={Refusal} alt="합승거부" />
                 </div>
                 <textarea value={myChat} onChange={myChatChange} required />
-                <button type="submit" onClick={onSendMyChat}>
+                <button type="submit" onClick={onSendMyChatHandler}>
                     전송
                 </button>
             </div>

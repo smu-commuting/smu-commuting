@@ -1,2 +1,3 @@
 export { sendNumberApi, verificationNumApi, signupApi } from './authApi';
-export { getChattingApi, deleteChatRoomApi } from './chatApi';
+export { getMyTaxiPartiesApi, deleteTaxiPartyApi } from './taxiApi';
+export { busApi } from './busApi';

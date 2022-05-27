@@ -8,7 +8,6 @@ import HomePage from './HomePage/HomePage';
 import LogInPage from './LogInPage/LogInPage';
 import LogInProcess from './LogInProcess/LogInProcess';
 import SignUpPage from './SignUpPage/SignUpPage';
-import ChatingTestPage from './ChatingTestPage/ChatingTestPage';
 import ChattingListPage from './ChattingListPage/ChattingListPage';
 import ChattingListHeader from '../components/ChattingListPage/ChattingListHeader/ChattingListHeader';
 import ChattingListFooter from '../components/ChattingListPage/ChattingListFooter/ChattingListFooter';
@@ -45,7 +44,6 @@ function App() {
                         </>
                     }
                 />
-                <Route path="/chat/test" element={<ChatingTestPage />} />
                 <Route
                     path="/chatlist"
                     element={
