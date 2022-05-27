@@ -13,19 +13,12 @@
             height: 1.938rem;
         }
         .setting {
-            display: flex;
-            flex-direction: column;
-            padding: 0 0 0 10.5531rem;
+            padding: 0 0 0 9rem;
             align-items: center;
-            .img {
-                display: block;
-                width: 3.25rem;
-                height: 3.25rem;
-            }
             div {
                 text-align: center;
                 font-weight: bold;
-                @include font-face(NotoSansKR-Regular, 1.875rem, 2.5rem, #292733);
+                @include font-face(NotoSansKR-Regular, 2.5rem, 2.5rem, #292733);
             }
         }
     }
@@ -37,7 +30,6 @@
             display: flex;
             flex-direction: row;
             padding: 1rem;
-            border-bottom: 0.063rem solid #a19fad;
             .sumung {
                 display: inline;
                 width: 5.494rem;
@@ -47,7 +39,68 @@
                 padding: 2rem 0 2rem 1rem;
                 text-align: left;
                 font-weight: bold;
-                @include font-face(NotoSansKR-Regular, 1.3rem, 2.5rem, #292733);
+                @include font-face(NotoSansKR-Regular, 1.5rem, 2.5rem, #292733);
+            }
+        }
+        .notification-setting {
+            display: flex;
+            flex-direction: row;
+            padding-left: 4rem;
+            text-align: left;
+            @include font-face(NotoSansKR-Regular, 1.5rem, 2.5rem, #292733);
+            border-bottom: 0.063rem solid #a19fad;
+            p{
+                padding-right: 10rem;
+                margin-top: 0.5rem;
+            }
+            .toggleSwitch {
+                .label {
+                    .checkbox {
+                        height: 0;
+                        width: 0;
+                        visibility: hidden;
+                    }
+                }
+                .label {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    cursor: pointer;
+                    width: 60px;
+                    height: 30px;
+                    background: grey;
+                    border-radius: 100px;
+                    position: relative;
+                    transition: background-color .2s;
+                }
+                .label {
+                    .switch {
+                        content: '';
+                        position: absolute;
+                        top: 2px;
+                        left: 2px;
+                        width: 25px;
+                        height: 25px;
+                        border-radius: 45px;
+                        transition: 0.2s;
+                        background: #fff;
+                    }
+                }
+                .label {
+                    .checkbox {
+                        &:checked + .switch{
+                            left: calc(100% - 2px);
+                            transform: translateX(-100%);
+                            }
+                        }
+                }
+                .label {
+                    &:active {
+                        .span{
+                            width: 60px;
+                        }
+                    }
+                }
             }
         }
         .refusal-taxi-share-btn {
@@ -55,32 +108,21 @@
             padding: 2rem;
             border-bottom: 0.063rem solid #a19fad;
             text-align: center;
-            font-weight: bold;
-            @include font-face(NotoSansKR-Regular, 1.3rem, 2.5rem, #292733);
-        }
-        .notification-setting-btn {
-            display: block;
-            padding: 2rem;
-            border-bottom: 0.063rem solid #a19fad;
-            text-align: center;
-            font-weight: bold;
-            @include font-face(NotoSansKR-Regular, 1.3rem, 2.5rem, #292733);
+            @include font-face(NotoSansKR-Regular, 1.5rem, 2.5rem, #292733);
         }
         .membership-withdrawal-btn {
             display: block;
             padding: 2rem;
             border-bottom: 0.063rem solid #a19fad;
             text-align: center;
-            font-weight: bold;
-            @include font-face(NotoSansKR-Regular, 1.3rem, 2.5rem, #292733);
+            @include font-face(NotoSansKR-Regular, 1.5rem, 2.5rem, #292733);
         }
         .inquiry-btn {
             display: block;
             padding: 2rem;
             border-bottom: 0.063rem solid #a19fad;
             text-align: center;
-            font-weight: bold;
-            @include font-face(NotoSansKR-Regular, 1.3rem, 2.5rem, #292733);
+            @include font-face(NotoSansKR-Regular, 1.5rem, 2.5rem, #292733);
         }
     }
 }

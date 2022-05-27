@@ -1,26 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Setting from '../../assets/MyPage/setting.png';
 import Profile from '../../assets/MyPage/수뭉이프로필.svg';
 import Arrow from '../../assets/MyPage/arrow.png';
 import './MyPage.scss';
 
 function MyPage() {
     const navigate = useNavigate();
+    const onChangeText = e => {
+        if (e.target.checked === false) {
+            alert('OFF');
+        } else if (e.target.checked === true) {
+            alert('ON');
+        }
+    };
+    const [studentId] = useState(''); // 학번
 
-    const homePage = async () => {
+    const homePage = () => {
         navigate(`/home`);
     };
-    const refusalTaxiShare = async () => {
+    const refusalTaxiShare = () => {
         navigate(`/refusal`);
     };
-    const notificationSetting = async () => {
-        navigate(`/notification`);
-    };
-    const membershipWithdrawal = async () => {
+    const membershipWithdrawal = () => {
         navigate(`/withdrawal`);
     };
-    const inquiry = async () => {
+    const inquiry = () => {
         navigate(`/inquiry`);
     };
 
@@ -34,7 +38,6 @@ function MyPage() {
                     aria-hidden="true"
                 />
                 <div className="setting">
-                    <img src={Setting} alt="설정" />
                     <div>내 정보</div>
                 </div>
             </div>
@@ -42,8 +45,22 @@ function MyPage() {
                 <div className="std-profile">
                     <img clsssName="sumung" src={Profile} alt="프로필사진" />
                     <div>
-                        학번
-                        <br /> 상명대학교 서울캠퍼스 (학번)
+                        {studentId}
+                        <br /> 상명대학교 서울캠퍼스
+                    </div>
+                </div>
+                <div className="notification-setting">
+                    <p>알림 설정</p>
+                    <div className="toggleSwitch">
+                        <label className="label" htmlFor="toggleSwitch">
+                            <input
+                                type="checkbox"
+                                className="checkbox"
+                                id="toggleSwitch"
+                                onClick={onChangeText}
+                            />
+                            <span className="switch" />
+                        </label>
                     </div>
                 </div>
                 <button
@@ -52,13 +69,6 @@ function MyPage() {
                     onClick={refusalTaxiShare}
                 >
                     택시 합승 거부 설정
-                </button>
-                <button
-                    className="notification-setting-btn"
-                    type="submit"
-                    onClick={notificationSetting}
-                >
-                    알림 설정
                 </button>
                 <button
                     className="membership-withdrawal-btn"

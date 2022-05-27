@@ -13,9 +13,53 @@
             height: 1.938rem;
         }
         div {
-            padding: 0 0 0 10rem;
+            padding: 0 0 0 8rem;
             text-align: center;
-            @include font-face(NotoSansKR-Regular, 1.875rem, 2.5rem, #292733);
+            font-weight: bold;
+            @include font-face(NotoSansKR-Regular, 2.5rem, 2.5rem, #292733);
+        }
+    }
+    .withdrawalpage-content {
+        display: flex;
+        flex-direction: column;
+        img {
+            padding-top: 6rem;
+            padding-left: 6rem;
+            padding-right: 6rem;
+            padding-bottom: 1rem;
+            align-items: center;
+            width: 60%;
+        }
+        p {
+            text-align: center;
+            @include font-face(NotoSansKR-Regular, 2.3rem, 2.5rem, #292733);
+        }
+        .withdrawal-btn {
+            display: flex;
+            flex-direction: row;
+            padding-left: 5rem;
+            .yes {
+                margin: 1rem;
+                padding-left: 2.5rem;
+                padding-right: 2.5rem;
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+                background-color: #c4c4c4;
+                border-radius: 10px;
+                text-align: center;
+                @include font-face(NotoSansKR-Regular, 2rem, 2.5rem, #ffffff);
+            }
+            .no {
+                margin: 1rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            background-color: #7b88f2;
+            border-radius: 10px;
+            text-align: center;
+            @include font-face(NotoSansKR-Regular, 2rem, 2.5rem, #ffffff);
+            }
         }
     }
 }

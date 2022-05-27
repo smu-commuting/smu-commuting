@@ -17,9 +17,9 @@ import ChattingRoomHeader from '../components/ChattingRoomPage/ChattingRoomHeade
 import ChatInputArea from '../components/ChattingRoomPage/ChatInputArea/ChatInputArea';
 import RefusalTaxiSharePage from './RefusalTaxiSharePage/RefusalTaxiSharePage';
 import MyPage from './MyPage/MyPage';
-import NotificationPage from './NotificationPage/NotificationPage';
 import InquiryPage from './InquiryPage/InquiryPage';
 import WithdrawalPage from './WithdrawalPage/WithdrawalPage';
+import WithdrawalConfirmPage from './WithdrawalConfirmPage/WithdrawalConfirmPage';
 
 function App() {
     const { isBusModalOpen } = useSelector(state => state.user);
@@ -75,9 +75,9 @@ function App() {
                 />
                 <Route path="/refusal" element={<RefusalTaxiSharePage />} />
                 <Route path="/mypage" element={<MyPage />} />
-                <Route path="/notification" element={<NotificationPage />} />
                 <Route path="/inquiry" element={<InquiryPage />} />
                 <Route path="/withdrawal" element={<WithdrawalPage />} />
+                <Route path="/confirm" element={<WithdrawalConfirmPage />} />
             </Routes>
         </Router>
     );

@@ -6,7 +6,7 @@ import './RefusalTaxiSharePage.scss';
 function RefusalTaxiSharePage() {
     const navigate = useNavigate();
 
-    const myPage = async () => {
+    const myPage = () => {
         navigate(`/mypage`);
     };
 

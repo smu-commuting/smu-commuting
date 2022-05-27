@@ -6,7 +6,7 @@ import './InquiryPage.scss';
 function InquiryPage() {
     const navigate = useNavigate();
 
-    const myPage = async () => {
+    const myPage = () => {
         navigate(`/mypage`);
     };
 
