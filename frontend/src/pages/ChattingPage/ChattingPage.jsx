@@ -1,13 +1,11 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable func-names */
 import React, { useState } from 'react';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
-import './ChatInputArea/ChatInputArea.scss';
+import './ChattingPage.scss';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import ChattingRoomHeader from './ChattingRoomHeader/ChattingRoomHeader';
-import ChattingRoomPage from './ChattingRoomPage/ChattingRoomPage';
+import ChattingRoomHeader from '../../components/ChattingRoomPage/ChattingRoomHeader/ChattingRoomHeader';
 import Refusal from '../../assets/ChattingList/ChatInputArea/합승거부.png';
 
 function ChattingUnionPage() {
@@ -69,10 +67,11 @@ function ChattingUnionPage() {
         });
         setMyChat('');
     };
+
     return (
-        <div>
+        <div className="chattingpage-wrapper">
             <ChattingRoomHeader />
-            <ChattingRoomPage />
+            <div className="chattingroompage-wrapper" />
             <div className="chatinputarea-wrapper">
                 <div>
                     <img src={Refusal} alt="합승거부" />

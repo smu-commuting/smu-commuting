@@ -12,14 +12,12 @@ function ChatingTestPage() {
     const [chatList, setChatList] = useState([]);
     const [myAsk, setMyAsk] = useState();
     const myAskChange = e => {
-        // console.log(e.target.value);
         setMyAsk(e.target.value);
     };
     const myChatSend = () => {
         setMyAsk('');
         setChatList([...chatList, { me: true, talk: myAsk }]);
     };
-
     function connect() {
         ws.connect(
             {},
