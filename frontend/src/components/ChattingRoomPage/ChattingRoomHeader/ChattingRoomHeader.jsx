@@ -8,11 +8,11 @@ import getOut from '../../../assets/ChattingList/ChattingListPage/첫줄.png';
 function ChattingRoomHeader() {
     const { id } = useParams();
     const navigate = useNavigate();
-    const { myChatRooms } = useSelector(state => state.chat);
+    const { myTaxiParties } = useSelector(state => state.taxi);
     const [meetInfo, setMeetInfo] = useState();
 
     useEffect(() => {
-        const info = myChatRooms.find(
+        const info = myTaxiParties.find(
             myChatRoom => myChatRoom.chatRoomId === parseInt(id, 10),
         );
         setMeetInfo(`${info.place} ${info.time}`);

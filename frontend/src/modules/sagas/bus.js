@@ -9,7 +9,7 @@ import {
     BUS_INFO_FETCH_SUCCESS,
     BUS_INFO_FETCH_FAILURE,
 } from '../../constants';
-import { busApi } from '../../utils/busApi';
+import { busApi } from '../../utils';
 
 function* businfomodal(action) {
     console.log(action.data);

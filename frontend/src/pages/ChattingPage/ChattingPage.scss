@@ -1,0 +1,51 @@
+@import '../../styles/utils.scss';
+
+.chattingpage-wrapper {
+    .chattingroompage-wrapper {
+        padding-top: 7rem;
+        padding-bottom: 4.5rem;
+        .notice {
+            text-align: center;
+            @include font-face('NotoSansKR-Regular', 1.3rem, 2rem, #a19fad);
+        }
+    }
+    .chatinputarea-wrapper {
+        ::-webkit-scrollbar {
+            width: 20px;
+        }
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 5rem;
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid #7b88f2;
+        div {
+            flex: 0.3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+                display: block;
+                width: 4.1rem;
+                height: 4.1rem;
+            }
+        }
+        textarea {
+            margin-top: 0.1rem;
+            flex: 2;
+            resize: none; // 사이즈 resize X
+            border: none;
+            font-family: 'NotoSansKR-Regular';
+        }
+        textarea:focus {
+            // textarea 클릭 후, focusing 되는 현상 방지
+            outline: none;
+        }
+        button {
+            flex: 0.5;
+            background: #7b88f2;
+            @include font-face('NotoSansKR-Regular', 1.7rem, 0, #ffffff);
+        }
+    }
+}

@@ -23,6 +23,7 @@ function LogInProcess() {
             const userInfo = {
                 email: `${studentId}@sangmyung.kr`,
                 studentId,
+                id,
             };
             dispatch(loginRequest(userInfo));
             setTimeout(() => {

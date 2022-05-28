@@ -8,13 +8,10 @@ import HomePage from './HomePage/HomePage';
 import LogInPage from './LogInPage/LogInPage';
 import LogInProcess from './LogInProcess/LogInProcess';
 import SignUpPage from './SignUpPage/SignUpPage';
-import ChatingTestPage from './ChatingTestPage/ChatingTestPage';
 import ChattingListPage from './ChattingListPage/ChattingListPage';
 import ChattingListHeader from '../components/ChattingListPage/ChattingListHeader/ChattingListHeader';
 import ChattingListFooter from '../components/ChattingListPage/ChattingListFooter/ChattingListFooter';
-import ChattingRoomPage from './ChattingRoomPage/ChattingRoomPage';
-import ChattingRoomHeader from '../components/ChattingRoomPage/ChattingRoomHeader/ChattingRoomHeader';
-import ChatInputArea from '../components/ChattingRoomPage/ChatInputArea/ChatInputArea';
+import ChattingPage from './ChattingPage/ChattingPage';
 
 function App() {
     const { isBusModalOpen } = useSelector(state => state.user);
@@ -47,7 +44,6 @@ function App() {
                         </>
                     }
                 />
-                <Route path="/chat/test" element={<ChatingTestPage />} />
                 <Route
                     path="/chatlist"
                     element={
@@ -58,16 +54,7 @@ function App() {
                         </>
                     }
                 />
-                <Route
-                    path="/chatroom/:id"
-                    element={
-                        <>
-                            <ChattingRoomHeader />
-                            <ChattingRoomPage />
-                            <ChatInputArea />
-                        </>
-                    }
-                />
+                <Route path="/chatroom/:id" element={<ChattingPage />} />
             </Routes>
         </Router>
     );
