@@ -22,6 +22,9 @@ export {
     TAXI_ROOM_DELETE_REQUEST,
     TAXI_ROOM_DELETE_SUCCESS,
     TAXI_ROOM_DELETE_FAILURE,
+    CHAT_ROOM_MESSAGE_REQUEST,
+    CHAT_ROOM_MESSAGE_SUCCESS,
+    CHAT_ROOM_MESSAGE_FAILURE,
 } from './actions';
 
 export { default as prevent } from './prevent';

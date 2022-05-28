@@ -4,6 +4,5 @@ const API_URLS = {
     API_BUS: '/api/rest/',
     API_CHAT: '/api/chat/',
     API_TAXI: '/api/taxi/',
-    // API_POSTS: "/api/posts/",
 };
 export default API_URLS;

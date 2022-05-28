@@ -5,7 +5,7 @@ import storage from 'redux-persist/lib/storage';
 import user from './user';
 import bus from './bus';
 import taxi from './taxi';
-// import chat from './chat';
+import chat from './chat';
 
 const persistConfig = {
     key: 'root',
@@ -17,5 +17,6 @@ const rootReducer = combineReducers({
     user,
     bus,
     taxi,
+    chat,
 });
 export default persistReducer(persistConfig, rootReducer);

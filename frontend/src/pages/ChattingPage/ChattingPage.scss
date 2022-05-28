@@ -1,9 +1,18 @@
 @import '../../styles/utils.scss';
+
 .chattingpage-wrapper {
     .chattingroompage-wrapper {
         padding-top: 7rem;
+        padding-bottom: 4.5rem;
+        .notice {
+            text-align: center;
+            @include font-face('NotoSansKR-Regular', 1.3rem, 2rem, #a19fad);
+        }
     }
     .chatinputarea-wrapper {
+        ::-webkit-scrollbar {
+            width: 20px;
+        }
         position: fixed;
         bottom: 0;
         width: 100%;
