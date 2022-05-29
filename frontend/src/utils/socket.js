@@ -23,7 +23,7 @@ export const connect = id => {
     );
 };
 
-const waitForConnection = (stompClient, callback) => {
+export const waitForConnection = (stompClient, callback) => {
     setTimeout(
         () => {
             // 연결되었을 때 콜백함수 실행
