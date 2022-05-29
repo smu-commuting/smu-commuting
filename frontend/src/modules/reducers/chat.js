@@ -36,9 +36,7 @@ const reducer = (state = initialState, action) => {
                 draft.chatMessageListLoading = false;
                 draft.chatMessageListDone = true;
                 draft.chatMessageListError = null;
-                draft.chatMessageList = draft.chatMessageList.concat(
-                    action.data.data,
-                );
+                draft.chatMessageList = action.data.data;
                 draft.chatLoadEnd = action.data.data.length === 0;
                 // draft.hasMoreChat = action.data.data.length !== 0;
                 console.log('success', action.data.data);

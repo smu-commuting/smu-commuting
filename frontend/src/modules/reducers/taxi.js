@@ -48,7 +48,6 @@ const reducer = (state = initialState, action) => {
                 draft.myTaxiPartiesDone = true;
                 draft.myTaxiPartiesError = null;
                 draft.myTaxiParties = action.data.data;
-                console.log(draft.myTaxiParties);
                 break;
             case TAXI_LIST_FETCH_FAILURE:
                 draft.myTaxiPartiesLoading = false;
