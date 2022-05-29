@@ -51,14 +51,14 @@
             }
             .no {
                 margin: 1rem;
-            padding-left: 2rem;
-            padding-right: 2rem;
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-            background-color: #7b88f2;
-            border-radius: 10px;
-            text-align: center;
-            @include font-face(NotoSansKR-Regular, 2rem, 2.5rem, #ffffff);
+                padding-left: 2rem;
+                padding-right: 2rem;
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+                background-color: #7b88f2;
+                border-radius: 10px;
+                text-align: center;
+                @include font-face(NotoSansKR-Regular, 2rem, 2.5rem, #ffffff);
             }
         }
     }

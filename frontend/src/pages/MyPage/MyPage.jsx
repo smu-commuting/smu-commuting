@@ -8,9 +8,9 @@ function MyPage() {
     const navigate = useNavigate();
     const onChangeText = e => {
         if (e.target.checked === false) {
-            alert('OFF');
+            alert('알림설정OFF(기능연결필요)');
         } else if (e.target.checked === true) {
-            alert('ON');
+            alert('알림설정ON(기능연결필요)');
         }
     };
     const [studentId] = useState(''); // 학번

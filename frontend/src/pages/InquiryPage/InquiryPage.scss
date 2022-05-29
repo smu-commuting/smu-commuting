@@ -13,12 +13,14 @@
             height: 1.938rem;
         }
         div {
-            padding: 0 0 0 10rem;
+            padding: 0 0 0 8rem;
             text-align: center;
-            @include font-face(NotoSansKR-Regular, 1.875rem, 2.5rem, #292733);
+            font-weight: bold;
+            @include font-face(NotoSansKR-Regular, 2.5rem, 2.5rem, #292733);
         }
     }
     .inquirypage-content {
+        padding-top: 2rem;
         display: flex;
         flex-direction: row;
         select {
@@ -37,6 +39,5 @@
             text-align: center;
             @include font-face(NotoSansKR-Regular, 0.5rem, 2.5rem, #ffffff);
         }
-
     }
 }
