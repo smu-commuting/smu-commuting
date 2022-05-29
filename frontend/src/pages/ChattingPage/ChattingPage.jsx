@@ -12,7 +12,6 @@ import { firstEnterDateParser } from '../../constants/FirstEnterDateParser';
 import { connect, sendIo } from '../../utils/socket';
 import MeChatBox from '../../components/ChattingRoomPage/MeChatBox/MeChatBox';
 import SenderChatBox from '../../components/ChattingRoomPage/SenderChatBox/SenderChatBox';
-import { scrollToBottom } from '../../constants/scroll';
 
 function ChattingPage() {
     const { id } = useParams();
@@ -27,6 +26,7 @@ function ChattingPage() {
         chatMessageListDone,
     } = useSelector(state => state.chat);
 
+    const [prevHeight, setPrevHeight] = useState();
     const [messageBottle, setMessageBottle] = useState([]);
     const [myChat, setMyChat] = useState();
     const myChatChange = e => {
@@ -44,14 +44,26 @@ function ChattingPage() {
         );
         setTimeout(() => {
             window.scrollTo(0, document.body.offsetHeight);
+            setPrevHeight(document.body.offsetHeight);
         }, 100);
     }, []);
 
     useEffect(() => {
         const reverse = [...chatMessageList].reverse();
         setMessageBottle([...reverse, ...messageBottle]);
-        window.scrollTo(0, document.body.offsetHeight);
+        // console.log(
+        //     'prevHeight : ',
+        //     prevHeight,
+        //     'document.body.offsetHeight : ',
+        //     document.body.offsetHeight,
+        // );
+        window.scrollTo(0, document.body.offsetHeight - prevHeight);
+        setPrevHeight(document.body.offsetHeight);
     }, [chatMessageList]);
+
+    useEffect(() => {
+        console.log(window.scrollY);
+    }, [window.scrollY]);
 
     // useEffect(() => {
     //     if (chatMessageListDone) window.scrollTo(0, window.innerHeight);

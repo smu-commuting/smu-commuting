@@ -6,6 +6,8 @@ import Stomp from 'stompjs';
 const sock = new SockJS(`${process.env.REACT_APP_API_URL}/chat`);
 const ws = Stomp.over(sock);
 
+// let recv;
+
 export const connect = id => {
     ws.connect(
         {},
@@ -36,7 +38,7 @@ const waitForConnection = (stompClient, callback) => {
     );
 };
 
-export const sendIo = ({ myChat, id, userId, studentId }) =>
+export const sendIo = ({ myChat, id, userId, studentId }) => {
     waitForConnection(ws, () => {
         ws.send(
             '/pub/chat/message',
@@ -50,3 +52,4 @@ export const sendIo = ({ myChat, id, userId, studentId }) =>
             }),
         );
     });
+};
