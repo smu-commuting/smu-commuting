@@ -10,6 +10,8 @@ import Refusal from '../../assets/ChattingList/ChatInputArea/합승거부.png';
 import { getChatMessageList } from '../../modules/reducers/chat';
 import { firstEnterDateParser } from '../../constants/FirstEnterDateParser';
 import { connect, sendIo } from '../../utils/socket';
+import MeChatBox from '../../components/ChattingRoomPage/MeChatBox/MeChatBox';
+import SenderChatBox from '../../components/ChattingRoomPage/SenderChatBox/SenderChatBox';
 
 function ChattingPage() {
     const { id } = useParams();
@@ -33,15 +35,8 @@ function ChattingPage() {
                 date: firstEnterDateParser(),
             }),
         );
-        window.scrollTo(0, window.innerHeight);
-        console.log(
-            '사용자 스크롤 :',
-            window.scrollY,
-            '내 폰 높이',
-            window.innerHeight,
-            '전체 컨텐츠 길이',
-            document.body.offsetHeight,
-        );
+        window.scrollTo(0, document.body.offsetHeight);
+        console.log(document.body.offsetHeight);
     }, []);
 
     useEffect(() => {
@@ -54,8 +49,7 @@ function ChattingPage() {
                         getChatMessageList({
                             roomId: id,
                             size: 10,
-                            date: chatMessageList[chatMessageList.length - 1]
-                                .createdTime,
+                            date: chatMessageList.slice(-1)[0].createdTime,
                         }),
                     );
                     console.log(chatMessageList);
@@ -91,58 +85,23 @@ function ChattingPage() {
                     탑승 시각 기준 전후 1시간동안에는 <br /> 하나의 채팅방만
                     입장할 수 있습니다.
                 </p>
-                <p className="notice">
-                    탑승 시각 기준 전후 1시간동안에는 <br /> 하나의 채팅방만
-                    입장할 수 있습니다.
-                </p>
-                <p className="notice">
-                    탑승 시각 기준 전후 1시간동안에는 <br /> 하나의 채팅방만
-                    입장할 수 있습니다.
-                </p>
-                <p className="notice">
-                    탑승 시각 기준 전후 1시간동안에는 <br /> 하나의 채팅방만
-                    입장할 수 있습니다.
-                </p>
-                <p className="notice">
-                    탑승 시각 기준 전후 1시간동안에는 <br /> 하나의 채팅방만
-                    입장할 수 있습니다.
-                </p>
-                <p className="notice">
-                    탑승 시각 기준 전후 1시간동안에는 <br /> 하나의 채팅방만
-                    입장할 수 있습니다.
-                </p>
-                <p className="notice">
-                    탑승 시각 기준 전후 1시간동안에는 <br /> 하나의 채팅방만
-                    입장할 수 있습니다.
-                </p>
-                <p className="notice">
-                    탑승 시각 기준 전후 1시간동안에는 <br /> 하나의 채팅방만
-                    입장할 수 있습니다.
-                </p>
-                <p className="notice">
-                    탑승 시각 기준 전후 1시간동안에는 <br /> 하나의 채팅방만
-                    입장할 수 있습니다.
-                </p>
-                <p className="notice">
-                    탑승 시각 기준 전후 1시간동안에는 <br /> 하나의 채팅방만
-                    입장할 수 있습니다.
-                </p>
-                <p className="notice">
-                    탑승 시각 기준 전후 1시간동안에는 <br /> 하나의 채팅방만
-                    입장할 수 있습니다.
-                </p>
-                <p className="notice">
-                    탑승 시각 기준 전후 1시간동안에는 <br /> 하나의 채팅방만
-                    입장할 수 있습니다.
-                </p>
-                <p className="notice">
-                    탑승 시각 기준 전후 1시간동안에는 <br /> 하나의 채팅방만
-                    입장할 수 있습니다.
-                </p>
-                <p className="notice">
-                    탑승 시각 기준 전후 1시간동안에는 <br /> 하나의 채팅방만
-                    입장할 수 있습니다.
-                </p>
+                {chatMessageList &&
+                    chatMessageList.map(message => {
+                        return message.senderStudentId ===
+                            parseInt(studentId, 10) ? (
+                            <MeChatBox
+                                content={message.content}
+                                senderId={message.senderStudentId}
+                                createdTime={message.createdTime}
+                            />
+                        ) : (
+                            <SenderChatBox
+                                content={message.content}
+                                senderId={message.senderStudentId}
+                                createdTime={message.createdTime}
+                            />
+                        );
+                    })}
             </div>
             <div className="chatinputarea-wrapper">
                 <div>

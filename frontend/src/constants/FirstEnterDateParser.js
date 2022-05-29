@@ -12,6 +12,5 @@ export function firstEnterDateParser() {
     }T${hour >= 10 ? hour : `0${hour}`}:${
         minute >= 10 ? minute : `0${minute}`
     }:${second >= 10 ? second : `0${second}`}`;
-    console.log(result);
     return result;
 }
