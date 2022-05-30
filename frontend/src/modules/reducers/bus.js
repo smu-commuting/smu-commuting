@@ -57,6 +57,7 @@ const reducer = (state = initialState, action) => {
                 draft.busDataDone = true;
                 draft.busDataError = null;
                 draft.busData = action.data;
+                console.log(action.data);
                 break;
             case BUS_INFO_FETCH_FAILURE:
                 draft.busDataLoading = false;
