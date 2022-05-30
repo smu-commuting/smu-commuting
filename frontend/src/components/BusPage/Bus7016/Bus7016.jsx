@@ -9,6 +9,14 @@ import {
     isBusInfoFetch,
     isBusInfoModalClick,
 } from '../../../modules/reducers/bus';
+import {
+    Bus7016ID,
+    CityHall,
+    GyeongBok,
+    KTGwangHwa,
+    NamYoungStation,
+    SeoulStation,
+} from '../../../constants';
 
 function Bus7016() {
     const dispatch = useDispatch();
@@ -20,7 +28,7 @@ function Bus7016() {
         [dispatch],
     );
     useEffect(() => {
-        dispatch(isBusInfoFetch('100100447'));
+        dispatch(isBusInfoFetch(Bus7016ID));
     }, []);
     return (
         <div className="bus7016-wrapper">
@@ -28,14 +36,14 @@ function Bus7016() {
             <div className="first-bus-line">
                 <div
                     className="bus-img-wrapper"
-                    onClick={() => onBusInfoClick(parseInt(40, 10))}
+                    onClick={() => onBusInfoClick(NamYoungStation)}
                     aria-hidden
                 >
                     <img src={BusRight} alt="남영역" />
                 </div>
                 <div
                     className="bus-img-wrapper"
-                    onClick={() => onBusInfoClick(parseInt(43, 10))}
+                    onClick={() => onBusInfoClick(SeoulStation)}
                     aria-hidden
                 >
                     <img src={BusRight} alt="서울역" />
@@ -48,14 +56,14 @@ function Bus7016() {
             <div className="third-bus-line">
                 <div
                     className="bus-img-wrapper"
-                    onClick={() => onBusInfoClick(parseInt(46, 10))}
+                    onClick={() => onBusInfoClick(KTGwangHwa)}
                     aria-hidden
                 >
                     <img src={BusLeft} alt="KT 광화문지사" />
                 </div>
                 <div
                     className="bus-img-wrapper"
-                    onClick={() => onBusInfoClick(parseInt(44, 10))}
+                    onClick={() => onBusInfoClick(CityHall)}
                     aria-hidden
                 >
                     <img src={BusLeft} alt="시청역" />
@@ -68,7 +76,7 @@ function Bus7016() {
             <div className="fifth-bus-line">
                 <div
                     className="bus-img-wrapper"
-                    onClick={() => onBusInfoClick(parseInt(47, 10))}
+                    onClick={() => onBusInfoClick(GyeongBok)}
                     aria-hidden
                 >
                     <img src={BusRight} alt="경복궁역" />
