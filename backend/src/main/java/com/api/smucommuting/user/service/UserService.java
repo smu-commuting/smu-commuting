@@ -32,7 +32,13 @@ public class UserService {
         mailSender.mailSend(request.getEmail(), userVerificationCode);
     }
 
+    @Transactional(readOnly = true)
     public void codeVerification(UserRequest.EmailVerification request, User user, LocalDateTime now) {
         userVerificationCodeService.validateCode(user, request.getCode(), now);
+    }
+
+    public void delete(User loginUser) {
+        loginUser.quit(loginUser.getId());
+        userRepository.delete(loginUser);
     }
 }

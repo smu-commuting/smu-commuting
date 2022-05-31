@@ -1,4 +1,4 @@
-GET {{apiUrl}}/auth/2
+GET {{apiUrl}}/auth/4
 
 > {%
 client.global.set("authorizationToken", "Bearer " + response.body.accessToken);
