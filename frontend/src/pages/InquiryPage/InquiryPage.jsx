@@ -21,7 +21,7 @@ function InquiryPage() {
                 />
                 <div>문의하기</div>
             </div>
-            <div className="inquirypage-content">
+            <div className="inquirypage-search">
                 <select>
                     <option value="날짜">날짜</option>
                     <option value="제목">제목</option>
@@ -29,6 +29,11 @@ function InquiryPage() {
                 </select>
                 <input type="number" />
                 <button type="submit">검색</button>
+            </div>
+            <div className="inquirypage-content">
+                <p className="date">작성날짜</p>
+                <p className="title">제목</p>
+                <p className="reply">답변여부</p>
             </div>
         </div>
     );
