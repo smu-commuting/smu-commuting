@@ -25,11 +25,13 @@
         flex-direction: row;
         select {
             margin: 1rem;
+            margin-left: 0rem;
         }
         input {
-            margin: 1rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
             border: 0.063rem solid #000000;
-            width: 9rem;
+            width: 12.6rem;
         }
         button {
             margin: 1rem;
