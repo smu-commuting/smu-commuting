@@ -19,7 +19,7 @@
             @include font-face(NotoSansKR-Regular, 2.5rem, 2.5rem, #292733);
         }
     }
-    .inquirypage-content {
+    .inquirypage-search {
         padding-top: 2rem;
         display: flex;
         flex-direction: row;
@@ -40,6 +40,28 @@
             background-color: #7b88f2;
             text-align: center;
             @include font-face(NotoSansKR-Regular, 0.5rem, 2.5rem, #ffffff);
+        }
+    }
+    .inquirypage-content {
+        display: flex;
+        flex-direction: row;
+        border-bottom: 0.063rem solid #A19FAD;
+        .date {
+            padding: 1rem;
+            padding-top: 2rem;
+            padding-bottom: 0rem;
+        }
+        .title {
+            padding-top: 2rem;
+            padding-left: 6rem;
+            padding-right: 6rem;
+            margin-left: 1.7rem;
+            margin-right: 1.7rem;
+        }
+        .reply {
+            padding: 1rem;
+            padding-top: 2rem;
+            padding-bottom: 0rem;
         }
     }
 }
