@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { loginRequest } from '../../modules/reducers/user';
 import Profile from '../../assets/MyPage/수뭉이프로필.svg';
 import Arrow from '../../assets/MyPage/arrow.png';
 import './MyPage.scss';
 
 function MyPage() {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { studentId } = useSelector(state => state.user);
+    useEffect(() => {
+        dispatch(loginRequest());
+    }, []);
+
     const onChangeText = e => {
         if (e.target.checked === false) {
             alert('알림설정OFF(기능연결필요)');
@@ -13,7 +21,6 @@ function MyPage() {
             alert('알림설정ON(기능연결필요)');
         }
     };
-    const [studentId] = useState(''); // 학번
 
     const homePage = () => {
         navigate(`/home`);
@@ -45,7 +52,15 @@ function MyPage() {
                 <div className="std-profile">
                     <img clsssName="sumung" src={Profile} alt="프로필사진" />
                     <div>
-                        {studentId}
+                        {studentId.map(studentID => {
+                            return (
+                                <div className="student-info">
+                                    key={studentID.studentId}
+                                    {studentID.}
+                                </div>
+                            );
+                        })}
+                        {studentId.user}
                         <br /> 상명대학교 서울캠퍼스
                     </div>
                 </div>
