@@ -47,7 +47,6 @@ const reducer = (state = initialState, action) => {
                 draft.isBusModalOpen = false;
                 break;
             case BUS_INFO_FETCH_REQUEST:
-                console.log('BUS_request', action.data);
                 draft.busDataLoading = true;
                 draft.busDataDone = false;
                 draft.busDataError = null;

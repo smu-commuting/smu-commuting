@@ -28,3 +28,16 @@ export {
 } from './actions';
 
 export { default as prevent } from './prevent';
+
+export {
+    Bus7016ID,
+    Bus08ID,
+    NamYoungStation,
+    SeoulStation,
+    KTGwangHwa,
+    CityHall,
+    GyeongBok,
+    YooJinSangga,
+    HongjeStation,
+    SeoulWomanNurseUniv,
+} from './BUS_NUM';
