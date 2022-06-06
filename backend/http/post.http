@@ -1,0 +1,19 @@
+POST {{apiUrl}}/post
+Authorization: {{authorizationToken}}
+Content-Type: multipart/form-data; boundary=boundary
+Accept: application/json, image/*
+
+--boundary
+Content-Disposition: form-data; name="info";
+Content-Type: application/json;charset=UTF-8
+
+{
+  "content": "휴대폰 분실",
+  "item": "휴대폰",
+  "place": "공학관",
+  "getDate": "2022-06-06T09:30"
+}
+--boundary
+Content-Disposition: form-data; name="image"; filename="enjoy.png"
+
+< ../src/main/resources/mock/images/enjoy.png

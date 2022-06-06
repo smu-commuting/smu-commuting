@@ -1,0 +1,22 @@
+= 샘물로 API 문서 (Post)
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:snippets: ../../../build/generated-snippets
+
+== 게시물
+
+=== 게시물 생성
+
+`POST /api/post`
+
+요청 HTTP
+include::{snippets}/post_create/request-parts.adoc[]
+include::{snippets}/post_create/curl-request.adoc[]
+
+성공 응답 HTTP
+include::{snippets}/post_create/http-response.adoc[]
+include::{snippets}/post_create/response-fields.adoc[]
