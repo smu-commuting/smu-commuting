@@ -28,4 +28,10 @@ public class PostController {
         PostResponse.OnlyId response = postService.create(request, image, customUserDetails.getUser());
         return ResponseEntity.created(URI.create("/api/post/" + response.getPostId())).body(ApiResult.build(HttpStatus.CREATED.value(), response));
     }
+
+    @GetMapping("/post/{postId}")
+    public ResponseEntity<ApiResult<PostResponse.GetOne>> getOne(@PathVariable Long postId, @CurrentUser CustomUserDetails customUserDetails) {
+        PostResponse.GetOne response = postService.getOne(postId, customUserDetails.getUser());
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
+    }
 }

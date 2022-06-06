@@ -1,6 +1,7 @@
 package com.api.smucommuting.post.controller;
 
 import com.api.smucommuting.MvcTest;
+import com.api.smucommuting.post.domain.Post;
 import com.api.smucommuting.post.dto.PostRequest;
 import com.api.smucommuting.post.dto.PostResponse;
 import com.api.smucommuting.post.service.PostService;
@@ -11,6 +12,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -23,8 +25,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.multipart;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
-import static org.springframework.restdocs.request.RequestDocumentation.partWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.requestParts;
+import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -34,6 +35,13 @@ class PostControllerTest extends MvcTest {
     @MockBean
     PostService postService;
 
+    private static final String ITEM = "휴대폰";
+    private static final String PLACE = "공학관";
+    private static final String CONTENT = "공학관 휴대폰 분실";
+    private static final String IMAGE_URL = "image url";
+    private static final LocalDateTime DATE = LocalDateTime.of(2022, 6, 6, 15, 30);
+    private Post post;
+
     @Test
     @DisplayName("게시물 생성 문서화")
     public void create() throws Exception {
@@ -41,10 +49,10 @@ class PostControllerTest extends MvcTest {
         MockMultipartFile img = new MockMultipartFile("image", "image.jpg", "image/jpg", is1.readAllBytes());
 
         PostRequest.CreateInfo request = PostRequest.CreateInfo.builder()
-                .content("공학관 휴대폰 분실")
-                .place("공학관")
-                .item("휴대폰")
-                .obtainDate(LocalDateTime.of(2022, 6, 6, 17, 30))
+                .content(CONTENT)
+                .place(PLACE)
+                .item(ITEM)
+                .obtainDate(DATE)
                 .build();
         String content = objectMapper.writeValueAsString(request);
         MockMultipartFile infoRequest = new MockMultipartFile("info", "", "application/json", content.getBytes());
@@ -76,4 +84,40 @@ class PostControllerTest extends MvcTest {
                 ));
     }
 
+    @Test
+    @DisplayName("게시물 단건 조회")
+    public void getOne() throws Exception {
+        PostResponse.GetOne response = PostResponse.GetOne.builder()
+                .content(CONTENT)
+                .place(PLACE)
+                .createdDate(DATE)
+                .item(ITEM)
+                .image(IMAGE_URL)
+                .isMine(Boolean.TRUE)
+                .build();
+
+        given(postService.getOne(any(), any())).willReturn(response);
+
+        ResultActions results = mvc.perform(RestDocumentationRequestBuilders
+                .get("/api/post/{postId}", 1)
+        );
+
+        results.andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("post_getOne",
+                        pathParameters(
+                                parameterWithName("postId").description("게시물 식별자")
+                        ),
+                        responseFields(
+                                fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
+                                fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
+                                fieldWithPath("data.item").type(JsonFieldType.STRING).description("물건"),
+                                fieldWithPath("data.place").type(JsonFieldType.STRING).description("장소"),
+                                fieldWithPath("data.content").type(JsonFieldType.STRING).description("게시물 내용"),
+                                fieldWithPath("data.image").type(JsonFieldType.STRING).description("게시물 이미지 url"),
+                                fieldWithPath("data.isMine").type(JsonFieldType.BOOLEAN).description("자신의 게시물이라면 true"),
+                                fieldWithPath("data.createdDate").type(JsonFieldType.STRING).description("게시물 생성 날짜")
+                        )
+                ));
+    }
 }

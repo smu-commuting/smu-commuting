@@ -20,3 +20,15 @@ include::{snippets}/post_create/curl-request.adoc[]
 성공 응답 HTTP
 include::{snippets}/post_create/http-response.adoc[]
 include::{snippets}/post_create/response-fields.adoc[]
+
+=== 게시물 단건 조회
+
+`GET /api/post/{postId}`
+
+요청 HTTP
+include::{snippets}/post_getOne/http-request.adoc[]
+include::{snippets}/post_getOne/path-parameters.adoc[]
+
+성공 응답 HTTP
+include::{snippets}/post_getOne/http-response.adoc[]
+include::{snippets}/post_getOne/response-fields.adoc[]

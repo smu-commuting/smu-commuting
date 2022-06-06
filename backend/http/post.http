@@ -17,3 +17,7 @@ Content-Type: application/json;charset=UTF-8
 Content-Disposition: form-data; name="image"; filename="enjoy.png"
 
 < ../src/main/resources/mock/images/enjoy.png
+
+###
+GET {{apiUrl}}/post/1
+Authorization: {{authorizationToken}}

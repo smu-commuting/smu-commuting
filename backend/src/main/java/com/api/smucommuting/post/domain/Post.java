@@ -41,6 +41,10 @@ public class Post extends BaseTimeEntity {
         this.postFile = postFile;
     }
 
+    public Boolean isMine(User loginUser) {
+        return this.writer.equals(loginUser);
+    }
+
     public static Post create(Post post, User user) {
         return Post.builder()
                 .content(post.getContent())

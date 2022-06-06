@@ -21,6 +21,13 @@ public class PostService {
         Post post = Post.create(request.toEntity(), user);
         Post createdPost = postRepository.save(post);
         postFileService.upload(createdPost, image);
+
         return PostResponse.OnlyId.build(createdPost);
+    }
+
+    public PostResponse.GetOne getOne(Long postId, User loginUser) {
+        Post post = postRepository.findByPostIdWithImageAndWriter(postId).orElseThrow();
+
+        return PostResponse.GetOne.build(post, loginUser);
     }
 }
