@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BusModal from '../components/BusPage/BusClickModal/BusClickModal';
+import TaxiModal from '../components/TaxiClickModal/TaxiClickModal';
 import Header from '../components/Header/Header';
 import BusPage from './BusPage/BusPage';
 import HomePage from './HomePage/HomePage';
@@ -15,6 +16,7 @@ import ChattingPage from './ChattingPage/ChattingPage';
 
 function App() {
     const { isBusModalOpen } = useSelector(state => state.user);
+    const { isTaxiModalOpen } = useSelector(state => state.user);
     return (
         <Router>
             <Routes>
@@ -29,6 +31,7 @@ function App() {
                     element={
                         <>
                             {isBusModalOpen && <BusModal />}
+                            {isTaxiModalOpen && <TaxiModal />}
                             <Header />
                             <HomePage />
                         </>

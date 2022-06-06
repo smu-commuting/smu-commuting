@@ -1,0 +1,145 @@
+@import '../../styles/utils.scss';
+
+.taxiclickmodal-wrapper {
+    position: fixed;
+    width: 100vw;
+    height: 100%;
+    z-index: 2;
+    overflow: hidden;
+    touch-action: none;
+    background: $modal-background;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .taximodal {
+        width: 29.5rem;
+        border-radius: 1.2rem;
+        background-color: #ffffff;
+        padding: 1.1rem;
+        .cancel {
+            float: right;
+            display: block;
+            width: 2rem;
+            height: 2rem;
+        }
+        .inner-wrapper {
+            padding: 0 0.5rem;
+            div {
+                border-radius: 1rem;
+            }
+            .modal-text {
+                text-align: center;
+                @include font-face('NotoSansKR-Medium', 1.8rem, 0, #000000);
+                line-height: 2.5rem;
+            }
+            .date-wrapper {
+                display: flex;
+                justify-content: space-between;
+                text-align: center;
+                .year-box {
+                    .box-name {
+                        height: 10%;
+                        @include font-face(
+                            'NotoSansKR-Medium',
+                            1.8rem,
+                            0,
+                            #000000
+                        );
+                    }
+                    .year-scroll{
+                        
+                    }
+                    margin-right: 0.5rem;
+                    height: 10rem;
+                    background-color: #efecff;
+                    flex: 1;
+                    overflow: scroll;
+                    p {
+                        @include font-face(
+                            'NotoSansKR-Medium',
+                            1.8rem,
+                            0,
+                            #000000
+                        );
+                    }
+                    .click-year {
+                        color: red;
+                        margin: 50px 0;
+                    }
+                    .non-click-year {
+                        margin: 50px 0;
+                    }
+                }
+                .month-box {
+                    .box-name {
+                        height: 20%;
+                        text-align: center;
+                        @include font-face(
+                            'NotoSansKR-Medium',
+                            1.8rem,
+                            0,
+                            #000000
+                        );
+                    }
+                    margin: 0 0.5rem;
+                    height: 10rem;
+                    background-color: #efecff;
+                    flex: 1;
+                    p {
+                        text-align: center;
+                        @include font-face(
+                            'NotoSansKR-Medium',
+                            1.8rem,
+                            0,
+                            #000000
+                        );
+                    }
+                    .month-scroll {
+                        overflow: scroll;
+                        height: 80%;
+                        .click-mon {
+                            color: red;
+                            margin: 35px 0;
+                        }
+                        .non-click-mon {
+                            margin: 35px 0;
+                        }
+                    }
+                }
+                .day-box {
+                    .box-name {
+                        height: 20%;
+                        text-align: center;
+                        @include font-face(
+                            'NotoSansKR-Medium',
+                            1.8rem,
+                            0,
+                            #000000
+                        );
+                    }
+                    margin-left: 0.5rem;
+                    height: 10rem;
+                    background-color: #efecff;
+                    flex: 1;
+                    overflow: scroll;
+                    p {
+                        text-align: center;
+                        @include font-face(
+                            'NotoSansKR-Medium',
+                            1.8rem,
+                            0,
+                            #000000
+                        );
+                    }
+                    .click-day {
+                        color: red;
+                        margin: 35px 0;
+                    }
+                    .non-click-day {
+                        margin: 35px 0;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -25,6 +25,9 @@ export {
     CHAT_ROOM_MESSAGE_REQUEST,
     CHAT_ROOM_MESSAGE_SUCCESS,
     CHAT_ROOM_MESSAGE_FAILURE,
+    USER_TAXI_MODAL,
+    USER_TAXI_MODAL_SUCCESS,
+    USER_TAXI_MODAL_FAILURE,
 } from './actions';
 
 export { default as prevent } from './prevent';
@@ -41,3 +44,5 @@ export {
     HongjeStation,
     SeoulWomanNurseUniv,
 } from './BUS_NUM';
+
+export { day, monthDay } from './dayData';
