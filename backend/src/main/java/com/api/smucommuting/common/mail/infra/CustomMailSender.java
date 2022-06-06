@@ -1,4 +1,4 @@
-package com.api.smucommuting.mail.infra;
+package com.api.smucommuting.common.mail.infra;
 
 import com.api.smucommuting.common.exception.mail.MailSendException;
 import lombok.RequiredArgsConstructor;

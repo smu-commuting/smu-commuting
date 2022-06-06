@@ -1,7 +1,7 @@
 package com.api.smucommuting.user.service;
 
 import com.api.smucommuting.common.exception.user.UserNotFoundException;
-import com.api.smucommuting.mail.infra.CustomMailSender;
+import com.api.smucommuting.common.mail.infra.CustomMailSender;
 import com.api.smucommuting.user.domain.User;
 import com.api.smucommuting.user.domain.UserValidator;
 import com.api.smucommuting.user.domain.UserVerificationCode;
