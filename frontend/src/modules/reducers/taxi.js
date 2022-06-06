@@ -9,14 +9,23 @@ import {
     TAXI_ROOM_DELETE_REQUEST,
     TAXI_ROOM_DELETE_SUCCESS,
     TAXI_ROOM_DELETE_FAILURE,
+    TAXI_PLACE_LIST_REQUEST,
+    TAXI_PLACE_LIST_SUCCESS,
+    TAXI_PLACE_LIST_FAILURE,
 } from '../../constants';
 
 export const initialState = {
+    // 채팅 리스트
     myTaxiParties: null,
-    // 채팅 리스트 로딩
     myTaxiPartiesLoading: false,
     myTaxiPartiesDone: false,
     myTaxiPartiesError: null,
+    // 택시 미팅 장소
+    taxiMeetPlaceList: null,
+    taxiMeetPlaceListLoading: false,
+    taxiMeetPlaceListDone: false,
+    taxiMeetPlaceListError: null,
+    // 채팅방 삭제
     deleteTaxiPartyLoading: false,
     deleteTaxiPartyDone: false,
     deleteTaxiPartyError: null,
@@ -32,6 +41,12 @@ export const deleteTaxiParty = id => {
     return {
         type: TAXI_ROOM_DELETE_REQUEST,
         id,
+    };
+};
+
+export const getTaxiMeetPlaceList = () => {
+    return {
+        type: TAXI_PLACE_LIST_REQUEST,
     };
 };
 
@@ -52,6 +67,22 @@ const reducer = (state = initialState, action) => {
             case TAXI_LIST_FETCH_FAILURE:
                 draft.myTaxiPartiesLoading = false;
                 draft.myTaxiPartiesError = action.err;
+                break;
+            case TAXI_PLACE_LIST_REQUEST:
+                draft.taxiMeetPlaceListLoading = true;
+                draft.taxiMeetPlaceListDone = false;
+                draft.taxiMeetPlaceListError = null;
+                break;
+            case TAXI_PLACE_LIST_SUCCESS:
+                draft.taxiMeetPlaceListLoading = false;
+                draft.taxiMeetPlaceListDone = true;
+                draft.taxiMeetPlaceListError = null;
+                console.log(action.data.data);
+                draft.taxiMeetPlaceList = action.data.data;
+                break;
+            case TAXI_PLACE_LIST_FAILURE:
+                draft.taxiMeetPlaceListLoading = false;
+                draft.taxiMeetPlaceListError = action.err;
                 break;
             case TAXI_ROOM_DELETE_REQUEST:
                 draft.deleteTaxiPartyLoading = true;

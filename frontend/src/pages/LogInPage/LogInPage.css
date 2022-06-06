@@ -1,0 +1,55 @@
+@font-face {
+  font-family: 'NotoSansKR-Bold';
+  src: url(./fonts/NotoSansKR-Bold.otf);
+}
+
+@font-face {
+  font-family: 'NotoSansKR-Medium';
+  src: url(./fonts/NotoSansKR-Medium.otf);
+}
+
+@font-face {
+  font-family: 'NotoSansKR-Regular';
+  src: url(./fonts/NotoSansKR-Regular.otf);
+}
+
+@font-face {
+  font-family: 'NotoSansKR-Light';
+  src: url(./fonts/NotoSansKR-Light.otf);
+}
+
+@font-face {
+  font-family: 'NotoSansKR-Black';
+  src: url(./fonts/NotoSansKR-Black.otf);
+}
+
+@font-face {
+  font-family: 'NotoSansKR-Thin';
+  src: url(./fonts/NotoSansKR-Thin.otf);
+}
+
+.loginpage-wrapper .sammulro {
+  display: block;
+  margin: 6.3rem auto 1.3rem auto;
+}
+
+.loginpage-wrapper .sumuro {
+  display: block;
+  width: 100%;
+  margin: 5.6rem auto;
+}
+
+.loginpage-wrapper .login-btn {
+  margin-top: 2.1rem;
+}
+
+.loginpage-wrapper .login-btn img:nth-child(1) {
+  display: block;
+  margin: 0 auto 1.8rem auto;
+}
+
+.loginpage-wrapper .login-btn img:nth-child(2) {
+  display: block;
+  margin: 0 auto;
+}
+/*# sourceMappingURL=LogInPage.css.map */

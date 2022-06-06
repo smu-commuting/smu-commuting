@@ -7,8 +7,15 @@ import {
     TAXI_ROOM_DELETE_REQUEST,
     TAXI_ROOM_DELETE_SUCCESS,
     TAXI_ROOM_DELETE_FAILURE,
+    TAXI_PLACE_LIST_REQUEST,
+    TAXI_PLACE_LIST_SUCCESS,
+    TAXI_PLACE_LIST_FAILURE,
 } from '../../constants';
-import { getMyTaxiPartiesApi, deleteTaxiPartyApi } from '../../utils';
+import {
+    getMyTaxiPartiesApi,
+    deleteTaxiPartyApi,
+    getTaxiPlaceListApi,
+} from '../../utils';
 
 function* getTaxiParties() {
     const result = yield call(getMyTaxiPartiesApi);
@@ -42,6 +49,22 @@ function* deleteTaxiParty(action) {
     }
 }
 
+function* getTaxiPlaceList() {
+    const result = yield call(getTaxiPlaceListApi);
+    console.log('요청 이후 result', result);
+    try {
+        yield put({
+            type: TAXI_PLACE_LIST_SUCCESS,
+            data: result.data,
+        });
+    } catch (err) {
+        yield put({
+            type: TAXI_PLACE_LIST_FAILURE,
+            error: err,
+        });
+    }
+}
+
 function* watchTaxiPartiesList() {
     yield takeLatest(TAXI_LIST_FETCH_REQUEST, getTaxiParties);
 }
@@ -50,6 +73,14 @@ function* watchDeleteTaxiParty() {
     yield takeLatest(TAXI_ROOM_DELETE_REQUEST, deleteTaxiParty);
 }
 
+function* watchGetTaxiPlace() {
+    yield takeLatest(TAXI_PLACE_LIST_REQUEST, getTaxiPlaceList);
+}
+
 export default function* chatSaga() {
-    yield all([fork(watchTaxiPartiesList), fork(watchDeleteTaxiParty)]);
+    yield all([
+        fork(watchTaxiPartiesList),
+        fork(watchDeleteTaxiParty),
+        fork(watchGetTaxiPlace),
+    ]);
 }

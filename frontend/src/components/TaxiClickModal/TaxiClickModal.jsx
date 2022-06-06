@@ -1,18 +1,23 @@
 /* eslint-disable no-unused-vars */
 import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { taxiModalClick } from '../../modules/reducers/user';
 import cancel from '../../assets/TaxiPage/cancel.png';
+import location from '../../assets/TaxiPage/place.png';
 import './TaxiClickModal.scss';
-import downtoggle from '../../assets/TaxiPage/downtoggle.png';
 import { monthDay } from '../../constants';
+import { getTaxiMeetPlaceList } from '../../modules/reducers/taxi';
 
 function TaxiClickModal() {
+    const dispatch = useDispatch();
+    const { taxiMeetPlaceList } = useSelector(state => state.taxi);
     const [yearLists, setYearLists] = useState([]);
     const [year, setYear] = useState();
     const [month, setMonth] = useState();
     const [date, setDate] = useState();
+    const [placeId, setPlaceId] = useState(0);
     useEffect(() => {
+        if (!taxiMeetPlaceList) dispatch(getTaxiMeetPlaceList());
         const now = new Date();
         setYear(now.getFullYear());
         setMonth(now.getMonth() + 1);
@@ -23,10 +28,17 @@ function TaxiClickModal() {
             now.getFullYear() + 1,
         ]);
     }, []);
-    const dispatch = useDispatch();
+    useEffect(() => {
+        console.log(placeId);
+    }, [placeId]);
     const onCancelClick = useCallback(() => {
         dispatch(taxiModalClick());
     }, [dispatch]);
+
+    const onTaxiFindClick = useCallback(() => {
+        console.log(`${year}-${month}-${date}`);
+        console.log(placeId);
+    });
 
     return (
         <div className="taxiclickmodal-wrapper">
@@ -131,6 +143,35 @@ function TaxiClickModal() {
                             </div>
                         </div>
                     </div>
+                    <div className="place-wrapper">
+                        {taxiMeetPlaceList.map(place => {
+                            return (
+                                <div
+                                    className={
+                                        placeId === place.taxiPlaceId
+                                            ? 'loc-box checked'
+                                            : 'loc-box non-checked'
+                                    }
+                                    key={place.id}
+                                    onClick={() => {
+                                        setPlaceId(place.taxiPlaceId);
+                                    }}
+                                    aria-hidden
+                                >
+                                    <img src={location} alt="loc" />
+                                    <p>{place.name}</p>
+                                </div>
+                            );
+                        })}
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="submit-btn"
+                        onClick={onTaxiFindClick}
+                    >
+                        선택 완료
+                    </button>
                 </div>
             </div>
         </div>

@@ -28,6 +28,9 @@ export {
     USER_TAXI_MODAL,
     USER_TAXI_MODAL_SUCCESS,
     USER_TAXI_MODAL_FAILURE,
+    TAXI_PLACE_LIST_REQUEST,
+    TAXI_PLACE_LIST_SUCCESS,
+    TAXI_PLACE_LIST_FAILURE,
 } from './actions';
 
 export { default as prevent } from './prevent';

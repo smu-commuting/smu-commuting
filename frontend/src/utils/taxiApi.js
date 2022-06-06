@@ -19,3 +19,10 @@ export const deleteTaxiPartyApi = async id => {
         `${process.env.REACT_APP_API_URL}${API_TAXI}room/${id}`,
     );
 };
+
+// 택시 장소 목록 조회 API
+export const getTaxiPlaceListApi = async () => {
+    return await withAuthInstance.get(
+        `${process.env.REACT_APP_API_URL}${API_TAXI}places`,
+    );
+};

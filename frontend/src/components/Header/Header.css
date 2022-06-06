@@ -1,0 +1,20 @@
+.header-wrapper {
+  height: 6.2rem;
+  padding: 1.9rem 1.2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.header-wrapper img:nth-child(odd) {
+  width: 3.6rem;
+  height: 3.6rem;
+}
+
+.header-wrapper img:nth-child(even) {
+  height: 150%;
+}
+/*# sourceMappingURL=Header.css.map */

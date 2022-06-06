@@ -1,0 +1,247 @@
+@font-face {
+  font-family: 'NotoSansKR-Bold';
+  src: url(./fonts/NotoSansKR-Bold.otf);
+}
+
+@font-face {
+  font-family: 'NotoSansKR-Medium';
+  src: url(./fonts/NotoSansKR-Medium.otf);
+}
+
+@font-face {
+  font-family: 'NotoSansKR-Regular';
+  src: url(./fonts/NotoSansKR-Regular.otf);
+}
+
+@font-face {
+  font-family: 'NotoSansKR-Light';
+  src: url(./fonts/NotoSansKR-Light.otf);
+}
+
+@font-face {
+  font-family: 'NotoSansKR-Black';
+  src: url(./fonts/NotoSansKR-Black.otf);
+}
+
+@font-face {
+  font-family: 'NotoSansKR-Thin';
+  src: url(./fonts/NotoSansKR-Thin.otf);
+}
+
+.taxiclickmodal-wrapper {
+  position: fixed;
+  width: 100vw;
+  height: 100%;
+  z-index: 2;
+  overflow: hidden;
+  -ms-touch-action: none;
+      touch-action: none;
+  background: rgba(6, 2, 19, 0.4);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.taxiclickmodal-wrapper .taximodal {
+  width: 29.5rem;
+  border-radius: 1.2rem;
+  background-color: #ffffff;
+  padding: 1.1rem 1.1rem 3rem 1.1rem;
+}
+
+.taxiclickmodal-wrapper .taximodal .cancel {
+  float: right;
+  display: block;
+  width: 2rem;
+  height: 2rem;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper {
+  padding: 0 0.5rem;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper div {
+  border-radius: 1rem;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .modal-text {
+  text-align: center;
+  font-family: "NotoSansKR-Medium";
+  font-size: 1.8rem;
+  line-height: 0;
+  color: #000000;
+  line-height: 2.5rem;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .date-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  text-align: center;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .date-wrapper .year-box {
+  height: 10rem;
+  background-color: #efecff;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .date-wrapper .year-box .box-name {
+  font-family: "NotoSansKR-Medium";
+  font-size: 1.8rem;
+  line-height: 0;
+  color: #000000;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .date-wrapper .year-box .year-scroll {
+  height: 6rem;
+  overflow: scroll;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .date-wrapper .year-box .year-scroll p {
+  font-family: "NotoSansKR-Medium";
+  font-size: 1.8rem;
+  line-height: 0.5rem;
+  color: #000000;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .date-wrapper .year-box .year-scroll .non-click-year {
+  color: darkgray;
+  opacity: 0.5;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .date-wrapper .month-box {
+  margin: 0 0.5rem;
+  height: 10rem;
+  background-color: #efecff;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .date-wrapper .month-box .box-name {
+  text-align: center;
+  font-family: "NotoSansKR-Medium";
+  font-size: 1.8rem;
+  line-height: 0;
+  color: #000000;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .date-wrapper .month-box .month-scroll {
+  overflow: scroll;
+  height: 6rem;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .date-wrapper .month-box .month-scroll p {
+  text-align: center;
+  font-family: "NotoSansKR-Medium";
+  font-size: 1.8rem;
+  line-height: 0.5rem;
+  color: #000000;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .date-wrapper .month-box .month-scroll .non-click-mon {
+  color: darkgray;
+  opacity: 0.5;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .date-wrapper .day-box {
+  margin-left: 0.5rem;
+  height: 10rem;
+  background-color: #efecff;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .date-wrapper .day-box .box-name {
+  text-align: center;
+  font-family: "NotoSansKR-Medium";
+  font-size: 1.8rem;
+  line-height: 0;
+  color: #000000;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .date-wrapper .day-box .day-scroll {
+  height: 6rem;
+  overflow: scroll;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .date-wrapper .day-box .day-scroll p {
+  text-align: center;
+  font-family: "NotoSansKR-Medium";
+  font-size: 1.8rem;
+  line-height: 0.5rem;
+  color: #000000;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .date-wrapper .day-box .day-scroll .non-click-day {
+  color: darkgray;
+  opacity: 0.5;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .place-wrapper {
+  overflow: scroll;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #efecff;
+  height: 12.5rem;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .place-wrapper .loc-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .place-wrapper .loc-box img {
+  display: block;
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .place-wrapper .loc-box p {
+  margin-left: 1rem;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .place-wrapper .checked {
+  font-family: "NotoSansKR-Medium";
+  font-size: 1.8rem;
+  line-height: 0rem;
+  color: black;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .place-wrapper .non-checked {
+  font-family: "NotoSansKR-Medium";
+  font-size: 1.5rem;
+  line-height: 0rem;
+  color: darkgray;
+  opacity: 0.5;
+}
+
+.taxiclickmodal-wrapper .taximodal .inner-wrapper .submit-btn {
+  font-family: "NotoSansKR-Medium";
+  font-size: 1.7rem;
+  line-height: 0;
+  color: white;
+  border-radius: 1rem;
+  margin-top: 2rem;
+  width: 100%;
+  height: 3.2rem;
+  background-color: #7b88f2;
+}
+/*# sourceMappingURL=TaxiClickModal.css.map */
