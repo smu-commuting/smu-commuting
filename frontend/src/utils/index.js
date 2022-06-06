@@ -3,6 +3,7 @@ export {
     getMyTaxiPartiesApi,
     deleteTaxiPartyApi,
     getTaxiPlaceListApi,
+    getTaxiPartyListApi,
 } from './taxiApi';
 export { busApi } from './busApi';
 export { getRoomMessage } from './chatApi';

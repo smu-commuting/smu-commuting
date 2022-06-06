@@ -12,6 +12,12 @@ import {
     TAXI_PLACE_LIST_REQUEST,
     TAXI_PLACE_LIST_SUCCESS,
     TAXI_PLACE_LIST_FAILURE,
+    TAXI_PARTY_LIST_REQUEST,
+    TAXI_PARTY_LIST_SUCCESS,
+    TAXI_PARTY_LIST_FAILURE,
+    TAXI_PARTY_CREATE_REQUEST,
+    TAXI_PARTY_CREATE_SUCCESS,
+    TAXI_PARTY_CREATE_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -25,6 +31,13 @@ export const initialState = {
     taxiMeetPlaceListLoading: false,
     taxiMeetPlaceListDone: false,
     taxiMeetPlaceListError: null,
+    // 택시 파티 리스트 조회
+    taxiPartyList: [],
+    taxiPartyListLoading: false,
+    taxiPartyListDone: false,
+    taxiPartyListError: null,
+    // 택시 생성 모달창 오픈
+    isTaxiCreateModalOpen: false,
     // 채팅방 삭제
     deleteTaxiPartyLoading: false,
     deleteTaxiPartyDone: false,
@@ -47,6 +60,19 @@ export const deleteTaxiParty = id => {
 export const getTaxiMeetPlaceList = () => {
     return {
         type: TAXI_PLACE_LIST_REQUEST,
+    };
+};
+
+export const getTaxiPartyList = data => {
+    return {
+        type: TAXI_PARTY_LIST_REQUEST,
+        data,
+    };
+};
+
+export const taxiCreateModalClick = () => {
+    return {
+        type: TAXI_PARTY_CREATE_REQUEST,
     };
 };
 
@@ -83,6 +109,30 @@ const reducer = (state = initialState, action) => {
             case TAXI_PLACE_LIST_FAILURE:
                 draft.taxiMeetPlaceListLoading = false;
                 draft.taxiMeetPlaceListError = action.err;
+                break;
+            case TAXI_PARTY_LIST_REQUEST:
+                draft.taxiPartyListLoading = true;
+                draft.taxiPartyListDone = false;
+                draft.taxiPartyListError = null;
+                break;
+            case TAXI_PARTY_LIST_SUCCESS:
+                draft.taxiPartyListLoading = false;
+                draft.taxiPartyListDone = true;
+                draft.taxiPartyListError = null;
+                console.log(action.data.data);
+                draft.taxiPartyList = action.data.data;
+                break;
+            case TAXI_PARTY_LIST_FAILURE:
+                draft.taxiPartyListLoading = false;
+                draft.taxiPartyListError = action.err;
+                break;
+            case TAXI_PARTY_CREATE_REQUEST:
+                break;
+            case TAXI_PARTY_CREATE_SUCCESS:
+                draft.isTaxiCreateModalOpen = !draft.isTaxiCreateModalOpen;
+                break;
+            case TAXI_PARTY_CREATE_FAILURE:
+                draft.isTaxiCreateModalOpen = false;
                 break;
             case TAXI_ROOM_DELETE_REQUEST:
                 draft.deleteTaxiPartyLoading = true;

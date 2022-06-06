@@ -37,7 +37,9 @@ function TaxiClickModal() {
     }, [dispatch]);
 
     const onTaxiFindClick = useCallback(() => {
-        const when = `${year}-${month}-${date}`;
+        const when = `${year}-${month >= 10 ? month : `0${month}`}-${
+            date >= 10 ? date : `0${date}`
+        }`;
         if (placeId === 0) {
             alert('장소를 선택해주세요');
             return;

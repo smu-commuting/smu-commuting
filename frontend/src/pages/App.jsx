@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BusModal from '../components/BusPage/BusClickModal/BusClickModal';
 import TaxiModal from '../components/TaxiPage/TaxiClickModal/TaxiClickModal';
+import TaxiCreateModal from '../components/TaxiPage/TaxiCreateModal/TaxiCreateModal';
 import Header from '../components/Header/Header';
 import BusPage from './BusPage/BusPage';
 import HomePage from './HomePage/HomePage';
@@ -18,6 +19,7 @@ import TaxiPage from './TaxiPage/TaxiPage';
 function App() {
     const { isBusModalOpen } = useSelector(state => state.user);
     const { isTaxiModalOpen } = useSelector(state => state.user);
+    const { isTaxiCreateModalOpen } = useSelector(state => state.taxi);
     return (
         <Router>
             <Routes>
@@ -54,6 +56,7 @@ function App() {
                     element={
                         <>
                             {isTaxiModalOpen && <TaxiModal />}
+                            {isTaxiCreateModalOpen && <TaxiCreateModal />}
                             <Header />
                             <TaxiPage />
                         </>

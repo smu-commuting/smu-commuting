@@ -26,3 +26,18 @@ export const getTaxiPlaceListApi = async () => {
         `${process.env.REACT_APP_API_URL}${API_TAXI}places`,
     );
 };
+
+// 택시 파티 목록 조회 API
+export const getTaxiPartyListApi = async data => {
+    return await withAuthInstance.get(
+        `${process.env.REACT_APP_API_URL}${API_TAXI}parties`,
+        {
+            params: {
+                page: data.page,
+                size: data.size,
+                placeId: data.placeId,
+                date: data.date,
+            },
+        },
+    );
+};

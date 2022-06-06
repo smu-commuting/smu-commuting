@@ -10,11 +10,18 @@ import {
     TAXI_PLACE_LIST_REQUEST,
     TAXI_PLACE_LIST_SUCCESS,
     TAXI_PLACE_LIST_FAILURE,
+    TAXI_PARTY_LIST_REQUEST,
+    TAXI_PARTY_LIST_SUCCESS,
+    TAXI_PARTY_LIST_FAILURE,
+    TAXI_PARTY_CREATE_REQUEST,
+    TAXI_PARTY_CREATE_SUCCESS,
+    TAXI_PARTY_CREATE_FAILURE,
 } from '../../constants';
 import {
     getMyTaxiPartiesApi,
     deleteTaxiPartyApi,
     getTaxiPlaceListApi,
+    getTaxiPartyListApi,
 } from '../../utils';
 
 function* getTaxiParties() {
@@ -65,6 +72,34 @@ function* getTaxiPlaceList() {
     }
 }
 
+function* getTaxiPartyList(action) {
+    const result = yield call(getTaxiPartyListApi, action.data);
+    try {
+        yield put({
+            type: TAXI_PARTY_LIST_SUCCESS,
+            data: result.data,
+        });
+    } catch (err) {
+        yield put({
+            type: TAXI_PARTY_LIST_FAILURE,
+            error: err,
+        });
+    }
+}
+
+function* taxiCreateModal() {
+    try {
+        yield put({
+            type: TAXI_PARTY_CREATE_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: TAXI_PARTY_CREATE_FAILURE,
+            error: err,
+        });
+    }
+}
+
 function* watchTaxiPartiesList() {
     yield takeLatest(TAXI_LIST_FETCH_REQUEST, getTaxiParties);
 }
@@ -77,10 +112,20 @@ function* watchGetTaxiPlace() {
     yield takeLatest(TAXI_PLACE_LIST_REQUEST, getTaxiPlaceList);
 }
 
-export default function* chatSaga() {
+function* watchGetTaxiParty() {
+    yield takeLatest(TAXI_PARTY_LIST_REQUEST, getTaxiPartyList);
+}
+
+function* watchCreateTaxiModal() {
+    yield takeLatest(TAXI_PARTY_CREATE_REQUEST, taxiCreateModal);
+}
+
+export default function* taxiSaga() {
     yield all([
         fork(watchTaxiPartiesList),
         fork(watchDeleteTaxiParty),
         fork(watchGetTaxiPlace),
+        fork(watchGetTaxiParty),
+        fork(watchCreateTaxiModal),
     ]);
 }
