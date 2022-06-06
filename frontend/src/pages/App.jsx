@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BusModal from '../components/BusPage/BusClickModal/BusClickModal';
-import TaxiModal from '../components/TaxiClickModal/TaxiClickModal';
+import TaxiModal from '../components/TaxiPage/TaxiClickModal/TaxiClickModal';
 import Header from '../components/Header/Header';
 import BusPage from './BusPage/BusPage';
 import HomePage from './HomePage/HomePage';
@@ -43,13 +43,14 @@ function App() {
                     element={
                         <>
                             {isBusModalOpen && <BusModal />}
+                            {isTaxiModalOpen && <TaxiModal />}
                             <Header />
                             <BusPage />
                         </>
                     }
                 />
                 <Route
-                    path="/taxi/:placeId/:date"
+                    path="/taxi/:placeId/:date/:placeName"
                     element={
                         <>
                             {isTaxiModalOpen && <TaxiModal />}

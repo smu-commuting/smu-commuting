@@ -1,5 +1,44 @@
 @import '../../styles/utils.scss';
 
-.taxipage-wrapper{
-    
+.taxipage-wrapper {
+    padding: 1.5rem 3.1rem 0rem 3.1rem;
+    overflow: hidden;
+    .taxi-logo-box {
+        padding: 1.5rem 0 1rem 0;
+        width: 100%;
+        img {
+            display: block;
+            margin: auto;
+            width: 8rem;
+        }
+        border-bottom: 1px solid black;
+    }
+    .taxi-info-wrapper {
+        padding-top: 0.5rem;
+        .taxi-place-box {
+            @include font-face(
+                'NotoSansKR-Medium',
+                1.8rem,
+                1rem,
+                rgba(0, 0, 0, 0.8)
+            );
+            display: flex;
+            justify-content: space-between;
+            div:nth-child(1) {
+                flex: 2;
+            }
+            div:nth-child(2) {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                img {
+                    display: block;
+                }
+                img:nth-child(1) {
+                    margin-right: 1rem;
+                }
+            }
+        }
+    }
 }

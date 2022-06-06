@@ -2,12 +2,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { taxiModalClick } from '../../modules/reducers/user';
-import cancel from '../../assets/TaxiPage/cancel.png';
-import location from '../../assets/TaxiPage/place.png';
+import { taxiModalClick } from '../../../modules/reducers/user';
+import cancel from '../../../assets/TaxiPage/cancel.png';
+import location from '../../../assets/TaxiPage/place.png';
 import './TaxiClickModal.scss';
-import { monthDay } from '../../constants';
-import { getTaxiMeetPlaceList } from '../../modules/reducers/taxi';
+import { monthDay } from '../../../constants';
+import { getTaxiMeetPlaceList } from '../../../modules/reducers/taxi';
 
 function TaxiClickModal() {
     const navigate = useNavigate();
@@ -18,6 +18,7 @@ function TaxiClickModal() {
     const [month, setMonth] = useState();
     const [date, setDate] = useState();
     const [placeId, setPlaceId] = useState(0);
+    const [placeName, setPlaceName] = useState();
     useEffect(() => {
         if (!taxiMeetPlaceList) dispatch(getTaxiMeetPlaceList());
         const now = new Date();
@@ -37,7 +38,11 @@ function TaxiClickModal() {
 
     const onTaxiFindClick = useCallback(() => {
         const when = `${year}-${month}-${date}`;
-        navigate(`/taxi/${placeId}/${when}`);
+        if (placeId === 0) {
+            alert('장소를 선택해주세요');
+            return;
+        }
+        navigate(`/taxi/${placeId}/${when}/${placeName}`);
         dispatch(taxiModalClick());
     });
 
@@ -156,6 +161,7 @@ function TaxiClickModal() {
                                     key={place.id}
                                     onClick={() => {
                                         setPlaceId(place.taxiPlaceId);
+                                        setPlaceName(place.name);
                                     }}
                                     aria-hidden
                                 >

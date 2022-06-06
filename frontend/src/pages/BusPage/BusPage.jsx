@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import bus7016 from '../../assets/BusPage/7016.png';
 import bus08 from '../../assets/BusPage/서대문08.png';
 import refresh from '../../assets/BusPage/refresh.png';
-import { busModalClick } from '../../modules/reducers/user';
+import { busModalClick, taxiModalClick } from '../../modules/reducers/user';
 import Bus7016 from '../../components/BusPage/Bus7016/Bus7016';
 import Bus08 from '../../components/BusPage/Bus08/Bus08';
 import Timer from '../../components/common/Timer';
@@ -20,6 +20,9 @@ function BusPage() {
     const onRefreshPage = useCallback(() => {
         window.location.reload();
     }, []);
+    const onTaxiClick = useCallback(() => {
+        dispatch(taxiModalClick());
+    }, [dispatch]);
 
     return (
         <div className="buspage-wrapper">
@@ -44,7 +47,7 @@ function BusPage() {
                 </div>
             </div>
             {busNum === '7016' ? <Bus7016 /> : <Bus08 />}
-            <button type="button" className="gototaxi">
+            <button type="button" className="gototaxi" onClick={onTaxiClick}>
                 택시합승구하기
             </button>
         </div>
