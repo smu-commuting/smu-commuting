@@ -13,6 +13,7 @@ import ChattingListPage from './ChattingListPage/ChattingListPage';
 import ChattingListHeader from '../components/ChattingListPage/ChattingListHeader/ChattingListHeader';
 import ChattingListFooter from '../components/ChattingListPage/ChattingListFooter/ChattingListFooter';
 import ChattingPage from './ChattingPage/ChattingPage';
+import TaxiPage from './TaxiPage/TaxiPage';
 
 function App() {
     const { isBusModalOpen } = useSelector(state => state.user);
@@ -44,6 +45,16 @@ function App() {
                             {isBusModalOpen && <BusModal />}
                             <Header />
                             <BusPage />
+                        </>
+                    }
+                />
+                <Route
+                    path="/taxi/:placeId/:date"
+                    element={
+                        <>
+                            {isTaxiModalOpen && <TaxiModal />}
+                            <Header />
+                            <TaxiPage />
                         </>
                     }
                 />

@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { taxiModalClick } from '../../modules/reducers/user';
 import cancel from '../../assets/TaxiPage/cancel.png';
 import location from '../../assets/TaxiPage/place.png';
@@ -9,6 +10,7 @@ import { monthDay } from '../../constants';
 import { getTaxiMeetPlaceList } from '../../modules/reducers/taxi';
 
 function TaxiClickModal() {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const { taxiMeetPlaceList } = useSelector(state => state.taxi);
     const [yearLists, setYearLists] = useState([]);
@@ -28,16 +30,15 @@ function TaxiClickModal() {
             now.getFullYear() + 1,
         ]);
     }, []);
-    useEffect(() => {
-        console.log(placeId);
-    }, [placeId]);
+
     const onCancelClick = useCallback(() => {
         dispatch(taxiModalClick());
     }, [dispatch]);
 
     const onTaxiFindClick = useCallback(() => {
-        console.log(`${year}-${month}-${date}`);
-        console.log(placeId);
+        const when = `${year}-${month}-${date}`;
+        navigate(`/taxi/${placeId}/${when}`);
+        dispatch(taxiModalClick());
     });
 
     return (
