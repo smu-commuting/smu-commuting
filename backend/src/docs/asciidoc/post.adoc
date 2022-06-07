@@ -32,3 +32,15 @@ include::{snippets}/post_getOne/path-parameters.adoc[]
 성공 응답 HTTP
 include::{snippets}/post_getOne/http-response.adoc[]
 include::{snippets}/post_getOne/response-fields.adoc[]
+
+=== 게시물 삭제
+
+`DELETE /api/post/{postId}`
+
+요청 HTTP
+include::{snippets}/post_deleteOne/http-request.adoc[]
+include::{snippets}/post_deleteOne/path-parameters.adoc[]
+
+성공 응답 HTTP
+include::{snippets}/post_deleteOne/http-response.adoc[]
+include::{snippets}/post_deleteOne/response-fields.adoc[]

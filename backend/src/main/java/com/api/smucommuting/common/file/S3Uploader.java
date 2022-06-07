@@ -89,4 +89,11 @@ public class S3Uploader {
         }
         return Optional.empty();
     }
+
+    public void delete(String fileName) {
+        boolean isExistObject = s3Client.doesObjectExist(s3Bucket, fileName);
+        if (isExistObject) {
+            s3Client.deleteObject(s3Bucket, fileName);
+        }
+    }
 }

@@ -120,4 +120,25 @@ class PostControllerTest extends MvcTest {
                         )
                 ));
     }
+
+    @Test
+    @DisplayName("게시물 삭제")
+    public void deleteOne() throws Exception {
+        ResultActions results = mvc.perform(RestDocumentationRequestBuilders
+                .delete("/api/post/{postId}", 1)
+        );
+
+        results.andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("post_deleteOne",
+                        pathParameters(
+                                parameterWithName("postId").description("게시물 식별자")
+                        ),
+                        responseFields(
+                                fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
+                                fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
+                                fieldWithPath("data").description("응답 데이터가 없다면 null")
+                        )
+                ));
+    }
 }

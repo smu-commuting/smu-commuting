@@ -34,4 +34,10 @@ public class PostController {
         PostResponse.GetOne response = postService.getOne(postId, customUserDetails.getUser());
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
     }
+
+    @DeleteMapping("/post/{postId}")
+    public ResponseEntity<ApiResult<Void>> deleteOne(@PathVariable Long postId, @CurrentUser CustomUserDetails customUserDetails) {
+        postService.deleteOne(postId, customUserDetails.getUser());
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
+    }
 }

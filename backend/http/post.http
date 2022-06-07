@@ -11,7 +11,7 @@ Content-Type: application/json;charset=UTF-8
   "content": "휴대폰 분실",
   "item": "휴대폰",
   "place": "공학관",
-  "getDate": "2022-06-06T09:30"
+  "obtainDate": "2022-06-06T09:30"
 }
 --boundary
 Content-Disposition: form-data; name="image"; filename="enjoy.png"
@@ -20,4 +20,8 @@ Content-Disposition: form-data; name="image"; filename="enjoy.png"
 
 ###
 GET {{apiUrl}}/post/1
+Authorization: {{authorizationToken}}
+
+###
+DELETE {{apiUrl}}/post/1
 Authorization: {{authorizationToken}}
