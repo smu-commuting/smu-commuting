@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PostResponse {
     @Getter
@@ -42,6 +44,31 @@ public class PostResponse {
                     .createdDate(post.getCreatedAt())
                     .isMine(post.isMine(loginUser))
                     .build();
+        }
+    }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
+    public static class GetList {
+        private String item;
+        private String place;
+        private String image;
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+        private LocalDateTime createdDate;
+
+        public static PostResponse.GetList build(Post post) {
+            return PostResponse.GetList.builder()
+                    .item(post.getItem())
+                    .place(post.getPlace())
+                    .image(post.getPostFile().getUrl())
+                    .createdDate(post.getCreatedAt())
+                    .build();
+        }
+
+        public static List<GetList> listsOf(List<Post> posts) {
+            return posts.stream().map(GetList::build).collect(Collectors.toList());
         }
     }
 }

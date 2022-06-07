@@ -1,5 +1,6 @@
 package com.api.smucommuting.post.service;
 
+import com.api.smucommuting.common.dto.PageDto;
 import com.api.smucommuting.common.exception.post.PostNotFoundException;
 import com.api.smucommuting.post.domain.Post;
 import com.api.smucommuting.post.domain.PostValidator;
@@ -11,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +36,13 @@ public class PostService {
         Post post = postRepository.findByPostIdWithImageAndWriter(postId).orElseThrow(PostNotFoundException::new);
 
         return PostResponse.GetOne.build(post, loginUser);
+    }
+
+    @Transactional(readOnly = true)
+    public List<PostResponse.GetList> getList(PageDto pageDto) {
+        List<Post> posts = postRepository.findAllOrderByCreatedAtDesc(pageDto.of());
+
+        return PostResponse.GetList.listsOf(posts);
     }
 
     public void deleteOne(Long postId, User loginUser) {
