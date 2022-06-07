@@ -27,7 +27,7 @@ function TaxiPage() {
         setMonth(temp[1]);
         setDay(temp[2]);
         dispatch(getTaxiPartyList({ page: 1, size: 10, placeId, date }));
-    }, []);
+    }, [placeId, date, placeName]);
 
     useEffect(() => {
         setPartyList([...partyList, ...taxiPartyList]);

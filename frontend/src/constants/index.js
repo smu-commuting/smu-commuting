@@ -34,6 +34,12 @@ export {
     TAXI_PARTY_LIST_REQUEST,
     TAXI_PARTY_LIST_SUCCESS,
     TAXI_PARTY_LIST_FAILURE,
+    TAXI_CREATE_MODAL_REQUEST,
+    TAXI_CREATE_MODAL_SUCCESS,
+    TAXI_CREATE_MODAL_FAILURE,
+    TAXI_PAGE_DATE_REQUEST,
+    TAXI_PAGE_DATE_SUCCESS,
+    TAXI_PAGE_DATE_FAILURE,
     TAXI_PARTY_CREATE_REQUEST,
     TAXI_PARTY_CREATE_SUCCESS,
     TAXI_PARTY_CREATE_FAILURE,
@@ -54,4 +60,4 @@ export {
     SeoulWomanNurseUniv,
 } from './BUS_NUM';
 
-export { day, monthDay } from './dayData';
+export { day, monthDay, hoursArr, minutesArr } from './dayData';

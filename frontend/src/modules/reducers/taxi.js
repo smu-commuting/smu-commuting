@@ -15,6 +15,12 @@ import {
     TAXI_PARTY_LIST_REQUEST,
     TAXI_PARTY_LIST_SUCCESS,
     TAXI_PARTY_LIST_FAILURE,
+    TAXI_CREATE_MODAL_REQUEST,
+    TAXI_CREATE_MODAL_SUCCESS,
+    TAXI_CREATE_MODAL_FAILURE,
+    TAXI_PAGE_DATE_REQUEST,
+    TAXI_PAGE_DATE_SUCCESS,
+    TAXI_PAGE_DATE_FAILURE,
     TAXI_PARTY_CREATE_REQUEST,
     TAXI_PARTY_CREATE_SUCCESS,
     TAXI_PARTY_CREATE_FAILURE,
@@ -36,12 +42,18 @@ export const initialState = {
     taxiPartyListLoading: false,
     taxiPartyListDone: false,
     taxiPartyListError: null,
+    // 현재 조회중인 택시 페이지의 날짜
+    taxiPageInfo: null,
     // 택시 생성 모달창 오픈
     isTaxiCreateModalOpen: false,
     // 채팅방 삭제
     deleteTaxiPartyLoading: false,
     deleteTaxiPartyDone: false,
     deleteTaxiPartyError: null,
+    // 택시 파티 생성
+    createTaxiPartyLoading: false,
+    createTaxiPartyDone: false,
+    createTaxiPartyError: null,
 };
 
 export const getMyTaxiParties = () => {
@@ -70,9 +82,23 @@ export const getTaxiPartyList = data => {
     };
 };
 
+export const taxiPageInfo = data => {
+    return {
+        type: TAXI_PAGE_DATE_REQUEST,
+        data,
+    };
+};
+
 export const taxiCreateModalClick = () => {
     return {
+        type: TAXI_CREATE_MODAL_REQUEST,
+    };
+};
+
+export const taxiPartyCreate = data => {
+    return {
         type: TAXI_PARTY_CREATE_REQUEST,
+        data,
     };
 };
 
@@ -103,7 +129,6 @@ const reducer = (state = initialState, action) => {
                 draft.taxiMeetPlaceListLoading = false;
                 draft.taxiMeetPlaceListDone = true;
                 draft.taxiMeetPlaceListError = null;
-                console.log(action.data.data);
                 draft.taxiMeetPlaceList = action.data.data;
                 break;
             case TAXI_PLACE_LIST_FAILURE:
@@ -126,13 +151,35 @@ const reducer = (state = initialState, action) => {
                 draft.taxiPartyListLoading = false;
                 draft.taxiPartyListError = action.err;
                 break;
-            case TAXI_PARTY_CREATE_REQUEST:
+            case TAXI_CREATE_MODAL_REQUEST:
                 break;
-            case TAXI_PARTY_CREATE_SUCCESS:
+            case TAXI_CREATE_MODAL_SUCCESS:
                 draft.isTaxiCreateModalOpen = !draft.isTaxiCreateModalOpen;
                 break;
-            case TAXI_PARTY_CREATE_FAILURE:
+            case TAXI_CREATE_MODAL_FAILURE:
                 draft.isTaxiCreateModalOpen = false;
+                break;
+            case TAXI_PAGE_DATE_REQUEST:
+                break;
+            case TAXI_PAGE_DATE_SUCCESS:
+                draft.taxiPageInfo = action.data;
+                break;
+            case TAXI_PAGE_DATE_FAILURE:
+                break;
+
+            case TAXI_PARTY_CREATE_REQUEST:
+                draft.createTaxiPartyLoading = true;
+                draft.createTaxiPartyDone = false;
+                draft.createTaxiPartyError = null;
+                break;
+            case TAXI_PARTY_CREATE_SUCCESS:
+                draft.createTaxiPartyLoading = false;
+                draft.createTaxiPartyDone = true;
+                draft.createTaxiPartyError = null;
+                break;
+            case TAXI_PARTY_CREATE_FAILURE:
+                draft.createTaxiPartyLoading = false;
+                draft.createTaxiPartyError = action.err;
                 break;
             case TAXI_ROOM_DELETE_REQUEST:
                 draft.deleteTaxiPartyLoading = true;

@@ -7,7 +7,10 @@ import cancel from '../../../assets/TaxiPage/cancel.png';
 import location from '../../../assets/TaxiPage/place.png';
 import './TaxiClickModal.scss';
 import { monthDay } from '../../../constants';
-import { getTaxiMeetPlaceList } from '../../../modules/reducers/taxi';
+import {
+    getTaxiMeetPlaceList,
+    taxiPageInfo,
+} from '../../../modules/reducers/taxi';
 
 function TaxiClickModal() {
     const navigate = useNavigate();
@@ -45,6 +48,7 @@ function TaxiClickModal() {
             return;
         }
         navigate(`/taxi/${placeId}/${when}/${placeName}`);
+        dispatch(taxiPageInfo({ when, placeId }));
         dispatch(taxiModalClick());
     });
 
