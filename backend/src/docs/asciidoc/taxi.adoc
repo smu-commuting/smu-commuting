@@ -81,6 +81,19 @@ include::{snippets}/taxi_party_user_list/request-parameters.adoc[]
 include::{snippets}/taxi_party_user_list/http-response.adoc[]
 include::{snippets}/taxi_party_user_list/response-fields.adoc[]
 
+=== 파티 최대 인원 수정
+
+`PUT /api/taxi/party/{taxiPartyId}`
+
+요청 HTTP
+include::{snippets}/taxi_party_update/http-request.adoc[]
+include::{snippets}/taxi_party_update/path-parameters.adoc[]
+include::{snippets}/taxi_party_update/request-fields.adoc[]
+
+성공 응답 HTTP
+include::{snippets}/taxi_party_update/http-response.adoc[]
+include::{snippets}/taxi_party_update/response-fields.adoc[]
+
 === 채팅방 나가기
 
 `DELETE /api/taxi/party/{taxiPartyId}`

@@ -58,6 +58,14 @@ public class TaxiPartyController {
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
     }
 
+    @PutMapping("/party/{taxiPartyId}")
+    public ResponseEntity<ApiResult<Void>> update(@PathVariable Long taxiPartyId,
+                                                  @RequestBody TaxiPartyRequest.Update request,
+                                                  @CurrentUser CustomUserDetails customUserDetails) {
+        taxiPartyService.update(taxiPartyId, request, customUserDetails.getUser());
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
+    }
+
     @DeleteMapping("/party/{taxiPartyId}")
     public ResponseEntity<ApiResult<Void>> exitParty(@PathVariable Long taxiPartyId, @CurrentUser CustomUserDetails customUserDetails) {
         taxiPartyService.exit(taxiPartyId, customUserDetails.getUser().getId());

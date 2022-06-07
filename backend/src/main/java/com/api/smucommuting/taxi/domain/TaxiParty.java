@@ -1,6 +1,7 @@
 package com.api.smucommuting.taxi.domain;
 
 import com.api.smucommuting.common.entity.BaseTimeEntity;
+import com.api.smucommuting.user.domain.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -42,5 +43,10 @@ public class TaxiParty extends BaseTimeEntity {
                 .build();
         TaxiGroup.createWithOutValidate(userId, taxiParty);
         return taxiParty;
+    }
+
+    public void update(int maximum, User loginUser, TaxiPartyValidator taxiPartyValidator, TaxiParty taxiParty) {
+        taxiPartyValidator.updateValidate(loginUser, maximum, taxiParty);
+        this.maximum = maximum;
     }
 }
