@@ -3,6 +3,6 @@ const API_URLS = {
     API_USER: '/api/user/',
     API_BUS: '/api/rest/',
     API_CHAT: '/api/chat/',
-    // API_POSTS: "/api/posts/",
+    API_TAXI: '/api/taxi/',
 };
 export default API_URLS;

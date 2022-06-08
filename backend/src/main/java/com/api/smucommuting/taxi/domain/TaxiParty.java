@@ -1,9 +1,7 @@
 package com.api.smucommuting.taxi.domain;
 
 import com.api.smucommuting.common.entity.BaseTimeEntity;
-import com.api.smucommuting.common.event.Events;
-import com.api.smucommuting.taxi.domain.event.TaxiPartyCreatedEvent;
-import com.api.smucommuting.taxi.domain.event.TaxiPartyJoinedEvent;
+import com.api.smucommuting.user.domain.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -36,23 +34,19 @@ public class TaxiParty extends BaseTimeEntity {
     @OneToMany(mappedBy = "taxiParty", cascade = CascadeType.ALL)
     private List<TaxiGroup> taxiGroupList = new ArrayList<>();
 
-    public void created(String place, Long userId) {
-        Events.raise(new TaxiPartyCreatedEvent(
-                this.getId(), place, this.meetingTime, this.maximum, userId)
-        );
-    }
-
-    public void joined(Long taxiPartyId, Long userId) {
-        Events.raise(new TaxiPartyJoinedEvent(taxiPartyId, userId));
-    }
-
-    public static TaxiParty create(TaxiPlace taxiPlace, int maximum, LocalDateTime meetingTime, Long userId) {
+    public static TaxiParty create(TaxiPlace taxiPlace, int maximum, LocalDateTime meetingTime, Long userId, TaxiPartyValidator taxiPartyValidator) {
+        taxiPartyValidator.createValidate(userId, meetingTime);
         TaxiParty taxiParty = TaxiParty.builder()
                 .taxiPlace(taxiPlace)
                 .maximum(maximum)
                 .meetingTime(meetingTime)
                 .build();
-        TaxiGroup.create(userId, taxiParty);
+        TaxiGroup.createWithOutValidate(userId, taxiParty);
         return taxiParty;
+    }
+
+    public void update(int maximum, User loginUser, TaxiPartyValidator taxiPartyValidator, TaxiParty taxiParty) {
+        taxiPartyValidator.updateValidate(loginUser, maximum, taxiParty);
+        this.maximum = maximum;
     }
 }

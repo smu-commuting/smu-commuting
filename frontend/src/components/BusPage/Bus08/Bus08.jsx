@@ -9,6 +9,12 @@ import {
     isBusInfoModalClick,
 } from '../../../modules/reducers/bus';
 import BusInfoModal from '../BusInfoModal/BusInfoModal';
+import {
+    Bus08ID,
+    HongjeStation,
+    SeoulWomanNurseUniv,
+    YooJinSangga,
+} from '../../../constants';
 
 function Bus08() {
     const dispatch = useDispatch();
@@ -20,7 +26,7 @@ function Bus08() {
         [dispatch],
     );
     useEffect(() => {
-        dispatch(isBusInfoFetch('100900012'));
+        dispatch(isBusInfoFetch(Bus08ID));
     }, []);
     return (
         <div className="bus08-wrapper">
@@ -28,14 +34,14 @@ function Bus08() {
             <div className="first-bus-line">
                 <div
                     className="bus-img-wrapper"
-                    onClick={() => onBusInfoClick(parseInt(12, 10))}
+                    onClick={() => onBusInfoClick(YooJinSangga)}
                     aria-hidden
                 >
                     <img src={BusLeft} alt="유진상가" />
                 </div>
                 <div
                     className="bus-img-wrapper"
-                    onClick={() => onBusInfoClick(parseInt(10, 10))}
+                    onClick={() => onBusInfoClick(HongjeStation)}
                     aria-hidden
                 >
                     <img src={BusLeft} alt="홍제역" />
@@ -48,7 +54,7 @@ function Bus08() {
             <div className="third-bus-line">
                 <div
                     className="bus-img-wrapper"
-                    onClick={() => onBusInfoClick(parseInt(15, 10))}
+                    onClick={() => onBusInfoClick(SeoulWomanNurseUniv)}
                     aria-hidden
                 >
                     <img src={BusRight} alt="간호대" />

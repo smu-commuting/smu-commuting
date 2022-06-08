@@ -3,71 +3,48 @@
 /* eslint-disable default-param-last */
 import produce from 'immer';
 import {
-    CHAT_LIST_FETCH_REQUEST,
-    CHAT_LIST_FETCH_SUCCESS,
-    CHAT_LIST_FETCH_FAILURE,
-    CHAT_ROOM_DELETE_REQUEST,
-    CHAT_ROOM_DELETE_SUCCESS,
-    CHAT_ROOM_DELETE_FAILURE,
+    CHAT_ROOM_MESSAGE_REQUEST,
+    CHAT_ROOM_MESSAGE_SUCCESS,
+    CHAT_ROOM_MESSAGE_FAILURE,
 } from '../../constants';
 
 export const initialState = {
-    myChatRooms: null,
-    // 채팅 리스트 로딩
-    chatListLoading: false,
-    chatListDone: false,
-    chatListError: null,
-    deleteChatRoomLoading: false,
-    deleteChatRoomDone: false,
-    deleteChatRoomError: null,
+    chatMessageList: [],
+    chatLoadEnd: false,
+    // hasMoreChat: true,
+    chatMessageListLoading: false,
+    chatMessageListDone: false,
+    chatMessageListError: null,
 };
 
-export const getMyChatRooms = () => {
+export const getChatMessageList = data => {
     return {
-        type: CHAT_LIST_FETCH_REQUEST,
-    };
-};
-
-export const deleteMyChatRoom = id => {
-    return {
-        type: CHAT_ROOM_DELETE_REQUEST,
-        id,
+        type: CHAT_ROOM_MESSAGE_REQUEST,
+        data,
     };
 };
 
 const reducer = (state = initialState, action) => {
     return produce(state, draft => {
         switch (action.type) {
-            case CHAT_LIST_FETCH_REQUEST:
-                draft.chatListLoading = true;
-                draft.chatListDone = false;
-                draft.chatListError = null;
+            case CHAT_ROOM_MESSAGE_REQUEST:
+                draft.chatMessageListLoading = true;
+                draft.chatMessageListDone = false;
+                draft.chatMessageListError = null;
                 break;
-            case CHAT_LIST_FETCH_SUCCESS:
-                draft.chatListLoading = false;
-                draft.chatListDone = true;
-                draft.chatListError = null;
-                draft.myChatRooms = action.data.data;
-                console.log(draft.myChatRooms);
+            case CHAT_ROOM_MESSAGE_SUCCESS:
+                draft.chatMessageListLoading = false;
+                draft.chatMessageListDone = true;
+                draft.chatMessageListError = null;
+                draft.chatMessageList = action.data.data;
+                draft.chatLoadEnd = action.data.data.length === 0;
+                // draft.hasMoreChat = action.data.data.length !== 0;
+                console.log('success', action.data.data);
+                console.log('draft', draft.chatMessageList);
                 break;
-            case CHAT_LIST_FETCH_FAILURE:
-                draft.chatListLoading = false;
-                draft.chatListError = action.err;
-                break;
-            case CHAT_ROOM_DELETE_REQUEST:
-                draft.deleteChatRoomLoading = true;
-                draft.deleteChatRoomDone = false;
-                draft.deleteChatRoomError = null;
-                break;
-            case CHAT_ROOM_DELETE_SUCCESS:
-                draft.deleteChatRoomLoading = false;
-                draft.deleteChatRoomDone = true;
-                draft.deleteChatRoomError = null;
-                break;
-            case CHAT_ROOM_DELETE_FAILURE:
-                console.log(action.err);
-                draft.deleteChatRoomLoading = false;
-                draft.deleteChatRoomError = action.err;
+            case CHAT_ROOM_MESSAGE_FAILURE:
+                draft.chatMessageListLoading = false;
+                draft.chatMessageListError = action.err;
                 break;
             default:
                 break;

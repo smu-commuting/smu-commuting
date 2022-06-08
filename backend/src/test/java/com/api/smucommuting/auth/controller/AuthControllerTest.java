@@ -76,4 +76,20 @@ class AuthControllerTest extends MvcTest {
                         )
                 ));
     }
+
+    @Test
+    @DisplayName("logout 문서화")
+    public void logout() throws Exception {
+        ResultActions results = mvc.perform(post("/api/auth/logout"));
+
+        results.andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("auth_logout",
+                        responseFields(
+                                fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
+                                fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
+                                fieldWithPath("data").description("data 없다면 null")
+                        )
+                ));
+    }
 }

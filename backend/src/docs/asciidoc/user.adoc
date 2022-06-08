@@ -44,3 +44,14 @@ include::{snippets}/user_email_code_verification/request-fields.adoc[]
 성공 응답 HTTP
 include::{snippets}/user_email_code_verification/http-response.adoc[]
 include::{snippets}/user_email_code_verification/response-fields.adoc[]
+
+=== 회원탈퇴
+
+`DELETE /api/user`
+
+요청 HTTP
+include::{snippets}/user_quit/http-request.adoc[]
+
+성공 응답 HTTP
+include::{snippets}/user_quit/http-response.adoc[]
+include::{snippets}/user_quit/response-fields.adoc[]

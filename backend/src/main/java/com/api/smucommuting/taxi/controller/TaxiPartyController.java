@@ -4,6 +4,7 @@ import com.api.smucommuting.auth.domain.security.CurrentUser;
 import com.api.smucommuting.auth.domain.security.CustomUserDetails;
 import com.api.smucommuting.common.dto.ApiResult;
 import com.api.smucommuting.common.dto.PageDto;
+import com.api.smucommuting.taxi.domain.TaxiGroupUserStatus;
 import com.api.smucommuting.taxi.dto.TaxiPartyRequest;
 import com.api.smucommuting.taxi.dto.TaxiPartyResponse;
 import com.api.smucommuting.taxi.service.TaxiPartyService;
@@ -51,9 +52,22 @@ public class TaxiPartyController {
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
     }
 
+    @GetMapping("/party/{taxiPartyId}/users")
+    public ResponseEntity<ApiResult<List<TaxiPartyResponse.TaxiPartyUsers>>> getTaxiPartyUsers(@PathVariable Long taxiPartyId, @RequestParam("status") TaxiGroupUserStatus status) {
+        List<TaxiPartyResponse.TaxiPartyUsers> response = taxiPartyService.getTaxiPartyUsers(taxiPartyId, status);
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
+    }
+
+    @PutMapping("/party/{taxiPartyId}")
+    public ResponseEntity<ApiResult<Void>> update(@PathVariable Long taxiPartyId,
+                                                  @RequestBody TaxiPartyRequest.Update request,
+                                                  @CurrentUser CustomUserDetails customUserDetails) {
+        taxiPartyService.update(taxiPartyId, request, customUserDetails.getUser());
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
+    }
+
     @DeleteMapping("/party/{taxiPartyId}")
     public ResponseEntity<ApiResult<Void>> exitParty(@PathVariable Long taxiPartyId, @CurrentUser CustomUserDetails customUserDetails) {
-        //TODO 택시방과 같이 나가는 경우 로직 추가
         taxiPartyService.exit(taxiPartyId, customUserDetails.getUser().getId());
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
     }

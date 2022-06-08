@@ -24,3 +24,7 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "9922748"
 }
+
+###
+DELETE {{apiUrl}}/user
+Authorization: {{authorizationToken}}

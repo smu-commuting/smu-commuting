@@ -34,4 +34,10 @@ public class AuthController {
 
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), tokenResponse));
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<ApiResult<Void>> logout(HttpServletResponse response) {
+        CookieUtils.deleteCookie(response, REFRESH_TOKEN);
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
+    }
 }

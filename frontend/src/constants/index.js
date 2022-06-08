@@ -16,12 +16,28 @@ export {
     BUS_INFO_FETCH_REQUEST,
     BUS_INFO_FETCH_SUCCESS,
     BUS_INFO_FETCH_FAILURE,
-    CHAT_LIST_FETCH_REQUEST,
-    CHAT_LIST_FETCH_SUCCESS,
-    CHAT_LIST_FETCH_FAILURE,
-    CHAT_ROOM_DELETE_REQUEST,
-    CHAT_ROOM_DELETE_SUCCESS,
-    CHAT_ROOM_DELETE_FAILURE,
+    TAXI_LIST_FETCH_REQUEST,
+    TAXI_LIST_FETCH_SUCCESS,
+    TAXI_LIST_FETCH_FAILURE,
+    TAXI_ROOM_DELETE_REQUEST,
+    TAXI_ROOM_DELETE_SUCCESS,
+    TAXI_ROOM_DELETE_FAILURE,
+    CHAT_ROOM_MESSAGE_REQUEST,
+    CHAT_ROOM_MESSAGE_SUCCESS,
+    CHAT_ROOM_MESSAGE_FAILURE,
 } from './actions';
 
 export { default as prevent } from './prevent';
+
+export {
+    Bus7016ID,
+    Bus08ID,
+    NamYoungStation,
+    SeoulStation,
+    KTGwangHwa,
+    CityHall,
+    GyeongBok,
+    YooJinSangga,
+    HongjeStation,
+    SeoulWomanNurseUniv,
+} from './BUS_NUM';

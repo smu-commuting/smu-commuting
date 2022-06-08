@@ -8,10 +8,10 @@ import HomePage from './HomePage/HomePage';
 import LogInPage from './LogInPage/LogInPage';
 import LogInProcess from './LogInProcess/LogInProcess';
 import SignUpPage from './SignUpPage/SignUpPage';
-import ChatingTestPage from './ChatingTestPage/ChatingTestPage';
 import ChattingListPage from './ChattingListPage/ChattingListPage';
 import ChattingListHeader from '../components/ChattingListPage/ChattingListHeader/ChattingListHeader';
 import ChattingListFooter from '../components/ChattingListPage/ChattingListFooter/ChattingListFooter';
+<<<<<<< HEAD
 import ChattingRoomPage from './ChattingRoomPage/ChattingRoomPage';
 import ChattingRoomHeader from '../components/ChattingRoomPage/ChattingRoomHeader/ChattingRoomHeader';
 import ChatInputArea from '../components/ChattingRoomPage/ChatInputArea/ChatInputArea';
@@ -23,6 +23,9 @@ import WithdrawalConfirmPage from './WithdrawalConfirmPage/WithdrawalConfirmPage
 import ManualPage from './ManualPage/ManualPage';
 import InquiryDetailPage from './InquiryDetailPage/InquiryDetailPage';
 import InquiryWritePage from './inquiryWritePage/inquiryWritePage';
+=======
+import ChattingPage from './ChattingPage/ChattingPage';
+>>>>>>> 66002e5ce54952ea81e176b6565945953065e4c1
 
 function App() {
     const { isBusModalOpen } = useSelector(state => state.user);
@@ -55,7 +58,6 @@ function App() {
                         </>
                     }
                 />
-                <Route path="/chat/test" element={<ChatingTestPage />} />
                 <Route
                     path="/chatlist"
                     element={
@@ -66,6 +68,7 @@ function App() {
                         </>
                     }
                 />
+<<<<<<< HEAD
                 <Route
                     path="/chatroom/:id"
                     element={
@@ -84,6 +87,9 @@ function App() {
                 <Route path="/manual" element={<ManualPage />} />
                 <Route path="/inquirydetail" element={<InquiryDetailPage />} />
                 <Route path="/inquirywrite" element={<InquiryWritePage />} />
+=======
+                <Route path="/chatroom/:id" element={<ChattingPage />} />
+>>>>>>> 66002e5ce54952ea81e176b6565945953065e4c1
             </Routes>
         </Router>
     );

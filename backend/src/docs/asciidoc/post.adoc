@@ -1,0 +1,66 @@
+= 샘물로 API 문서 (Post)
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:snippets: ../../../build/generated-snippets
+
+== 게시물
+
+=== 게시물 생성
+
+`POST /api/post`
+
+요청 HTTP
+
+include::{snippets}/post_create/request-parts.adoc[]
+include::{snippets}/post_create/curl-request.adoc[]
+
+성공 응답 HTTP
+
+include::{snippets}/post_create/http-response.adoc[]
+include::{snippets}/post_create/response-fields.adoc[]
+
+=== 게시물 단건 조회
+
+`GET /api/post/{postId}`
+
+요청 HTTP
+
+include::{snippets}/post_getOne/http-request.adoc[]
+include::{snippets}/post_getOne/path-parameters.adoc[]
+
+성공 응답 HTTP
+
+include::{snippets}/post_getOne/http-response.adoc[]
+include::{snippets}/post_getOne/response-fields.adoc[]
+
+=== 게시물 목록 조회
+
+`GET /api/posts`
+
+요청 HTTP
+
+include::{snippets}/post_getList/http-request.adoc[]
+include::{snippets}/post_getList/request-parameters.adoc[]
+
+성공 응답 HTTP
+
+include::{snippets}/post_getList/http-response.adoc[]
+include::{snippets}/post_getList/response-fields.adoc[]
+
+=== 게시물 삭제
+
+`DELETE /api/post/{postId}`
+
+요청 HTTP
+
+include::{snippets}/post_deleteOne/http-request.adoc[]
+include::{snippets}/post_deleteOne/path-parameters.adoc[]
+
+성공 응답 HTTP
+
+include::{snippets}/post_deleteOne/http-response.adoc[]
+include::{snippets}/post_deleteOne/response-fields.adoc[]

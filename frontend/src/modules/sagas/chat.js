@@ -1,55 +1,32 @@
 import { all, fork, put, takeLatest, call } from 'redux-saga/effects';
 
 import {
-    CHAT_LIST_FETCH_REQUEST,
-    CHAT_LIST_FETCH_SUCCESS,
-    CHAT_LIST_FETCH_FAILURE,
-    CHAT_ROOM_DELETE_REQUEST,
-    CHAT_ROOM_DELETE_SUCCESS,
-    CHAT_ROOM_DELETE_FAILURE,
+    CHAT_ROOM_MESSAGE_REQUEST,
+    CHAT_ROOM_MESSAGE_SUCCESS,
+    CHAT_ROOM_MESSAGE_FAILURE,
 } from '../../constants';
-import { deleteChatRoomApi, getChattingApi } from '../../utils';
+import { getRoomMessage } from '../../utils';
 
-function* chatlist() {
-    const result = yield call(getChattingApi);
-    console.log('요청 이후 result', result);
+function* chatMessageList(action) {
+    const result = yield call(getRoomMessage, action.data);
+    console.log('채팅 요청 이후 result', result);
     try {
         yield put({
-            type: CHAT_LIST_FETCH_SUCCESS,
+            type: CHAT_ROOM_MESSAGE_SUCCESS,
             data: result.data,
         });
     } catch (err) {
         yield put({
-            type: CHAT_LIST_FETCH_FAILURE,
+            type: CHAT_ROOM_MESSAGE_FAILURE,
             error: err,
         });
     }
 }
 
-function* deleteChatRoom(action) {
-    console.log('saga', action);
-    const result = yield call(deleteChatRoomApi, action.id);
-    console.log('요청 이후 result', result);
-    try {
-        yield put({
-            type: CHAT_ROOM_DELETE_SUCCESS,
-        });
-    } catch (err) {
-        yield put({
-            type: CHAT_ROOM_DELETE_FAILURE,
-            error: err,
-        });
-    }
-}
-
-function* watchChatList() {
-    yield takeLatest(CHAT_LIST_FETCH_REQUEST, chatlist);
-}
-
-function* watchDeleteChatRoom() {
-    yield takeLatest(CHAT_ROOM_DELETE_REQUEST, deleteChatRoom);
+function* watchChatRoomMessage() {
+    yield takeLatest(CHAT_ROOM_MESSAGE_REQUEST, chatMessageList);
 }
 
 export default function* chatSaga() {
-    yield all([fork(watchChatList), fork(watchDeleteChatRoom)]);
+    yield all([fork(watchChatRoomMessage)]);
 }

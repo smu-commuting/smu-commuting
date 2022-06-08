@@ -120,4 +120,22 @@ class UserControllerTest extends MvcTest {
                         )
                 ));
     }
+
+    @Test
+    @DisplayName("회원탈퇴 문서화")
+    public void quit() throws Exception {
+        ResultActions results = mvc.perform(RestDocumentationRequestBuilders
+                .delete("/api/user")
+        );
+
+        results.andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("user_quit",
+                        responseFields(
+                                fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
+                                fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
+                                fieldWithPath("data").description("응답 데이터가 없다면 null")
+                        )
+                ));
+    }
 }
