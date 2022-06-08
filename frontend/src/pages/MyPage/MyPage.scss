@@ -91,6 +91,7 @@
                         &:checked + .switch{
                             left: calc(100% - 4px);
                             transform: translateX(-100%);
+                            background-color: #7B88F2;
                             }
                         }
                 }

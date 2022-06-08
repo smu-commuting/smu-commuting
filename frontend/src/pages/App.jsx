@@ -21,6 +21,8 @@ import InquiryPage from './InquiryPage/InquiryPage';
 import WithdrawalPage from './WithdrawalPage/WithdrawalPage';
 import WithdrawalConfirmPage from './WithdrawalConfirmPage/WithdrawalConfirmPage';
 import ManualPage from './ManualPage/ManualPage';
+import InquiryDetailPage from './InquiryDetailPage/InquiryDetailPage';
+import InquiryWritePage from './inquiryWritePage/inquiryWritePage';
 
 function App() {
     const { isBusModalOpen } = useSelector(state => state.user);
@@ -80,6 +82,8 @@ function App() {
                 <Route path="/withdrawal" element={<WithdrawalPage />} />
                 <Route path="/confirm" element={<WithdrawalConfirmPage />} />
                 <Route path="/manual" element={<ManualPage />} />
+                <Route path="/inquirydetail" element={<InquiryDetailPage />} />
+                <Route path="/inquirywrite" element={<InquiryWritePage />} />
             </Routes>
         </Router>
     );

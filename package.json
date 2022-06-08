@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "react-datepicker": "^4.8.0"
+  },
+  "devDependencies": {
+    "eslint-import-resolver-typescript": "^2.7.1"
   }
 }

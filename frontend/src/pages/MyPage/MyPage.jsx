@@ -1,18 +1,16 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+// import React, { useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { loginRequest } from '../../modules/reducers/user';
 import Profile from '../../assets/MyPage/수뭉이프로필.svg';
 import Arrow from '../../assets/MyPage/arrow.png';
+// import { loginRequest } from '../../modules/reducers/user';
 import './MyPage.scss';
 
 function MyPage() {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { studentId } = useSelector(state => state.user);
-    useEffect(() => {
-        dispatch(loginRequest());
-    }, []);
+    // const [value, setValue] = useState(false);
+    const { loginDone } = useSelector(state => state.user);
 
     const onChangeText = e => {
         if (e.target.checked === false) {
@@ -21,6 +19,16 @@ function MyPage() {
             alert('알림설정ON(기능연결필요)');
         }
     };
+
+    /* const isOn = () => {
+        return value;
+    };
+    const onColor = () => {
+        return '#7B88F2';
+    };
+     const handleToggle = () => {
+        setValue(!value);
+    }; */
 
     const homePage = () => {
         navigate(`/home`);
@@ -52,29 +60,30 @@ function MyPage() {
                 <div className="std-profile">
                     <img clsssName="sumung" src={Profile} alt="프로필사진" />
                     <div>
-                        {studentId.map(studentID => {
-                            return (
-                                <div className="student-info">
-                                    key={studentID.studentId}
-                                    {studentID.}
-                                </div>
-                            );
-                        })}
-                        {studentId.user}
+                        {loginDone.studentId}
                         <br /> 상명대학교 서울캠퍼스
                     </div>
                 </div>
                 <div className="notification-setting">
                     <p>알림 설정</p>
                     <div className="toggleSwitch">
-                        <label className="label" htmlFor="toggleSwitch">
+                        <label
+                            className="label"
+                            htmlFor="toggleSwitch"
+                            // style={{ background: isOn && onColor }}
+                        >
                             <input
                                 type="checkbox"
                                 className="checkbox"
                                 id="toggleSwitch"
                                 onClick={onChangeText}
+                                // checked={isOn}
+                                // onChange={handleToggle}
                             />
-                            <span className="switch" />
+                            <span
+                                className="switch"
+                                // style={{ background: isOn && '#000000' }}
+                            />
                         </label>
                     </div>
                 </div>
