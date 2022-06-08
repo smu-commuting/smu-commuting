@@ -1,3 +1,4 @@
+/* eslint-disable dot-notation */
 /* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
@@ -9,7 +10,9 @@ export function setInterceptors(instance) {
             res.headers.Authorization = `Bearer ${axios.defaults.headers.common.Authorization}`;
             return res;
         },
-        err => Promise.reject(err),
+        err => {
+            Promise.reject(err);
+        },
     );
 
     instance.interceptors.response.use(
@@ -33,8 +36,8 @@ export function setInterceptors(instance) {
                         return axios(originalRequest);
                     })
                     .catch(err => {
-                        window.location.replace('/');
-                        localStorage.clear();
+                        // window.location.replace('/');
+                        // localStorage.clear();
                     });
             }
             return Promise.reject(err);

@@ -1,4 +1,4 @@
-package com.api.smucommuting.chat;
+package com.api.smucommuting.taxichat;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

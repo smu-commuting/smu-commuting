@@ -33,6 +33,7 @@ class TaxiPartyControllerTest extends MvcTest {
     private static final Long PLACE_ID = 1L;
     private static final Integer HEADCOUNT = 3;
     private static final LocalDateTime MEETING_DATE = LocalDateTime.of(2022, 5, 18, 15, 0);
+    private static final String PLACE_NAME = "경복궁역";
 
     @Test
     @DisplayName("택시 파티 생성 문서화")
@@ -114,6 +115,55 @@ class TaxiPartyControllerTest extends MvcTest {
                                 fieldWithPath("data.[].headcount").type(JsonFieldType.NUMBER).description("현재 인원"),
                                 fieldWithPath("data.[].maximum").type(JsonFieldType.NUMBER).description("최대 인원"),
                                 fieldWithPath("data.[].time").type(JsonFieldType.STRING).description("택시 타는 시간")
+                        )
+                ));
+    }
+
+    @Test
+    @DisplayName("택시 합승 채팅방 목록 조회 문서화")
+    public void getMyList() throws Exception {
+        TaxiPartyResponse.GetMyList response1 = TaxiPartyResponse.GetMyList.builder().chatRoomId(1L).date(MEETING_DATE).headcount(HEADCOUNT).maximum(HEADCOUNT).place(PLACE_NAME).time(MEETING_DATE).build();
+        TaxiPartyResponse.GetMyList response2 = TaxiPartyResponse.GetMyList.builder().chatRoomId(2L).date(MEETING_DATE).headcount(HEADCOUNT).maximum(HEADCOUNT).place(PLACE_NAME).time(MEETING_DATE).build();
+
+        given(taxiPartyService.getMyList(any())).willReturn(Arrays.asList(response1, response2));
+
+        ResultActions results = mvc.perform(RestDocumentationRequestBuilders
+                .get("/api/taxi/my-parties")
+        );
+
+        results.andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("taxi_my_parties",
+                        responseFields(
+                                fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
+                                fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
+                                fieldWithPath("data.[].chatRoomId").type(JsonFieldType.NUMBER).description("채팅방 식별자"),
+                                fieldWithPath("data.[].place").type(JsonFieldType.STRING).description("만나는 장소"),
+                                fieldWithPath("data.[].date").type(JsonFieldType.STRING).description("만나는 날짜"),
+                                fieldWithPath("data.[].time").type(JsonFieldType.STRING).description("만나는 시간"),
+                                fieldWithPath("data.[].headcount").type(JsonFieldType.NUMBER).description("현재 인원 수"),
+                                fieldWithPath("data.[].maximum").type(JsonFieldType.NUMBER).description("최대 인원 수")
+                        )
+                ));
+    }
+
+    @Test
+    @DisplayName("채팅방 나가기 문서화")
+    public void exitTaxiParty() throws Exception {
+        ResultActions results = mvc.perform(RestDocumentationRequestBuilders
+                .delete("/api/taxi/party/{taxiPartyId}", 1)
+        );
+
+        results.andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("taxi_party_exit",
+                        pathParameters(
+                                parameterWithName("taxiPartyId").description("나갈 택시파티 식별자")
+                        ),
+                        responseFields(
+                                fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
+                                fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
+                                fieldWithPath("data").description("응답 데이터가 없다면 null")
                         )
                 ));
     }

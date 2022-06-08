@@ -44,4 +44,17 @@ public class TaxiPartyController {
         List<TaxiPartyResponse.GetList> response = taxiPartyService.getList(placeId, meetingDate, LocalDateTime.now(), pageDto);
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
     }
+
+    @GetMapping("/my-parties")
+    public ResponseEntity<ApiResult<List<TaxiPartyResponse.GetMyList>>> getMyList(@CurrentUser CustomUserDetails customUserDetails) {
+        List<TaxiPartyResponse.GetMyList> response = taxiPartyService.getMyList(customUserDetails.getUser());
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
+    }
+
+    @DeleteMapping("/party/{taxiPartyId}")
+    public ResponseEntity<ApiResult<Void>> exitParty(@PathVariable Long taxiPartyId, @CurrentUser CustomUserDetails customUserDetails) {
+        //TODO 택시방과 같이 나가는 경우 로직 추가
+        taxiPartyService.exit(taxiPartyId, customUserDetails.getUser().getId());
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
+    }
 }

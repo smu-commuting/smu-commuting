@@ -1,2 +1,2 @@
 export { sendNumberApi, verificationNumApi, signupApi } from './authApi';
-export { getChattingApi } from './chatApi';
+export { getChattingApi, deleteChatRoomApi } from './chatApi';

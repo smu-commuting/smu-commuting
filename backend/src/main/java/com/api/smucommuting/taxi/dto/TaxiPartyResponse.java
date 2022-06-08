@@ -28,4 +28,30 @@ public class TaxiPartyResponse {
                     .build();
         }
     }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
+    public static class GetMyList {
+        private Long chatRoomId;
+        private String place;
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd", timezone = "Asia/Seoul")
+        private LocalDateTime date;
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "Asia/Seoul")
+        private LocalDateTime time;
+        private int headcount;
+        private int maximum;
+
+        public static TaxiPartyResponse.GetMyList build(TaxiParty taxiParty) {
+            return TaxiPartyResponse.GetMyList.builder()
+                    .chatRoomId(taxiParty.getId())
+                    .place(taxiParty.getTaxiPlace().getName())
+                    .headcount(taxiParty.getTaxiGroupList().size())
+                    .maximum(taxiParty.getMaximum())
+                    .date(taxiParty.getMeetingTime())
+                    .time(taxiParty.getMeetingTime())
+                    .build();
+        }
+    }
 }
