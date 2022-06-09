@@ -6,6 +6,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Builder
@@ -37,12 +39,16 @@ public class Post extends BaseTimeEntity {
     @OneToOne(mappedBy = "post", cascade = CascadeType.REMOVE)
     private PostFile postFile;
 
+    @Builder.Default
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    private List<PostReply> postReplyList = new ArrayList<>();
+
     protected void setPostFile(PostFile postFile) {
         this.postFile = postFile;
     }
 
     public Boolean isMine(User loginUser) {
-        return this.writer.equals(loginUser);
+        return this.writer.getId().equals(loginUser.getId());
     }
 
     public void delete(PostValidator postValidator, User loginUser) {
@@ -57,5 +63,13 @@ public class Post extends BaseTimeEntity {
                 .obtainDate(post.getObtainDate())
                 .writer(user)
                 .build();
+    }
+
+    public void update(Post updatedPost, Post originPost, PostValidator postValidator, User loginUser) {
+        postValidator.updateValidate(originPost, loginUser);
+        this.content = updatedPost.getContent();
+        this.obtainDate = updatedPost.getObtainDate();
+        this.item = updatedPost.getItem();
+        this.place = updatedPost.getPlace();
     }
 }

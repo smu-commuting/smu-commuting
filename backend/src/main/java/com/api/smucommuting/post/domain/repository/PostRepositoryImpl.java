@@ -19,7 +19,7 @@ public class PostRepositoryImpl implements PostRepositoryCustom {
                 .join(post.postFile).fetchJoin()
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
-                .orderBy(post.createdAt.desc())
+                .orderBy(post.id.desc())
                 .fetch();
     }
 }

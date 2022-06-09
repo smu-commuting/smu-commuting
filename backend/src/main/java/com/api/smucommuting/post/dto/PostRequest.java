@@ -27,4 +27,26 @@ public class PostRequest {
                     .build();
         }
     }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
+    public static class Update {
+        private String content;
+        private String item;
+        private String place;
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm", timezone = "Asia/Seoul")
+        private LocalDateTime obtainDate;
+        private Boolean imageChanged;
+
+        public Post toEntity() {
+            return Post.builder()
+                    .place(place)
+                    .item(item)
+                    .content(content)
+                    .obtainDate(obtainDate)
+                    .build();
+        }
+    }
 }
