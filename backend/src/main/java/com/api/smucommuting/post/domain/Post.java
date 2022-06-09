@@ -48,7 +48,7 @@ public class Post extends BaseTimeEntity {
     }
 
     public Boolean isMine(User loginUser) {
-        return this.writer.equals(loginUser);
+        return this.writer.getId().equals(loginUser.getId());
     }
 
     public void delete(PostValidator postValidator, User loginUser) {

@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Service
 @Transactional
@@ -32,6 +34,12 @@ public class PostReplyService {
         return PostReplyResponse.OnlyId.build(savedReply);
     }
 
+    @Transactional(readOnly = true)
+    public List<PostReplyResponse.GetList> getList(Long postId, User loginUser) {
+        List<PostReply> replies = postReplyRepository.findAllByPostIdWithWriter(postId);
+        return PostReplyResponse.GetList.listsOf(replies, loginUser);
+    }
+
     public void update(Long replyId, PostReplyRequest.CreateOrUpdate request, User loginUser) {
         PostReply reply = postReplyRepository.findById(replyId).orElseThrow(PostReplyNotFoundException::new);
         reply.update(request.toEntity(), reply, postReplyValidator, loginUser);
@@ -39,7 +47,7 @@ public class PostReplyService {
 
     public void delete(Long replyId, User loginUser) {
         PostReply reply = postReplyRepository.findById(replyId).orElseThrow(PostReplyNotFoundException::new);
-        reply.delete(reply,postReplyValidator,loginUser);
+        reply.delete(reply, postReplyValidator, loginUser);
         postReplyRepository.delete(reply);
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,6 +27,13 @@ public class PostReplyController {
                                                                       @CurrentUser CustomUserDetails customUserDetails) {
         PostReplyResponse.OnlyId response = postReplyService.create(postId, request, customUserDetails.getUser());
         return ResponseEntity.created(URI.create("/api/post/reply/" + response.getReplyId())).body(ApiResult.build(HttpStatus.CREATED.value(), response));
+    }
+
+    @GetMapping("/post/{postId}/replies")
+    public ResponseEntity<ApiResult<List<PostReplyResponse.GetList>>> getList(@PathVariable Long postId,
+                                                                              @CurrentUser CustomUserDetails customUserDetails) {
+        List<PostReplyResponse.GetList> response = postReplyService.getList(postId, customUserDetails.getUser());
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
     }
 
     @PutMapping("/post/reply/{replyId}")

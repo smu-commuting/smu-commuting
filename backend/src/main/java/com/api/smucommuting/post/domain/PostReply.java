@@ -42,6 +42,10 @@ public class PostReply extends BaseTimeEntity {
         postReplyValidator.deleteValidate(reply, loginUser);
     }
 
+    public Boolean isMine(User loginUser) {
+        return this.writer.getId().equals(loginUser.getId());
+    }
+
     public static PostReply create(PostReply postReply, Post post, User loginUser) {
         PostReply reply = PostReply.builder()
                 .writer(loginUser)

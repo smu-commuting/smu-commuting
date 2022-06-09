@@ -96,6 +96,20 @@ include::{snippets}/post_reply_create/request-fields.adoc[]
 include::{snippets}/post_reply_create/http-response.adoc[]
 include::{snippets}/post_reply_create/response-fields.adoc[]
 
+=== 댓글 목록 조회
+
+`GET /api/post/{postId}/replies`
+
+요청 HTTP
+
+include::{snippets}/post_reply_getList/path-parameters.adoc[]
+include::{snippets}/post_reply_getList/http-request.adoc[]
+
+성공 응답 HTTP
+
+include::{snippets}/post_reply_getList/http-response.adoc[]
+include::{snippets}/post_reply_getList/response-fields.adoc[]
+
 === 댓글 수정
 
 `PUT /api/post/reply/{replyId}`

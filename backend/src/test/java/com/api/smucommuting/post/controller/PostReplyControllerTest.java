@@ -13,6 +13,9 @@ import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.time.LocalDateTime;
+import java.util.Arrays;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -59,6 +62,46 @@ class PostReplyControllerTest extends MvcTest {
                                 fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
                                 fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
                                 fieldWithPath("data.replyId").description("댓글 식별자")
+                        )
+                ));
+    }
+
+    @Test
+    @DisplayName("댓글 목록 조회")
+    public void getList() throws Exception {
+        PostReplyResponse.GetList response1 = PostReplyResponse.GetList.builder()
+                .content("감사합니다!")
+                .isMine(false)
+                .writer("123456")
+                .createdDate(LocalDateTime.of(2022, 6, 8, 9, 30))
+                .build();
+
+        PostReplyResponse.GetList response2 = PostReplyResponse.GetList.builder()
+                .content("네!")
+                .isMine(true)
+                .writer("123789")
+                .createdDate(LocalDateTime.of(2022, 6, 8, 9, 40))
+                .build();
+
+        given(postReplyService.getList(any(), any())).willReturn(Arrays.asList(response1, response2));
+
+        ResultActions results = mvc.perform(RestDocumentationRequestBuilders
+                .get("/api/post/{postId}/replies", 1)
+        );
+
+        results.andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("post_reply_getList",
+                        pathParameters(
+                                parameterWithName("postId").description("게시물 식별자")
+                        ),
+                        responseFields(
+                                fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
+                                fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
+                                fieldWithPath("data.[].content").type(JsonFieldType.STRING).description("내용"),
+                                fieldWithPath("data.[].writer").type(JsonFieldType.STRING).description("댓쓴이 학번"),
+                                fieldWithPath("data.[].isMine").type(JsonFieldType.BOOLEAN).description("자신의 댓글이라면 true"),
+                                fieldWithPath("data.[].createdDate").type(JsonFieldType.STRING).description("댓글 생성 날짜")
                         )
                 ));
     }

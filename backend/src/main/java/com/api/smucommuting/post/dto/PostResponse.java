@@ -32,17 +32,19 @@ public class PostResponse {
         private String content;
         private String image;
         private Boolean isMine;
+        private String writer;
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm", timezone = "Asia/Seoul")
         private LocalDateTime createdDate;
 
         public static PostResponse.GetOne build(Post post, User loginUser) {
-            return PostResponse.GetOne.builder()
+            return GetOne.builder()
                     .item(post.getItem())
                     .place(post.getPlace())
                     .content(post.getContent())
                     .image(post.getPostFile().getUrl())
                     .createdDate(post.getCreatedAt())
                     .isMine(post.isMine(loginUser))
+                    .writer(post.getWriter().getStudentId().toString())
                     .build();
         }
     }

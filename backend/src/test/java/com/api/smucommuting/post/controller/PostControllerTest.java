@@ -140,6 +140,7 @@ class PostControllerTest extends MvcTest {
                 .createdDate(DATE)
                 .item(ITEM)
                 .image(IMAGE_URL)
+                .writer("123456")
                 .isMine(Boolean.TRUE)
                 .build();
 
@@ -158,6 +159,7 @@ class PostControllerTest extends MvcTest {
                         responseFields(
                                 fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
                                 fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
+                                fieldWithPath("data.writer").type(JsonFieldType.STRING).description("글쓴이 학번"),
                                 fieldWithPath("data.item").type(JsonFieldType.STRING).description("물건"),
                                 fieldWithPath("data.place").type(JsonFieldType.STRING).description("장소"),
                                 fieldWithPath("data.content").type(JsonFieldType.STRING).description("게시물 내용"),
