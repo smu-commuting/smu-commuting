@@ -22,6 +22,9 @@ import {
     TAXI_PARTY_CREATE_REQUEST,
     TAXI_PARTY_CREATE_SUCCESS,
     TAXI_PARTY_CREATE_FAILURE,
+    TAXI_PARTY_LIST_RESTART_REQUEST,
+    TAXI_PARTY_LIST_RESTART_SUCCESS,
+    TAXI_PARTY_LIST_RESTART_FAILURE,
 } from '../../constants';
 import {
     getMyTaxiPartiesApi,
@@ -138,6 +141,23 @@ function* createTaxiParty(action) {
     }
 }
 
+function* taxiPartyRestart() {
+    try {
+        yield put({
+            type: TAXI_PARTY_LIST_RESTART_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: TAXI_PARTY_LIST_RESTART_FAILURE,
+            error: err,
+        });
+    }
+}
+
+function* watchTaxiPartyRestart() {
+    yield takeLatest(TAXI_PARTY_LIST_RESTART_REQUEST, taxiPartyRestart);
+}
+
 function* watchTaxiPartiesList() {
     yield takeLatest(TAXI_LIST_FETCH_REQUEST, getTaxiParties);
 }
@@ -175,5 +195,6 @@ export default function* taxiSaga() {
         fork(watchCreateTaxiModal),
         fork(watchTaxiPageDate),
         fork(watchCreateTaxiParty),
+        fork(watchTaxiPartyRestart),
     ]);
 }

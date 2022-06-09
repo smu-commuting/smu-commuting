@@ -1,5 +1,5 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/no-unescaped-entities */
-// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,35 +13,92 @@ import add from '../../assets/TaxiPage/add.png';
 import {
     getTaxiPartyList,
     taxiCreateModalClick,
+    taxiPartyListRestart,
 } from '../../modules/reducers/taxi';
 import TaxiCard from '../../components/TaxiPage/TaxiCard/TaxiCard';
 
 function TaxiPage() {
     const dispatch = useDispatch();
     const { placeId, date, placeName } = useParams();
-    const { taxiPartyList, isTaxiCreateModalOpen } = useSelector(
-        state => state.taxi,
-    );
+    const {
+        taxiPartyList,
+        isTaxiCreateModalOpen,
+        taxiPartyListLoading,
+        taxiPartyEnd,
+        taxiPartyListDone,
+        createTaxiPartyDone,
+    } = useSelector(state => state.taxi);
     const [partyList, setPartyList] = useState([]);
     const [month, setMonth] = useState();
     const [day, setDay] = useState();
-    useEffect(() => {
-        if (isTaxiCreateModalOpen) dispatch(taxiCreateModalClick());
-        const temp = date.split('-');
-        setMonth(temp[1]);
-        setDay(temp[2]);
-        dispatch(getTaxiPartyList({ page: 1, size: 10, placeId, date }));
-    }, [placeId, date, placeName]);
+    const [page, setPage] = useState(1);
 
-    useEffect(() => {
-        setPartyList([...partyList, ...taxiPartyList]);
-    }, [taxiPartyList]);
     const onConditionChange = useCallback(() => {
         dispatch(taxiModalClick());
     }, [dispatch]);
     const onCreateClick = useCallback(() => {
         dispatch(taxiCreateModalClick());
     }, [dispatch]);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        setPage(() => {
+            return 1;
+        });
+        // console.log('첫페이지', page);
+        dispatch(taxiPartyListRestart());
+        setPartyList([]);
+        if (isTaxiCreateModalOpen) dispatch(taxiCreateModalClick());
+        const temp = date.split('-');
+        setMonth(temp[1]);
+        setDay(temp[2]);
+        dispatch(
+            getTaxiPartyList({
+                page,
+                size: 10,
+                placeId,
+                date,
+            }),
+        );
+    }, [placeId, date, placeName, createTaxiPartyDone]);
+
+    useEffect(() => {
+        setPartyList([...partyList, ...taxiPartyList]);
+    }, [taxiPartyList]);
+
+    useEffect(() => {
+        dispatch(
+            getTaxiPartyList({
+                page,
+                size: 10,
+                placeId,
+                date,
+            }),
+        ); // 다 내리면 새로운거 로딩
+    }, [page]);
+
+    // 스크롤이 내려갈 때마다 데이터를 불러오는 로직
+    useEffect(() => {
+        function onScroll() {
+            if (
+                window.innerHeight + window.scrollY >
+                document.body.offsetHeight - 10
+            ) {
+                if (!taxiPartyEnd && !taxiPartyListLoading) {
+                    setPage(prev => {
+                        return prev + 1;
+                    });
+                    // console.log(page);
+                    // console.log(page, '요청');
+                }
+            }
+        }
+        window.addEventListener('scroll', onScroll);
+        return () => {
+            window.removeEventListener('scroll', onScroll);
+        };
+    }, [window.screenY, taxiPartyEnd, taxiPartyListDone]);
+
     return (
         <div className="taxipage-wrapper">
             <div className="taxi-logo-box">
@@ -53,7 +110,11 @@ function TaxiPage() {
                 />
             </div>
             <div className="taxi-info-wrapper">
-                <div className="taxi-place-box">
+                <div
+                    className="taxi-place-box"
+                    onClick={onConditionChange}
+                    aria-hidden
+                >
                     <div>
                         <p>
                             {month}월 {day}일 '{placeName}'
@@ -67,13 +128,14 @@ function TaxiPage() {
                 </div>
                 <div className="taxi-party-list">
                     {partyList.length !== 0 ? (
-                        partyList.map(party => {
+                        partyList.map((party, idx) => {
                             return (
                                 <TaxiCard
                                     taxiPartyId={party.taxiPartyId}
                                     headcount={party.headcount}
                                     maximum={party.maximum}
                                     time={party.time}
+                                    key={idx}
                                 />
                             );
                         })

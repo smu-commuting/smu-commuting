@@ -69,7 +69,6 @@ function TaxiClickModal() {
                     </p>
                     <div className="date-wrapper">
                         <div className="year-box">
-                            <p className="box-name">{year}년</p>
                             <div className="year-scroll">
                                 {yearLists &&
                                     yearLists.map(yearList => {
@@ -156,26 +155,27 @@ function TaxiClickModal() {
                         </div>
                     </div>
                     <div className="place-wrapper">
-                        {taxiMeetPlaceList.map(place => {
-                            return (
-                                <div
-                                    className={
-                                        placeId === place.taxiPlaceId
-                                            ? 'loc-box checked'
-                                            : 'loc-box non-checked'
-                                    }
-                                    key={place.id}
-                                    onClick={() => {
-                                        setPlaceId(place.taxiPlaceId);
-                                        setPlaceName(place.name);
-                                    }}
-                                    aria-hidden
-                                >
-                                    <img src={location} alt="loc" />
-                                    <p>{place.name}</p>
-                                </div>
-                            );
-                        })}
+                        {taxiMeetPlaceList &&
+                            taxiMeetPlaceList.map(place => {
+                                return (
+                                    <div
+                                        className={
+                                            placeId === place.taxiPlaceId
+                                                ? 'loc-box checked'
+                                                : 'loc-box non-checked'
+                                        }
+                                        key={place.id}
+                                        onClick={() => {
+                                            setPlaceId(place.taxiPlaceId);
+                                            setPlaceName(place.name);
+                                        }}
+                                        aria-hidden
+                                    >
+                                        <img src={location} alt="loc" />
+                                        <p>{place.name}</p>
+                                    </div>
+                                );
+                            })}
                     </div>
 
                     <button

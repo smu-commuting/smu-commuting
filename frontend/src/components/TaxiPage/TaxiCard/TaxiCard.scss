@@ -1,10 +1,25 @@
-.taxicard-wrapper {
-    width: 13.5rem;
+%taxicard-wrapper {
+    width: 45%;
+    margin-bottom: 2.5rem;
     padding: 0.1rem 0;
     border-radius: 1rem;
     text-align: center;
     color: white;
-    background-color: #7b88f2;
     font-family: 'NotoSansKR-Regular';
     font-size: 1.8rem;
+}
+
+.taxicard-not-end-wrapper {
+    @extend %taxicard-wrapper;
+    background-color: #7b88f2;
+}
+
+.taxicard-soon-end-wrapper {
+    @extend %taxicard-wrapper;
+    background-color: #1a2962;
+}
+
+.taxicard-end-wrapper{
+    @extend %taxicard-wrapper;
+    display: none;
 }
