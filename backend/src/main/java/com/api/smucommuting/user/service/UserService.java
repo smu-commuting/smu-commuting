@@ -1,7 +1,7 @@
 package com.api.smucommuting.user.service;
 
 import com.api.smucommuting.common.exception.user.UserNotFoundException;
-import com.api.smucommuting.mail.infra.CustomMailSender;
+import com.api.smucommuting.common.mail.infra.CustomMailSender;
 import com.api.smucommuting.user.domain.User;
 import com.api.smucommuting.user.domain.UserValidator;
 import com.api.smucommuting.user.domain.UserVerificationCode;
@@ -32,7 +32,13 @@ public class UserService {
         mailSender.mailSend(request.getEmail(), userVerificationCode);
     }
 
+    @Transactional(readOnly = true)
     public void codeVerification(UserRequest.EmailVerification request, User user, LocalDateTime now) {
         userVerificationCodeService.validateCode(user, request.getCode(), now);
+    }
+
+    public void delete(User loginUser) {
+        loginUser.quit(loginUser.getId());
+        userRepository.delete(loginUser);
     }
 }

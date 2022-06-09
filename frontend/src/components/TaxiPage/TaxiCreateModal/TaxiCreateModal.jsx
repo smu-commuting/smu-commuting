@@ -27,9 +27,10 @@ function TaxiCreateModal() {
         if (now.getHours() < 12) setAmpm('AM');
         else setAmpm('PM');
         if (now.getHours() > 12) {
-            setHour(new Date().getHours() - 12);
+            console.log(now.getHours());
+            setHour(now.getHours() - 12);
         }
-        setHour(new Date().getHours());
+        setHour(now.getHours());
         setMinute(now.getMinutes());
     }, []);
 
@@ -55,9 +56,7 @@ function TaxiCreateModal() {
         };
         console.log(data);
         dispatch(taxiPartyCreate(data));
-        if (createTaxiPartyDone) {
-            dispatch(taxiCreateModalClick());
-        }
+        dispatch(taxiCreateModalClick());
     };
 
     return (

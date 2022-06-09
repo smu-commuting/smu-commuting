@@ -14,15 +14,19 @@ import {
     getTaxiPartyList,
     taxiCreateModalClick,
 } from '../../modules/reducers/taxi';
+import TaxiCard from '../../components/TaxiPage/TaxiCard/TaxiCard';
 
 function TaxiPage() {
     const dispatch = useDispatch();
     const { placeId, date, placeName } = useParams();
-    const { taxiPartyList } = useSelector(state => state.taxi);
+    const { taxiPartyList, isTaxiCreateModalOpen } = useSelector(
+        state => state.taxi,
+    );
     const [partyList, setPartyList] = useState([]);
     const [month, setMonth] = useState();
     const [day, setDay] = useState();
     useEffect(() => {
+        if (isTaxiCreateModalOpen) dispatch(taxiCreateModalClick());
         const temp = date.split('-');
         setMonth(temp[1]);
         setDay(temp[2]);
@@ -64,7 +68,14 @@ function TaxiPage() {
                 <div className="taxi-party-list">
                     {partyList.length !== 0 ? (
                         partyList.map(party => {
-                            return party;
+                            return (
+                                <TaxiCard
+                                    taxiPartyId={party.taxiPartyId}
+                                    headcount={party.headcount}
+                                    maximum={party.maximum}
+                                    time={party.time}
+                                />
+                            );
                         })
                     ) : (
                         <div className="none-data">

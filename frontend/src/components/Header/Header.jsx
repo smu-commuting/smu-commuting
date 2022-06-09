@@ -13,6 +13,9 @@ function Header() {
     const onChattingClick = useCallback(() => {
         navigate('/chatlist');
     }, []);
+    const onMyPageClick = useCallback(() => {
+        navigate('/mypage');
+    }, []);
     return (
         <div className="header-wrapper">
             <img
@@ -27,7 +30,12 @@ function Header() {
                 onClick={onLogoClick}
                 aria-hidden
             />
-            <img src={headerMypage} alt="마이페이지" />
+            <img
+                src={headerMypage}
+                alt="마이페이지"
+                onClick={onMyPageClick}
+                aria-hidden
+            />
         </div>
     );
 }

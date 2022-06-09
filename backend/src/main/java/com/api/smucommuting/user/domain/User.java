@@ -1,9 +1,12 @@
 package com.api.smucommuting.user.domain;
 
 import com.api.smucommuting.common.entity.BaseTimeEntity;
+import com.api.smucommuting.common.event.Events;
+import com.api.smucommuting.user.domain.event.UserDeletedEvent;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Getter
 @Builder
@@ -37,5 +40,22 @@ public class User extends BaseTimeEntity {
         userValidator.emailValidate(email);
         this.email = email;
         this.studentId = studentId;
+    }
+
+    public void quit(Long userId) {
+        Events.raise(new UserDeletedEvent(userId));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return getId().equals(user.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

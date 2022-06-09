@@ -3,7 +3,6 @@ package com.api.smucommuting.taxi.domain.repository;
 import com.api.smucommuting.taxi.domain.TaxiParty;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDate;
@@ -15,7 +14,6 @@ import static com.api.smucommuting.taxi.domain.QTaxiGroup.taxiGroup;
 import static com.api.smucommuting.taxi.domain.QTaxiParty.taxiParty;
 
 @RequiredArgsConstructor
-@Slf4j
 public class TaxiPartyRepositoryImpl implements TaxiPartyRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 

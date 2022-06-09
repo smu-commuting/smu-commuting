@@ -24,4 +24,11 @@ public class CustomExceptionHandler {
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(PermissionException.class)
+    public ResponseEntity<ErrorResponse> permissionExceptionHandler(PermissionException ex) {
+        ErrorResponse response = ErrorResponse.build(HttpServletResponse.SC_FORBIDDEN, ex);
+
+        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+    }
 }

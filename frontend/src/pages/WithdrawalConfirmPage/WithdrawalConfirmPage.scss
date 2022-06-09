@@ -1,0 +1,50 @@
+@import '../../styles/utils.scss';
+
+.wthdrawalconfirmpage-wrapper {
+    padding: 4.6rem 3.1rem;
+    .wthdrawalconfirmpage-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .img {
+            padding: 0.813rem;
+            display: block;
+            width: 1.938rem;
+            height: 1.938rem;
+        }
+        div {
+            padding: 0 0 0 8rem;
+            text-align: center;
+            font-weight: bold;
+            @include font-face(NotoSansKR-Regular, 2.5rem, 2.5rem, #292733);
+        }
+    }
+    .wthdrawalconfirmpage-content {
+        padding-top: 18rem;
+        display: flex;
+        flex-direction: column;
+        p {
+            align-items: left;
+            text-align: left;
+            padding-bottom: 2rem;
+            @include font-face(NotoSansKR-Regular, 2.3rem, 2.5rem, #292733);
+        }
+        .studentid-input {
+            
+            display: flex;
+            flex-direction: row;
+            input{
+                border: 0.063rem solid #000000;
+            }
+            .confirm-btn{
+                margin-left: 2rem;
+                height: 3rem;
+                width: 10rem;
+                text-align: center;
+                border-radius: 10px;
+                @include font-face(NotoSansKR-Regular,1.8rem, 2.5rem, #ffffff);
+                background-color: #7b88f2;
+            }
+        }
+    }
+}

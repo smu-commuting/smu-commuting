@@ -8,10 +8,7 @@ import com.api.smucommuting.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
@@ -36,6 +33,12 @@ public class UserController {
     @PostMapping("/email/verification")
     public ResponseEntity<ApiResult<Void>> codeVerification(@RequestBody UserRequest.EmailVerification request, @CurrentUser CustomUserDetails customUserDetails) {
         userService.codeVerification(request, customUserDetails.getUser(), LocalDateTime.now());
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
+    }
+
+    @DeleteMapping
+    public ResponseEntity<ApiResult<Void>> delete(@CurrentUser CustomUserDetails customUserDetails) {
+        userService.delete(customUserDetails.getUser());
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
     }
 }

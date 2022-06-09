@@ -43,5 +43,13 @@ include::{snippets}/auth_refresh/http-request.adoc[]
 include::{snippets}/auth_refresh/http-response.adoc[]
 include::{snippets}/auth_refresh/response-fields.adoc[]
 
+=== 로그아웃
 
+`POST /api/auth/logout`
 
+요청 HTTP
+include::{snippets}/auth_logout/http-request.adoc[]
+
+성공 응답 HTTP
+include::{snippets}/auth_logout/http-response.adoc[]
+include::{snippets}/auth_logout/response-fields.adoc[]

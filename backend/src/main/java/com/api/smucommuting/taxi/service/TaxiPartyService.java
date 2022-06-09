@@ -2,6 +2,7 @@ package com.api.smucommuting.taxi.service;
 
 import com.api.smucommuting.common.dto.PageDto;
 import com.api.smucommuting.common.exception.taxi.TaxiGroupNotFoundException;
+import com.api.smucommuting.common.exception.taxi.TaxiPartyNotFoundException;
 import com.api.smucommuting.taxi.domain.*;
 import com.api.smucommuting.taxi.domain.repository.TaxiGroupRepository;
 import com.api.smucommuting.taxi.domain.repository.TaxiPartyRepository;
@@ -57,6 +58,11 @@ public class TaxiPartyService {
         List<Long> userIds = taxiGroupRepository.findAllByTaxiPartyIdAndStatus(taxiPartyId, status).stream().map(TaxiGroup::getUserId).collect(Collectors.toList());
         List<User> userList = users.findAllByUserIdIn(userIds);
         return TaxiPartyResponse.TaxiPartyUsers.listsOf(userList);
+    }
+
+    public void update(Long taxiPartyId, TaxiPartyRequest.Update request, User loginUser) {
+        TaxiParty taxiParty = taxiPartyRepository.findByIdWithTaxiGroup(taxiPartyId).orElseThrow(TaxiPartyNotFoundException::new);
+        taxiParty.update(request.getMaximum(), loginUser, taxiPartyValidator, taxiParty);
     }
 
     public void exit(Long taxiPartyId, Long loginUserId) {
