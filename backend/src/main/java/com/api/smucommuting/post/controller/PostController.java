@@ -25,10 +25,19 @@ public class PostController {
     @PostMapping("/post")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ApiResult<PostResponse.OnlyId>> create(@RequestPart(value = "info") PostRequest.CreateInfo request,
-                                                                 @RequestPart(value = "image") MultipartFile image,
+                                                                 @RequestPart(value = "image", required = false) MultipartFile image,
                                                                  @CurrentUser CustomUserDetails customUserDetails) {
         PostResponse.OnlyId response = postService.create(request, image, customUserDetails.getUser());
         return ResponseEntity.created(URI.create("/api/post/" + response.getPostId())).body(ApiResult.build(HttpStatus.CREATED.value(), response));
+    }
+
+    @PostMapping("/post/{postId}")
+    public ResponseEntity<ApiResult<PostResponse.OnlyId>> update(@PathVariable Long postId,
+                                                                 @RequestPart(value = "info") PostRequest.Update request,
+                                                                 @RequestPart(value = "image", required = false) MultipartFile image,
+                                                                 @CurrentUser CustomUserDetails customUserDetails) {
+        PostResponse.OnlyId response = postService.update(postId, request, image, customUserDetails.getUser());
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
     }
 
     @GetMapping("/post/{postId}")

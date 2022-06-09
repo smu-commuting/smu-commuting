@@ -86,6 +86,52 @@ class PostControllerTest extends MvcTest {
     }
 
     @Test
+    @DisplayName("게시물 수정 문서화")
+    public void update() throws Exception {
+        InputStream is1 = new ClassPathResource("mock/images/enjoy.png").getInputStream();
+        MockMultipartFile img = new MockMultipartFile("image", "image.jpg", "image/jpg", is1.readAllBytes());
+
+        PostRequest.Update request = PostRequest.Update.builder()
+                .content(CONTENT)
+                .place(PLACE)
+                .item(ITEM)
+                .obtainDate(DATE)
+                .imageChanged(true)
+                .build();
+        String content = objectMapper.writeValueAsString(request);
+        MockMultipartFile infoRequest = new MockMultipartFile("info", "", "application/json", content.getBytes());
+
+        PostResponse.OnlyId response = PostResponse.OnlyId.builder().postId(1L).build();
+
+        given(postService.update(any(), any(), any(), any())).willReturn(response);
+
+        ResultActions results = mvc.perform(multipart("/api/post/{postId}",1)
+                .file(infoRequest)
+                .file(img)
+                .contentType(MediaType.MULTIPART_MIXED)
+                .accept(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+        );
+
+        results.andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("post_update",
+                        pathParameters(
+                                parameterWithName("postId").description("게시물 식별자")
+                        ),
+                        requestParts(
+                                partWithName("info").description("게시물 정보 JSON"),
+                                partWithName("image").description("게시물 이미지")
+                        ),
+                        responseFields(
+                                fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
+                                fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
+                                fieldWithPath("data.postId").type(JsonFieldType.NUMBER).description("생성된 게시물 식별자")
+                        )
+                ));
+    }
+
+    @Test
     @DisplayName("게시물 단건 조회")
     public void getOne() throws Exception {
         PostResponse.GetOne response = PostResponse.GetOne.builder()

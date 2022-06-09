@@ -12,6 +12,10 @@ public class PostValidator {
         isMineValidate(post, loginUser);
     }
 
+    public void updateValidate(Post post, User loginUser) {
+        isMineValidate(post, loginUser);
+    }
+
     private void isMineValidate(Post post, User loginUser) {
         if (!post.getWriter().equals(loginUser)) {
             throw new PermissionException();

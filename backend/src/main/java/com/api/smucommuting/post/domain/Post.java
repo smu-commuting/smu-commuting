@@ -58,4 +58,12 @@ public class Post extends BaseTimeEntity {
                 .writer(user)
                 .build();
     }
+
+    public void update(Post updatedPost, Post originPost, PostValidator postValidator, User loginUser) {
+        postValidator.updateValidate(originPost, loginUser);
+        this.content = updatedPost.getContent();
+        this.obtainDate = updatedPost.getObtainDate();
+        this.item = updatedPost.getItem();
+        this.place = updatedPost.getPlace();
+    }
 }

@@ -1,0 +1,3 @@
+###
+GET {{apiUrl}}/chat/room/6/messages?size=10&lastMessageDate=2022-06-08T18:00:01.000000011
+Authorization: {{authorizationToken}}

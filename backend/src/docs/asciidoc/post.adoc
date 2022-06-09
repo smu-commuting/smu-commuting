@@ -51,6 +51,20 @@ include::{snippets}/post_getList/request-parameters.adoc[]
 include::{snippets}/post_getList/http-response.adoc[]
 include::{snippets}/post_getList/response-fields.adoc[]
 
+=== 게시물 수정
+
+`POST /api/post/{postId}`
+
+요청 HTTP
+
+include::{snippets}/post_update/request-parts.adoc[]
+include::{snippets}/post_update/curl-request.adoc[]
+
+성공 응답 HTTP
+
+include::{snippets}/post_update/http-response.adoc[]
+include::{snippets}/post_update/response-fields.adoc[]
+
 === 게시물 삭제
 
 `DELETE /api/post/{postId}`
