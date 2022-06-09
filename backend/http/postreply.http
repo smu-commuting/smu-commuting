@@ -1,0 +1,7 @@
+POST {{apiUrl}}/post/1/reply
+Authorization: {{authorizationToken}}
+Content-Type: application/json;charset=UTF-8
+
+{
+  "content": "감사합니다!"
+}

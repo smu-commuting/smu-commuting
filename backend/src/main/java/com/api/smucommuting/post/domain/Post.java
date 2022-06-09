@@ -6,6 +6,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Builder
@@ -36,6 +38,10 @@ public class Post extends BaseTimeEntity {
 
     @OneToOne(mappedBy = "post", cascade = CascadeType.REMOVE)
     private PostFile postFile;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    private List<PostReply> postReplyList = new ArrayList<>();
 
     protected void setPostFile(PostFile postFile) {
         this.postFile = postFile;

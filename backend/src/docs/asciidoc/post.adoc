@@ -78,3 +78,20 @@ include::{snippets}/post_deleteOne/path-parameters.adoc[]
 
 include::{snippets}/post_deleteOne/http-response.adoc[]
 include::{snippets}/post_deleteOne/response-fields.adoc[]
+
+== 댓글
+
+=== 댓글 생성
+
+`POST /api/post/{postId}/reply`
+
+요청 HTTP
+
+include::{snippets}/post_reply_create/path-parameters.adoc[]
+include::{snippets}/post_reply_create/http-request.adoc[]
+include::{snippets}/post_reply_create/request-fields.adoc[]
+
+성공 응답 HTTP
+
+include::{snippets}/post_reply_create/http-response.adoc[]
+include::{snippets}/post_reply_create/response-fields.adoc[]
