@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState, useCallback } from 'react';
@@ -19,18 +20,32 @@ import TaxiCard from '../../components/TaxiPage/TaxiCard/TaxiCard';
 function TaxiPage() {
     const dispatch = useDispatch();
     const { placeId, date, placeName } = useParams();
-    const { taxiPartyList, isTaxiCreateModalOpen } = useSelector(
-        state => state.taxi,
-    );
+    const {
+        taxiPartyList,
+        isTaxiCreateModalOpen,
+        taxiPartyListLoading,
+        taxiPartyEnd,
+        taxiPartyListDone,
+    } = useSelector(state => state.taxi);
     const [partyList, setPartyList] = useState([]);
     const [month, setMonth] = useState();
     const [day, setDay] = useState();
+    const [page, setPage] = useState(1);
+
     useEffect(() => {
+        setPartyList([]);
         if (isTaxiCreateModalOpen) dispatch(taxiCreateModalClick());
         const temp = date.split('-');
         setMonth(temp[1]);
         setDay(temp[2]);
-        dispatch(getTaxiPartyList({ page: 1, size: 10, placeId, date }));
+        dispatch(
+            getTaxiPartyList({
+                page: 1,
+                size: 10,
+                placeId,
+                date,
+            }),
+        );
     }, [placeId, date, placeName]);
 
     useEffect(() => {
@@ -42,6 +57,36 @@ function TaxiPage() {
     const onCreateClick = useCallback(() => {
         dispatch(taxiCreateModalClick());
     }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(
+            getTaxiPartyList({
+                page: page + 1,
+                size: 10,
+                placeId,
+                date,
+            }),
+        ); // 다 내리면 새로운거 로딩
+    }, [page]);
+
+    // 스크롤이 내려갈 때마다 데이터를 불러오는 로직
+    useEffect(() => {
+        function onScroll() {
+            if (
+                window.innerHeight + window.scrollY >
+                document.body.offsetHeight - 10
+            ) {
+                if (!taxiPartyEnd && !taxiPartyListLoading) {
+                    setPage(prev => prev + 1);
+                }
+            }
+        }
+        window.addEventListener('scroll', onScroll);
+        return () => {
+            window.removeEventListener('scroll', onScroll);
+        };
+    }, [window.screenY, taxiPartyEnd, taxiPartyListDone]);
+
     return (
         <div className="taxipage-wrapper">
             <div className="taxi-logo-box">

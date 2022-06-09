@@ -2,7 +2,6 @@
 
 .taxipage-wrapper {
     padding: 1.5rem 3.1rem 0rem 3.1rem;
-    overflow: hidden;
     .taxi-logo-box {
         padding: 1.5rem 0 1rem 0;
         width: 100%;
@@ -14,8 +13,11 @@
         border-bottom: 1px solid black;
     }
     .taxi-info-wrapper {
-        padding-top: 0.5rem;
+        padding-top: 2rem;
         .taxi-place-box {
+            position: sticky;
+            top: 0;
+            background-color: white;
             @include font-face(
                 'NotoSansKR-Medium',
                 1.8rem,
@@ -41,7 +43,12 @@
             }
         }
         .taxi-party-list {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
             .none-data {
+                width : 100%;
                 margin-top: 4rem;
                 img {
                     display: block;

@@ -1,12 +1,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
 import React from 'react';
 import './TaxiCard.scss';
 
 function TaxiCard({ taxiPartyId, headcount, maximum, time }) {
     return (
-        <div className="taxicard-wrapper">
+        <div className="taxicard-not-end-wrapper">
             <p>{time}</p>
             <p>
                 {headcount} / {maximum}

@@ -45,7 +45,6 @@ export const loginRequest = data => {
 };
 
 export const signupRequest = data => {
-    console.log('action', data);
     return {
         type: USER_SIGN_UP_REQUEST,
         data,

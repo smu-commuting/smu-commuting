@@ -11,11 +11,13 @@ import cancel from '../../../assets/TaxiPage/cancel.png';
 import { hoursArr, minutesArr } from '../../../constants';
 
 function TaxiCreateModal() {
-    const { taxiPageInfo, createTaxiPartyDone } = useSelector(
-        state => state.taxi,
-    );
+    const { taxiPageInfo } = useSelector(state => state.taxi);
     const [ampm, setAmpm] = useState();
-    const [hour, setHour] = useState();
+    const [hour, setHour] = useState(
+        new Date().getHours() > 12
+            ? new Date().getHours() - 12
+            : new Date().getHours(),
+    );
     const [minute, setMinute] = useState();
     const [headCount, setHeadCount] = useState(0);
     const dispatch = useDispatch();
@@ -26,13 +28,10 @@ function TaxiCreateModal() {
         const now = new Date();
         if (now.getHours() < 12) setAmpm('AM');
         else setAmpm('PM');
-        if (now.getHours() > 12) {
-            console.log(now.getHours());
-            setHour(now.getHours() - 12);
-        }
-        setHour(now.getHours());
         setMinute(now.getMinutes());
     }, []);
+
+    useEffect(() => {}, [hour]);
 
     const onCreateTaxiParty = () => {
         let tempHour;
@@ -54,7 +53,6 @@ function TaxiCreateModal() {
             headCount,
             meetingDate: when,
         };
-        console.log(data);
         dispatch(taxiPartyCreate(data));
         dispatch(taxiCreateModalClick());
     };

@@ -42,6 +42,7 @@ export const initialState = {
     taxiPartyListLoading: false,
     taxiPartyListDone: false,
     taxiPartyListError: null,
+    taxiPartyEnd: false,
     // 현재 조회중인 택시 페이지의 날짜
     taxiPageInfo: null,
     // 택시 생성 모달창 오픈
@@ -146,6 +147,7 @@ const reducer = (state = initialState, action) => {
                 draft.taxiPartyListError = null;
                 console.log(action.data.data);
                 draft.taxiPartyList = action.data.data;
+                draft.taxiPartyEnd = action.data.data.length === 0;
                 break;
             case TAXI_PARTY_LIST_FAILURE:
                 draft.taxiPartyListLoading = false;

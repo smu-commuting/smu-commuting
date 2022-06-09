@@ -11,7 +11,6 @@ import {
 export const initialState = {
     chatMessageList: [],
     chatLoadEnd: false,
-    // hasMoreChat: true,
     chatMessageListLoading: false,
     chatMessageListDone: false,
     chatMessageListError: null,
