@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
-// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,6 +12,7 @@ import add from '../../assets/TaxiPage/add.png';
 import {
     getTaxiPartyList,
     taxiCreateModalClick,
+    taxiPartyListRestart,
 } from '../../modules/reducers/taxi';
 import TaxiCard from '../../components/TaxiPage/TaxiCard/TaxiCard';
 
@@ -26,31 +25,13 @@ function TaxiPage() {
         taxiPartyListLoading,
         taxiPartyEnd,
         taxiPartyListDone,
+        createTaxiPartyDone,
     } = useSelector(state => state.taxi);
     const [partyList, setPartyList] = useState([]);
     const [month, setMonth] = useState();
     const [day, setDay] = useState();
     const [page, setPage] = useState(1);
 
-    useEffect(() => {
-        setPartyList([]);
-        if (isTaxiCreateModalOpen) dispatch(taxiCreateModalClick());
-        const temp = date.split('-');
-        setMonth(temp[1]);
-        setDay(temp[2]);
-        dispatch(
-            getTaxiPartyList({
-                page: 1,
-                size: 10,
-                placeId,
-                date,
-            }),
-        );
-    }, [placeId, date, placeName]);
-
-    useEffect(() => {
-        setPartyList([...partyList, ...taxiPartyList]);
-    }, [taxiPartyList]);
     const onConditionChange = useCallback(() => {
         dispatch(taxiModalClick());
     }, [dispatch]);
@@ -59,9 +40,35 @@ function TaxiPage() {
     }, [dispatch]);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+        setPage(() => {
+            return 1;
+        });
+        // console.log('첫페이지', page);
+        dispatch(taxiPartyListRestart());
+        setPartyList([]);
+        if (isTaxiCreateModalOpen) dispatch(taxiCreateModalClick());
+        const temp = date.split('-');
+        setMonth(temp[1]);
+        setDay(temp[2]);
         dispatch(
             getTaxiPartyList({
-                page: page + 1,
+                page,
+                size: 10,
+                placeId,
+                date,
+            }),
+        );
+    }, [placeId, date, placeName, createTaxiPartyDone]);
+
+    useEffect(() => {
+        setPartyList([...partyList, ...taxiPartyList]);
+    }, [taxiPartyList]);
+
+    useEffect(() => {
+        dispatch(
+            getTaxiPartyList({
+                page,
                 size: 10,
                 placeId,
                 date,
@@ -76,8 +83,14 @@ function TaxiPage() {
                 window.innerHeight + window.scrollY >
                 document.body.offsetHeight - 10
             ) {
+                console.log(taxiPartyEnd, taxiPartyListLoading);
                 if (!taxiPartyEnd && !taxiPartyListLoading) {
-                    setPage(prev => prev + 1);
+                    console.log('taxiPartyEnd, taxiPartyListLoading 문제');
+                    setPage(prev => {
+                        return prev + 1;
+                    });
+                    // console.log(page);
+                    // console.log(page, '요청');
                 }
             }
         }
@@ -98,7 +111,11 @@ function TaxiPage() {
                 />
             </div>
             <div className="taxi-info-wrapper">
-                <div className="taxi-place-box">
+                <div
+                    className="taxi-place-box"
+                    onClick={onConditionChange}
+                    aria-hidden
+                >
                     <div>
                         <p>
                             {month}월 {day}일 '{placeName}'

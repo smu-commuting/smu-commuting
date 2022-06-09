@@ -24,6 +24,9 @@ import {
     TAXI_PARTY_CREATE_REQUEST,
     TAXI_PARTY_CREATE_SUCCESS,
     TAXI_PARTY_CREATE_FAILURE,
+    TAXI_PARTY_LIST_RESTART_REQUEST,
+    TAXI_PARTY_LIST_RESTART_SUCCESS,
+    TAXI_PARTY_LIST_RESTART_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -103,6 +106,12 @@ export const taxiPartyCreate = data => {
     };
 };
 
+export const taxiPartyListRestart = () => {
+    return {
+        type: TAXI_PARTY_LIST_RESTART_REQUEST,
+    };
+};
+
 const reducer = (state = initialState, action) => {
     return produce(state, draft => {
         switch (action.type) {
@@ -147,7 +156,7 @@ const reducer = (state = initialState, action) => {
                 draft.taxiPartyListError = null;
                 console.log(action.data.data);
                 draft.taxiPartyList = action.data.data;
-                draft.taxiPartyEnd = action.data.data.length === 0;
+                draft.taxiPartyEnd = action.data.data.length !== 10; // 요청 사이즈 바꾸면 이것도 반드시 바꿔야 할 것
                 break;
             case TAXI_PARTY_LIST_FAILURE:
                 draft.taxiPartyListLoading = false;
@@ -182,6 +191,13 @@ const reducer = (state = initialState, action) => {
             case TAXI_PARTY_CREATE_FAILURE:
                 draft.createTaxiPartyLoading = false;
                 draft.createTaxiPartyError = action.err;
+                break;
+            case TAXI_PARTY_LIST_RESTART_REQUEST:
+                break;
+            case TAXI_PARTY_LIST_RESTART_SUCCESS:
+                draft.taxiPartyEnd = false;
+                break;
+            case TAXI_PARTY_LIST_RESTART_FAILURE:
                 break;
             case TAXI_ROOM_DELETE_REQUEST:
                 draft.deleteTaxiPartyLoading = true;
