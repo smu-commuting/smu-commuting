@@ -1,4 +1,44 @@
 @import '../../../styles/utils.scss';
-.taxitochatmodal-wrapper{
-    
+.taxitochatmodal-wrapper {
+    position: fixed;
+    z-index: 2;
+    width: 100vw;
+    height: 100%;
+    overflow: hidden;
+    touch-action: none;
+    background: $modal-background;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .taxitochatmodal {
+        width: 29.5rem;
+        border-radius: 1.2rem;
+        background-color: #ffffff;
+        p {
+            text-align: center;
+            @include font-face('NotoSansKR-Medium', 1.7rem, 3rem, #000000);
+        }
+        .button-wrapper {
+            display: flex;
+            justify-content: space-between;
+            height: 4.8rem;
+            font-family: 'NotoSansKR-Medium';
+            font-size: 2rem;
+            .cancel {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-top: 1px solid black;
+                border-right: 1px solid black;
+            }
+            .agree {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-top: 1px solid black;
+            }
+        }
+    }
 }
