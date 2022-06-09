@@ -14,6 +14,9 @@ import {
     USER_TAXI_MODAL,
     USER_TAXI_MODAL_SUCCESS,
     USER_TAXI_MODAL_FAILURE,
+    USER_COMMUNITY_MODAL,
+    USER_COMMUNITY_MODAL_SUCCESS,
+    USER_COMMUNITY_MODAL_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -58,6 +61,12 @@ export const busModalClick = () => {
 export const taxiModalClick = () => {
     return {
         type: USER_TAXI_MODAL,
+    };
+};
+
+export const communityModalClick = () => {
+    return {
+        type: USER_COMMUNITY_MODAL,
     };
 };
 
@@ -117,6 +126,14 @@ const reducer = (state = initialState, action) => {
                 break;
             case USER_TAXI_MODAL_FAILURE:
                 draft.isTaxiModalOpen = false;
+                break;
+            case USER_COMMUNITY_MODAL:
+                break;
+            case USER_COMMUNITY_MODAL_SUCCESS:
+                draft.isCommunityModalOpen = !draft.isCommunityModalOpen;
+                break;
+            case USER_COMMUNITY_MODAL_FAILURE:
+                draft.isCommunityModalOpen = false;
                 break;
             default:
                 break;

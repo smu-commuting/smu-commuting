@@ -1,0 +1,56 @@
+@import '../../../styles/utils.scss';
+.communitymodal-wrapper {
+    position: fixed;
+    width: 100vw;
+    height: 100%;
+    z-index: 2;
+    overflow: hidden;
+    touch-action: none;
+    background: $modal-background;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .communitymodal {
+        width: 29.5rem;
+        border-radius: 1.2rem;
+        background-color: #ffffff;
+        padding: 1.1rem 1.1rem 3rem 1.1rem;
+        .cancel {
+            float: right;
+            display: block;
+            width: 2rem;
+            height: 2rem;
+        }
+        .inner-wrapper {
+            // margin-top: 0.5rem;
+            p {
+                text-align: center;
+                font-family: 'NotoSansKR-Medium';
+                font-size: 1.8rem;
+                color: #000000;
+            }
+            .community-wrapper {
+                display: flex;
+                justify-content: space-between;
+                padding: 0 1rem 0rem 1rem;
+                text-align: center;
+                div {
+                    width: 45%;
+                    img {
+                        display: block;
+                        width: 100%;
+                    }
+                    p {
+                        margin-top: 2rem;
+                        @include font-face(
+                            'NotoSansKR-Bold',
+                            1.3rem,
+                            0,
+                            #000000
+                        );
+                    }
+                }
+            }
+        }
+    }
+}

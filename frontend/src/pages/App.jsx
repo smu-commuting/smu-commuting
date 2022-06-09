@@ -23,10 +23,11 @@ import InquiryDetailPage from './InquiryDetailPage/InquiryDetailPage';
 import InquiryWritePage from './inquiryWritePage/inquiryWritePage';
 import ChattingPage from './ChattingPage/ChattingPage';
 import TaxiPage from './TaxiPage/TaxiPage';
+import CommunityModal from '../components/CommunityPage/CommunityModal/CommunityModal';
 
 function App() {
-    const { isBusModalOpen } = useSelector(state => state.user);
-    const { isTaxiModalOpen } = useSelector(state => state.user);
+    const { isBusModalOpen, isTaxiModalOpen, isCommunityModalOpen } =
+        useSelector(state => state.user);
     const { isTaxiCreateModalOpen } = useSelector(state => state.taxi);
     return (
         <Router>
@@ -43,6 +44,7 @@ function App() {
                         <>
                             {isBusModalOpen && <BusModal />}
                             {isTaxiModalOpen && <TaxiModal />}
+                            {isCommunityModalOpen && <CommunityModal />}
                             <Header />
                             <HomePage />
                         </>

@@ -13,6 +13,9 @@ import {
     USER_TAXI_MODAL,
     USER_TAXI_MODAL_SUCCESS,
     USER_TAXI_MODAL_FAILURE,
+    USER_COMMUNITY_MODAL,
+    USER_COMMUNITY_MODAL_SUCCESS,
+    USER_COMMUNITY_MODAL_FAILURE,
 } from '../../constants';
 import { signupApi } from '../../utils';
 
@@ -72,6 +75,19 @@ function* taximodal() {
     }
 }
 
+function* communitymodal() {
+    try {
+        yield put({
+            type: USER_COMMUNITY_MODAL_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: USER_COMMUNITY_MODAL_FAILURE,
+            error: err,
+        });
+    }
+}
+
 function* watchLogin() {
     yield takeLatest(USER_LOG_IN_REQUEST, login);
 }
@@ -88,11 +104,16 @@ function* watchTaxiModal() {
     yield takeLatest(USER_TAXI_MODAL, taximodal);
 }
 
+function* watchCommunityModal() {
+    yield takeLatest(USER_COMMUNITY_MODAL, communitymodal);
+}
+
 export default function* userSaga() {
     yield all([
         fork(watchLogin),
         fork(watchSignUp),
         fork(watchBusModal),
         fork(watchTaxiModal),
+        fork(watchCommunityModal),
     ]);
 }

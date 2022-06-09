@@ -1,20 +1,32 @@
 import React, { useCallback } from 'react';
 import './HomePage.scss';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Bus from '../../assets/HomePage/버스-2.png';
 import Taxi from '../../assets/HomePage/택시-2.png';
 import Community from '../../assets/HomePage/커뮤니티-2.png';
 import Manual from '../../assets/HomePage/매뉴얼-3.png';
-import { busModalClick, taxiModalClick } from '../../modules/reducers/user';
+import {
+    busModalClick,
+    communityModalClick,
+    taxiModalClick,
+} from '../../modules/reducers/user';
 
 function HomePage() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const onBusClick = useCallback(() => {
         dispatch(busModalClick());
     }, [dispatch]);
     const onTaxiClick = useCallback(() => {
         dispatch(taxiModalClick());
     }, [dispatch]);
+    const onCommunityClick = useCallback(() => {
+        dispatch(communityModalClick());
+    }, [dispatch]);
+    const onManualClick = useCallback(() => {
+        navigate('/manual');
+    }, []);
     return (
         <div className="homepage-inner-wrapper">
             <div className="homepage-top-line">
@@ -37,10 +49,20 @@ function HomePage() {
             </div>
             <div className="homepage-bottom-line">
                 <div>
-                    <img src={Community} alt="커뮤니티" />
+                    <img
+                        src={Community}
+                        alt="커뮤니티"
+                        onClick={onCommunityClick}
+                        aria-hidden
+                    />
                 </div>
                 <div>
-                    <img src={Manual} alt="매뉴얼" />
+                    <img
+                        src={Manual}
+                        alt="매뉴얼"
+                        onClick={onManualClick}
+                        aria-hidden
+                    />
                 </div>
             </div>
         </div>

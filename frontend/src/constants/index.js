@@ -43,6 +43,9 @@ export {
     TAXI_PARTY_CREATE_REQUEST,
     TAXI_PARTY_CREATE_SUCCESS,
     TAXI_PARTY_CREATE_FAILURE,
+    USER_COMMUNITY_MODAL,
+    USER_COMMUNITY_MODAL_SUCCESS,
+    USER_COMMUNITY_MODAL_FAILURE,
 } from './actions';
 
 export { default as prevent } from './prevent';
