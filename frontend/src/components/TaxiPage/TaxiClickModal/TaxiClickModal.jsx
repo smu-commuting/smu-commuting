@@ -69,7 +69,6 @@ function TaxiClickModal() {
                     </p>
                     <div className="date-wrapper">
                         <div className="year-box">
-                            <p className="box-name">{year}년</p>
                             <div className="year-scroll">
                                 {yearLists &&
                                     yearLists.map(yearList => {

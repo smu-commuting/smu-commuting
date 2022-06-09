@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/no-unescaped-entities */
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
@@ -83,9 +84,7 @@ function TaxiPage() {
                 window.innerHeight + window.scrollY >
                 document.body.offsetHeight - 10
             ) {
-                console.log(taxiPartyEnd, taxiPartyListLoading);
                 if (!taxiPartyEnd && !taxiPartyListLoading) {
-                    console.log('taxiPartyEnd, taxiPartyListLoading 문제');
                     setPage(prev => {
                         return prev + 1;
                     });
@@ -129,13 +128,14 @@ function TaxiPage() {
                 </div>
                 <div className="taxi-party-list">
                     {partyList.length !== 0 ? (
-                        partyList.map(party => {
+                        partyList.map((party, idx) => {
                             return (
                                 <TaxiCard
                                     taxiPartyId={party.taxiPartyId}
                                     headcount={party.headcount}
                                     maximum={party.maximum}
                                     time={party.time}
+                                    key={idx}
                                 />
                             );
                         })
