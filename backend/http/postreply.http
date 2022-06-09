@@ -5,3 +5,13 @@ Content-Type: application/json;charset=UTF-8
 {
   "content": "감사합니다!"
 }
+
+###
+PUT {{apiUrl}}/post/reply/1
+Authorization: {{authorizationToken}}
+Content-Type: application/json;charset=UTF-8
+
+{
+  "content": "수정!"
+}
+

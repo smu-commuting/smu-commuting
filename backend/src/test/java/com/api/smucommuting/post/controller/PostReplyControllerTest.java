@@ -22,16 +22,16 @@ import static org.springframework.restdocs.request.RequestDocumentation.pathPara
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@DisplayName("게시물 API 문서화")
+@DisplayName("게시물 댓글 API 문서화")
 @WebMvcTest(PostReplyController.class)
 class PostReplyControllerTest extends MvcTest {
     @MockBean
     PostReplyService postReplyService;
 
     @Test
-    @DisplayName("회원가입 문서화")
-    public void signup() throws Exception {
-        PostReplyRequest.Create request = PostReplyRequest.Create.builder()
+    @DisplayName("댓글 생성 문서화")
+    public void create() throws Exception {
+        PostReplyRequest.CreateOrUpdate request = PostReplyRequest.CreateOrUpdate.builder()
                 .content("감사합니다!")
                 .build();
 
@@ -59,6 +59,37 @@ class PostReplyControllerTest extends MvcTest {
                                 fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
                                 fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
                                 fieldWithPath("data.replyId").description("댓글 식별자")
+                        )
+                ));
+    }
+
+    @Test
+    @DisplayName("댓글 수정 문서화")
+    public void update() throws Exception {
+        PostReplyRequest.CreateOrUpdate request = PostReplyRequest.CreateOrUpdate.builder()
+                .content("수정!")
+                .build();
+
+        ResultActions results = mvc.perform(RestDocumentationRequestBuilders
+                .put("/api/post/reply/{replyId}", 1)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(objectMapper.writeValueAsString(request))
+        );
+
+        results.andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("post_reply_update",
+                        pathParameters(
+                                parameterWithName("replyId").description("댓글 식별자")
+                        ),
+                        requestFields(
+                                fieldWithPath("content").type(JsonFieldType.STRING).description("내용")
+                        ),
+                        responseFields(
+                                fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
+                                fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
+                                fieldWithPath("data").description("응답 데이터가 없다면 null")
                         )
                 ));
     }

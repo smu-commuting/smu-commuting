@@ -8,7 +8,7 @@ public class PostReplyRequest {
     @Builder
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class Create {
+    public static class CreateOrUpdate {
         private String content;
 
         public PostReply toEntity() {

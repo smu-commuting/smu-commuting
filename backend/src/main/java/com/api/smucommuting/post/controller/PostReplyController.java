@@ -22,9 +22,17 @@ public class PostReplyController {
     @PostMapping("/post/{postId}/reply")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ApiResult<PostReplyResponse.OnlyId>> create(@PathVariable Long postId,
-                                                                      @RequestBody PostReplyRequest.Create request,
+                                                                      @RequestBody PostReplyRequest.CreateOrUpdate request,
                                                                       @CurrentUser CustomUserDetails customUserDetails) {
         PostReplyResponse.OnlyId response = postReplyService.create(postId, request, customUserDetails.getUser());
         return ResponseEntity.created(URI.create("/api/post/reply/" + response.getReplyId())).body(ApiResult.build(HttpStatus.CREATED.value(), response));
+    }
+
+    @PutMapping("/post/reply/{replyId}")
+    public ResponseEntity<ApiResult<Void>> update(@PathVariable Long replyId,
+                                                  @RequestBody PostReplyRequest.CreateOrUpdate request,
+                                                  @CurrentUser CustomUserDetails customUserDetails) {
+        postReplyService.update(replyId, request, customUserDetails.getUser());
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
     }
 }

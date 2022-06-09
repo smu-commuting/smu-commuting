@@ -33,6 +33,11 @@ public class PostReply extends BaseTimeEntity {
         post.getPostReplyList().add(this);
     }
 
+    public void update(PostReply updatedReply, PostReply originReply, PostReplyValidator postReplyValidator, User loginUser) {
+        postReplyValidator.updateValidate(originReply, loginUser);
+        this.content = updatedReply.getContent();
+    }
+
     public static PostReply create(PostReply postReply, Post post, User loginUser) {
         PostReply reply = PostReply.builder()
                 .writer(loginUser)
