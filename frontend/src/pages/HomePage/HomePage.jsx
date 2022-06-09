@@ -5,12 +5,15 @@ import Bus from '../../assets/HomePage/버스-2.png';
 import Taxi from '../../assets/HomePage/택시-2.png';
 import Community from '../../assets/HomePage/커뮤니티-2.png';
 import Manual from '../../assets/HomePage/매뉴얼-3.png';
-import { busModalClick } from '../../modules/reducers/user';
+import { busModalClick, taxiModalClick } from '../../modules/reducers/user';
 
 function HomePage() {
     const dispatch = useDispatch();
     const onBusClick = useCallback(() => {
         dispatch(busModalClick());
+    }, [dispatch]);
+    const onTaxiClick = useCallback(() => {
+        dispatch(taxiModalClick());
     }, [dispatch]);
     return (
         <div className="homepage-inner-wrapper">
@@ -24,7 +27,12 @@ function HomePage() {
                     />
                 </div>
                 <div>
-                    <img src={Taxi} alt="택시" />
+                    <img
+                        src={Taxi}
+                        alt="택시"
+                        onClick={onTaxiClick}
+                        aria-hidden="true"
+                    />
                 </div>
             </div>
             <div className="homepage-bottom-line">

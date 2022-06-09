@@ -1,0 +1,184 @@
+@import '../../../styles/utils.scss';
+
+.taxiclickmodal-wrapper {
+    position: fixed;
+    width: 100vw;
+    height: 100%;
+    z-index: 2;
+    overflow: hidden;
+    touch-action: none;
+    background: $modal-background;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .taximodal {
+        width: 29.5rem;
+        border-radius: 1.2rem;
+        background-color: #ffffff;
+        padding: 1.1rem 1.1rem 3rem 1.1rem;
+        .cancel {
+            float: right;
+            display: block;
+            width: 2rem;
+            height: 2rem;
+        }
+        .inner-wrapper {
+            padding: 0 0.5rem;
+            div {
+                border-radius: 1rem;
+            }
+            .modal-text {
+                text-align: center;
+                @include font-face('NotoSansKR-Medium', 1.8rem, 0, #000000);
+                line-height: 2.5rem;
+            }
+            .date-wrapper {
+                display: flex;
+                justify-content: space-between;
+                text-align: center;
+
+                .year-box {
+                    height: 10rem;
+                    background-color: #efecff;
+                    flex: 1;
+                    .box-name {
+                        @include font-face(
+                            'NotoSansKR-Medium',
+                            1.8rem,
+                            0,
+                            #000000
+                        );
+                    }
+                    .year-scroll {
+                        height: 6rem;
+                        overflow: scroll;
+                        p {
+                            @include font-face(
+                                'NotoSansKR-Medium',
+                                1.8rem,
+                                0.5rem,
+                                #000000
+                            );
+                        }
+                        .non-click-year {
+                            color: darkgray;
+                            opacity: 0.5;
+                        }
+                    }
+                }
+                .month-box {
+                    margin: 0 0.5rem;
+                    height: 10rem;
+                    background-color: #efecff;
+                    flex: 1;
+                    .box-name {
+                        text-align: center;
+                        @include font-face(
+                            'NotoSansKR-Medium',
+                            1.8rem,
+                            0,
+                            #000000
+                        );
+                    }
+                    .month-scroll {
+                        overflow: scroll;
+                        height: 6rem;
+                        p {
+                            text-align: center;
+                            @include font-face(
+                                'NotoSansKR-Medium',
+                                1.8rem,
+                                0.5rem,
+                                #000000
+                            );
+                        }
+                        .click-mon {
+                            // color: red;
+                        }
+                        .non-click-mon {
+                            color: darkgray;
+                            opacity: 0.5;
+                        }
+                    }
+                }
+                .day-box {
+                    margin-left: 0.5rem;
+                    height: 10rem;
+                    background-color: #efecff;
+                    flex: 1;
+                    .box-name {
+                        text-align: center;
+                        @include font-face(
+                            'NotoSansKR-Medium',
+                            1.8rem,
+                            0,
+                            #000000
+                        );
+                    }
+                    .day-scroll {
+                        height: 6rem;
+                        overflow: scroll;
+                        p {
+                            text-align: center;
+                            @include font-face(
+                                'NotoSansKR-Medium',
+                                1.8rem,
+                                0.5rem,
+                                #000000
+                            );
+                        }
+                        .non-click-day {
+                            color: darkgray;
+                            opacity: 0.5;
+                        }
+                    }
+                }
+            }
+            .place-wrapper {
+                overflow: scroll;
+                margin-top: 2rem;
+                padding: 1.5rem;
+                background-color: #efecff;
+                height: 12.5rem;
+
+                .loc-box {
+                    display: flex;
+                    align-items: center;
+                    img {
+                        display: block;
+                        width: 1.8rem;
+                        height: 1.8rem;
+                    }
+                    p {
+                        margin-left: 1rem;
+                    }
+                }
+                .checked {
+                    @include font-face(
+                        'NotoSansKR-Medium',
+                        1.8rem,
+                        0rem,
+                        black
+                    );
+                }
+                .non-checked {
+                    @include font-face(
+                        'NotoSansKR-Medium',
+                        1.5rem,
+                        0rem,
+                        darkgray
+                    );
+                    opacity: 0.5;
+                }
+            }
+            .submit-btn {
+                @include font-face('NotoSansKR-Medium', 1.7rem, 0, white);
+                border-radius: 1rem;
+                margin-top: 2rem;
+                width: 100%;
+                height: 3.2rem;
+                background-color: #7b88f2;
+            }
+        }
+    }
+}

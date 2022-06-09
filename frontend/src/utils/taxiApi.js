@@ -19,3 +19,39 @@ export const deleteTaxiPartyApi = async id => {
         `${process.env.REACT_APP_API_URL}${API_TAXI}room/${id}`,
     );
 };
+
+// 택시 장소 목록 조회 API
+export const getTaxiPlaceListApi = async () => {
+    return await withAuthInstance.get(
+        `${process.env.REACT_APP_API_URL}${API_TAXI}places`,
+    );
+};
+
+// 택시 파티 목록 조회 API
+export const getTaxiPartyListApi = async data => {
+    return await withAuthInstance.get(
+        `${process.env.REACT_APP_API_URL}${API_TAXI}parties`,
+        {
+            params: {
+                page: data.page,
+                size: data.size,
+                placeId: data.placeId,
+                date: data.date,
+            },
+        },
+    );
+};
+
+// 택시 파티 생성 API
+export const createTaxiPartyApi = async paramsData => {
+    console.log('여기까진 오나', paramsData);
+    const data = {
+        placeId: paramsData.placeId,
+        headcount: paramsData.headCount,
+        meetingDate: paramsData.meetingDate,
+    };
+    return await withAuthInstance.post(
+        `${process.env.REACT_APP_API_URL}${API_TAXI}party`,
+        data,
+    );
+};

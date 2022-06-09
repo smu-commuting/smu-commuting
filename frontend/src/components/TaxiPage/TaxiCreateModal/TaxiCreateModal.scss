@@ -1,0 +1,191 @@
+@import '../../../styles/utils.scss';
+
+.taxicreatemodal-wrapper {
+    position: fixed;
+    width: 100vw;
+    height: 100%;
+    z-index: 2;
+    overflow: hidden;
+    touch-action: none;
+    background: $modal-background;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .taxicreatemodal {
+        width: 29.5rem;
+        border-radius: 1.2rem;
+        background-color: #ffffff;
+        padding: 1.1rem 1.1rem 3.1rem 1.1rem;
+        .cancel {
+            float: right;
+            display: block;
+            width: 2rem;
+            height: 2rem;
+        }
+        .inner-wrapper {
+            padding: 0 0.5rem;
+            div {
+                border-radius: 1rem;
+            }
+            .modal-text {
+                text-align: center;
+                @include font-face('NotoSansKR-Medium', 1.8rem, 0, #000000);
+                line-height: 2.5rem;
+            }
+            .time-wrapper {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .am-pm-wrapper {
+                    flex: 1;
+                    background-color: #efecff;
+                    margin-right: 0.5rem;
+                    height: 10rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                    .center-align {
+                        .active-ampm {
+                            @include font-face(
+                                'NotoSansKR-Medium',
+                                1.8rem,
+                                1rem,
+                                black
+                            );
+                        }
+                        .non-active-ampm {
+                            @include font-face(
+                                'NotoSansKR-Medium',
+                                1.5rem,
+                                1rem,
+                                darkgray
+                            );
+                            opacity: 0.5;
+                        }
+                    }
+                }
+                .hour-wrapper {
+                    flex: 1;
+                    background-color: #efecff;
+                    margin: 0 0.5rem;
+                    text-align: center;
+                    height: 10rem;
+                    p {
+                        @include font-face(
+                            'NotoSansKR-Medium',
+                            1.8rem,
+                            1rem,
+                            black
+                        );
+                    }
+                    .hour-scroll {
+                        overflow: scroll;
+                        height: 5rem;
+                        .active-hour {
+                            @include font-face(
+                                'NotoSansKR-Medium',
+                                1.8rem,
+                                0.3rem,
+                                black
+                            );
+                        }
+                        .non-active-hour {
+                            @include font-face(
+                                'NotoSansKR-Medium',
+                                1.5rem,
+                                1rem,
+                                darkgray
+                            );
+                            opacity: 0.5;
+                        }
+                    }
+                }
+                .minute-wrapper {
+                    flex: 1;
+                    background-color: #efecff;
+                    margin-left: 0.5rem;
+                    text-align: center;
+                    height: 10rem;
+                    p {
+                        @include font-face(
+                            'NotoSansKR-Medium',
+                            1.8rem,
+                            1rem,
+                            black
+                        );
+                    }
+                    .minute-scroll {
+                        overflow: scroll;
+                        height: 5rem;
+                        .active-minute {
+                            @include font-face(
+                                'NotoSansKR-Medium',
+                                1.8rem,
+                                0.3rem,
+                                black
+                            );
+                        }
+                        .non-active-minute {
+                            @include font-face(
+                                'NotoSansKR-Medium',
+                                1.5rem,
+                                1rem,
+                                darkgray
+                            );
+                            opacity: 0.5;
+                        }
+                    }
+                }
+            }
+            .headcount-wrapper {
+                margin-top: 2rem;
+                display: flex;
+                justify-content: space-between;
+                div {
+                    flex: 1;
+                    text-align: center;
+                    border-radius: 1rem;
+                    background-color: #efecff;
+                    padding: 2rem;
+                }
+                .active-headcount {
+                    @include font-face(
+                        'NotoSansKR-Medium',
+                        2rem,
+                        0,
+                        #000000 !important
+                    );
+                }
+                .non-active-headcount {
+                    @include font-face(
+                        'NotoSansKR-Medium',
+                        1.8rem,
+                        0rem,
+                        darkgray
+                    );
+                    opacity: 0.5;
+                }
+                div:nth-child(1) {
+                    margin-right: 0.5rem;
+                }
+                div:nth-child(2) {
+                    margin: 0 0.5rem;
+                }
+                div:nth-child(3) {
+                    margin-left: 0.5rem;
+                }
+            }
+        }
+        .create {
+            margin-top: 3rem;
+            width: 100%;
+            background-color: #7b88f2;
+            color: white;
+            font-family: 'NotoSansKR-Medium';
+            font-size: 2rem;
+            padding: 1rem;
+            border-radius: 1rem;
+        }
+    }
+}
