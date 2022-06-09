@@ -12,6 +12,9 @@ Authorization: {{authorizationToken}}
 Content-Type: application/json;charset=UTF-8
 
 {
-  "content": "수정!"
+  "content": "수정!!!"
 }
 
+###
+DELETE {{apiUrl}}/post/reply/2
+Authorization: {{authorizationToken}}

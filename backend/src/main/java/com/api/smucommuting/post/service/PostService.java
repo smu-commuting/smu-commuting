@@ -32,7 +32,7 @@ public class PostService {
     }
 
     public PostResponse.OnlyId update(Long postId, PostRequest.Update request, MultipartFile image, User loginUser) {
-        Post post = postRepository.findByPostIdWithImageAndWriter(postId).orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findByPostIdWithImage(postId).orElseThrow(PostNotFoundException::new);
         post.update(request.toEntity(), post, postValidator, loginUser);
         postFileService.update(request.getImageChanged(), post, image);
         return null;
@@ -53,7 +53,7 @@ public class PostService {
     }
 
     public void deleteOne(Long postId, User loginUser) {
-        Post post = postRepository.findByPostIdWithImageAndWriter(postId).orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findByPostIdWithImage(postId).orElseThrow(PostNotFoundException::new);
         post.delete(postValidator, loginUser);
         postFileService.delete(post);
         postRepository.delete(post);

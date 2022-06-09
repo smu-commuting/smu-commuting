@@ -36,4 +36,10 @@ public class PostReplyService {
         PostReply reply = postReplyRepository.findById(replyId).orElseThrow(PostReplyNotFoundException::new);
         reply.update(request.toEntity(), reply, postReplyValidator, loginUser);
     }
+
+    public void delete(Long replyId, User loginUser) {
+        PostReply reply = postReplyRepository.findById(replyId).orElseThrow(PostReplyNotFoundException::new);
+        reply.delete(reply,postReplyValidator,loginUser);
+        postReplyRepository.delete(reply);
+    }
 }

@@ -38,6 +38,10 @@ public class PostReply extends BaseTimeEntity {
         this.content = updatedReply.getContent();
     }
 
+    public void delete(PostReply reply, PostReplyValidator postReplyValidator, User loginUser) {
+        postReplyValidator.deleteValidate(reply, loginUser);
+    }
+
     public static PostReply create(PostReply postReply, Post post, User loginUser) {
         PostReply reply = PostReply.builder()
                 .writer(loginUser)

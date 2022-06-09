@@ -110,3 +110,17 @@ include::{snippets}/post_reply_update/request-fields.adoc[]
 
 include::{snippets}/post_reply_update/http-response.adoc[]
 include::{snippets}/post_reply_update/response-fields.adoc[]
+
+=== 댓글 삭제
+
+`DELETE /api/post/reply/{replyId}`
+
+요청 HTTP
+
+include::{snippets}/post_reply_deleteOne/path-parameters.adoc[]
+include::{snippets}/post_reply_deleteOne/http-request.adoc[]
+
+성공 응답 HTTP
+
+include::{snippets}/post_reply_deleteOne/http-response.adoc[]
+include::{snippets}/post_reply_deleteOne/response-fields.adoc[]

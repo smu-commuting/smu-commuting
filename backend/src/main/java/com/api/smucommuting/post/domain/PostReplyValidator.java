@@ -15,7 +15,7 @@ public class PostReplyValidator {
     }
 
     private void isMineValidate(PostReply reply, User loginUser) {
-        if (!reply.getWriter().equals(loginUser)) {
+        if (!reply.getWriter().getId().equals(loginUser.getId())) {
             throw new PermissionException();
         }
     }

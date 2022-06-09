@@ -35,4 +35,11 @@ public class PostReplyController {
         postReplyService.update(replyId, request, customUserDetails.getUser());
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
     }
+
+    @DeleteMapping("/post/reply/{replyId}")
+    public ResponseEntity<ApiResult<Void>> deleteOne(@PathVariable Long replyId,
+                                                     @CurrentUser CustomUserDetails customUserDetails) {
+        postReplyService.delete(replyId, customUserDetails.getUser());
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
+    }
 }
