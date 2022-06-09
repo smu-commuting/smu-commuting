@@ -27,6 +27,9 @@ import {
     TAXI_PARTY_LIST_RESTART_REQUEST,
     TAXI_PARTY_LIST_RESTART_SUCCESS,
     TAXI_PARTY_LIST_RESTART_FAILURE,
+    TAXI_TO_CHAT_INFO_MODAL_REQUEST,
+    TAXI_TO_CHAT_INFO_MODAL_SUCCESS,
+    TAXI_TO_CHAT_INFO_MODAL_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -58,6 +61,10 @@ export const initialState = {
     createTaxiPartyLoading: false,
     createTaxiPartyDone: false,
     createTaxiPartyError: null,
+    // 채팅방 입장 알림 모달창
+    isEnterChattingRoomModalOpen: false,
+    // 알림 모달창에 뜨게 될 정보들
+    chattingRoomInfo: null,
 };
 
 export const getMyTaxiParties = () => {
@@ -109,6 +116,13 @@ export const taxiPartyCreate = data => {
 export const taxiPartyListRestart = () => {
     return {
         type: TAXI_PARTY_LIST_RESTART_REQUEST,
+    };
+};
+
+export const taxiToChatModal = data => {
+    return {
+        type: TAXI_TO_CHAT_INFO_MODAL_REQUEST,
+        data,
     };
 };
 
@@ -198,6 +212,17 @@ const reducer = (state = initialState, action) => {
                 draft.taxiPartyEnd = false;
                 break;
             case TAXI_PARTY_LIST_RESTART_FAILURE:
+                break;
+
+            case TAXI_TO_CHAT_INFO_MODAL_REQUEST:
+                break;
+            case TAXI_TO_CHAT_INFO_MODAL_SUCCESS:
+                draft.isEnterChattingRoomModalOpen =
+                    !draft.isEnterChattingRoomModalOpen;
+                console.log('saga 이후 reducer', action.data);
+                draft.chattingRoomInfo = action.data;
+                break;
+            case TAXI_TO_CHAT_INFO_MODAL_FAILURE:
                 break;
             case TAXI_ROOM_DELETE_REQUEST:
                 draft.deleteTaxiPartyLoading = true;

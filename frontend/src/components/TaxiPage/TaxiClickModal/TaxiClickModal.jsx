@@ -48,7 +48,7 @@ function TaxiClickModal() {
             return;
         }
         navigate(`/taxi/${placeId}/${when}/${placeName}`);
-        dispatch(taxiPageInfo({ when, placeId }));
+        dispatch(taxiPageInfo({ when, placeId, placeName }));
         dispatch(taxiModalClick());
     });
 
