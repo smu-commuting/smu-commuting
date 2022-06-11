@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Arrow from '../../assets/MyPage/arrow.png';
+import add from '../../assets/InquiryPage/add.png';
 import './InquiryPage.scss';
 
 function InquiryPage() {
@@ -8,6 +9,10 @@ function InquiryPage() {
 
     const myPage = () => {
         navigate(`/mypage`);
+    };
+
+    const inquiryWrite = () => {
+        navigate(`/inquirywrite`);
     };
 
     return (
@@ -35,6 +40,13 @@ function InquiryPage() {
                 <p className="title">제목</p>
                 <p className="reply">답변여부</p>
             </div>
+            <img
+                className="add"
+                src={add}
+                alt="add"
+                onClick={inquiryWrite}
+                aria-hidden
+            />
         </div>
     );
 }

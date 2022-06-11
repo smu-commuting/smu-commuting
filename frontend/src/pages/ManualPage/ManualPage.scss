@@ -1,39 +1,43 @@
 @import '../../styles/utils.scss';
 
 .manualpage-wrapper {
-    display: flex;
-    flex-direction: column;
     .manualpage-header {
         display: flex;
         flex-direction: row;
         padding-top: 1rem;
+        align-items: center;
+        text-align: center;
+        justify-content: space-around;
         p {
-            padding-left: 11rem;
-            text-align: center;
+            flex: 1;
             font-weight: bold;
-            @include font-face(NotoSansKR-Regular, 2rem, 2.5rem, #292733);
+            @include font-face(NotoSansKR-Regular, 2.5rem, 2.5rem, #292733);
         }
         img {
-            padding-left: 8rem;
-            padding-top: 2rem;
-            display: block;
+            padding-right: 3rem;
             width: 2.3rem;
             height: 2.3em;
         }
     }
     .manualpage-content {
+        display: flex;
+        flex-direction: column;
         .main-info {
             text-align: center;
             font-weight: bold;
-            @include font-face(NotoSansKR-Regular, 1.3rem, 2.5rem, #292733);
+            @include font-face(NotoSansKR-Regular, 1.8rem, 2.5rem, #292733);
         }
         .function-info {
+            h4 {
+                font-weight: bold;
+                @include font-face(NotoSansKR-Regular, 1.5rem, 2.5rem, #292733);
+            }
             h3 {
                 padding-left: 2rem;
                 padding-top: 2rem;
                 text-align: left;
                 font-weight: bold;
-                @include font-face(NotoSansKR-Regular, 1.2rem, 2.5rem, #292733);
+                @include font-face(NotoSansKR-Regular, 1.7rem, 2.5rem, #292733);
             }
             .community-header {
                 padding-top: 0.5rem;
@@ -42,17 +46,13 @@
                 padding-left: 2rem;
                 padding-right: 2rem;
                 text-align: left;
-                @include font-face(NotoSansKR-Regular, 1.1rem, 2.5rem, #292733);
+                @include font-face(NotoSansKR-Regular, 1.3rem, 2.5rem, #292733);
             }
             .taxi-info {
                 padding-left: 2rem;
                 padding-right: 2rem;
                 text-align: left;
-                @include font-face(NotoSansKR-Regular, 1.1rem, 2.5rem, #292733);
-                h4 {
-                    font-weight: bold;
-                    @include font-face(NotoSansKR-Regular, 1.1rem, 2.5rem, #292733);
-                }
+                @include font-face(NotoSansKR-Regular, 1.3rem, 2.5rem, #292733);
                 p {
                     padding-bottom: 1.5rem;
                 }
@@ -61,7 +61,7 @@
                 padding-left: 2rem;
                 padding-right: 2rem;
                 text-align: left;
-                @include font-face(NotoSansKR-Regular, 1.1rem, 2.5rem, #292733);
+                @include font-face(NotoSansKR-Regular, 1.3rem, 2.5rem, #292733);
             }
         }
     }

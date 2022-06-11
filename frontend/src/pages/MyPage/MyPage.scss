@@ -6,15 +6,16 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: space-around;
         .img {
-            padding: 0.813rem;
             display: block;
             width: 1.938rem;
             height: 1.938rem;
+            flex: 1;
         }
         .setting {
-            padding: 0 0 0 9rem;
-            align-items: center;
+            text-align: center;
+            flex: 1;
             div {
                 text-align: center;
                 font-weight: bold;
@@ -30,14 +31,18 @@
             display: flex;
             flex-direction: row;
             padding: 1rem;
+            align-items: center;
+            justify-content: space-around;
             .sumung {
+                flex: 1;
                 display: inline;
                 width: 5.494rem;
                 height: 5.438rem;
+                align-items: center;
             }
-            div {
-                padding: 2rem 0 2rem 1rem;
-                text-align: left;
+            .student-info {
+                flex: 1;
+                text-align: center;
                 font-weight: bold;
                 @include font-face(NotoSansKR-Regular, 1.5rem, 2.5rem, #292733);
             }
@@ -45,8 +50,9 @@
         .notification-setting {
             display: flex;
             flex-direction: row;
-            padding-left: 4rem;
+            padding-left: 3rem;
             text-align: left;
+            justify-content: space-around;
             @include font-face(NotoSansKR-Regular, 1.5rem, 2.5rem, #292733);
             border-bottom: 0.063rem solid #a19fad;
             p{
@@ -54,6 +60,7 @@
                 margin-top: 0.5rem;
             }
             .toggleSwitch {
+                padding-right: 3rem;
                 .label {
                     .checkbox {
                         height: 0;

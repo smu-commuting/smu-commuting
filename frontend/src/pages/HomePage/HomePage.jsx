@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import './HomePage.scss';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Bus from '../../assets/HomePage/버스-2.png';
 import Taxi from '../../assets/HomePage/택시-2.png';
 import Community from '../../assets/HomePage/커뮤니티-2.png';
@@ -8,10 +9,15 @@ import Manual from '../../assets/HomePage/매뉴얼-3.png';
 import { busModalClick } from '../../modules/reducers/user';
 
 function HomePage() {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const onBusClick = useCallback(() => {
         dispatch(busModalClick());
     }, [dispatch]);
+    const onManualClick = () => {
+        navigate(`/manual`);
+    };
+
     return (
         <div className="homepage-inner-wrapper">
             <div className="homepage-top-line">
@@ -32,7 +38,12 @@ function HomePage() {
                     <img src={Community} alt="커뮤니티" />
                 </div>
                 <div>
-                    <img src={Manual} alt="매뉴얼" />
+                    <img
+                        src={Manual}
+                        alt="매뉴얼"
+                        onClick={onManualClick}
+                        aria-hidden="true"
+                    />
                 </div>
             </div>
         </div>

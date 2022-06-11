@@ -1,8 +1,8 @@
 @import '../../styles/utils.scss';
 
-.inquirypage-wrapper {
+.lostitempage-wrapper {
     padding: 4.6rem 3.1rem;
-    .inquirypage-header {
+    .lostitempage-header {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -20,7 +20,7 @@
             @include font-face(NotoSansKR-Regular, 2.5rem, 2.5rem, #292733);
         }
     }
-    .inquirypage-search {
+    .lostitempage-search {
         padding-top: 2rem;
         display: flex;
         flex-direction: row;
@@ -45,28 +45,34 @@
             @include font-face(NotoSansKR-Regular, 0.5rem, 2.5rem, #ffffff);
         }
     }
-    .inquirypage-content {
+    .lostitempage-content {
         display: flex;
         flex-direction: row;
         border-bottom: 0.063rem solid #A19FAD;
         justify-content: space-around;
+        .picture {
+            flex: 1;
+            text-align: center;
+        }
         .date {
             flex: 1;
-            padding: 1rem;
-            padding-top: 2rem;
-            padding-bottom: 0rem;
+            text-align: center;
+            //padding: 1rem;
+            //padding-bottom: 0rem;
         }
-        .title {
+        .item {
             flex: 1;
-            padding-top: 2rem;
-            padding-left: 6rem;
-            padding-right: 6rem;
+            text-align: center;
+            //padding: 1rem;
+            //padding-bottom: 0rem;
+            //padding-left: 6rem;
+            //padding-right: 6rem;
         }
-        .reply {
+        .place {
             flex: 1;
-            padding: 1rem;
-            padding-top: 2rem;
-            padding-bottom: 0rem;
+            text-align: center;
+            //padding: 1rem;
+            //padding-bottom: 0rem;
         }
     }
     .add{

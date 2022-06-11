@@ -20,6 +20,9 @@ import ManualPage from './ManualPage/ManualPage';
 import InquiryDetailPage from './InquiryDetailPage/InquiryDetailPage';
 import InquiryWritePage from './inquiryWritePage/inquiryWritePage';
 import ChattingPage from './ChattingPage/ChattingPage';
+import LostItemPage from './lostItemPage/lostItemPage';
+import LostItemDetailPage from './lostItemDetailPage/lostItemDetailPage';
+import LostItemWritePage from './lostItemWritePage/lostItemWritePage';
 
 function App() {
     const { isBusModalOpen } = useSelector(state => state.user);
@@ -71,6 +74,12 @@ function App() {
                 <Route path="/inquirydetail" element={<InquiryDetailPage />} />
                 <Route path="/inquirywrite" element={<InquiryWritePage />} />
                 <Route path="/chatroom/:id" element={<ChattingPage />} />
+                <Route path="/lostitem" element={<LostItemPage />} />
+                <Route
+                    path="/lostitemdetail"
+                    element={<LostItemDetailPage />}
+                />
+                <Route path="/lostitemwrite" element={<LostItemWritePage />} />
             </Routes>
         </Router>
     );

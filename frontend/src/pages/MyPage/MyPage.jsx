@@ -4,13 +4,12 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Profile from '../../assets/MyPage/수뭉이프로필.svg';
 import Arrow from '../../assets/MyPage/arrow.png';
-// import { loginRequest } from '../../modules/reducers/user';
 import './MyPage.scss';
 
 function MyPage() {
     const navigate = useNavigate();
     // const [value, setValue] = useState(false);
-    const { loginDone } = useSelector(state => state.user);
+    const { me } = useSelector(state => state.user);
 
     const onChangeText = e => {
         if (e.target.checked === false) {
@@ -59,8 +58,8 @@ function MyPage() {
             <div className="mypage-content">
                 <div className="std-profile">
                     <img clsssName="sumung" src={Profile} alt="프로필사진" />
-                    <div>
-                        {loginDone.studentId}
+                    <div className="student-info">
+                        {me.studentId}
                         <br /> 상명대학교 서울캠퍼스
                     </div>
                 </div>
