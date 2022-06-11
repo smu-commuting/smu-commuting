@@ -9,23 +9,31 @@ import './TaxiToChatModal.scss';
 
 function TaxiToChatModal() {
     const dispatch = useDispatch();
-    const { chattingRoomInfo } = useSelector(state => state.taxi);
-    useEffect(() => {
-        // 시간 파싱
-    }, []);
+    const {
+        chattingRoomInfo,
+        isTaxiPartyEnterLoading,
+        isTaxiPartyEnterDone,
+        showErrorModal,
+    } = useSelector(state => state.taxi);
     const onCancelClick = useCallback(() => {
         dispatch(taxiToChatModal());
     }, [dispatch]);
     const onAgreeClick = useCallback(() => {
-        console.log(chattingRoomInfo.taxiPartyId);
         dispatch(taxiPartyEnter(chattingRoomInfo.taxiPartyId));
     }, [dispatch]);
+    useEffect(() => {
+        if (showErrorModal) {
+            dispatch(taxiToChatModal());
+            dispatch(showErrorModal());
+        }
+    }, [showErrorModal]);
     return (
         <div className="taxitochatmodal-wrapper">
             <div className="taxitochatmodal">
                 <p>
-                    {chattingRoomInfo.placeName}에서&nbsp;
-                    {chattingRoomInfo.time}에 탑승하는 <br />
+                    {chattingRoomInfo && chattingRoomInfo.placeName}에서&nbsp;
+                    {chattingRoomInfo && chattingRoomInfo.time}에 탑승하는{' '}
+                    <br />
                     모임에 입장하시겠습니까?
                 </p>
                 <div className="button-wrapper">

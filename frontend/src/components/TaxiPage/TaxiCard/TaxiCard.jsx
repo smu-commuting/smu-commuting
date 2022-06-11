@@ -18,6 +18,7 @@ function TaxiCard({ taxiPartyId, headcount, maximum, time }) {
             setCard('taxicard-not-end-wrapper');
         }
     }, []);
+
     const onCardClick = () => {
         const data = {
             placeName: taxiPageInfo.placeName,

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { all, fork, put, takeLatest, call } from 'redux-saga/effects';
 
 import {
@@ -31,6 +32,9 @@ import {
     TAXI_PARTY_ENTER_REQUEST,
     TAXI_PARTY_ENTER_SUCCESS,
     TAXI_PARTY_ENTER_FAILURE,
+    TAXI_ERROR_MODAL_CLICK_REQUEST,
+    TAXI_ERROR_MODAL_CLICK_SUCCESS,
+    TAXI_ERROR_MODAL_CLICK_FAILRURE,
 } from '../../constants';
 import {
     getMyTaxiPartiesApi,
@@ -188,7 +192,20 @@ function* taxiPartyEnter(action) {
         console.log('saga', err);
         yield put({
             type: TAXI_PARTY_ENTER_FAILURE,
-            error: err.response.data.error.info,
+            error: err.response.data.error.info, // 모달에 띄워질 문구
+        });
+    }
+}
+
+function* errorModalClose() {
+    try {
+        yield put({
+            type: TAXI_ERROR_MODAL_CLICK_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: TAXI_ERROR_MODAL_CLICK_FAILRURE,
+            error: err,
         });
     }
 }
@@ -233,6 +250,10 @@ function* watchTaxiToChatModal() {
     yield takeLatest(TAXI_TO_CHAT_INFO_MODAL_REQUEST, taxiToChatModal);
 }
 
+function* watchErrorModalClose() {
+    yield takeLatest(TAXI_ERROR_MODAL_CLICK_REQUEST, errorModalClose);
+}
+
 export default function* taxiSaga() {
     yield all([
         fork(watchTaxiPartiesList),
@@ -245,5 +266,6 @@ export default function* taxiSaga() {
         fork(watchTaxiPartyRestart),
         fork(watchTaxiToChatModal),
         fork(watchTaxiPartyEnter),
+        fork(watchErrorModalClose),
     ]);
 }

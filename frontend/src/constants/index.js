@@ -55,6 +55,9 @@ export {
     TAXI_PARTY_ENTER_REQUEST,
     TAXI_PARTY_ENTER_SUCCESS,
     TAXI_PARTY_ENTER_FAILURE,
+    TAXI_ERROR_MODAL_CLICK_REQUEST,
+    TAXI_ERROR_MODAL_CLICK_SUCCESS,
+    TAXI_ERROR_MODAL_CLICK_FAILRURE,
 } from './actions';
 
 export { default as prevent } from './prevent';

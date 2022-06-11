@@ -1,3 +1,4 @@
+/* eslint-disable no-duplicate-case */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-param-reassign */
 /* eslint-disable default-param-last */
@@ -33,6 +34,9 @@ import {
     TAXI_PARTY_ENTER_REQUEST,
     TAXI_PARTY_ENTER_SUCCESS,
     TAXI_PARTY_ENTER_FAILURE,
+    TAXI_ERROR_MODAL_CLICK_REQUEST,
+    TAXI_ERROR_MODAL_CLICK_SUCCESS,
+    TAXI_ERROR_MODAL_CLICK_FAILRURE,
 } from '../../constants';
 
 export const initialState = {
@@ -72,6 +76,8 @@ export const initialState = {
     isEnterChattingRoomModalOpen: false,
     // 알림 모달창에 뜨게 될 정보들
     chattingRoomInfo: null,
+    // 에러창 뜨게할까요
+    showErrorModal: false,
 };
 
 export const getMyTaxiParties = () => {
@@ -137,6 +143,12 @@ export const taxiPartyEnter = id => {
     return {
         type: TAXI_PARTY_ENTER_REQUEST,
         id,
+    };
+};
+
+export const taxiErrorModalClose = () => {
+    return {
+        type: TAXI_ERROR_MODAL_CLICK_REQUEST,
     };
 };
 
@@ -233,8 +245,18 @@ const reducer = (state = initialState, action) => {
                 break;
             case TAXI_PARTY_ENTER_FAILURE:
                 draft.isTaxiPartyEnterLoading = false;
+                draft.isTaxiPartyEnterDone = false;
                 draft.isTaxiPartyEnterError = action.error;
-                console.log(action.error);
+                draft.isEnterChattingRoomModalOpen = false;
+                draft.showErrorModal = true;
+                break;
+
+            case TAXI_ERROR_MODAL_CLICK_REQUEST:
+                break;
+            case TAXI_ERROR_MODAL_CLICK_SUCCESS:
+                draft.showErrorModal = !draft.showErrorModal;
+                break;
+            case TAXI_ERROR_MODAL_CLICK_FAILRURE:
                 break;
             case TAXI_PARTY_LIST_RESTART_REQUEST:
                 break;
@@ -251,8 +273,15 @@ const reducer = (state = initialState, action) => {
                     !draft.isEnterChattingRoomModalOpen;
                 console.log('saga 이후 reducer', action.data);
                 draft.chattingRoomInfo = action.data;
+                draft.showErrorModal = false;
                 break;
             case TAXI_TO_CHAT_INFO_MODAL_FAILURE:
+                break;
+            case TAXI_ERROR_MODAL_CLICK_REQUEST:
+                break;
+            case TAXI_ERROR_MODAL_CLICK_SUCCESS:
+                break;
+            case TAXI_ERROR_MODAL_CLICK_FAILRURE:
                 break;
             case TAXI_ROOM_DELETE_REQUEST:
                 draft.deleteTaxiPartyLoading = true;
