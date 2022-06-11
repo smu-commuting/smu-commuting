@@ -52,6 +52,9 @@ export {
     TAXI_TO_CHAT_INFO_MODAL_REQUEST,
     TAXI_TO_CHAT_INFO_MODAL_SUCCESS,
     TAXI_TO_CHAT_INFO_MODAL_FAILURE,
+    TAXI_PARTY_ENTER_REQUEST,
+    TAXI_PARTY_ENTER_SUCCESS,
+    TAXI_PARTY_ENTER_FAILURE,
 } from './actions';
 
 export { default as prevent } from './prevent';

@@ -28,6 +28,9 @@ import {
     TAXI_TO_CHAT_INFO_MODAL_REQUEST,
     TAXI_TO_CHAT_INFO_MODAL_SUCCESS,
     TAXI_TO_CHAT_INFO_MODAL_FAILURE,
+    TAXI_PARTY_ENTER_REQUEST,
+    TAXI_PARTY_ENTER_SUCCESS,
+    TAXI_PARTY_ENTER_FAILURE,
 } from '../../constants';
 import {
     getMyTaxiPartiesApi,
@@ -36,6 +39,7 @@ import {
     getTaxiPartyListApi,
     createTaxiPartyApi,
 } from '../../utils';
+import { taxiPartyEnterApi } from '../../utils/taxiApi';
 
 function* getTaxiParties() {
     const result = yield call(getMyTaxiPartiesApi);
@@ -129,7 +133,7 @@ function* taxiPageDate(action) {
 }
 
 function* createTaxiParty(action) {
-    const result = yield call(createTaxiPartyApi, action.data);
+    const result = yield call(createTaxiPartyApi, action.id);
     console.log('saga 결과', result);
     try {
         yield put({
@@ -170,6 +174,27 @@ function* taxiToChatModal(action) {
             error: err,
         });
     }
+}
+
+function* taxiPartyEnter(action) {
+    console.log('saga 요청 이전 action', action);
+    try {
+        const result = yield call(taxiPartyEnterApi, action.id);
+        yield put({
+            type: TAXI_PARTY_ENTER_SUCCESS,
+            data: result.data,
+        });
+    } catch (err) {
+        console.log('saga', err);
+        yield put({
+            type: TAXI_PARTY_ENTER_FAILURE,
+            error: err.response.data.error.info,
+        });
+    }
+}
+
+function* watchTaxiPartyEnter() {
+    yield takeLatest(TAXI_PARTY_ENTER_REQUEST, taxiPartyEnter);
 }
 
 function* watchTaxiPartyRestart() {
@@ -219,5 +244,6 @@ export default function* taxiSaga() {
         fork(watchCreateTaxiParty),
         fork(watchTaxiPartyRestart),
         fork(watchTaxiToChatModal),
+        fork(watchTaxiPartyEnter),
     ]);
 }

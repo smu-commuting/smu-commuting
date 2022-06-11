@@ -1,6 +1,10 @@
+/* eslint-disable no-unused-vars */
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { taxiToChatModal } from '../../../modules/reducers/taxi';
+import {
+    taxiPartyEnter,
+    taxiToChatModal,
+} from '../../../modules/reducers/taxi';
 import './TaxiToChatModal.scss';
 
 function TaxiToChatModal() {
@@ -13,7 +17,8 @@ function TaxiToChatModal() {
         dispatch(taxiToChatModal());
     }, [dispatch]);
     const onAgreeClick = useCallback(() => {
-        // dispatch(moveToChatRoom());
+        console.log(chattingRoomInfo.taxiPartyId);
+        dispatch(taxiPartyEnter(chattingRoomInfo.taxiPartyId));
     }, [dispatch]);
     return (
         <div className="taxitochatmodal-wrapper">

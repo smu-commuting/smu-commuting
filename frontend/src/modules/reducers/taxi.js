@@ -30,6 +30,9 @@ import {
     TAXI_TO_CHAT_INFO_MODAL_REQUEST,
     TAXI_TO_CHAT_INFO_MODAL_SUCCESS,
     TAXI_TO_CHAT_INFO_MODAL_FAILURE,
+    TAXI_PARTY_ENTER_REQUEST,
+    TAXI_PARTY_ENTER_SUCCESS,
+    TAXI_PARTY_ENTER_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -49,6 +52,10 @@ export const initialState = {
     taxiPartyListDone: false,
     taxiPartyListError: null,
     taxiPartyEnd: false,
+    // 택시 파티 참여
+    isTaxiPartyEnterLoading: false,
+    isTaxiPartyEnterDone: false,
+    isTaxiPartyEnterError: null,
     // 현재 조회중인 택시 페이지의 날짜
     taxiPageInfo: null,
     // 택시 생성 모달창 오픈
@@ -123,6 +130,13 @@ export const taxiToChatModal = data => {
     return {
         type: TAXI_TO_CHAT_INFO_MODAL_REQUEST,
         data,
+    };
+};
+
+export const taxiPartyEnter = id => {
+    return {
+        type: TAXI_PARTY_ENTER_REQUEST,
+        id,
     };
 };
 
@@ -205,6 +219,22 @@ const reducer = (state = initialState, action) => {
             case TAXI_PARTY_CREATE_FAILURE:
                 draft.createTaxiPartyLoading = false;
                 draft.createTaxiPartyError = action.err;
+                break;
+            case TAXI_PARTY_ENTER_REQUEST:
+                draft.isTaxiPartyEnterLoading = true;
+                draft.isTaxiPartyEnterDone = false;
+                draft.isTaxiPartyEnterError = null;
+                break;
+            case TAXI_PARTY_ENTER_SUCCESS:
+                console.log(action.data);
+                draft.isTaxiPartyEnterLoading = false;
+                draft.isTaxiPartyEnterDone = true;
+                draft.isTaxiPartyEnterError = null;
+                break;
+            case TAXI_PARTY_ENTER_FAILURE:
+                draft.isTaxiPartyEnterLoading = false;
+                draft.isTaxiPartyEnterError = action.error;
+                console.log(action.error);
                 break;
             case TAXI_PARTY_LIST_RESTART_REQUEST:
                 break;
