@@ -8,8 +8,8 @@ db_volume
 /src/main/resources/application-aws.yml
 /src/main/resources/application-oauth.yml
 /src/main/resources/application-mail.yml
-/src/main/generated
-
+/src/main/resources/firebase/**
+/src/main
 ### STS ###
 .apt_generated
 .classpath
