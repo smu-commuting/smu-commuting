@@ -36,13 +36,23 @@ const lostItemDetailPage = () => {
                         <p className="item">#(물품이름)</p>
                         <p className="place">#(습득장소)</p>
                     </div>
-                    <p className="content">(내용) </p>
+                    <p className="content">(게시글 내용) </p>
                     <p className="picture">(사진)</p>
                 </div>
                 <div className="comment">
-                    <p className="number">2019*****</p>
-                    <p className="content">(내용) </p>
-                    <p className="write-date">2022.06.11.23:55:02</p>
+                    <div className="comment-header">
+                        <p className="number">2019*****</p>
+                        <img
+                            className="menu"
+                            src={Menu}
+                            alt="메뉴"
+                            aria-hidden="true"
+                        />
+                    </div>
+                    <div className="comment-content">
+                        <p className="content">(댓글 내용)</p>
+                        <p className="write-date">2022.06.11.23:55:02</p>
+                    </div>
                 </div>
             </div>
             <div className="lostitemwritepage-bottom">

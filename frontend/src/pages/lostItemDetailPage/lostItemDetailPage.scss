@@ -28,6 +28,7 @@
         flex-direction: column;
         .lostitem-content {
             .header {
+                flex: 1;
                 margin-top: 2rem;
                 display: flex;
                 flex-direction: row;
@@ -47,11 +48,13 @@
                 }
             }
             .content {
+                flex: 1;
                 margin-bottom: 6rem;
                 text-align: left;
                 @include font-face(NotoSansKR-Regular, 1.7rem, 2.5rem, #292733);
             }
             .picture {
+                flex: 1;
                 padding: 12rem;
                 margin: 0;
                 border: 0.5rem solid #7b88f2;
@@ -63,9 +66,30 @@
         .comment {
             margin-top: 2rem;
             border-top: 0.063rem solid #A19FAD;
-            .wtire-date {
-                text-align: right;
-                @include font-face(NotoSansKR-Regular, 1rem, 2.5rem, #292733);
+            border-bottom: 0.063rem solid #A19FAD;
+            text-align: left;
+            @include font-face(NotoSansKR-Regular, 1rem, 1.0rem, #292733);
+            .comment-header {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                .number {
+                    @include font-face(NotoSansKR-Regular, 1.3rem, 1.0rem, #292733);
+                }
+                .menu {
+                    padding-top: 1rem;
+                    height: 2rem;
+                    align-items: center;
+                    padding-right: 1rem;
+                }
+            }
+            .comment-content {
+                .content {
+                    @include font-face(NotoSansKR-Regular, 1.2rem, 1.0rem, #292733);
+                }
+                .write-date {
+                    text-align: right;
+                }
             }
         }
     }
@@ -74,21 +98,26 @@
         position: fixed;
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
         input {
-            flex: 1;
+            //flex: 1;
             border-top: 0.063rem solid #A19FAD;
         }
         span {
+            padding-top: 0.5rem;
+            margin-right: 1rem;
             text-align: center;
             flex: 1;
+            align-items: center;
+            @include font-face(NotoSansKR-Regular, 1.2rem, 1.0rem, #292733);
         }
         button {
-            flex: 1;
+            //flex: 1;
             padding-left: 2rem;
             padding-right: 2rem;
             background-color: #7b88f2;
             text-align: center;
-            @include font-face(NotoSansKR-Regular, 0.5rem, 2.5rem, #ffffff);
+            @include font-face(NotoSansKR-Regular, 0.2rem, 2.5rem, #ffffff);
         }
     }
 }
