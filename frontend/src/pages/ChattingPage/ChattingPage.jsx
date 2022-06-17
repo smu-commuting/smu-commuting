@@ -39,6 +39,7 @@ function ChattingPage() {
             function (frame) {
                 ws.subscribe(`/sub/chat/room/${id}`, function (msg) {
                     const recv = JSON.parse(msg.body);
+                    console.log(recv);
                     setMessageBottle(() => [...messageBottle, recv]);
                     window.scrollTo(0, document.body.offsetHeight + 20);
                 });
@@ -80,6 +81,7 @@ function ChattingPage() {
             );
             window.scrollTo(0, document.body.offsetHeight);
         }, 100);
+        return () => ws && ws.disconnect();
     }, []);
 
     // 데이터 fetch 되면 메세지 배열 10개 앞에 추가하기

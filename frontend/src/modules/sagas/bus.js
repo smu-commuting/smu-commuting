@@ -28,8 +28,8 @@ function* businfomodal(action) {
 
 function* businfofetch(action) {
     console.log('action', action.data);
-    const result = yield call(busApi, action.data);
     try {
+        const result = yield call(busApi, action.data);
         yield put({
             type: BUS_INFO_FETCH_SUCCESS,
             data:

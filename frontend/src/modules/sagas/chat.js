@@ -8,9 +8,9 @@ import {
 import { getRoomMessage } from '../../utils';
 
 function* chatMessageList(action) {
-    const result = yield call(getRoomMessage, action.data);
-    console.log('채팅 요청 이후 result', result);
     try {
+        const result = yield call(getRoomMessage, action.data);
+        console.log('채팅 요청 이후 result', result);
         yield put({
             type: CHAT_ROOM_MESSAGE_SUCCESS,
             data: result.data,
