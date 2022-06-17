@@ -11,6 +11,7 @@ import alert from '../../assets/TaxiPage/option-alert.png';
 import nolist from '../../assets/TaxiPage/nolist.png';
 import add from '../../assets/TaxiPage/add.png';
 import {
+    getMyTaxiParties,
     getTaxiPartyList,
     taxiCreateModalClick,
     taxiPartyListRestart,
@@ -39,15 +40,26 @@ function TaxiPage() {
     const onCreateClick = useCallback(() => {
         dispatch(taxiCreateModalClick());
     }, [dispatch]);
-
     useEffect(() => {
-        window.scrollTo(0, 0);
+        setPartyList(() => {
+            return [];
+        });
         setPage(() => {
             return 1;
         });
+    }, []);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        setPartyList(() => {
+            return [];
+        });
+        setPage(() => {
+            return 1;
+        });
+        dispatch(getMyTaxiParties()); // 택시 리스트 들어왔을 때, 내가 속해있는 채팅방 리스트 redux 관리
         // console.log('첫페이지', page);
         dispatch(taxiPartyListRestart());
-        setPartyList([]);
         if (isTaxiCreateModalOpen) dispatch(taxiCreateModalClick());
         const temp = date.split('-');
         setMonth(temp[1]);
@@ -88,8 +100,6 @@ function TaxiPage() {
                     setPage(prev => {
                         return prev + 1;
                     });
-                    // console.log(page);
-                    // console.log(page, '요청');
                 }
             }
         }

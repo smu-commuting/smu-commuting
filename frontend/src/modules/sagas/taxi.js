@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { all, fork, put, takeLatest, call } from 'redux-saga/effects';
 
 import {
@@ -25,6 +26,15 @@ import {
     TAXI_PARTY_LIST_RESTART_REQUEST,
     TAXI_PARTY_LIST_RESTART_SUCCESS,
     TAXI_PARTY_LIST_RESTART_FAILURE,
+    TAXI_TO_CHAT_INFO_MODAL_REQUEST,
+    TAXI_TO_CHAT_INFO_MODAL_SUCCESS,
+    TAXI_TO_CHAT_INFO_MODAL_FAILURE,
+    TAXI_PARTY_ENTER_REQUEST,
+    TAXI_PARTY_ENTER_SUCCESS,
+    TAXI_PARTY_ENTER_FAILURE,
+    TAXI_ERROR_MODAL_CLICK_REQUEST,
+    TAXI_ERROR_MODAL_CLICK_SUCCESS,
+    TAXI_ERROR_MODAL_CLICK_FAILRURE,
 } from '../../constants';
 import {
     getMyTaxiPartiesApi,
@@ -33,6 +43,7 @@ import {
     getTaxiPartyListApi,
     createTaxiPartyApi,
 } from '../../utils';
+import { taxiPartyEnterApi } from '../../utils/taxiApi';
 
 function* getTaxiParties() {
     const result = yield call(getMyTaxiPartiesApi);
@@ -126,9 +137,10 @@ function* taxiPageDate(action) {
 }
 
 function* createTaxiParty(action) {
-    const result = yield call(createTaxiPartyApi, action.data);
-    console.log('saga 결과', result);
     try {
+        console.log('saga 진입 이전', action.data);
+        const result = yield call(createTaxiPartyApi, action.data);
+        console.log('saga 결과', result);
         yield put({
             type: TAXI_PARTY_CREATE_SUCCESS,
             data: result.data,
@@ -152,6 +164,55 @@ function* taxiPartyRestart() {
             error: err,
         });
     }
+}
+
+function* taxiToChatModal(action) {
+    console.log('saga', action);
+    try {
+        yield put({
+            type: TAXI_TO_CHAT_INFO_MODAL_SUCCESS,
+            data: action.data,
+        });
+    } catch (err) {
+        yield put({
+            type: TAXI_TO_CHAT_INFO_MODAL_FAILURE,
+            error: err,
+        });
+    }
+}
+
+function* taxiPartyEnter(action) {
+    console.log('saga 요청 이전 action', action);
+    try {
+        const result = yield call(taxiPartyEnterApi, action.id);
+        yield put({
+            type: TAXI_PARTY_ENTER_SUCCESS,
+            data: result.data,
+        });
+    } catch (err) {
+        console.log('saga', err);
+        yield put({
+            type: TAXI_PARTY_ENTER_FAILURE,
+            error: err.response.data.error.info, // 모달에 띄워질 문구
+        });
+    }
+}
+
+function* errorModalClose() {
+    try {
+        yield put({
+            type: TAXI_ERROR_MODAL_CLICK_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: TAXI_ERROR_MODAL_CLICK_FAILRURE,
+            error: err,
+        });
+    }
+}
+
+function* watchTaxiPartyEnter() {
+    yield takeLatest(TAXI_PARTY_ENTER_REQUEST, taxiPartyEnter);
 }
 
 function* watchTaxiPartyRestart() {
@@ -186,6 +247,14 @@ function* watchCreateTaxiParty() {
     yield takeLatest(TAXI_PARTY_CREATE_REQUEST, createTaxiParty);
 }
 
+function* watchTaxiToChatModal() {
+    yield takeLatest(TAXI_TO_CHAT_INFO_MODAL_REQUEST, taxiToChatModal);
+}
+
+function* watchErrorModalClose() {
+    yield takeLatest(TAXI_ERROR_MODAL_CLICK_REQUEST, errorModalClose);
+}
+
 export default function* taxiSaga() {
     yield all([
         fork(watchTaxiPartiesList),
@@ -196,5 +265,8 @@ export default function* taxiSaga() {
         fork(watchTaxiPageDate),
         fork(watchCreateTaxiParty),
         fork(watchTaxiPartyRestart),
+        fork(watchTaxiToChatModal),
+        fork(watchTaxiPartyEnter),
+        fork(watchErrorModalClose),
     ]);
 }

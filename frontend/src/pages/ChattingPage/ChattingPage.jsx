@@ -34,7 +34,6 @@ function ChattingPage() {
     const [prevHeight, setPrevHeight] = useState();
     const [messageBottle, setMessageBottle] = useState([]);
     const [myChat, setMyChat] = useState();
-    // const [liveChat, setLiveChat] = useState([]);
     const myChatChange = e => {
         setMyChat(e.target.value);
     };

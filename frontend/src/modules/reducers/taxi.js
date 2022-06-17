@@ -1,3 +1,4 @@
+/* eslint-disable no-duplicate-case */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-param-reassign */
 /* eslint-disable default-param-last */
@@ -27,6 +28,15 @@ import {
     TAXI_PARTY_LIST_RESTART_REQUEST,
     TAXI_PARTY_LIST_RESTART_SUCCESS,
     TAXI_PARTY_LIST_RESTART_FAILURE,
+    TAXI_TO_CHAT_INFO_MODAL_REQUEST,
+    TAXI_TO_CHAT_INFO_MODAL_SUCCESS,
+    TAXI_TO_CHAT_INFO_MODAL_FAILURE,
+    TAXI_PARTY_ENTER_REQUEST,
+    TAXI_PARTY_ENTER_SUCCESS,
+    TAXI_PARTY_ENTER_FAILURE,
+    TAXI_ERROR_MODAL_CLICK_REQUEST,
+    TAXI_ERROR_MODAL_CLICK_SUCCESS,
+    TAXI_ERROR_MODAL_CLICK_FAILRURE,
 } from '../../constants';
 
 export const initialState = {
@@ -46,6 +56,11 @@ export const initialState = {
     taxiPartyListDone: false,
     taxiPartyListError: null,
     taxiPartyEnd: false,
+    taxiToChatRoom: false,
+    // 택시 파티 참여
+    isTaxiPartyEnterLoading: false,
+    isTaxiPartyEnterDone: false,
+    isTaxiPartyEnterError: null,
     // 현재 조회중인 택시 페이지의 날짜
     taxiPageInfo: null,
     // 택시 생성 모달창 오픈
@@ -58,6 +73,12 @@ export const initialState = {
     createTaxiPartyLoading: false,
     createTaxiPartyDone: false,
     createTaxiPartyError: null,
+    // 채팅방 입장 알림 모달창
+    isEnterChattingRoomModalOpen: false,
+    // 알림 모달창에 뜨게 될 정보들
+    chattingRoomInfo: null,
+    // 에러창 뜨게할까요
+    showErrorModal: false,
 };
 
 export const getMyTaxiParties = () => {
@@ -100,6 +121,7 @@ export const taxiCreateModalClick = () => {
 };
 
 export const taxiPartyCreate = data => {
+    console.log('액션함수 진입', data);
     return {
         type: TAXI_PARTY_CREATE_REQUEST,
         data,
@@ -109,6 +131,26 @@ export const taxiPartyCreate = data => {
 export const taxiPartyListRestart = () => {
     return {
         type: TAXI_PARTY_LIST_RESTART_REQUEST,
+    };
+};
+
+export const taxiToChatModal = data => {
+    return {
+        type: TAXI_TO_CHAT_INFO_MODAL_REQUEST,
+        data,
+    };
+};
+
+export const taxiPartyEnter = id => {
+    return {
+        type: TAXI_PARTY_ENTER_REQUEST,
+        id,
+    };
+};
+
+export const taxiErrorModalClose = () => {
+    return {
+        type: TAXI_ERROR_MODAL_CLICK_REQUEST,
     };
 };
 
@@ -190,7 +232,36 @@ const reducer = (state = initialState, action) => {
                 break;
             case TAXI_PARTY_CREATE_FAILURE:
                 draft.createTaxiPartyLoading = false;
-                draft.createTaxiPartyError = action.err;
+                draft.createTaxiPartyError = action.error;
+                break;
+            case TAXI_PARTY_ENTER_REQUEST:
+                draft.isTaxiPartyEnterLoading = true;
+                draft.isTaxiPartyEnterDone = false;
+                draft.isTaxiPartyEnterError = null;
+                draft.taxiToChatRoom = false;
+                break;
+            case TAXI_PARTY_ENTER_SUCCESS:
+                console.log(action.data);
+                draft.isTaxiPartyEnterLoading = false;
+                draft.isTaxiPartyEnterDone = true;
+                draft.isTaxiPartyEnterError = null;
+                draft.isEnterChattingRoomModalOpen = false;
+                draft.taxiToChatRoom = true;
+                break;
+            case TAXI_PARTY_ENTER_FAILURE:
+                draft.isTaxiPartyEnterLoading = false;
+                draft.isTaxiPartyEnterDone = false;
+                draft.isTaxiPartyEnterError = action.error;
+                draft.isEnterChattingRoomModalOpen = false;
+                draft.showErrorModal = true;
+                break;
+
+            case TAXI_ERROR_MODAL_CLICK_REQUEST:
+                break;
+            case TAXI_ERROR_MODAL_CLICK_SUCCESS:
+                draft.showErrorModal = !draft.showErrorModal;
+                break;
+            case TAXI_ERROR_MODAL_CLICK_FAILRURE:
                 break;
             case TAXI_PARTY_LIST_RESTART_REQUEST:
                 break;
@@ -198,6 +269,24 @@ const reducer = (state = initialState, action) => {
                 draft.taxiPartyEnd = false;
                 break;
             case TAXI_PARTY_LIST_RESTART_FAILURE:
+                break;
+
+            case TAXI_TO_CHAT_INFO_MODAL_REQUEST:
+                break;
+            case TAXI_TO_CHAT_INFO_MODAL_SUCCESS:
+                draft.isEnterChattingRoomModalOpen =
+                    !draft.isEnterChattingRoomModalOpen;
+                console.log('saga 이후 reducer', action.data);
+                draft.chattingRoomInfo = action.data;
+                // draft.showErrorModal = false;
+                break;
+            case TAXI_TO_CHAT_INFO_MODAL_FAILURE:
+                break;
+            case TAXI_ERROR_MODAL_CLICK_REQUEST:
+                break;
+            case TAXI_ERROR_MODAL_CLICK_SUCCESS:
+                break;
+            case TAXI_ERROR_MODAL_CLICK_FAILRURE:
                 break;
             case TAXI_ROOM_DELETE_REQUEST:
                 draft.deleteTaxiPartyLoading = true;

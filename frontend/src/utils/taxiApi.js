@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-return-await */
 /* eslint-disable import/prefer-default-export */
+import { type } from '@testing-library/user-event/dist/type';
 import { API_URLS } from '../constants';
 import { withAuthInstance } from './common';
 
@@ -53,5 +54,14 @@ export const createTaxiPartyApi = async paramsData => {
     return await withAuthInstance.post(
         `${process.env.REACT_APP_API_URL}${API_TAXI}party`,
         data,
+    );
+};
+
+// 택시 파티 입장 API
+export const taxiPartyEnterApi = async id => {
+    console.log(id);
+    console.log(`${process.env.REACT_APP_API_URL}${API_TAXI}party/${id}`);
+    return await withAuthInstance.post(
+        `${process.env.REACT_APP_API_URL}${API_TAXI}party/${id}`,
     );
 };

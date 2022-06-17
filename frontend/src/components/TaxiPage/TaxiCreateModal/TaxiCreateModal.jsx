@@ -31,8 +31,6 @@ function TaxiCreateModal() {
         setMinute(now.getMinutes());
     }, []);
 
-    useEffect(() => {}, [hour]);
-
     const onCreateTaxiParty = () => {
         let tempHour;
         if (ampm === 'PM') {

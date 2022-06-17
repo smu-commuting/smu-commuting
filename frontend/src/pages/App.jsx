@@ -24,11 +24,18 @@ import InquiryWritePage from './inquiryWritePage/inquiryWritePage';
 import ChattingPage from './ChattingPage/ChattingPage';
 import TaxiPage from './TaxiPage/TaxiPage';
 import CommunityModal from '../components/CommunityPage/CommunityModal/CommunityModal';
+import TaxiToChatModal from '../components/TaxiPage/TaxiToChatModal/TaxiToChatModal';
+import TaxiNotEnterModal from '../components/TaxiPage/TaxiNotEnterModal/TaxiNotEnterModal';
 
 function App() {
     const { isBusModalOpen, isTaxiModalOpen, isCommunityModalOpen } =
         useSelector(state => state.user);
-    const { isTaxiCreateModalOpen } = useSelector(state => state.taxi);
+    const {
+        isTaxiCreateModalOpen,
+        isEnterChattingRoomModalOpen,
+        showErrorModal,
+    } = useSelector(state => state.taxi);
+
     return (
         <Router>
             <Routes>
@@ -67,6 +74,10 @@ function App() {
                         <>
                             {isTaxiModalOpen && <TaxiModal />}
                             {isTaxiCreateModalOpen && <TaxiCreateModal />}
+                            {isEnterChattingRoomModalOpen && (
+                                <TaxiToChatModal />
+                            )}
+                            {showErrorModal && <TaxiNotEnterModal />}
                             <Header />
                             <TaxiPage />
                         </>
