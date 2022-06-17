@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
     taxiPartyEnter,
     taxiToChatModal,
@@ -9,24 +10,35 @@ import './TaxiToChatModal.scss';
 
 function TaxiToChatModal() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const {
         chattingRoomInfo,
-        isTaxiPartyEnterLoading,
         isTaxiPartyEnterDone,
-        showErrorModal,
+        isTaxiPartyEnterLoading,
+        taxiToChatRoom,
     } = useSelector(state => state.taxi);
     const onCancelClick = useCallback(() => {
         dispatch(taxiToChatModal());
     }, [dispatch]);
+
     const onAgreeClick = useCallback(() => {
         dispatch(taxiPartyEnter(chattingRoomInfo.taxiPartyId));
     }, [dispatch]);
+
+    // 이거 지금 안먹힘
     useEffect(() => {
-        if (showErrorModal) {
-            dispatch(taxiToChatModal());
-            dispatch(showErrorModal());
-        }
-    }, [showErrorModal]);
+        console.log(
+            chattingRoomInfo.taxiPartyId,
+            'isTaxiPartyEnterDone',
+            isTaxiPartyEnterDone,
+            'isTaxiPartyEnterLoading',
+            isTaxiPartyEnterLoading,
+        );
+        // if (taxiToChatRoom) {
+        //     navigate(`/chatroom/${chattingRoomInfo.taxiPartyId}`);
+        // }
+    }, [taxiToChatRoom]);
+
     return (
         <div className="taxitochatmodal-wrapper">
             <div className="taxitochatmodal">

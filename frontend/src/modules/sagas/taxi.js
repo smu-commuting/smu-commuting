@@ -137,9 +137,10 @@ function* taxiPageDate(action) {
 }
 
 function* createTaxiParty(action) {
-    const result = yield call(createTaxiPartyApi, action.id);
-    console.log('saga 결과', result);
     try {
+        console.log('saga 진입 이전', action.data);
+        const result = yield call(createTaxiPartyApi, action.data);
+        console.log('saga 결과', result);
         yield put({
             type: TAXI_PARTY_CREATE_SUCCESS,
             data: result.data,

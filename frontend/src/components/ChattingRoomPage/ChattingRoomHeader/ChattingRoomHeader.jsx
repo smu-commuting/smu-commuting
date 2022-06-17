@@ -1,21 +1,26 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import './ChattingRoomHeader.scss';
 import Talk from '../../../assets/ChattingList/ChattingListHeader/talk.png';
 import getOut from '../../../assets/ChattingList/ChattingListPage/첫줄.png';
+import { getMyTaxiParties } from '../../../modules/reducers/taxi';
 
 function ChattingRoomHeader() {
+    const dispatch = useDispatch();
     const { id } = useParams();
     const navigate = useNavigate();
     const { myTaxiParties } = useSelector(state => state.taxi);
     const [meetInfo, setMeetInfo] = useState();
 
     useEffect(() => {
+        dispatch(getMyTaxiParties());
+    }, []);
+    useEffect(() => {
         const info = myTaxiParties.find(
             myChatRoom => myChatRoom.chatRoomId === parseInt(id, 10),
         );
-        setMeetInfo(`${info.place} ${info.time}`);
+        setMeetInfo(() => `${info && info.place} ${info && info.time}`);
     }, [id]);
 
     const gotoBack = useCallback(() => {
