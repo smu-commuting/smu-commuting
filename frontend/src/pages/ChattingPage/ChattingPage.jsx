@@ -1,7 +1,5 @@
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable no-undef */
-/* eslint-disable prefer-const */
 /* eslint-disable no-unused-vars */
+/* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState } from 'react';
 import './ChattingPage.scss';
 import { useParams } from 'react-router-dom';
@@ -24,12 +22,9 @@ function ChattingPage() {
     const dispatch = useDispatch();
     const userId = useSelector(state => state.user.me.id);
     const studentId = useSelector(state => state.user.me.studentId);
-    const {
-        chatMessageList,
-        chatMessageListLoading,
-        chatLoadEnd,
-        chatMessageListDone,
-    } = useSelector(state => state.chat);
+    const { chatMessageList } = useSelector(state => state.chat);
+    const { chatMessageListLoading, chatLoadEnd, chatMessageListDone } =
+        useSelector(state => state.chat);
 
     const [prevHeight, setPrevHeight] = useState();
     const [messageBottle, setMessageBottle] = useState([]);
@@ -44,7 +39,7 @@ function ChattingPage() {
             function (frame) {
                 ws.subscribe(`/sub/chat/room/${id}`, function (msg) {
                     const recv = JSON.parse(msg.body);
-                    setMessageBottle([...messageBottle, recv]);
+                    setMessageBottle(() => [...messageBottle, recv]);
                     window.scrollTo(0, document.body.offsetHeight + 20);
                 });
             },
@@ -73,16 +68,17 @@ function ChattingPage() {
     // 처음 들어올 때
     useEffect(() => {
         connect();
-        dispatch(
-            getChatMessageList({
-                roomId: id,
-                size: 10,
-                date: firstEnterDateParser(),
-            }),
-        );
         setTimeout(() => {
-            window.scrollTo(0, document.body.offsetHeight);
             setPrevHeight(document.body.offsetHeight);
+            setMessageBottle(() => []);
+            dispatch(
+                getChatMessageList({
+                    roomId: id,
+                    size: 10,
+                    date: firstEnterDateParser(),
+                }),
+            );
+            window.scrollTo(0, document.body.offsetHeight);
         }, 100);
     }, []);
 
