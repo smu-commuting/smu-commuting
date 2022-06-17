@@ -50,28 +50,30 @@ function TaxiPage() {
     }, []);
 
     useEffect(() => {
-        window.scrollTo(0, 0);
-        setPartyList(() => {
-            return [];
-        });
-        setPage(() => {
-            return 1;
-        });
-        dispatch(getMyTaxiParties()); // 택시 리스트 들어왔을 때, 내가 속해있는 채팅방 리스트 redux 관리
-        // console.log('첫페이지', page);
-        dispatch(taxiPartyListRestart());
-        if (isTaxiCreateModalOpen) dispatch(taxiCreateModalClick());
-        const temp = date.split('-');
-        setMonth(temp[1]);
-        setDay(temp[2]);
-        dispatch(
-            getTaxiPartyList({
-                page,
-                size: 10,
-                placeId,
-                date,
-            }),
-        );
+        setTimeout(() => {
+            window.scrollTo(0, 0);
+            setPartyList(() => {
+                return [];
+            });
+            setPage(() => {
+                return 1;
+            });
+            dispatch(getMyTaxiParties()); // 택시 리스트 들어왔을 때, 내가 속해있는 채팅방 리스트 redux 관리
+            // console.log('첫페이지', page);
+            dispatch(taxiPartyListRestart());
+            if (isTaxiCreateModalOpen) dispatch(taxiCreateModalClick());
+            const temp = date.split('-');
+            setMonth(temp[1]);
+            setDay(temp[2]);
+            dispatch(
+                getTaxiPartyList({
+                    page,
+                    size: 10,
+                    placeId,
+                    date,
+                }),
+            );
+        }, 100);
     }, [placeId, date, placeName, createTaxiPartyDone]);
 
     useEffect(() => {
