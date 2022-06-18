@@ -46,9 +46,9 @@ import {
 import { taxiPartyEnterApi } from '../../utils/taxiApi';
 
 function* getTaxiParties() {
-    const result = yield call(getMyTaxiPartiesApi);
-    console.log('요청 이후 result', result);
     try {
+        const result = yield call(getMyTaxiPartiesApi);
+        console.log('요청 이후 result', result);
         yield put({
             type: TAXI_LIST_FETCH_SUCCESS,
             data: result.data,
@@ -62,10 +62,10 @@ function* getTaxiParties() {
 }
 
 function* deleteTaxiParty(action) {
-    console.log('saga', action);
-    const result = yield call(deleteTaxiPartyApi, action.id);
-    console.log('요청 이후 result', result);
     try {
+        console.log('saga', action);
+        const result = yield call(deleteTaxiPartyApi, action.id);
+        console.log('요청 이후 result', result);
         yield put({
             type: TAXI_ROOM_DELETE_SUCCESS,
         });
@@ -78,9 +78,9 @@ function* deleteTaxiParty(action) {
 }
 
 function* getTaxiPlaceList() {
-    const result = yield call(getTaxiPlaceListApi);
-    console.log('요청 이후 result', result);
     try {
+        const result = yield call(getTaxiPlaceListApi);
+        console.log('요청 이후 result', result);
         yield put({
             type: TAXI_PLACE_LIST_SUCCESS,
             data: result.data,
@@ -94,8 +94,8 @@ function* getTaxiPlaceList() {
 }
 
 function* getTaxiPartyList(action) {
-    const result = yield call(getTaxiPartyListApi, action.data);
     try {
+        const result = yield call(getTaxiPartyListApi, action.data);
         yield put({
             type: TAXI_PARTY_LIST_SUCCESS,
             data: result.data,

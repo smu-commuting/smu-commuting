@@ -10,7 +10,7 @@ import chat from './chat';
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['user', 'bus'],
+    whitelist: ['user'],
 };
 
 const rootReducer = combineReducers({
