@@ -3,7 +3,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { taxiToChatModal } from '../../../modules/reducers/taxi';
 import './TaxiCard.scss';
 

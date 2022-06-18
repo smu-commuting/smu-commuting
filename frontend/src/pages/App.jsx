@@ -26,6 +26,7 @@ import TaxiPage from './TaxiPage/TaxiPage';
 import CommunityModal from '../components/CommunityPage/CommunityModal/CommunityModal';
 import TaxiToChatModal from '../components/TaxiPage/TaxiToChatModal/TaxiToChatModal';
 import TaxiNotEnterModal from '../components/TaxiPage/TaxiNotEnterModal/TaxiNotEnterModal';
+import TaxiNotCreateModal from '../components/TaxiPage/TaxiNotCreateModal/TaxiNotCreateModal';
 
 function App() {
     const { isBusModalOpen, isTaxiModalOpen, isCommunityModalOpen } =
@@ -34,6 +35,7 @@ function App() {
         isTaxiCreateModalOpen,
         isEnterChattingRoomModalOpen,
         showErrorModal,
+        showCreateErrorModal,
     } = useSelector(state => state.taxi);
 
     return (
@@ -78,6 +80,7 @@ function App() {
                                 <TaxiToChatModal />
                             )}
                             {showErrorModal && <TaxiNotEnterModal />}
+                            {showCreateErrorModal && <TaxiNotCreateModal />}
                             <Header />
                             <TaxiPage />
                         </>

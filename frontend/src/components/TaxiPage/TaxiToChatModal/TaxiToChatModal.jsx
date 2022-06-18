@@ -38,7 +38,7 @@ function TaxiToChatModal() {
             <div className="taxitochatmodal">
                 <p>
                     {chattingRoomInfo && chattingRoomInfo.placeName}에서&nbsp;
-                    {chattingRoomInfo && chattingRoomInfo.time}에 탑승하는{' '}
+                    {chattingRoomInfo && chattingRoomInfo.time}에 탑승하는
                     <br />
                     모임에 입장하시겠습니까?
                 </p>

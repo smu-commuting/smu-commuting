@@ -148,7 +148,7 @@ function* createTaxiParty(action) {
     } catch (err) {
         yield put({
             type: TAXI_PARTY_CREATE_FAILURE,
-            error: err,
+            error: err.response.data.error.info,
         });
     }
 }

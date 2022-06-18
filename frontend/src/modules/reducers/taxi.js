@@ -73,6 +73,7 @@ export const initialState = {
     createTaxiPartyLoading: false,
     createTaxiPartyDone: false,
     createTaxiPartyError: null,
+    showCreateErrorModal: false,
     // 채팅방 입장 알림 모달창
     isEnterChattingRoomModalOpen: false,
     // 알림 모달창에 뜨게 될 정보들
@@ -233,6 +234,7 @@ const reducer = (state = initialState, action) => {
             case TAXI_PARTY_CREATE_FAILURE:
                 draft.createTaxiPartyLoading = false;
                 draft.createTaxiPartyError = action.error;
+                draft.showCreateErrorModal = true;
                 break;
             case TAXI_PARTY_ENTER_REQUEST:
                 draft.isTaxiPartyEnterLoading = true;
@@ -259,7 +261,8 @@ const reducer = (state = initialState, action) => {
             case TAXI_ERROR_MODAL_CLICK_REQUEST:
                 break;
             case TAXI_ERROR_MODAL_CLICK_SUCCESS:
-                draft.showErrorModal = !draft.showErrorModal;
+                draft.showErrorModal = false;
+                draft.showCreateErrorModal = false;
                 break;
             case TAXI_ERROR_MODAL_CLICK_FAILRURE:
                 break;
@@ -278,7 +281,6 @@ const reducer = (state = initialState, action) => {
                     !draft.isEnterChattingRoomModalOpen;
                 console.log('saga 이후 reducer', action.data);
                 draft.chattingRoomInfo = action.data;
-                // draft.showErrorModal = false;
                 break;
             case TAXI_TO_CHAT_INFO_MODAL_FAILURE:
                 break;
