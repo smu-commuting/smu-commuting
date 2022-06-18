@@ -13,19 +13,22 @@ function ChattingRoomHeader() {
     const { myTaxiParties } = useSelector(state => state.taxi);
     const [meetInfo, setMeetInfo] = useState();
 
-    useEffect(() => {
-        dispatch(getMyTaxiParties());
-    }, []);
-    useEffect(() => {
+    const getInfo = useCallback(() => {
         const info = myTaxiParties.find(
             myChatRoom => myChatRoom.chatRoomId === parseInt(id, 10),
         );
         setMeetInfo(() => `${info && info.place} ${info && info.time}`);
     }, [id]);
 
+    useEffect(() => {
+        dispatch(getMyTaxiParties());
+        getInfo();
+    }, []);
+
     const gotoBack = useCallback(() => {
         navigate(-1);
     }, []);
+
     return (
         <div className="chattingroomheader-wrapper">
             <div>

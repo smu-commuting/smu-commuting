@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -17,27 +17,21 @@ function TaxiToChatModal() {
         isTaxiPartyEnterLoading,
         taxiToChatRoom,
     } = useSelector(state => state.taxi);
+
+    const toChatRoom = useCallback(() => {
+        if (taxiToChatRoom) {
+            navigate(`/chatroom/${chattingRoomInfo.taxiPartyId}`);
+        }
+    }, [taxiToChatRoom]);
+
     const onCancelClick = useCallback(() => {
         dispatch(taxiToChatModal());
     }, [dispatch]);
 
     const onAgreeClick = useCallback(() => {
         dispatch(taxiPartyEnter(chattingRoomInfo.taxiPartyId));
+        toChatRoom();
     }, [dispatch]);
-
-    // 이거 지금 안먹힘
-    useEffect(() => {
-        console.log(
-            chattingRoomInfo.taxiPartyId,
-            'isTaxiPartyEnterDone',
-            isTaxiPartyEnterDone,
-            'isTaxiPartyEnterLoading',
-            isTaxiPartyEnterLoading,
-        );
-        // if (taxiToChatRoom) {
-        //     navigate(`/chatroom/${chattingRoomInfo.taxiPartyId}`);
-        // }
-    }, [taxiToChatRoom]);
 
     return (
         <div className="taxitochatmodal-wrapper">
