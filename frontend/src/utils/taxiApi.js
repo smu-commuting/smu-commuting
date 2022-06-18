@@ -17,7 +17,7 @@ export const getMyTaxiPartiesApi = async () => {
 // 채팅 목록 삭제 API
 export const deleteTaxiPartyApi = async id => {
     return await withAuthInstance.delete(
-        `${process.env.REACT_APP_API_URL}${API_TAXI}room/${id}`,
+        `${process.env.REACT_APP_API_URL}${API_TAXI}party/${id}`,
     );
 };
 

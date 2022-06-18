@@ -6,21 +6,32 @@ import { useNavigate } from 'react-router-dom';
 import './ChattingListPage.scss';
 import getOut from '../../assets/ChattingList/ChattingListPage/첫줄.png';
 import sumung from '../../assets/ChattingList/ChattingListPage/sample_sumung.png';
+import nonchat from '../../assets/ChattingList/ChattingListPage/non-chat.png';
 import { prevent } from '../../constants';
-import { deleteTaxiParty, getMyTaxiParties } from '../../modules/reducers/taxi';
+import {
+    deleteModal,
+    deleteTaxiParty,
+    getMyTaxiParties,
+} from '../../modules/reducers/taxi';
 
 function ChattingListPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { myTaxiParties } = useSelector(state => state.taxi);
+    const { myTaxiParties, deleteTaxiPartyDone } = useSelector(
+        state => state.taxi,
+    );
     useEffect(() => {
         dispatch(getMyTaxiParties());
     }, []);
+    useEffect(() => {
+        dispatch(getMyTaxiParties());
+    }, [deleteTaxiPartyDone]);
     const onChatRoomEnter = useCallback(id => {
         navigate(`/chatroom/${id}`);
     }, []);
-    const onDeleteClick = useCallback(id => {
-        dispatch(deleteTaxiParty(id));
+    const onDeleteClick = useCallback(myTaxiParty => {
+        dispatch(deleteModal(myTaxiParty));
+        // dispatch(deleteTaxiParty(id));
     }, []);
     return (
         <ul className="chattinglist-wrapper">
@@ -45,7 +56,7 @@ function ChattingListPage() {
                             </div>
                             <div
                                 onClick={prevent(() =>
-                                    onDeleteClick(myTaxiParty.chatRoomId),
+                                    onDeleteClick(myTaxiParty),
                                 )}
                                 aria-hidden
                             >
@@ -55,7 +66,12 @@ function ChattingListPage() {
                     );
                 })
             ) : (
-                <div> 대화 없음 </div>
+                <div className="non-chat-wrapper">
+                    <div className="content-wrapper">
+                        <img src={nonchat} alt="채팅 없음" />
+                        <p>참여 중인 대화방이 없습니다.</p>
+                    </div>
+                </div>
             )}
         </ul>
     );

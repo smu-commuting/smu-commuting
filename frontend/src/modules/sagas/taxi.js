@@ -32,9 +32,12 @@ import {
     TAXI_PARTY_ENTER_REQUEST,
     TAXI_PARTY_ENTER_SUCCESS,
     TAXI_PARTY_ENTER_FAILURE,
-    TAXI_ERROR_MODAL_CLICK_REQUEST,
-    TAXI_ERROR_MODAL_CLICK_SUCCESS,
-    TAXI_ERROR_MODAL_CLICK_FAILRURE,
+    TAXI_SECOND_MODAL_CLICK_REQUEST,
+    TAXI_SECOND_MODAL_CLICK_SUCCESS,
+    TAXI_SECOND_MODAL_CLICK_FAILRURE,
+    TAXI_ROOM_DELETE_MODAL_REQUEST,
+    TAXI_ROOM_DELETE_MODAL_SUCCESS,
+    TAXI_ROOM_DELETE_MODAL_FAILURE,
 } from '../../constants';
 import {
     getMyTaxiPartiesApi,
@@ -201,14 +204,32 @@ function* taxiPartyEnter(action) {
 function* errorModalClose() {
     try {
         yield put({
-            type: TAXI_ERROR_MODAL_CLICK_SUCCESS,
+            type: TAXI_SECOND_MODAL_CLICK_SUCCESS,
         });
     } catch (err) {
         yield put({
-            type: TAXI_ERROR_MODAL_CLICK_FAILRURE,
+            type: TAXI_SECOND_MODAL_CLICK_FAILRURE,
             error: err,
         });
     }
+}
+
+function* taxiRoomDeleteModal(action) {
+    try {
+        yield put({
+            type: TAXI_ROOM_DELETE_MODAL_SUCCESS,
+            data: action.data,
+        });
+    } catch (err) {
+        yield put({
+            type: TAXI_ROOM_DELETE_MODAL_FAILURE,
+            error: err,
+        });
+    }
+}
+
+function* watchTaxiRoomDeleteModal() {
+    yield takeLatest(TAXI_ROOM_DELETE_MODAL_REQUEST, taxiRoomDeleteModal);
 }
 
 function* watchTaxiPartyEnter() {
@@ -251,8 +272,8 @@ function* watchTaxiToChatModal() {
     yield takeLatest(TAXI_TO_CHAT_INFO_MODAL_REQUEST, taxiToChatModal);
 }
 
-function* watchErrorModalClose() {
-    yield takeLatest(TAXI_ERROR_MODAL_CLICK_REQUEST, errorModalClose);
+function* watchSecondModalClose() {
+    yield takeLatest(TAXI_SECOND_MODAL_CLICK_REQUEST, errorModalClose);
 }
 
 export default function* taxiSaga() {
@@ -267,6 +288,7 @@ export default function* taxiSaga() {
         fork(watchTaxiPartyRestart),
         fork(watchTaxiToChatModal),
         fork(watchTaxiPartyEnter),
-        fork(watchErrorModalClose),
+        fork(watchSecondModalClose),
+        fork(watchTaxiRoomDeleteModal),
     ]);
 }

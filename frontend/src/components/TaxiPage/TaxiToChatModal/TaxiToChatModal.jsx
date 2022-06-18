@@ -11,12 +11,9 @@ import './TaxiToChatModal.scss';
 function TaxiToChatModal() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {
-        chattingRoomInfo,
-        isTaxiPartyEnterDone,
-        isTaxiPartyEnterLoading,
-        taxiToChatRoom,
-    } = useSelector(state => state.taxi);
+    const { chattingRoomInfo, taxiToChatRoom } = useSelector(
+        state => state.taxi,
+    );
 
     const toChatRoom = useCallback(() => {
         console.log(taxiToChatRoom);

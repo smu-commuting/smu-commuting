@@ -27,6 +27,8 @@ import CommunityModal from '../components/CommunityPage/CommunityModal/Community
 import TaxiToChatModal from '../components/TaxiPage/TaxiToChatModal/TaxiToChatModal';
 import TaxiNotEnterModal from '../components/TaxiPage/TaxiNotEnterModal/TaxiNotEnterModal';
 import TaxiNotCreateModal from '../components/TaxiPage/TaxiNotCreateModal/TaxiNotCreateModal';
+import TaxiPartyDeleteModal from '../components/TaxiPage/TaxiPartyDeleteModal/TaxiPartyDeleteModal';
+import TaxiPartyDeleteCompleteModal from '../components/TaxiPage/TaxiPartyDeleteCompleteModal/TaxiPartyDeleteCompleteModal';
 
 function App() {
     const { isBusModalOpen, isTaxiModalOpen, isCommunityModalOpen } =
@@ -36,6 +38,8 @@ function App() {
         isEnterChattingRoomModalOpen,
         showErrorModal,
         showCreateErrorModal,
+        isDeleteTaxiPartyModal,
+        isDeleteAllowModal,
     } = useSelector(state => state.taxi);
 
     return (
@@ -90,6 +94,10 @@ function App() {
                     path="/chatlist"
                     element={
                         <>
+                            {isDeleteTaxiPartyModal && <TaxiPartyDeleteModal />}
+                            {isDeleteAllowModal && (
+                                <TaxiPartyDeleteCompleteModal />
+                            )}
                             <ChattingListHeader />
                             <ChattingListPage />
                             <ChattingListFooter />
