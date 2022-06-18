@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-array-index-key */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import './ChattingPage.scss';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,50 +28,31 @@ function ChattingPage() {
 
     const [prevHeight, setPrevHeight] = useState();
     const [messageBottle, setMessageBottle] = useState([]);
+    const [userChat, setUserChat] = useState([]);
     const [myChat, setMyChat] = useState();
     const myChatChange = e => {
         setMyChat(e.target.value);
     };
 
-    function connect() {
-        ws.connect(
-            {},
-            function (frame) {
-                ws.subscribe(`/sub/chat/room/${id}`, function (msg) {
-                    const recv = JSON.parse(msg.body);
-                    console.log(recv);
-                    setMessageBottle(() => [...messageBottle, recv]);
-                    window.scrollTo(0, document.body.offsetHeight + 20);
-                });
-            },
-            function (error) {
-                console.log(error);
-            },
-        );
-    }
-    connect();
-
-    function waitForConnection(stompClient, callback) {
-        setTimeout(
-            function () {
-                // 연결되었을 때 콜백함수 실행
-                if (stompClient.ws.readyState === 1) {
-                    callback();
-                    // 연결이 안 되었으면 재호출
-                } else {
-                    waitForConnection(stompClient, callback);
-                }
-            },
-            1, // 밀리초 간격으로 실행
-        );
-    }
+    const pushMessage = useCallback(message => {
+        const received = JSON.parse(message.body);
+        setMessageBottle(prev => {
+            return [...prev, received];
+        });
+        window.scrollTo(0, document.body.offsetHeight + 100);
+    }, []);
 
     // 처음 들어올 때
     useEffect(() => {
-        connect();
+        ws.connect(
+            {},
+            () => {
+                ws.subscribe(`/sub/chat/room/${id}`, pushMessage, {});
+            },
+            {},
+        );
         setTimeout(() => {
             setPrevHeight(document.body.offsetHeight);
-            setMessageBottle(() => []);
             dispatch(
                 getChatMessageList({
                     roomId: id,
@@ -81,6 +62,7 @@ function ChattingPage() {
             );
             window.scrollTo(0, document.body.offsetHeight);
         }, 100);
+        // 나갈때 웹 소켓 연결 끊어줌
         return () => ws && ws.disconnect();
     }, []);
 
@@ -116,19 +98,20 @@ function ChattingPage() {
     }, [window.scrollY, chatLoadEnd, chatMessageListDone]);
 
     const onSendMyChatHandler = () => {
-        waitForConnection(ws, function () {
-            ws.send(
-                '/pub/chat/message',
-                {},
-                JSON.stringify({
-                    messageType: 'TALK',
-                    message: myChat,
-                    roomId: id,
-                    senderId: userId,
-                    studentId,
-                }),
-            );
-        });
+        if (!myChat) {
+            return;
+        }
+        ws.send(
+            '/pub/chat/message',
+            {},
+            JSON.stringify({
+                messageType: 'TALK',
+                message: myChat,
+                roomId: id,
+                senderId: userId,
+                studentId,
+            }),
+        );
         setMyChat('');
         window.scrollTo(0, document.body.offsetHeight);
     };
