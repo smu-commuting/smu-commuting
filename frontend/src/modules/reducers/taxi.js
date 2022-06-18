@@ -301,7 +301,6 @@ const reducer = (state = initialState, action) => {
                 draft.deleteTaxiPartyError = null;
                 break;
             case TAXI_ROOM_DELETE_FAILURE:
-                console.log(action.err);
                 draft.deleteTaxiPartyLoading = false;
                 draft.deleteTaxiPartyError = action.err;
                 break;

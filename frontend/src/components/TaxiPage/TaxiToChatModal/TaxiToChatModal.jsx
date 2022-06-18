@@ -19,6 +19,7 @@ function TaxiToChatModal() {
     } = useSelector(state => state.taxi);
 
     const toChatRoom = useCallback(() => {
+        console.log(taxiToChatRoom);
         if (taxiToChatRoom) {
             navigate(`/chatroom/${chattingRoomInfo.taxiPartyId}`);
         }

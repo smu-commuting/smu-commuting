@@ -1,16 +1,16 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import './ChattingRoomHeader.scss';
 import Talk from '../../../assets/ChattingList/ChattingListHeader/talk.png';
 import getOut from '../../../assets/ChattingList/ChattingListPage/첫줄.png';
-import { getMyTaxiParties } from '../../../modules/reducers/taxi';
 
 function ChattingRoomHeader() {
-    const dispatch = useDispatch();
     const { id } = useParams();
     const navigate = useNavigate();
-    const { myTaxiParties } = useSelector(state => state.taxi);
+    const { myTaxiParties, chattingRoomInfo } = useSelector(
+        state => state.taxi,
+    );
     const [meetInfo, setMeetInfo] = useState();
 
     const getInfo = useCallback(() => {
@@ -18,10 +18,16 @@ function ChattingRoomHeader() {
             myChatRoom => myChatRoom.chatRoomId === parseInt(id, 10),
         );
         setMeetInfo(() => `${info && info.place} ${info && info.time}`);
-    }, [id]);
+        if (!info)
+            setMeetInfo(
+                () =>
+                    `${chattingRoomInfo && chattingRoomInfo.placeName} ${
+                        chattingRoomInfo && chattingRoomInfo.time
+                    }`,
+            );
+    }, []);
 
     useEffect(() => {
-        dispatch(getMyTaxiParties());
         getInfo();
     }, []);
 

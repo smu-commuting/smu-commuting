@@ -23,6 +23,7 @@ function TaxiCard({ taxiPartyId, headcount, maximum, time }) {
     }, []);
 
     const onCardClick = () => {
+        console.log(taxiPageInfo.placeName);
         const data = {
             placeName: taxiPageInfo.placeName,
             time,

@@ -12,6 +12,7 @@ import { getChatMessageList } from '../../modules/reducers/chat';
 import { firstEnterDateParser } from '../../constants/FirstEnterDateParser';
 import MeChatBox from '../../components/ChattingRoomPage/MeChatBox/MeChatBox';
 import SenderChatBox from '../../components/ChattingRoomPage/SenderChatBox/SenderChatBox';
+import { getMyTaxiParties } from '../../modules/reducers/taxi';
 
 function ChattingPage() {
     // 소켓 connect
@@ -43,6 +44,7 @@ function ChattingPage() {
 
     // 처음 들어올 때
     useEffect(() => {
+        dispatch(getMyTaxiParties());
         ws.connect(
             {},
             () => {
