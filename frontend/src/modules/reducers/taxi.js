@@ -85,7 +85,7 @@ export const initialState = {
     isEnterChattingRoomModalOpen: false,
     // 알림 모달창에 뜨게 될 정보들
     chattingRoomInfo: null,
-    // 에러창 뜨게할까요
+    // 입장 에러창 뜨게할까요
     showErrorModal: false,
 };
 

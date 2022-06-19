@@ -42,9 +42,41 @@ function ChattingPage() {
         window.scrollTo(0, document.body.offsetHeight + 100);
     }, []);
 
+    const fetchData = () => {
+        console.log('첫번째');
+        setMessageBottle(prev => {
+            return [];
+        });
+        console.log('첫번째', messageBottle);
+        dispatch(getMyTaxiParties());
+        dispatch(
+            getChatMessageList({
+                roomId: id,
+                size: 10,
+                date: firstEnterDateParser(),
+            }),
+        );
+    };
+
+    const fetchDataSecond = useCallback(() => {
+        console.log('두번째', messageBottle);
+        if (!chatLoadEnd) {
+            if (chatMessageList.length !== 0 && chatMessageListDone) {
+                const reverse = [...chatMessageList].reverse();
+                setMessageBottle(() => {
+                    return [...reverse, ...messageBottle];
+                });
+                window.scrollTo(0, document.body.offsetHeight - prevHeight);
+                setPrevHeight(() => document.body.offsetHeight);
+            } else {
+                setMessageBottle(() => []);
+            }
+        }
+    }, []);
+
     // 처음 들어올 때
     useEffect(() => {
-        dispatch(getMyTaxiParties());
+        // dispatch(getMyTaxiParties());
         ws.connect(
             {},
             () => {
@@ -52,27 +84,29 @@ function ChattingPage() {
             },
             {},
         );
-        setTimeout(() => {
-            setPrevHeight(document.body.offsetHeight);
-            dispatch(
-                getChatMessageList({
-                    roomId: id,
-                    size: 10,
-                    date: firstEnterDateParser(),
-                }),
-            );
-            window.scrollTo(0, document.body.offsetHeight);
-        }, 100);
+        fetchData();
+        fetchDataSecond();
+        setPrevHeight(() => document.body.offsetHeight);
+        // dispatch(
+        //     getChatMessageList({
+        //         roomId: id,
+        //         size: 10,
+        //         date: firstEnterDateParser(),
+        //     }),
+        // );
+        window.scrollTo(0, document.body.offsetHeight);
+
         // 나갈때 웹 소켓 연결 끊어줌
         return () => ws && ws.disconnect();
     }, []);
 
     // 데이터 fetch 되면 메세지 배열 10개 앞에 추가하기
     useEffect(() => {
-        const reverse = [...chatMessageList].reverse();
-        setMessageBottle([...reverse, ...messageBottle]);
-        window.scrollTo(0, document.body.offsetHeight - prevHeight);
-        setPrevHeight(document.body.offsetHeight);
+        fetchDataSecond();
+        // const reverse = [...chatMessageList].reverse();
+        // setMessageBottle(() => [...reverse, ...messageBottle]);
+        // window.scrollTo(0, document.body.offsetHeight - prevHeight);
+        // setPrevHeight(document.body.offsetHeight);
     }, [chatMessageList]);
 
     // 스크롤 천장에 닿으면 데이터 dispatch
@@ -120,33 +154,37 @@ function ChattingPage() {
     return (
         <div className="chattingpage-wrapper">
             <ChattingRoomHeader />
-            <div className="chattingroompage-wrapper">
-                <p className="notice">
-                    탑승 시각 기준 전후 1시간동안에는 <br /> 하나의 채팅방만
-                    입장할 수 있습니다.
-                </p>
-                {messageBottle &&
-                    messageBottle.map((message, index) => {
-                        return message.senderStudentId ===
-                            parseInt(studentId, 10) ? (
-                            <MeChatBox
-                                key={index}
-                                id={message.messageId}
-                                content={message.content}
-                                senderId={message.senderStudentId}
-                                createdTime={message.createdTime}
-                            />
-                        ) : (
-                            <SenderChatBox
-                                key={index}
-                                id={message.messageId}
-                                content={message.content}
-                                senderId={message.senderStudentId}
-                                createdTime={message.createdTime}
-                            />
-                        );
-                    })}
-            </div>
+            {chatMessageListDone ? (
+                <div className="chattingroompage-wrapper">
+                    <p className="notice">
+                        탑승 시각 기준 전후 1시간동안에는 <br /> 하나의 채팅방만
+                        입장할 수 있습니다.
+                    </p>
+                    {messageBottle.length !== 0 &&
+                        messageBottle.map((message, index) => {
+                            return message.senderStudentId ===
+                                parseInt(studentId, 10) ? (
+                                <MeChatBox
+                                    key={index}
+                                    id={message.messageId}
+                                    content={message.content}
+                                    senderId={message.senderStudentId}
+                                    createdTime={message.createdTime}
+                                />
+                            ) : (
+                                <SenderChatBox
+                                    key={index}
+                                    id={message.messageId}
+                                    content={message.content}
+                                    senderId={message.senderStudentId}
+                                    createdTime={message.createdTime}
+                                />
+                            );
+                        })}
+                </div>
+            ) : (
+                <p>로딩중</p>
+            )}
             <div className="chatinputarea-wrapper">
                 <div>
                     <img src={Refusal} alt="합승거부" />

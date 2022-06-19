@@ -15,8 +15,7 @@ function TaxiPartyDeleteCompleteModal() {
                 <div className="main-text">
                     <p>
                         {deleteInfo.date} &nbsp; {deleteInfo.place} &nbsp;
-                        {deleteInfo.time} &nbsp; ({deleteInfo.headcount}/
-                        {deleteInfo.maximum})
+                        {deleteInfo.time} &nbsp;
                     </p>
                     <p>채팅방에서 나가기 되었습니다.</p>
                 </div>

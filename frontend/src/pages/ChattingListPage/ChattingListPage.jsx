@@ -8,30 +8,24 @@ import getOut from '../../assets/ChattingList/ChattingListPage/첫줄.png';
 import sumung from '../../assets/ChattingList/ChattingListPage/sample_sumung.png';
 import nonchat from '../../assets/ChattingList/ChattingListPage/non-chat.png';
 import { prevent } from '../../constants';
-import {
-    deleteModal,
-    deleteTaxiParty,
-    getMyTaxiParties,
-} from '../../modules/reducers/taxi';
+import { deleteModal, getMyTaxiParties } from '../../modules/reducers/taxi';
 
 function ChattingListPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { myTaxiParties, deleteTaxiPartyDone } = useSelector(
-        state => state.taxi,
-    );
+    const { myTaxiParties, deleteTaxiPartyDone, isDeleteAllowModal } =
+        useSelector(state => state.taxi);
     useEffect(() => {
         dispatch(getMyTaxiParties());
     }, []);
     useEffect(() => {
         dispatch(getMyTaxiParties());
-    }, [deleteTaxiPartyDone]);
+    }, [deleteTaxiPartyDone, isDeleteAllowModal]);
     const onChatRoomEnter = useCallback(id => {
         navigate(`/chatroom/${id}`);
     }, []);
     const onDeleteClick = useCallback(myTaxiParty => {
         dispatch(deleteModal(myTaxiParty));
-        // dispatch(deleteTaxiParty(id));
     }, []);
     return (
         <ul className="chattinglist-wrapper">

@@ -112,7 +112,18 @@ function App() {
                 <Route path="/manual" element={<ManualPage />} />
                 <Route path="/inquirydetail" element={<InquiryDetailPage />} />
                 <Route path="/inquirywrite" element={<InquiryWritePage />} />
-                <Route path="/chatroom/:id" element={<ChattingPage />} />
+                <Route
+                    path="/chatroom/:id"
+                    element={
+                        <>
+                            {isDeleteTaxiPartyModal && <TaxiPartyDeleteModal />}
+                            {isDeleteAllowModal && (
+                                <TaxiPartyDeleteCompleteModal />
+                            )}
+                            <ChattingPage />
+                        </>
+                    }
+                />
             </Routes>
         </Router>
     );

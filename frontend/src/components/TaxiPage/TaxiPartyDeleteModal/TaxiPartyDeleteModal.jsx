@@ -22,8 +22,7 @@ function TaxiPartyDeleteModal() {
                 <p>
                     {deleteInfo && deleteInfo.date} &nbsp;
                     {deleteInfo && deleteInfo.place}&nbsp;
-                    {deleteInfo && deleteInfo.time}&nbsp; (
-                    {deleteInfo.headcount}/{deleteInfo.maximum}) <br />
+                    {deleteInfo && deleteInfo.time} <br />
                     채팅방을 나가시겠습니까?
                 </p>
                 <p>대화 내용이 삭제되며 채팅목록에서 삭제됩니다.</p>
