@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { taxiSecondModalClose } from '../../../modules/reducers/taxi';
-import './TaxiNotEnterModal.scss';
+import './TaxiNotCreateModal.scss';
 import cannotenter from '../../../assets/TaxiPage/택시입장실패.MP3';
 
-function TaxiNotEnterModal() {
+function TaxiNotCreateModal() {
     const dispatch = useDispatch();
-    const { isTaxiPartyEnterError } = useSelector(state => state.taxi);
+    const { createTaxiPartyError } = useSelector(state => state.taxi);
     const onModalClose = useCallback(() => {
         dispatch(taxiSecondModalClose());
     }, [dispatch]);
@@ -18,7 +18,7 @@ function TaxiNotEnterModal() {
         <div className="taxinotentermodal-wrapper">
             <div className="taxinotentermodal">
                 <div className="error-text">
-                    <p>{isTaxiPartyEnterError}</p>
+                    <p>{createTaxiPartyError}</p>
                 </div>
                 <button type="submit" onClick={onModalClose}>
                     확인
@@ -28,4 +28,4 @@ function TaxiNotEnterModal() {
     );
 }
 
-export default TaxiNotEnterModal;
+export default TaxiNotCreateModal;

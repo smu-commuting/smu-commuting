@@ -40,14 +40,6 @@ function TaxiPage() {
     const onCreateClick = useCallback(() => {
         dispatch(taxiCreateModalClick());
     }, [dispatch]);
-    useEffect(() => {
-        setPartyList(() => {
-            return [];
-        });
-        setPage(() => {
-            return 1;
-        });
-    }, []);
 
     useEffect(() => {
         setTimeout(() => {
@@ -59,7 +51,6 @@ function TaxiPage() {
                 return 1;
             });
             dispatch(getMyTaxiParties()); // 택시 리스트 들어왔을 때, 내가 속해있는 채팅방 리스트 redux 관리
-            // console.log('첫페이지', page);
             dispatch(taxiPartyListRestart());
             if (isTaxiCreateModalOpen) dispatch(taxiCreateModalClick());
             const temp = date.split('-');

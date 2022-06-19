@@ -34,9 +34,12 @@ import {
     TAXI_PARTY_ENTER_REQUEST,
     TAXI_PARTY_ENTER_SUCCESS,
     TAXI_PARTY_ENTER_FAILURE,
-    TAXI_ERROR_MODAL_CLICK_REQUEST,
-    TAXI_ERROR_MODAL_CLICK_SUCCESS,
-    TAXI_ERROR_MODAL_CLICK_FAILRURE,
+    TAXI_SECOND_MODAL_CLICK_REQUEST,
+    TAXI_SECOND_MODAL_CLICK_SUCCESS,
+    TAXI_SECOND_MODAL_CLICK_FAILRURE,
+    TAXI_ROOM_DELETE_MODAL_REQUEST,
+    TAXI_ROOM_DELETE_MODAL_SUCCESS,
+    TAXI_ROOM_DELETE_MODAL_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -69,21 +72,33 @@ export const initialState = {
     deleteTaxiPartyLoading: false,
     deleteTaxiPartyDone: false,
     deleteTaxiPartyError: null,
+    // 삭제 모달에 뜰 정보
+    deleteInfo: null, // myTaxiParty
+    isDeleteTaxiPartyModal: false,
+    isDeleteAllowModal: false,
     // 택시 파티 생성
     createTaxiPartyLoading: false,
     createTaxiPartyDone: false,
     createTaxiPartyError: null,
+    showCreateErrorModal: false,
     // 채팅방 입장 알림 모달창
     isEnterChattingRoomModalOpen: false,
     // 알림 모달창에 뜨게 될 정보들
     chattingRoomInfo: null,
-    // 에러창 뜨게할까요
+    // 입장 에러창 뜨게할까요
     showErrorModal: false,
 };
 
 export const getMyTaxiParties = () => {
     return {
         type: TAXI_LIST_FETCH_REQUEST,
+    };
+};
+
+export const deleteModal = data => {
+    return {
+        type: TAXI_ROOM_DELETE_MODAL_REQUEST,
+        data,
     };
 };
 
@@ -148,9 +163,9 @@ export const taxiPartyEnter = id => {
     };
 };
 
-export const taxiErrorModalClose = () => {
+export const taxiSecondModalClose = () => {
     return {
-        type: TAXI_ERROR_MODAL_CLICK_REQUEST,
+        type: TAXI_SECOND_MODAL_CLICK_REQUEST,
     };
 };
 
@@ -233,6 +248,7 @@ const reducer = (state = initialState, action) => {
             case TAXI_PARTY_CREATE_FAILURE:
                 draft.createTaxiPartyLoading = false;
                 draft.createTaxiPartyError = action.error;
+                draft.showCreateErrorModal = true;
                 break;
             case TAXI_PARTY_ENTER_REQUEST:
                 draft.isTaxiPartyEnterLoading = true;
@@ -256,12 +272,14 @@ const reducer = (state = initialState, action) => {
                 draft.showErrorModal = true;
                 break;
 
-            case TAXI_ERROR_MODAL_CLICK_REQUEST:
+            case TAXI_SECOND_MODAL_CLICK_REQUEST:
                 break;
-            case TAXI_ERROR_MODAL_CLICK_SUCCESS:
-                draft.showErrorModal = !draft.showErrorModal;
+            case TAXI_SECOND_MODAL_CLICK_SUCCESS: // 2번째 확인 모달 종료 조건
+                draft.showErrorModal = false;
+                draft.showCreateErrorModal = false;
+                draft.isDeleteAllowModal = false;
                 break;
-            case TAXI_ERROR_MODAL_CLICK_FAILRURE:
+            case TAXI_SECOND_MODAL_CLICK_FAILRURE:
                 break;
             case TAXI_PARTY_LIST_RESTART_REQUEST:
                 break;
@@ -278,15 +296,16 @@ const reducer = (state = initialState, action) => {
                     !draft.isEnterChattingRoomModalOpen;
                 console.log('saga 이후 reducer', action.data);
                 draft.chattingRoomInfo = action.data;
-                // draft.showErrorModal = false;
                 break;
             case TAXI_TO_CHAT_INFO_MODAL_FAILURE:
                 break;
-            case TAXI_ERROR_MODAL_CLICK_REQUEST:
+            case TAXI_ROOM_DELETE_MODAL_REQUEST:
                 break;
-            case TAXI_ERROR_MODAL_CLICK_SUCCESS:
+            case TAXI_ROOM_DELETE_MODAL_SUCCESS:
+                draft.deleteInfo = action.data;
+                draft.isDeleteTaxiPartyModal = !draft.isDeleteTaxiPartyModal;
                 break;
-            case TAXI_ERROR_MODAL_CLICK_FAILRURE:
+            case TAXI_ROOM_DELETE_MODAL_FAILURE:
                 break;
             case TAXI_ROOM_DELETE_REQUEST:
                 draft.deleteTaxiPartyLoading = true;
@@ -297,9 +316,10 @@ const reducer = (state = initialState, action) => {
                 draft.deleteTaxiPartyLoading = false;
                 draft.deleteTaxiPartyDone = true;
                 draft.deleteTaxiPartyError = null;
+                draft.isDeleteTaxiPartyModal = !draft.isDeleteTaxiPartyModal;
+                draft.isDeleteAllowModal = !draft.isDeleteAllowModal;
                 break;
             case TAXI_ROOM_DELETE_FAILURE:
-                console.log(action.err);
                 draft.deleteTaxiPartyLoading = false;
                 draft.deleteTaxiPartyError = action.err;
                 break;
