@@ -59,7 +59,6 @@ export const createTaxiPartyApi = async paramsData => {
 
 // 택시 파티 입장 API
 export const taxiPartyEnterApi = async id => {
-    console.log(id);
     console.log(`${process.env.REACT_APP_API_URL}${API_TAXI}party/${id}`);
     return await withAuthInstance.post(
         `${process.env.REACT_APP_API_URL}${API_TAXI}party/${id}`,
