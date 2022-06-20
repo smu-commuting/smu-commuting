@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState, useCallback } from 'react';
@@ -12,7 +13,8 @@ import { getChatMessageList } from '../../modules/reducers/chat';
 import { firstEnterDateParser } from '../../constants/FirstEnterDateParser';
 import MeChatBox from '../../components/ChattingRoomPage/MeChatBox/MeChatBox';
 import SenderChatBox from '../../components/ChattingRoomPage/SenderChatBox/SenderChatBox';
-import { getMyTaxiParties } from '../../modules/reducers/taxi';
+
+let messageBottle = [];
 
 function ChattingPage() {
     // 소켓 connect
@@ -24,11 +26,16 @@ function ChattingPage() {
     const userId = useSelector(state => state.user.me.id);
     const studentId = useSelector(state => state.user.me.studentId);
     const { chatMessageList } = useSelector(state => state.chat);
-    const { chatMessageListLoading, chatLoadEnd, chatMessageListDone } =
-        useSelector(state => state.chat);
+    const {
+        chatMessageListLoading,
+        chatLoadEnd,
+        chatMessageListDone,
+        chatMessageAllList,
+    } = useSelector(state => state.chat);
 
     const [prevHeight, setPrevHeight] = useState();
-    const [messageBottle, setMessageBottle] = useState([]);
+
+    // const [messageBottle, setMessageBottle] = useState([]);
     const [myChat, setMyChat] = useState();
     const myChatChange = e => {
         setMyChat(e.target.value);
@@ -36,47 +43,13 @@ function ChattingPage() {
 
     const pushMessage = useCallback(message => {
         const received = JSON.parse(message.body);
-        setMessageBottle(prev => {
-            return [...prev, received];
-        });
+        messageBottle = [...messageBottle, received];
         window.scrollTo(0, document.body.offsetHeight + 100);
-    }, []);
-
-    const fetchData = () => {
-        console.log('첫번째');
-        setMessageBottle(prev => {
-            return [];
-        });
-        console.log('첫번째', messageBottle);
-        dispatch(getMyTaxiParties());
-        dispatch(
-            getChatMessageList({
-                roomId: id,
-                size: 10,
-                date: firstEnterDateParser(),
-            }),
-        );
-    };
-
-    const fetchDataSecond = useCallback(() => {
-        console.log('두번째', messageBottle);
-        if (!chatLoadEnd) {
-            if (chatMessageList.length !== 0 && chatMessageListDone) {
-                const reverse = [...chatMessageList].reverse();
-                setMessageBottle(() => {
-                    return [...reverse, ...messageBottle];
-                });
-                window.scrollTo(0, document.body.offsetHeight - prevHeight);
-                setPrevHeight(() => document.body.offsetHeight);
-            } else {
-                setMessageBottle(() => []);
-            }
-        }
     }, []);
 
     // 처음 들어올 때
     useEffect(() => {
-        // dispatch(getMyTaxiParties());
+        messageBottle = [];
         ws.connect(
             {},
             () => {
@@ -84,30 +57,32 @@ function ChattingPage() {
             },
             {},
         );
-        fetchData();
-        fetchDataSecond();
-        setPrevHeight(() => document.body.offsetHeight);
-        // dispatch(
-        //     getChatMessageList({
-        //         roomId: id,
-        //         size: 10,
-        //         date: firstEnterDateParser(),
-        //     }),
-        // );
-        window.scrollTo(0, document.body.offsetHeight);
 
+        setPrevHeight(document.body.offsetHeight);
+        dispatch(
+            getChatMessageList({
+                roomId: id,
+                size: 10,
+                date: firstEnterDateParser(),
+            }),
+        );
+        window.scrollTo(0, document.body.offsetHeight);
+        // messageBottle.concat(messageBottle, chatMessageList);
+        // messageBottle = [...chatMessageList];
+        // console.log(messageBottle);
         // 나갈때 웹 소켓 연결 끊어줌
         return () => ws && ws.disconnect();
     }, []);
 
     // 데이터 fetch 되면 메세지 배열 10개 앞에 추가하기
     useEffect(() => {
-        fetchDataSecond();
-        // const reverse = [...chatMessageList].reverse();
-        // setMessageBottle(() => [...reverse, ...messageBottle]);
-        // window.scrollTo(0, document.body.offsetHeight - prevHeight);
-        // setPrevHeight(document.body.offsetHeight);
-    }, [chatMessageList]);
+        if (chatMessageListDone) {
+            const reverse = [...chatMessageList].reverse();
+            messageBottle = [...reverse, ...messageBottle];
+            window.scrollTo(0, document.body.offsetHeight - prevHeight);
+            setPrevHeight(document.body.offsetHeight);
+        }
+    }, [chatMessageListDone]);
 
     // 스크롤 천장에 닿으면 데이터 dispatch
     useEffect(() => {
@@ -154,37 +129,37 @@ function ChattingPage() {
     return (
         <div className="chattingpage-wrapper">
             <ChattingRoomHeader />
-            {chatMessageListDone ? (
-                <div className="chattingroompage-wrapper">
-                    <p className="notice">
-                        탑승 시각 기준 전후 1시간동안에는 <br /> 하나의 채팅방만
-                        입장할 수 있습니다.
-                    </p>
-                    {messageBottle.length !== 0 &&
-                        messageBottle.map((message, index) => {
-                            return message.senderStudentId ===
-                                parseInt(studentId, 10) ? (
-                                <MeChatBox
-                                    key={index}
-                                    id={message.messageId}
-                                    content={message.content}
-                                    senderId={message.senderStudentId}
-                                    createdTime={message.createdTime}
-                                />
-                            ) : (
-                                <SenderChatBox
-                                    key={index}
-                                    id={message.messageId}
-                                    content={message.content}
-                                    senderId={message.senderStudentId}
-                                    createdTime={message.createdTime}
-                                />
-                            );
-                        })}
-                </div>
-            ) : (
-                <p>로딩중</p>
-            )}
+            <div className="chattingroompage-wrapper">
+                <p className="notice">
+                    탑승 시각 기준 전후 1시간동안에는 <br /> 하나의 채팅방만
+                    입장할 수 있습니다.
+                </p>
+                {chatMessageListDone ? (
+                    chatMessageAllList.map((message, index) => {
+                        console.log(messageBottle);
+                        return message.senderStudentId ===
+                            parseInt(studentId, 10) ? (
+                            <MeChatBox
+                                key={index}
+                                id={message.messageId}
+                                content={message.content}
+                                senderId={message.senderStudentId}
+                                createdTime={message.createdTime}
+                            />
+                        ) : (
+                            <SenderChatBox
+                                key={index}
+                                id={message.messageId}
+                                content={message.content}
+                                senderId={message.senderStudentId}
+                                createdTime={message.createdTime}
+                            />
+                        );
+                    })
+                ) : (
+                    <p>로딩중</p>
+                )}
+            </div>
             <div className="chatinputarea-wrapper">
                 <div>
                     <img src={Refusal} alt="합승거부" />

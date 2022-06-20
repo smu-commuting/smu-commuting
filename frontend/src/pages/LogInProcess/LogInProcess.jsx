@@ -12,13 +12,9 @@ function LogInProcess() {
     const dispatch = useDispatch();
     const { id, accessToken, studentId } = useParams();
     useEffect(() => {
-        // console.log(accessToken);
         axios.defaults.headers.common['Authorization'] = accessToken;
-        // console.log(axios.defaults.headers.common['Authorization']);
         if (studentId === 'null') {
-            setTimeout(() => {
-                navigate('/signup');
-            }, 1500);
+            navigate('/signup');
         } else {
             const userInfo = {
                 email: `${studentId}@sangmyung.kr`,
@@ -26,9 +22,7 @@ function LogInProcess() {
                 id,
             };
             dispatch(loginRequest(userInfo));
-            setTimeout(() => {
-                navigate('/home');
-            }, 1500);
+            navigate('/home');
         }
     }, []);
     return <LoadingPage />;

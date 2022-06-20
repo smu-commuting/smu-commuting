@@ -6,7 +6,6 @@ import { withAuthInstance } from './common';
 const { API_BUS } = API_URLS;
 
 export const busApi = async data => {
-    console.log(`${process.env.REACT_APP_API_URL}${API_BUS}${data}`);
     return await withAuthInstance.get(
         `${process.env.REACT_APP_API_URL}${API_BUS}${data}`,
     );
