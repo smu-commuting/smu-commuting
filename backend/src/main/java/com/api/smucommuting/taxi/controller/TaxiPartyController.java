@@ -59,7 +59,7 @@ public class TaxiPartyController {
 
     @GetMapping("/party/{taxiPartyId}/exit/users")
     public ResponseEntity<ApiResult<List<TaxiPartyResponse.TaxiPartyUsers>>> getTaxiPartyExitUsers(@PathVariable Long taxiPartyId) {
-        List<TaxiPartyResponse.TaxiPartyUsers> response = taxiPartyService.getTaxiPartyUsers(taxiPartyId);
+        List<TaxiPartyResponse.TaxiPartyUsers> response = taxiPartyService.getTaxiPartyExitUsers(taxiPartyId);
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
     }
 

@@ -61,13 +61,20 @@ public class TaxiPartyService {
         return TaxiPartyResponse.TaxiPartyUsers.listsOf(userList);
     }
 
+    @Transactional(readOnly = true)
+    public List<TaxiPartyResponse.TaxiPartyUsers> getTaxiPartyExitUsers(Long taxiPartyId) {
+        List<Long> userIds = taxiExitGroupRepository.findAllByTaxiPartyId(taxiPartyId).stream().map(TaxiExitGroup::getUserId).collect(Collectors.toList());
+        List<User> userList = users.findAllByUserIdIn(userIds);
+        return TaxiPartyResponse.TaxiPartyUsers.listsOf(userList);
+    }
+
     public void update(Long taxiPartyId, TaxiPartyRequest.Update request, User loginUser) {
         TaxiParty taxiParty = taxiPartyRepository.findByIdWithTaxiGroup(taxiPartyId).orElseThrow(TaxiPartyNotFoundException::new);
         taxiParty.update(request.getMaximum(), loginUser, taxiPartyValidator, taxiParty);
     }
 
     public void exit(Long taxiPartyId, Long loginUserId) {
-        TaxiParty taxiParty = taxiPartyRepository.findByIdWithTaxiGroup(taxiPartyId).orElseThrow();
+        TaxiParty taxiParty = taxiPartyRepository.findByIdWithTaxiGroup(taxiPartyId).orElseThrow(TaxiPartyNotFoundException::new);
         List<TaxiGroup> taxiGroupList = taxiParty.getTaxiGroupList();
         if (taxiGroupList.size() == 1) {
             taxiPartyRepository.deleteById(taxiPartyId);
