@@ -17,10 +17,7 @@ function ChattingListPage() {
         useSelector(state => state.taxi);
     useEffect(() => {
         dispatch(getMyTaxiParties());
-    }, [dispatch]);
-    useEffect(() => {
-        // dispatch(getMyTaxiParties());
-    }, [deleteTaxiPartyDone, isDeleteAllowModal]);
+    }, [dispatch, deleteTaxiPartyDone, isDeleteAllowModal]);
     const onChatRoomEnter = useCallback(id => {
         navigate(`/chatroom/${id}`);
     }, []);
@@ -29,7 +26,7 @@ function ChattingListPage() {
     }, []);
     return (
         <ul className="chattinglist-wrapper">
-            {myTaxiParties !== null ? (
+            {myTaxiParties.length !== 0 ? (
                 myTaxiParties.map(myTaxiParty => {
                     return (
                         <li

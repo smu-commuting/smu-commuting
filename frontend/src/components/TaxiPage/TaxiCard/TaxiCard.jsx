@@ -40,7 +40,6 @@ function TaxiCard({ taxiPartyId, headcount, maximum, time }) {
     };
     return (
         <div className={card} onClick={onCardClick} aria-hidden>
-            <p>{taxiPartyId}</p>
             <p>{time}</p>
             <p>
                 {headcount} / {maximum}

@@ -5,6 +5,9 @@
         padding-top: 7rem;
         padding-bottom: 4.5rem;
         .notice {
+            position: sticky;
+            top: 10rem;
+            opacity: 0.3;
             text-align: center;
             @include font-face('NotoSansKR-Regular', 1.3rem, 2rem, #a19fad);
         }

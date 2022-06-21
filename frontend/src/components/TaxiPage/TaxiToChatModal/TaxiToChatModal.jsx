@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import {
     taxiPartyEnter,
     taxiToChatModal,
@@ -15,21 +15,15 @@ function TaxiToChatModal() {
         state => state.taxi,
     );
 
-    const toChatRoom = useCallback(() => {
-        console.log(taxiToChatRoom);
-        if (taxiToChatRoom) {
-            navigate(`/chatroom/${chattingRoomInfo.taxiPartyId}`);
-        }
-    }, [taxiToChatRoom]);
-
     const onCancelClick = useCallback(() => {
         dispatch(taxiToChatModal());
     }, [dispatch]);
 
     const onAgreeClick = useCallback(() => {
         dispatch(taxiPartyEnter(chattingRoomInfo.taxiPartyId));
-        toChatRoom();
-    }, [dispatch]);
+        if (taxiToChatRoom)
+            navigate(`/chatroom/${chattingRoomInfo.taxiPartyId}`);
+    }, [dispatch, taxiToChatRoom]);
 
     return (
         <div className="taxitochatmodal-wrapper">

@@ -65,7 +65,7 @@ function TaxiPage() {
                 }),
             );
         }, 100);
-    }, [placeId, date, placeName, createTaxiPartyDone]);
+    }, [dispatch, placeId, date, placeName, createTaxiPartyDone]);
 
     useEffect(() => {
         setPartyList([...partyList, ...taxiPartyList]);

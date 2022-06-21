@@ -2,7 +2,7 @@
 /* eslint-disable prefer-const */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-array-index-key */
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import './ChattingPage.scss';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,6 +19,7 @@ import MeChatBox from '../../components/ChattingRoomPage/MeChatBox/MeChatBox';
 import SenderChatBox from '../../components/ChattingRoomPage/SenderChatBox/SenderChatBox';
 
 function ChattingPage() {
+    const scrollRef = useRef();
     // 소켓 connect
     const sock = new SockJS(`${process.env.REACT_APP_API_URL}/chat`);
     const ws = Stomp.over(sock);
@@ -37,12 +38,18 @@ function ChattingPage() {
         setMyChat(e.target.value);
     };
 
+    const scrollToBottom = useCallback(() => {
+        scrollRef.current.scrollIntoView({
+            block: 'end',
+        });
+    }, []);
+
     const pushMessage = useCallback(message => {
         const received = JSON.parse(message.body);
         setMessageBottle(prev => {
             return [...prev, received];
         });
-        window.scrollTo(0, document.body.offsetHeight + 100);
+        setTimeout(() => scrollToBottom(), 1);
     }, []);
 
     // 처음 들어올 때
@@ -54,8 +61,6 @@ function ChattingPage() {
             },
             {},
         );
-
-        setPrevHeight(document.body.offsetHeight);
         dispatch(
             getChatMessageList({
                 roomId: id,
@@ -63,12 +68,15 @@ function ChattingPage() {
                 date: firstEnterDateParser(),
             }),
         );
-        window.scrollTo(0, document.body.offsetHeight);
         return () => {
             dispatch(deleteChatMessageList());
             ws && ws.disconnect();
         };
     }, [dispatch, id]);
+
+    useEffect(() => {
+        if (messageBottle.length < 11) scrollToBottom();
+    }, [messageBottle]);
 
     // 데이터 fetch 되면 메세지 배열 10개 앞에 추가하기
     useEffect(() => {
@@ -125,9 +133,9 @@ function ChattingPage() {
     return (
         <div className="chattingpage-wrapper">
             <ChattingRoomHeader />
-            <div className="chattingroompage-wrapper">
+            <div className="chattingroompage-wrapper" ref={scrollRef}>
                 <p className="notice">
-                    탑승 시각 기준 전후 1시간동안에는 <br /> 하나의 채팅방만
+                    탑승 시각 기준 전후 30분 동안에는 <br /> 하나의 채팅방만
                     입장할 수 있습니다.
                 </p>
                 {messageBottle ? (
