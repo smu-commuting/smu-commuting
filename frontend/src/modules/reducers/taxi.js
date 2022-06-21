@@ -60,10 +60,7 @@ export const initialState = {
     taxiPartyListError: null,
     taxiPartyEnd: false,
     // 택시 파티 참여
-    isTaxiPartyEnterLoading: false,
-    isTaxiPartyEnterDone: false,
     isTaxiPartyEnterError: null,
-    taxiPartyEnterResult: false,
     // 현재 조회중인 택시 페이지의 날짜
     taxiPageInfo: null,
     // 택시 생성 모달창 오픈
@@ -156,9 +153,10 @@ export const taxiToChatModal = data => {
     };
 };
 
-export const taxiPartyEnter = () => {
+export const taxiPartyEnter = errorMessage => {
     return {
         type: TAXI_PARTY_ENTER_REQUEST,
+        errorMessage,
     };
 };
 
@@ -250,25 +248,15 @@ const reducer = (state = initialState, action) => {
                 draft.showCreateErrorModal = true;
                 break;
             case TAXI_PARTY_ENTER_REQUEST:
-                // draft.isTaxiPartyEnterLoading = true;
-                // draft.isTaxiPartyEnterDone = false;
-                // draft.isTaxiPartyEnterError = null;
                 break;
             case TAXI_PARTY_ENTER_SUCCESS:
                 console.log(action.data);
-                // draft.isTaxiPartyEnterLoading = false;
-                // draft.isTaxiPartyEnterDone = true;
-                // draft.isTaxiPartyEnterError = null;
                 draft.isEnterChattingRoomModalOpen = false;
-                // draft.taxiPartyEnterResult = action.data;
+                draft.isTaxiPartyEnterError = action.data && action.data;
+                draft.showErrorModal = action.data && true;
                 console.log(action.data);
                 break;
             case TAXI_PARTY_ENTER_FAILURE:
-                // draft.isTaxiPartyEnterLoading = false;
-                // draft.isTaxiPartyEnterDone = false;
-                // draft.isTaxiPartyEnterError = action.error;
-                draft.isEnterChattingRoomModalOpen = false;
-                draft.showErrorModal = true;
                 break;
 
             case TAXI_SECOND_MODAL_CLICK_REQUEST:

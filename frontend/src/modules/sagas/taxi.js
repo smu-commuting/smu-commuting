@@ -184,19 +184,20 @@ function* taxiToChatModal(action) {
     }
 }
 
-function* taxiPartyEnter() {
+function* taxiPartyEnter(action) {
     // console.log('saga 요청 이전 action', action);
     try {
+        console.log('참여', action);
         // const result = yield call(taxiPartyEnterApi, action.id);
         yield put({
             type: TAXI_PARTY_ENTER_SUCCESS,
-            // data: result.data,
+            data: action.data,
         });
     } catch (err) {
-        console.log('saga', err);
+        // console.log('saga', err);
         yield put({
             type: TAXI_PARTY_ENTER_FAILURE,
-            error: err.response.data.error.info, // 모달에 띄워질 문구
+            // error: err.response.data.error.info, // 모달에 띄워질 문구
         });
     }
 }

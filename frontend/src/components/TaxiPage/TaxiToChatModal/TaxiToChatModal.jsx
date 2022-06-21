@@ -28,10 +28,10 @@ function TaxiToChatModal() {
         const result = await taxiPartyEnterApi(chattingRoomInfo.taxiPartyId);
         dispatch(taxiPartyEnter());
         if (result.data.status === 200) {
+            dispatch(taxiPartyEnter());
             navigate(`/chatroom/${chattingRoomInfo.taxiPartyId}`);
         } else {
-            // dispatch(taxiPartyEnter(result.response.data.error.info));
-            alert(result.response.data.error.info);
+            dispatch(taxiPartyEnter(result.response.data.error.info));
         }
     }, []);
 
