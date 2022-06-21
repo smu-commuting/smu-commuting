@@ -22,7 +22,11 @@ GET {{apiUrl}}/taxi/my-parties
 Authorization: {{authorizationToken}}
 
 ###
-GET {{apiUrl}}/taxi/party/2/users?status=IN
+GET {{apiUrl}}/taxi/party/2/users
+Authorization: {{authorizationToken}}
+
+###
+GET {{apiUrl}}/taxi/party/2/exit/users
 Authorization: {{authorizationToken}}
 
 ###
