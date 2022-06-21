@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable prefer-const */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-array-index-key */
@@ -9,12 +10,13 @@ import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 import ChattingRoomHeader from '../../components/ChattingRoomPage/ChattingRoomHeader/ChattingRoomHeader';
 import Refusal from '../../assets/ChattingList/ChatInputArea/합승거부.png';
-import { getChatMessageList } from '../../modules/reducers/chat';
+import {
+    deleteChatMessageList,
+    getChatMessageList,
+} from '../../modules/reducers/chat';
 import { firstEnterDateParser } from '../../constants/FirstEnterDateParser';
 import MeChatBox from '../../components/ChattingRoomPage/MeChatBox/MeChatBox';
 import SenderChatBox from '../../components/ChattingRoomPage/SenderChatBox/SenderChatBox';
-
-let messageBottle = [];
 
 function ChattingPage() {
     // 소켓 connect
@@ -26,16 +28,10 @@ function ChattingPage() {
     const userId = useSelector(state => state.user.me.id);
     const studentId = useSelector(state => state.user.me.studentId);
     const { chatMessageList } = useSelector(state => state.chat);
-    const {
-        chatMessageListLoading,
-        chatLoadEnd,
-        chatMessageListDone,
-        chatMessageAllList,
-    } = useSelector(state => state.chat);
-
+    const { chatMessageListLoading, chatLoadEnd, chatMessageListDone } =
+        useSelector(state => state.chat);
     const [prevHeight, setPrevHeight] = useState();
-
-    // const [messageBottle, setMessageBottle] = useState([]);
+    const [messageBottle, setMessageBottle] = useState([]);
     const [myChat, setMyChat] = useState();
     const myChatChange = e => {
         setMyChat(e.target.value);
@@ -43,13 +39,14 @@ function ChattingPage() {
 
     const pushMessage = useCallback(message => {
         const received = JSON.parse(message.body);
-        messageBottle = [...messageBottle, received];
+        setMessageBottle(prev => {
+            return [...prev, received];
+        });
         window.scrollTo(0, document.body.offsetHeight + 100);
     }, []);
 
     // 처음 들어올 때
     useEffect(() => {
-        messageBottle = [];
         ws.connect(
             {},
             () => {
@@ -67,18 +64,17 @@ function ChattingPage() {
             }),
         );
         window.scrollTo(0, document.body.offsetHeight);
-        // messageBottle.concat(messageBottle, chatMessageList);
-        // messageBottle = [...chatMessageList];
-        // console.log(messageBottle);
-        // 나갈때 웹 소켓 연결 끊어줌
-        return () => ws && ws.disconnect();
-    }, []);
+        return () => {
+            dispatch(deleteChatMessageList());
+            ws && ws.disconnect();
+        };
+    }, [dispatch, id]);
 
     // 데이터 fetch 되면 메세지 배열 10개 앞에 추가하기
     useEffect(() => {
         if (chatMessageListDone) {
             const reverse = [...chatMessageList].reverse();
-            messageBottle = [...reverse, ...messageBottle];
+            setMessageBottle([...reverse, ...messageBottle]);
             window.scrollTo(0, document.body.offsetHeight - prevHeight);
             setPrevHeight(document.body.offsetHeight);
         }
@@ -134,9 +130,8 @@ function ChattingPage() {
                     탑승 시각 기준 전후 1시간동안에는 <br /> 하나의 채팅방만
                     입장할 수 있습니다.
                 </p>
-                {chatMessageListDone ? (
-                    chatMessageAllList.map((message, index) => {
-                        console.log(messageBottle);
+                {messageBottle ? (
+                    messageBottle.map((message, index) => {
                         return message.senderStudentId ===
                             parseInt(studentId, 10) ? (
                             <MeChatBox

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './ChattingListPage.scss';
@@ -17,9 +17,9 @@ function ChattingListPage() {
         useSelector(state => state.taxi);
     useEffect(() => {
         dispatch(getMyTaxiParties());
-    }, []);
+    }, [dispatch]);
     useEffect(() => {
-        dispatch(getMyTaxiParties());
+        // dispatch(getMyTaxiParties());
     }, [deleteTaxiPartyDone, isDeleteAllowModal]);
     const onChatRoomEnter = useCallback(id => {
         navigate(`/chatroom/${id}`);
@@ -29,7 +29,7 @@ function ChattingListPage() {
     }, []);
     return (
         <ul className="chattinglist-wrapper">
-            {myTaxiParties ? (
+            {myTaxiParties !== null ? (
                 myTaxiParties.map(myTaxiParty => {
                     return (
                         <li
