@@ -39,6 +39,9 @@ public class TaxiPartyService {
 
     public void join(Long taxiPartyId, User loginUser) {
         TaxiParty taxiParty = taxiPartyInfo.getTaxiParty(taxiPartyId);
+        if (taxiExitGroupRepository.findByUserId(loginUser.getId()).isPresent()) {
+            taxiExitGroupRepository.deleteByUserId(loginUser.getId());
+        }
         taxiGroupRepository.save(TaxiGroup.createWithValidate(loginUser.getId(), taxiParty, taxiPartyValidator));
     }
 
