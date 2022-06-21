@@ -28,6 +28,8 @@ function TaxiPage() {
         taxiPartyEnd,
         taxiPartyListDone,
         createTaxiPartyDone,
+        isDeleteAllowModal,
+        isTaxiPartyEnterDone,
     } = useSelector(state => state.taxi);
     const [partyList, setPartyList] = useState([]);
     const [month, setMonth] = useState();
@@ -43,7 +45,6 @@ function TaxiPage() {
 
     useEffect(() => {
         setTimeout(() => {
-            window.scrollTo(0, 0);
             setPartyList(() => {
                 return [];
             });
@@ -64,8 +65,16 @@ function TaxiPage() {
                     date,
                 }),
             );
-        }, 100);
-    }, [placeId, date, placeName, createTaxiPartyDone]);
+        }, 1);
+    }, [
+        dispatch,
+        placeId,
+        date,
+        placeName,
+        createTaxiPartyDone,
+        isDeleteAllowModal,
+        isTaxiPartyEnterDone,
+    ]);
 
     useEffect(() => {
         setPartyList([...partyList, ...taxiPartyList]);

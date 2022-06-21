@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable prefer-const */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-array-index-key */
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import './ChattingPage.scss';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,13 +10,17 @@ import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 import ChattingRoomHeader from '../../components/ChattingRoomPage/ChattingRoomHeader/ChattingRoomHeader';
 import Refusal from '../../assets/ChattingList/ChatInputArea/합승거부.png';
-import { getChatMessageList } from '../../modules/reducers/chat';
+import {
+    deleteChatMessageList,
+    getChatMessageList,
+} from '../../modules/reducers/chat';
 import { firstEnterDateParser } from '../../constants/FirstEnterDateParser';
 import MeChatBox from '../../components/ChattingRoomPage/MeChatBox/MeChatBox';
 import SenderChatBox from '../../components/ChattingRoomPage/SenderChatBox/SenderChatBox';
-import { getMyTaxiParties } from '../../modules/reducers/taxi';
+import { taxiPartyEnter } from '../../modules/reducers/taxi';
 
 function ChattingPage() {
+    const scrollRef = useRef();
     // 소켓 connect
     const sock = new SockJS(`${process.env.REACT_APP_API_URL}/chat`);
     const ws = Stomp.over(sock);
@@ -26,7 +32,6 @@ function ChattingPage() {
     const { chatMessageList } = useSelector(state => state.chat);
     const { chatMessageListLoading, chatLoadEnd, chatMessageListDone } =
         useSelector(state => state.chat);
-
     const [prevHeight, setPrevHeight] = useState();
     const [messageBottle, setMessageBottle] = useState([]);
     const [myChat, setMyChat] = useState();
@@ -34,49 +39,22 @@ function ChattingPage() {
         setMyChat(e.target.value);
     };
 
+    const scrollToBottom = useCallback(() => {
+        scrollRef.current.scrollIntoView({
+            block: 'end',
+        });
+    }, []);
+
     const pushMessage = useCallback(message => {
         const received = JSON.parse(message.body);
         setMessageBottle(prev => {
             return [...prev, received];
         });
-        window.scrollTo(0, document.body.offsetHeight + 100);
-    }, []);
-
-    const fetchData = () => {
-        console.log('첫번째');
-        setMessageBottle(prev => {
-            return [];
-        });
-        console.log('첫번째', messageBottle);
-        dispatch(getMyTaxiParties());
-        dispatch(
-            getChatMessageList({
-                roomId: id,
-                size: 10,
-                date: firstEnterDateParser(),
-            }),
-        );
-    };
-
-    const fetchDataSecond = useCallback(() => {
-        console.log('두번째', messageBottle);
-        if (!chatLoadEnd) {
-            if (chatMessageList.length !== 0 && chatMessageListDone) {
-                const reverse = [...chatMessageList].reverse();
-                setMessageBottle(() => {
-                    return [...reverse, ...messageBottle];
-                });
-                window.scrollTo(0, document.body.offsetHeight - prevHeight);
-                setPrevHeight(() => document.body.offsetHeight);
-            } else {
-                setMessageBottle(() => []);
-            }
-        }
+        setTimeout(() => scrollToBottom(), 1);
     }, []);
 
     // 처음 들어올 때
     useEffect(() => {
-        // dispatch(getMyTaxiParties());
         ws.connect(
             {},
             () => {
@@ -84,30 +62,32 @@ function ChattingPage() {
             },
             {},
         );
-        fetchData();
-        fetchDataSecond();
-        setPrevHeight(() => document.body.offsetHeight);
-        // dispatch(
-        //     getChatMessageList({
-        //         roomId: id,
-        //         size: 10,
-        //         date: firstEnterDateParser(),
-        //     }),
-        // );
-        window.scrollTo(0, document.body.offsetHeight);
+        dispatch(
+            getChatMessageList({
+                roomId: id,
+                size: 10,
+                date: firstEnterDateParser(),
+            }),
+        );
+        return () => {
+            dispatch(deleteChatMessageList());
+            ws && ws.disconnect();
+        };
+    }, [dispatch, id]);
 
-        // 나갈때 웹 소켓 연결 끊어줌
-        return () => ws && ws.disconnect();
-    }, []);
+    useEffect(() => {
+        if (messageBottle.length < 11) scrollToBottom();
+    }, [messageBottle]);
 
     // 데이터 fetch 되면 메세지 배열 10개 앞에 추가하기
     useEffect(() => {
-        fetchDataSecond();
-        // const reverse = [...chatMessageList].reverse();
-        // setMessageBottle(() => [...reverse, ...messageBottle]);
-        // window.scrollTo(0, document.body.offsetHeight - prevHeight);
-        // setPrevHeight(document.body.offsetHeight);
-    }, [chatMessageList]);
+        if (chatMessageListDone) {
+            const reverse = [...chatMessageList].reverse();
+            setMessageBottle([...reverse, ...messageBottle]);
+            window.scrollTo(0, document.body.offsetHeight - prevHeight);
+            setPrevHeight(document.body.offsetHeight);
+        }
+    }, [chatMessageListDone]);
 
     // 스크롤 천장에 닿으면 데이터 dispatch
     useEffect(() => {
@@ -154,37 +134,36 @@ function ChattingPage() {
     return (
         <div className="chattingpage-wrapper">
             <ChattingRoomHeader />
-            {chatMessageListDone ? (
-                <div className="chattingroompage-wrapper">
-                    <p className="notice">
-                        탑승 시각 기준 전후 1시간동안에는 <br /> 하나의 채팅방만
-                        입장할 수 있습니다.
-                    </p>
-                    {messageBottle.length !== 0 &&
-                        messageBottle.map((message, index) => {
-                            return message.senderStudentId ===
-                                parseInt(studentId, 10) ? (
-                                <MeChatBox
-                                    key={index}
-                                    id={message.messageId}
-                                    content={message.content}
-                                    senderId={message.senderStudentId}
-                                    createdTime={message.createdTime}
-                                />
-                            ) : (
-                                <SenderChatBox
-                                    key={index}
-                                    id={message.messageId}
-                                    content={message.content}
-                                    senderId={message.senderStudentId}
-                                    createdTime={message.createdTime}
-                                />
-                            );
-                        })}
-                </div>
-            ) : (
-                <p>로딩중</p>
-            )}
+            <div className="chattingroompage-wrapper" ref={scrollRef}>
+                <p className="notice">
+                    탑승 시각 기준 전후 30분 동안에는 <br /> 하나의 채팅방만
+                    입장할 수 있습니다.
+                </p>
+                {messageBottle ? (
+                    messageBottle.map((message, index) => {
+                        return message.senderStudentId ===
+                            parseInt(studentId, 10) ? (
+                            <MeChatBox
+                                key={index}
+                                id={message.messageId}
+                                content={message.content}
+                                senderId={message.senderStudentId}
+                                createdTime={message.createdTime}
+                            />
+                        ) : (
+                            <SenderChatBox
+                                key={index}
+                                id={message.messageId}
+                                content={message.content}
+                                senderId={message.senderStudentId}
+                                createdTime={message.createdTime}
+                            />
+                        );
+                    })
+                ) : (
+                    <p>로딩중</p>
+                )}
+            </div>
             <div className="chatinputarea-wrapper">
                 <div>
                     <img src={Refusal} alt="합승거부" />

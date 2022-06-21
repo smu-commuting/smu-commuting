@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -82,6 +83,9 @@ function App() {
                             {isTaxiCreateModalOpen && <TaxiCreateModal />}
                             {isEnterChattingRoomModalOpen && (
                                 <TaxiToChatModal />
+                            )}
+                            {isDeleteAllowModal && (
+                                <TaxiPartyDeleteCompleteModal />
                             )}
                             {showErrorModal && <TaxiNotEnterModal />}
                             {showCreateErrorModal && <TaxiNotCreateModal />}

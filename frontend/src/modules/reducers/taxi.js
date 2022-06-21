@@ -44,7 +44,7 @@ import {
 
 export const initialState = {
     // 채팅 리스트
-    myTaxiParties: null,
+    myTaxiParties: [],
     myTaxiPartiesLoading: false,
     myTaxiPartiesDone: false,
     myTaxiPartiesError: null,
@@ -59,10 +59,7 @@ export const initialState = {
     taxiPartyListDone: false,
     taxiPartyListError: null,
     taxiPartyEnd: false,
-    taxiToChatRoom: false,
     // 택시 파티 참여
-    isTaxiPartyEnterLoading: false,
-    isTaxiPartyEnterDone: false,
     isTaxiPartyEnterError: null,
     // 현재 조회중인 택시 페이지의 날짜
     taxiPageInfo: null,
@@ -156,10 +153,10 @@ export const taxiToChatModal = data => {
     };
 };
 
-export const taxiPartyEnter = id => {
+export const taxiPartyEnter = errorMessage => {
     return {
         type: TAXI_PARTY_ENTER_REQUEST,
-        id,
+        errorMessage,
     };
 };
 
@@ -251,25 +248,15 @@ const reducer = (state = initialState, action) => {
                 draft.showCreateErrorModal = true;
                 break;
             case TAXI_PARTY_ENTER_REQUEST:
-                draft.isTaxiPartyEnterLoading = true;
-                draft.isTaxiPartyEnterDone = false;
-                draft.isTaxiPartyEnterError = null;
-                draft.taxiToChatRoom = false;
                 break;
             case TAXI_PARTY_ENTER_SUCCESS:
                 console.log(action.data);
-                draft.isTaxiPartyEnterLoading = false;
-                draft.isTaxiPartyEnterDone = true;
-                draft.isTaxiPartyEnterError = null;
                 draft.isEnterChattingRoomModalOpen = false;
-                draft.taxiToChatRoom = true;
+                draft.isTaxiPartyEnterError = action.data && action.data;
+                draft.showErrorModal = action.data && true;
+                console.log(action.data);
                 break;
             case TAXI_PARTY_ENTER_FAILURE:
-                draft.isTaxiPartyEnterLoading = false;
-                draft.isTaxiPartyEnterDone = false;
-                draft.isTaxiPartyEnterError = action.error;
-                draft.isEnterChattingRoomModalOpen = false;
-                draft.showErrorModal = true;
                 break;
 
             case TAXI_SECOND_MODAL_CLICK_REQUEST:
@@ -294,7 +281,6 @@ const reducer = (state = initialState, action) => {
             case TAXI_TO_CHAT_INFO_MODAL_SUCCESS:
                 draft.isEnterChattingRoomModalOpen =
                     !draft.isEnterChattingRoomModalOpen;
-                console.log('saga 이후 reducer', action.data);
                 draft.chattingRoomInfo = action.data;
                 break;
             case TAXI_TO_CHAT_INFO_MODAL_FAILURE:

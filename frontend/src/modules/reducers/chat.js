@@ -6,10 +6,14 @@ import {
     CHAT_ROOM_MESSAGE_REQUEST,
     CHAT_ROOM_MESSAGE_SUCCESS,
     CHAT_ROOM_MESSAGE_FAILURE,
+    CHAT_ROOM_DELETE_MESSAGE_REQUEST,
+    CHAT_ROOM_DELETE_MESSAGE_SUCCESS,
+    CHAT_ROOM_DELETE_MESSAGE_FAILURE,
 } from '../../constants';
 
 export const initialState = {
     chatMessageList: [],
+    chatMessageAllList: [],
     chatLoadEnd: false,
     chatMessageListLoading: false,
     chatMessageListDone: false,
@@ -20,6 +24,12 @@ export const getChatMessageList = data => {
     return {
         type: CHAT_ROOM_MESSAGE_REQUEST,
         data,
+    };
+};
+
+export const deleteChatMessageList = () => {
+    return {
+        type: CHAT_ROOM_DELETE_MESSAGE_REQUEST,
     };
 };
 
@@ -44,6 +54,13 @@ const reducer = (state = initialState, action) => {
             case CHAT_ROOM_MESSAGE_FAILURE:
                 draft.chatMessageListLoading = false;
                 draft.chatMessageListError = action.err;
+                break;
+            case CHAT_ROOM_DELETE_MESSAGE_REQUEST:
+                break;
+            case CHAT_ROOM_DELETE_MESSAGE_SUCCESS:
+                draft.chatMessageList = [];
+                break;
+            case CHAT_ROOM_DELETE_MESSAGE_FAILURE:
                 break;
             default:
                 break;

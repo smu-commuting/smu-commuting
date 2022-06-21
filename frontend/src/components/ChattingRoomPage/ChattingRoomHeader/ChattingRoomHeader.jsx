@@ -39,7 +39,7 @@ function ChattingRoomHeader() {
     }, []);
 
     useEffect(() => {
-        if (isDeleteAllowModal) navigate(`/chatlist`);
+        if (isDeleteAllowModal) navigate(-1);
     }, [isDeleteAllowModal]);
 
     const gotoBackPage = useCallback(() => {

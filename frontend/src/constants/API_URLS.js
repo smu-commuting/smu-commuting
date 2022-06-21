@@ -1,7 +1,7 @@
 const API_URLS = {
     // api post
     API_USER: '/api/user/',
-    API_BUS: '/api/rest/',
+    API_BUS: '/api/bus/',
     API_CHAT: '/api/chat/',
     API_TAXI: '/api/taxi/',
 };

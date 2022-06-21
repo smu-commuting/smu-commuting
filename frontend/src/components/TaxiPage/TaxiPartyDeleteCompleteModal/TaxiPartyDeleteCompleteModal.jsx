@@ -5,7 +5,7 @@ import './TaxiPartyDeleteCompleteModal.scss';
 
 function TaxiPartyDeleteCompleteModal() {
     const dispatch = useDispatch();
-    const { deleteInfo } = useSelector(state => state.taxi);
+    const { deleteInfo, chattingRoomInfo } = useSelector(state => state.taxi);
     const onModalClose = useCallback(() => {
         dispatch(taxiSecondModalClose());
     }, [dispatch]);
@@ -14,8 +14,14 @@ function TaxiPartyDeleteCompleteModal() {
             <div className="taxipartydeletecompletemodal">
                 <div className="main-text">
                     <p>
-                        {deleteInfo.date} &nbsp; {deleteInfo.place} &nbsp;
-                        {deleteInfo.time} &nbsp;
+                        {deleteInfo.place
+                            ? deleteInfo.place
+                            : chattingRoomInfo.placeName}
+                        &nbsp;
+                        {deleteInfo.time
+                            ? deleteInfo.time
+                            : chattingRoomInfo.time}
+                        &nbsp;
                     </p>
                     <p>채팅방에서 나가기 되었습니다.</p>
                 </div>

@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
@@ -11,6 +12,7 @@ function TaxiCard({ taxiPartyId, headcount, maximum, time }) {
     const { taxiPageInfo, myTaxiParties } = useSelector(state => state.taxi);
     const dispatch = useDispatch();
     const [card, setCard] = useState();
+    const [isEnter, setIsEnter] = useState();
     const navigate = useNavigate();
     useEffect(() => {
         if (maximum - headcount === 0) {
@@ -20,10 +22,13 @@ function TaxiCard({ taxiPartyId, headcount, maximum, time }) {
         } else {
             setCard('taxicard-not-end-wrapper');
         }
+        let alreadyEnter = myTaxiParties.find(myTaxiParty => {
+            return myTaxiParty.chatRoomId === taxiPartyId;
+        });
+        alreadyEnter && setIsEnter('enter-party');
     }, []);
 
     const onCardClick = () => {
-        console.log(taxiPageInfo.placeName);
         const data = {
             placeName: taxiPageInfo.placeName,
             time,
@@ -31,16 +36,15 @@ function TaxiCard({ taxiPartyId, headcount, maximum, time }) {
         };
         // useSelector로 해당 클릭한 id(chatRoomId) 와 비교하여
         // 존재(taxiPartyId)한다면 바로 채팅방으로 이동, 없다면 모달 띄워준다.
-        const alreadyEnter = myTaxiParties.find(myTaxiParty => {
+        let alreadyEnter = myTaxiParties.find(myTaxiParty => {
             return myTaxiParty.chatRoomId === taxiPartyId;
         });
-        alreadyEnter
+        alreadyEnter !== undefined
             ? navigate(`/chatroom/${taxiPartyId}`)
             : dispatch(taxiToChatModal(data));
     };
     return (
-        <div className={card} onClick={onCardClick} aria-hidden>
-            <p>{taxiPartyId}</p>
+        <div className={`${card} ${isEnter}`} onClick={onCardClick} aria-hidden>
             <p>{time}</p>
             <p>
                 {headcount} / {maximum}
