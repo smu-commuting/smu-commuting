@@ -10,8 +10,8 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "taxi_group")
-public class TaxiGroup extends BaseTimeEntity {
+@Table(name = "taxi_exit_group")
+public class TaxiExitGroup extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,22 +25,15 @@ public class TaxiGroup extends BaseTimeEntity {
 
     private void assignTaxiParty(TaxiParty taxiParty) {
         this.taxiParty = taxiParty;
-        taxiParty.getTaxiGroupList().add(this);
+        taxiParty.getTaxiExitGroupList().add(this);
     }
 
-    public static void createWithOutValidate(Long userId, TaxiParty taxiParty) {
-        TaxiGroup taxiGroup = TaxiGroup.builder()
+    public static TaxiExitGroup create(Long userId, TaxiParty taxiParty) {
+        TaxiExitGroup taxiExitGroup = TaxiExitGroup.builder()
                 .userId(userId)
                 .build();
-        taxiGroup.assignTaxiParty(taxiParty);
-    }
-
-    public static TaxiGroup createWithValidate(Long userId, TaxiParty taxiParty, TaxiPartyValidator taxiPartyValidator) {
-        taxiPartyValidator.joinValidate(taxiParty.getId(), userId, taxiParty.getMeetingTime());
-        TaxiGroup taxiGroup = TaxiGroup.builder()
-                .userId(userId)
-                .build();
-        taxiGroup.assignTaxiParty(taxiParty);
-        return taxiGroup;
+        taxiExitGroup.assignTaxiParty(taxiParty);
+        return taxiExitGroup;
     }
 }
+

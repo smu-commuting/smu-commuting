@@ -1,9 +1,9 @@
 package com.api.smucommuting.taxi.service;
 
 import com.api.smucommuting.common.dto.PageDto;
-import com.api.smucommuting.common.exception.taxi.TaxiGroupNotFoundException;
 import com.api.smucommuting.common.exception.taxi.TaxiPartyNotFoundException;
 import com.api.smucommuting.taxi.domain.*;
+import com.api.smucommuting.taxi.domain.repository.TaxiExitGroupRepository;
 import com.api.smucommuting.taxi.domain.repository.TaxiGroupRepository;
 import com.api.smucommuting.taxi.domain.repository.TaxiPartyRepository;
 import com.api.smucommuting.taxi.dto.TaxiPartyRequest;
@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 public class TaxiPartyService {
     private final TaxiPartyRepository taxiPartyRepository;
     private final TaxiGroupRepository taxiGroupRepository;
+    private final TaxiExitGroupRepository taxiExitGroupRepository;
     private final TaxiPartyInfo taxiPartyInfo;
     private final TaxiPartyValidator taxiPartyValidator;
     private final Users users;
@@ -54,8 +55,8 @@ public class TaxiPartyService {
     }
 
     @Transactional(readOnly = true)
-    public List<TaxiPartyResponse.TaxiPartyUsers> getTaxiPartyUsers(Long taxiPartyId, TaxiGroupUserStatus status) {
-        List<Long> userIds = taxiGroupRepository.findAllByTaxiPartyIdAndStatus(taxiPartyId, status).stream().map(TaxiGroup::getUserId).collect(Collectors.toList());
+    public List<TaxiPartyResponse.TaxiPartyUsers> getTaxiPartyUsers(Long taxiPartyId) {
+        List<Long> userIds = taxiGroupRepository.findAllByTaxiPartyId(taxiPartyId).stream().map(TaxiGroup::getUserId).collect(Collectors.toList());
         List<User> userList = users.findAllByUserIdIn(userIds);
         return TaxiPartyResponse.TaxiPartyUsers.listsOf(userList);
     }
@@ -66,12 +67,15 @@ public class TaxiPartyService {
     }
 
     public void exit(Long taxiPartyId, Long loginUserId) {
-        List<TaxiGroup> allByTaxiPartyIdAndStatus = taxiGroupRepository.findAllByTaxiPartyIdAndStatus(taxiPartyId, TaxiGroupUserStatus.IN);
-        if (allByTaxiPartyIdAndStatus.size() == 1) {
+        TaxiParty taxiParty = taxiPartyRepository.findByIdWithTaxiGroup(taxiPartyId).orElseThrow();
+        List<TaxiGroup> taxiGroupList = taxiParty.getTaxiGroupList();
+        if (taxiGroupList.size() == 1) {
             taxiPartyRepository.deleteById(taxiPartyId);
         } else {
-            TaxiGroup taxiGroup = taxiGroupRepository.findByTaxiPartyIdAndUserId(taxiPartyId, loginUserId).orElseThrow(TaxiGroupNotFoundException::new);
-            taxiGroup.exit();
+            taxiGroupList.removeIf(taxiGroup -> taxiGroup.getUserId().equals(loginUserId));
+            taxiGroupRepository.deleteByUserId(loginUserId);
+            TaxiExitGroup taxiExitGroup = TaxiExitGroup.create(loginUserId, taxiParty);
+            taxiExitGroupRepository.save(taxiExitGroup);
         }
     }
 }

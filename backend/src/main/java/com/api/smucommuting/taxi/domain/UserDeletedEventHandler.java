@@ -21,7 +21,7 @@ public class UserDeletedEventHandler {
     public void handle(UserDeletedEvent event) {
         List<TaxiGroup> taxiGroupList = taxiGroupRepository.findAllByUserId(event.getUserId());
         taxiGroupList.forEach(taxiGroup -> {
-            List<TaxiGroup> allByTaxiPartyIdAndStatus = taxiGroupRepository.findAllByTaxiPartyIdAndStatus(taxiGroup.getTaxiParty().getId(), TaxiGroupUserStatus.IN);
+            List<TaxiGroup> allByTaxiPartyIdAndStatus = taxiGroupRepository.findAllByTaxiPartyId(taxiGroup.getTaxiParty().getId());
             if (allByTaxiPartyIdAndStatus.size() == 1) {
                 taxiPartyRepository.deleteById(taxiGroup.getTaxiParty().getId());
             }

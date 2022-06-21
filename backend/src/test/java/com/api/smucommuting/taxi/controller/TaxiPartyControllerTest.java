@@ -153,7 +153,7 @@ class TaxiPartyControllerTest extends MvcTest {
         TaxiPartyResponse.TaxiPartyUsers response1 = TaxiPartyResponse.TaxiPartyUsers.builder().userId(1L).studentId(1234).build();
         TaxiPartyResponse.TaxiPartyUsers response2 = TaxiPartyResponse.TaxiPartyUsers.builder().userId(2L).studentId(1111).build();
 
-        given(taxiPartyService.getTaxiPartyUsers(any(), any())).willReturn(Arrays.asList(response1, response2));
+        given(taxiPartyService.getTaxiPartyUsers(any())).willReturn(Arrays.asList(response1, response2));
 
         ResultActions results = mvc.perform(RestDocumentationRequestBuilders
                 .get("/api/taxi/party/{taxiPartyId}/users", 1)
