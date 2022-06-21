@@ -7,7 +7,7 @@ import Talk from '../../../assets/ChattingList/ChattingListHeader/talk1.png';
 function ChattingListHeader() {
     const navigate = useNavigate();
     const onBackClick = useCallback(() => {
-        navigate('/home');
+        navigate(-1);
     }, []);
     return (
         <div className="chattinglistheader-wrapper">

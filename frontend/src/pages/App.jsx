@@ -84,6 +84,9 @@ function App() {
                             {isEnterChattingRoomModalOpen && (
                                 <TaxiToChatModal />
                             )}
+                            {isDeleteAllowModal && (
+                                <TaxiPartyDeleteCompleteModal />
+                            )}
                             {showErrorModal && <TaxiNotEnterModal />}
                             {showCreateErrorModal && <TaxiNotCreateModal />}
                             <Header />

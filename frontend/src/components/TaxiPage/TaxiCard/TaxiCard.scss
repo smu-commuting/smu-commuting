@@ -9,6 +9,9 @@
     font-size: 1.8rem;
 }
 
+.enter-party {
+    border: 0.35rem solid coral;
+}
 .taxicard-not-end-wrapper {
     @extend %taxicard-wrapper;
     background-color: #7b88f2;
@@ -19,7 +22,7 @@
     background-color: #1a2962;
 }
 
-.taxicard-end-wrapper{
+.taxicard-end-wrapper {
     @extend %taxicard-wrapper;
     display: none;
 }

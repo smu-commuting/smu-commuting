@@ -184,13 +184,13 @@ function* taxiToChatModal(action) {
     }
 }
 
-function* taxiPartyEnter(action) {
-    console.log('saga 요청 이전 action', action);
+function* taxiPartyEnter() {
+    // console.log('saga 요청 이전 action', action);
     try {
-        const result = yield call(taxiPartyEnterApi, action.id);
+        // const result = yield call(taxiPartyEnterApi, action.id);
         yield put({
             type: TAXI_PARTY_ENTER_SUCCESS,
-            data: result.data,
+            // data: result.data,
         });
     } catch (err) {
         console.log('saga', err);
