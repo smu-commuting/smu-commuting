@@ -11,6 +11,7 @@ import alert from '../../assets/TaxiPage/option-alert.png';
 import nolist from '../../assets/TaxiPage/nolist.png';
 import add from '../../assets/TaxiPage/add.png';
 import {
+    getMyTaxiParties,
     getTaxiPartyList,
     taxiCreateModalClick,
     taxiPartyListRestart,
@@ -27,6 +28,8 @@ function TaxiPage() {
         taxiPartyEnd,
         taxiPartyListDone,
         createTaxiPartyDone,
+        isDeleteAllowModal,
+        isTaxiPartyEnterDone,
     } = useSelector(state => state.taxi);
     const [partyList, setPartyList] = useState([]);
     const [month, setMonth] = useState();
@@ -41,26 +44,37 @@ function TaxiPage() {
     }, [dispatch]);
 
     useEffect(() => {
-        window.scrollTo(0, 0);
-        setPage(() => {
-            return 1;
-        });
-        // console.log('첫페이지', page);
-        dispatch(taxiPartyListRestart());
-        setPartyList([]);
-        if (isTaxiCreateModalOpen) dispatch(taxiCreateModalClick());
-        const temp = date.split('-');
-        setMonth(temp[1]);
-        setDay(temp[2]);
-        dispatch(
-            getTaxiPartyList({
-                page,
-                size: 10,
-                placeId,
-                date,
-            }),
-        );
-    }, [placeId, date, placeName, createTaxiPartyDone]);
+        setTimeout(() => {
+            setPartyList(() => {
+                return [];
+            });
+            setPage(() => {
+                return 1;
+            });
+            dispatch(getMyTaxiParties()); // 택시 리스트 들어왔을 때, 내가 속해있는 채팅방 리스트 redux 관리
+            dispatch(taxiPartyListRestart());
+            if (isTaxiCreateModalOpen) dispatch(taxiCreateModalClick());
+            const temp = date.split('-');
+            setMonth(temp[1]);
+            setDay(temp[2]);
+            dispatch(
+                getTaxiPartyList({
+                    page,
+                    size: 10,
+                    placeId,
+                    date,
+                }),
+            );
+        }, 1);
+    }, [
+        dispatch,
+        placeId,
+        date,
+        placeName,
+        createTaxiPartyDone,
+        isDeleteAllowModal,
+        isTaxiPartyEnterDone,
+    ]);
 
     useEffect(() => {
         setPartyList([...partyList, ...taxiPartyList]);
@@ -88,8 +102,6 @@ function TaxiPage() {
                     setPage(prev => {
                         return prev + 1;
                     });
-                    // console.log(page);
-                    // console.log(page, '요청');
                 }
             }
         }

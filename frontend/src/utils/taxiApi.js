@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-return-await */
 /* eslint-disable import/prefer-default-export */
+import { type } from '@testing-library/user-event/dist/type';
 import { API_URLS } from '../constants';
 import { withAuthInstance } from './common';
 
@@ -16,7 +17,7 @@ export const getMyTaxiPartiesApi = async () => {
 // 채팅 목록 삭제 API
 export const deleteTaxiPartyApi = async id => {
     return await withAuthInstance.delete(
-        `${process.env.REACT_APP_API_URL}${API_TAXI}room/${id}`,
+        `${process.env.REACT_APP_API_URL}${API_TAXI}party/${id}`,
     );
 };
 
@@ -53,5 +54,12 @@ export const createTaxiPartyApi = async paramsData => {
     return await withAuthInstance.post(
         `${process.env.REACT_APP_API_URL}${API_TAXI}party`,
         data,
+    );
+};
+
+// 택시 파티 입장 API
+export const taxiPartyEnterApi = async id => {
+    return await withAuthInstance.post(
+        `${process.env.REACT_APP_API_URL}${API_TAXI}party/${id}`,
     );
 };

@@ -5,3 +5,4 @@
 - link:/docs/taxi.html[택시합승(TaxiParty) API]
 - link:/docs/blockuser.html[합승거부(BlockedUser) API]
 - link:/docs/post.html[게시물(Post) API]
+- link:/docs/bus.html[버스(Bus) API]

@@ -1,18 +1,21 @@
 @import '../../../styles/utils.scss';
 .mechatbox-wrapper {
-    width : 100%;
+    width: 100%;
     display: flex;
     justify-content: end;
-    padding-right : 2.5rem;
+    padding-right: 2.5rem;
     .content {
         position: relative;
-        // width: 20rem;
-        padding: 2rem;
+        padding: 1.5rem;
+        max-width: 70%;
         background: #e0e0e0;
         -webkit-border-radius: 1rem;
         -moz-border-radius: 1rem;
         border-radius: 1rem;
-        @include font-face('NotoSansKR-Medium', 1.3rem, 0, black);
+        font-family: 'NotoSansKR-Medium';
+        font-size: 1.3rem;
+        color: black;
+        line-height: 1.6rem;
     }
 
     .content:after {
@@ -27,5 +30,4 @@
         right: -1rem;
         top: 20%;
     }
-
 }

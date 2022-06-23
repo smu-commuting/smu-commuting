@@ -4,7 +4,6 @@ import com.api.smucommuting.auth.domain.security.CurrentUser;
 import com.api.smucommuting.auth.domain.security.CustomUserDetails;
 import com.api.smucommuting.common.dto.ApiResult;
 import com.api.smucommuting.common.dto.PageDto;
-import com.api.smucommuting.taxi.domain.TaxiGroupUserStatus;
 import com.api.smucommuting.taxi.dto.TaxiPartyRequest;
 import com.api.smucommuting.taxi.dto.TaxiPartyResponse;
 import com.api.smucommuting.taxi.service.TaxiPartyService;
@@ -53,8 +52,14 @@ public class TaxiPartyController {
     }
 
     @GetMapping("/party/{taxiPartyId}/users")
-    public ResponseEntity<ApiResult<List<TaxiPartyResponse.TaxiPartyUsers>>> getTaxiPartyUsers(@PathVariable Long taxiPartyId, @RequestParam("status") TaxiGroupUserStatus status) {
-        List<TaxiPartyResponse.TaxiPartyUsers> response = taxiPartyService.getTaxiPartyUsers(taxiPartyId, status);
+    public ResponseEntity<ApiResult<List<TaxiPartyResponse.TaxiPartyUsers>>> getTaxiPartyUsers(@PathVariable Long taxiPartyId) {
+        List<TaxiPartyResponse.TaxiPartyUsers> response = taxiPartyService.getTaxiPartyUsers(taxiPartyId);
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
+    }
+
+    @GetMapping("/party/{taxiPartyId}/exit/users")
+    public ResponseEntity<ApiResult<List<TaxiPartyResponse.TaxiPartyUsers>>> getTaxiPartyExitUsers(@PathVariable Long taxiPartyId) {
+        List<TaxiPartyResponse.TaxiPartyUsers> response = taxiPartyService.getTaxiPartyExitUsers(taxiPartyId);
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
     }
 

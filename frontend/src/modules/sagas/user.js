@@ -36,10 +36,10 @@ function* login(action) {
 
 function* signup(action) {
     try {
-        yield call(signupApi, action.data);
+        const result = yield call(signupApi, action.data);
         yield put({
             type: USER_SIGN_UP_SUCCESS,
-            data: action.data,
+            data: result.data,
         });
     } catch (err) {
         yield put({

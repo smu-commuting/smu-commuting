@@ -68,18 +68,29 @@ include::{snippets}/taxi_my_parties/http-request.adoc[]
 include::{snippets}/taxi_my_parties/http-response.adoc[]
 include::{snippets}/taxi_my_parties/response-fields.adoc[]
 
-=== 택시 채팅방 유저 목록 조회
+=== 택시 채팅방에 있는 유저 목록 조회
 
 `GET /api/taxi/party/{taxiPartyId}/users`
 
 요청 HTTP
 include::{snippets}/taxi_party_user_list/http-request.adoc[]
 include::{snippets}/taxi_party_user_list/path-parameters.adoc[]
-include::{snippets}/taxi_party_user_list/request-parameters.adoc[]
 
 성공 응답 HTTP
 include::{snippets}/taxi_party_user_list/http-response.adoc[]
 include::{snippets}/taxi_party_user_list/response-fields.adoc[]
+
+=== 택시 채팅방에 나간 유저 목록 조회
+
+`GET /api/taxi/party/{taxiPartyId}/exit/users`
+
+요청 HTTP
+include::{snippets}/taxi_party_exit_user_list/http-request.adoc[]
+include::{snippets}/taxi_party_exit_user_list/path-parameters.adoc[]
+
+성공 응답 HTTP
+include::{snippets}/taxi_party_exit_user_list/http-response.adoc[]
+include::{snippets}/taxi_party_exit_user_list/response-fields.adoc[]
 
 === 파티 최대 인원 수정
 

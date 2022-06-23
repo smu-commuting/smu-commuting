@@ -58,7 +58,7 @@ function MyPage() {
             </div>
             <div className="mypage-content">
                 <div className="std-profile">
-                    <img clsssName="sumung" src={Profile} alt="프로필사진" />
+                    <img className="sumung" src={Profile} alt="프로필사진" />
                     <div>
                         {loginDone.studentId}
                         <br /> 상명대학교 서울캠퍼스

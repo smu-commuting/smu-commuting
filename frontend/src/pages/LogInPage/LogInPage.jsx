@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useCallback } from 'react';
 import './LogInPage.scss';
 import { ReactComponent as Sumuro } from '../../assets/LogInPage/스뮤로.svg';
@@ -26,6 +27,7 @@ function LogInPage() {
                     onClick={onGoogleLogIn}
                     aria-hidden="true"
                 />
+
                 <img
                     src={Kakao}
                     alt="Kakao"

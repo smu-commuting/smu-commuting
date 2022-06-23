@@ -1,6 +1,7 @@
 @import '../../styles/utils.scss';
 .chattinglist-wrapper {
     padding: 1rem 3rem;
+    margin-bottom: 6.4rem;
     li {
         display: flex;
         justify-content: space-between;
@@ -9,5 +10,20 @@
         border-bottom: 1px solid #a19fad;
         @include font-face('NotoSansKR-Medium', 1.5rem, 0, #000000);
     }
-    margin-bottom: 6.4rem;
+    .non-chat-wrapper {
+        height: 70vh;
+        min-height: 33rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .content-wrapper {
+            img {
+                display: block;
+            }
+            p {
+                text-align: center;
+                @include font-face('NotoSansKR-Bold', 1.3rem, 0, #a19fad);
+            }
+        }
+    }
 }

@@ -1,0 +1,24 @@
+= 샘물로 API 문서 (Bus)
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:snippets: ../../../build/generated-snippets
+
+== Bus
+
+=== 버스 정보 조회
+
+`GET /api/bus/{busRouteId}`
+
+요청 HTTP
+
+include::{snippets}/bus_getInfo/path-parameters.adoc[]
+include::{snippets}/bus_getInfo/http-request.adoc[]
+
+성공 응답 HTTP
+
+include::{snippets}/bus_getInfo/http-response.adoc[]
+include::{snippets}/bus_getInfo/response-fields.adoc[]

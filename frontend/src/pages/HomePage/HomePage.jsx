@@ -29,40 +29,42 @@ function HomePage() {
     }, []);
     return (
         <div className="homepage-inner-wrapper">
-            <div className="homepage-top-line">
-                <div>
-                    <img
-                        src={Bus}
-                        alt="버스"
-                        onClick={onBusClick}
-                        aria-hidden="true"
-                    />
+            <div className="center">
+                <div className="homepage-top-line">
+                    <div>
+                        <img
+                            src={Bus}
+                            alt="버스"
+                            onClick={onBusClick}
+                            aria-hidden="true"
+                        />
+                    </div>
+                    <div>
+                        <img
+                            src={Taxi}
+                            alt="택시"
+                            onClick={onTaxiClick}
+                            aria-hidden="true"
+                        />
+                    </div>
                 </div>
-                <div>
-                    <img
-                        src={Taxi}
-                        alt="택시"
-                        onClick={onTaxiClick}
-                        aria-hidden="true"
-                    />
-                </div>
-            </div>
-            <div className="homepage-bottom-line">
-                <div>
-                    <img
-                        src={Community}
-                        alt="커뮤니티"
-                        onClick={onCommunityClick}
-                        aria-hidden
-                    />
-                </div>
-                <div>
-                    <img
-                        src={Manual}
-                        alt="매뉴얼"
-                        onClick={onManualClick}
-                        aria-hidden
-                    />
+                <div className="homepage-bottom-line">
+                    <div>
+                        <img
+                            src={Community}
+                            alt="커뮤니티"
+                            onClick={onCommunityClick}
+                            aria-hidden
+                        />
+                    </div>
+                    <div>
+                        <img
+                            src={Manual}
+                            alt="매뉴얼"
+                            onClick={onManualClick}
+                            aria-hidden
+                        />
+                    </div>
                 </div>
             </div>
         </div>

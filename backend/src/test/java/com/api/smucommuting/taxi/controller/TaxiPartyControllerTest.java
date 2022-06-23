@@ -153,11 +153,10 @@ class TaxiPartyControllerTest extends MvcTest {
         TaxiPartyResponse.TaxiPartyUsers response1 = TaxiPartyResponse.TaxiPartyUsers.builder().userId(1L).studentId(1234).build();
         TaxiPartyResponse.TaxiPartyUsers response2 = TaxiPartyResponse.TaxiPartyUsers.builder().userId(2L).studentId(1111).build();
 
-        given(taxiPartyService.getTaxiPartyUsers(any(), any())).willReturn(Arrays.asList(response1, response2));
+        given(taxiPartyService.getTaxiPartyUsers(any())).willReturn(Arrays.asList(response1, response2));
 
         ResultActions results = mvc.perform(RestDocumentationRequestBuilders
                 .get("/api/taxi/party/{taxiPartyId}/users", 1)
-                .param("status", "IN")
         );
 
         results.andExpect(status().isOk())
@@ -166,8 +165,32 @@ class TaxiPartyControllerTest extends MvcTest {
                         pathParameters(
                                 parameterWithName("taxiPartyId").description("택시파티 식별자")
                         ),
-                        requestParameters(
-                                parameterWithName("status").description("안에 있는 유저(IN), 나간 유저(OUT)")
+                        responseFields(
+                                fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
+                                fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
+                                fieldWithPath("data.[].userId").type(JsonFieldType.NUMBER).description("유저 식별자"),
+                                fieldWithPath("data.[].studentId").type(JsonFieldType.NUMBER).description("유저 학번")
+                        )
+                ));
+    }
+
+    @Test
+    @DisplayName("택시채팅방 나간 유저 목록 조회 문서화")
+    public void getTaxiPartyExitUsers() throws Exception {
+        TaxiPartyResponse.TaxiPartyUsers response1 = TaxiPartyResponse.TaxiPartyUsers.builder().userId(1L).studentId(1234).build();
+        TaxiPartyResponse.TaxiPartyUsers response2 = TaxiPartyResponse.TaxiPartyUsers.builder().userId(2L).studentId(1111).build();
+
+        given(taxiPartyService.getTaxiPartyExitUsers(any())).willReturn(Arrays.asList(response1, response2));
+
+        ResultActions results = mvc.perform(RestDocumentationRequestBuilders
+                .get("/api/taxi/party/{taxiPartyId}/exit/users", 1)
+        );
+
+        results.andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("taxi_party_exit_user_list",
+                        pathParameters(
+                                parameterWithName("taxiPartyId").description("택시파티 식별자")
                         ),
                         responseFields(
                                 fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),

@@ -27,7 +27,7 @@ function Bus08() {
     );
     useEffect(() => {
         dispatch(isBusInfoFetch(Bus08ID));
-    }, []);
+    }, [dispatch]);
     return (
         <div className="bus08-wrapper">
             {isBusInfoModalOpen && <BusInfoModal />}

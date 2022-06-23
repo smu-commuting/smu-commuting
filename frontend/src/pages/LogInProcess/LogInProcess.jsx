@@ -1,37 +1,36 @@
 /* eslint-disable dot-notation */
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { loginRequest } from '../../modules/reducers/user';
 import LoadingPage from '../LoadingPage/LoadingPage';
 
 function LogInProcess() {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const { id, accessToken, studentId } = useParams();
     useEffect(() => {
-        // console.log(accessToken);
         axios.defaults.headers.common['Authorization'] = accessToken;
-        // console.log(axios.defaults.headers.common['Authorization']);
-        if (studentId === 'null') {
-            setTimeout(() => {
-                navigate('/signup');
-            }, 1500);
-        } else {
+        if (studentId !== 'null') {
             const userInfo = {
                 email: `${studentId}@sangmyung.kr`,
                 studentId,
                 id,
             };
             dispatch(loginRequest(userInfo));
-            setTimeout(() => {
-                navigate('/home');
-            }, 1500);
         }
     }, []);
-    return <LoadingPage />;
+    return (
+        <>
+            <LoadingPage />
+            {studentId !== 'null' ? (
+                <Navigate to="/home" />
+            ) : (
+                <Navigate to="/signup" />
+            )}
+        </>
+    );
 }
 
 export default LogInProcess;

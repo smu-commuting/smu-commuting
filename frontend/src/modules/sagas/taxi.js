@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { all, fork, put, takeLatest, call } from 'redux-saga/effects';
 
 import {
@@ -25,6 +26,18 @@ import {
     TAXI_PARTY_LIST_RESTART_REQUEST,
     TAXI_PARTY_LIST_RESTART_SUCCESS,
     TAXI_PARTY_LIST_RESTART_FAILURE,
+    TAXI_TO_CHAT_INFO_MODAL_REQUEST,
+    TAXI_TO_CHAT_INFO_MODAL_SUCCESS,
+    TAXI_TO_CHAT_INFO_MODAL_FAILURE,
+    TAXI_PARTY_ENTER_REQUEST,
+    TAXI_PARTY_ENTER_SUCCESS,
+    TAXI_PARTY_ENTER_FAILURE,
+    TAXI_SECOND_MODAL_CLICK_REQUEST,
+    TAXI_SECOND_MODAL_CLICK_SUCCESS,
+    TAXI_SECOND_MODAL_CLICK_FAILRURE,
+    TAXI_ROOM_DELETE_MODAL_REQUEST,
+    TAXI_ROOM_DELETE_MODAL_SUCCESS,
+    TAXI_ROOM_DELETE_MODAL_FAILURE,
 } from '../../constants';
 import {
     getMyTaxiPartiesApi,
@@ -33,11 +46,12 @@ import {
     getTaxiPartyListApi,
     createTaxiPartyApi,
 } from '../../utils';
+import { taxiPartyEnterApi } from '../../utils/taxiApi';
 
 function* getTaxiParties() {
-    const result = yield call(getMyTaxiPartiesApi);
-    console.log('요청 이후 result', result);
     try {
+        const result = yield call(getMyTaxiPartiesApi);
+        console.log('요청 이후 result', result);
         yield put({
             type: TAXI_LIST_FETCH_SUCCESS,
             data: result.data,
@@ -51,10 +65,10 @@ function* getTaxiParties() {
 }
 
 function* deleteTaxiParty(action) {
-    console.log('saga', action);
-    const result = yield call(deleteTaxiPartyApi, action.id);
-    console.log('요청 이후 result', result);
     try {
+        console.log('saga', action);
+        const result = yield call(deleteTaxiPartyApi, action.id);
+        console.log('요청 이후 result', result);
         yield put({
             type: TAXI_ROOM_DELETE_SUCCESS,
         });
@@ -67,9 +81,9 @@ function* deleteTaxiParty(action) {
 }
 
 function* getTaxiPlaceList() {
-    const result = yield call(getTaxiPlaceListApi);
-    console.log('요청 이후 result', result);
     try {
+        const result = yield call(getTaxiPlaceListApi);
+        console.log('요청 이후 result', result);
         yield put({
             type: TAXI_PLACE_LIST_SUCCESS,
             data: result.data,
@@ -83,8 +97,8 @@ function* getTaxiPlaceList() {
 }
 
 function* getTaxiPartyList(action) {
-    const result = yield call(getTaxiPartyListApi, action.data);
     try {
+        const result = yield call(getTaxiPartyListApi, action.data);
         yield put({
             type: TAXI_PARTY_LIST_SUCCESS,
             data: result.data,
@@ -126,9 +140,10 @@ function* taxiPageDate(action) {
 }
 
 function* createTaxiParty(action) {
-    const result = yield call(createTaxiPartyApi, action.data);
-    console.log('saga 결과', result);
     try {
+        console.log('saga 진입 이전', action.data);
+        const result = yield call(createTaxiPartyApi, action.data);
+        console.log('saga 결과', result);
         yield put({
             type: TAXI_PARTY_CREATE_SUCCESS,
             data: result.data,
@@ -136,7 +151,7 @@ function* createTaxiParty(action) {
     } catch (err) {
         yield put({
             type: TAXI_PARTY_CREATE_FAILURE,
-            error: err,
+            error: err.response.data.error.info,
         });
     }
 }
@@ -152,6 +167,74 @@ function* taxiPartyRestart() {
             error: err,
         });
     }
+}
+
+function* taxiToChatModal(action) {
+    console.log('saga', action);
+    try {
+        yield put({
+            type: TAXI_TO_CHAT_INFO_MODAL_SUCCESS,
+            data: action.data,
+        });
+    } catch (err) {
+        yield put({
+            type: TAXI_TO_CHAT_INFO_MODAL_FAILURE,
+            error: err,
+        });
+    }
+}
+
+function* taxiPartyEnter(action) {
+    // console.log('saga 요청 이전 action', action);
+    try {
+        console.log('참여', action);
+        // const result = yield call(taxiPartyEnterApi, action.id);
+        yield put({
+            type: TAXI_PARTY_ENTER_SUCCESS,
+            data: action.data,
+        });
+    } catch (err) {
+        // console.log('saga', err);
+        yield put({
+            type: TAXI_PARTY_ENTER_FAILURE,
+            // error: err.response.data.error.info, // 모달에 띄워질 문구
+        });
+    }
+}
+
+function* errorModalClose() {
+    try {
+        yield put({
+            type: TAXI_SECOND_MODAL_CLICK_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: TAXI_SECOND_MODAL_CLICK_FAILRURE,
+            error: err,
+        });
+    }
+}
+
+function* taxiRoomDeleteModal(action) {
+    try {
+        yield put({
+            type: TAXI_ROOM_DELETE_MODAL_SUCCESS,
+            data: action.data,
+        });
+    } catch (err) {
+        yield put({
+            type: TAXI_ROOM_DELETE_MODAL_FAILURE,
+            error: err,
+        });
+    }
+}
+
+function* watchTaxiRoomDeleteModal() {
+    yield takeLatest(TAXI_ROOM_DELETE_MODAL_REQUEST, taxiRoomDeleteModal);
+}
+
+function* watchTaxiPartyEnter() {
+    yield takeLatest(TAXI_PARTY_ENTER_REQUEST, taxiPartyEnter);
 }
 
 function* watchTaxiPartyRestart() {
@@ -186,6 +269,14 @@ function* watchCreateTaxiParty() {
     yield takeLatest(TAXI_PARTY_CREATE_REQUEST, createTaxiParty);
 }
 
+function* watchTaxiToChatModal() {
+    yield takeLatest(TAXI_TO_CHAT_INFO_MODAL_REQUEST, taxiToChatModal);
+}
+
+function* watchSecondModalClose() {
+    yield takeLatest(TAXI_SECOND_MODAL_CLICK_REQUEST, errorModalClose);
+}
+
 export default function* taxiSaga() {
     yield all([
         fork(watchTaxiPartiesList),
@@ -196,5 +287,9 @@ export default function* taxiSaga() {
         fork(watchTaxiPageDate),
         fork(watchCreateTaxiParty),
         fork(watchTaxiPartyRestart),
+        fork(watchTaxiToChatModal),
+        fork(watchTaxiPartyEnter),
+        fork(watchSecondModalClose),
+        fork(watchTaxiRoomDeleteModal),
     ]);
 }

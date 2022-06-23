@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -24,11 +25,24 @@ import InquiryWritePage from './inquiryWritePage/inquiryWritePage';
 import ChattingPage from './ChattingPage/ChattingPage';
 import TaxiPage from './TaxiPage/TaxiPage';
 import CommunityModal from '../components/CommunityPage/CommunityModal/CommunityModal';
+import TaxiToChatModal from '../components/TaxiPage/TaxiToChatModal/TaxiToChatModal';
+import TaxiNotEnterModal from '../components/TaxiPage/TaxiNotEnterModal/TaxiNotEnterModal';
+import TaxiNotCreateModal from '../components/TaxiPage/TaxiNotCreateModal/TaxiNotCreateModal';
+import TaxiPartyDeleteModal from '../components/TaxiPage/TaxiPartyDeleteModal/TaxiPartyDeleteModal';
+import TaxiPartyDeleteCompleteModal from '../components/TaxiPage/TaxiPartyDeleteCompleteModal/TaxiPartyDeleteCompleteModal';
 
 function App() {
     const { isBusModalOpen, isTaxiModalOpen, isCommunityModalOpen } =
         useSelector(state => state.user);
-    const { isTaxiCreateModalOpen } = useSelector(state => state.taxi);
+    const {
+        isTaxiCreateModalOpen,
+        isEnterChattingRoomModalOpen,
+        showErrorModal,
+        showCreateErrorModal,
+        isDeleteTaxiPartyModal,
+        isDeleteAllowModal,
+    } = useSelector(state => state.taxi);
+
     return (
         <Router>
             <Routes>
@@ -67,6 +81,14 @@ function App() {
                         <>
                             {isTaxiModalOpen && <TaxiModal />}
                             {isTaxiCreateModalOpen && <TaxiCreateModal />}
+                            {isEnterChattingRoomModalOpen && (
+                                <TaxiToChatModal />
+                            )}
+                            {isDeleteAllowModal && (
+                                <TaxiPartyDeleteCompleteModal />
+                            )}
+                            {showErrorModal && <TaxiNotEnterModal />}
+                            {showCreateErrorModal && <TaxiNotCreateModal />}
                             <Header />
                             <TaxiPage />
                         </>
@@ -76,6 +98,10 @@ function App() {
                     path="/chatlist"
                     element={
                         <>
+                            {isDeleteTaxiPartyModal && <TaxiPartyDeleteModal />}
+                            {isDeleteAllowModal && (
+                                <TaxiPartyDeleteCompleteModal />
+                            )}
                             <ChattingListHeader />
                             <ChattingListPage />
                             <ChattingListFooter />
@@ -90,7 +116,18 @@ function App() {
                 <Route path="/manual" element={<ManualPage />} />
                 <Route path="/inquirydetail" element={<InquiryDetailPage />} />
                 <Route path="/inquirywrite" element={<InquiryWritePage />} />
-                <Route path="/chatroom/:id" element={<ChattingPage />} />
+                <Route
+                    path="/chatroom/:id"
+                    element={
+                        <>
+                            {isDeleteTaxiPartyModal && <TaxiPartyDeleteModal />}
+                            {isDeleteAllowModal && (
+                                <TaxiPartyDeleteCompleteModal />
+                            )}
+                            <ChattingPage />
+                        </>
+                    }
+                />
             </Routes>
         </Router>
     );
