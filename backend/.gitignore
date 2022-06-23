@@ -9,7 +9,7 @@ db_volume
 /src/main/resources/application-oauth.yml
 /src/main/resources/application-mail.yml
 /src/main/resources/firebase/**
-/src/main
+/src/main/generated
 ### STS ###
 .apt_generated
 .classpath
