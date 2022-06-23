@@ -4,20 +4,23 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.auth.oauth2.GoogleCredentials;
 import lombok.RequiredArgsConstructor;
-import okhttp3.*;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
 public class FirebaseCloudMessageService {
-    //TODO API_URL 따로 관리하기
-    private final String API_URL = "https://fcm.googleapis.com/v1/projects/smulo-*****/messages:send";
+    @Value("${fcm.send.url}")
+    private String API_URL;
     private final ObjectMapper objectMapper;
 
     public void sendMessageTo(String targetToken, String title, String body) throws IOException {
@@ -33,9 +36,7 @@ public class FirebaseCloudMessageService {
                 .addHeader(HttpHeaders.CONTENT_TYPE, "application/json; UTF-8")
                 .build();
 
-        Response response = client.newCall(request).execute();
-
-        System.out.println(Objects.requireNonNull(response.body()).string());
+        client.newCall(request).execute();
     }
 
     private String makeMessage(String targetToken, String title, String body) throws JsonProcessingException {

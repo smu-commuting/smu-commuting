@@ -1,0 +1,9 @@
+POST {{apiUrl}}/test
+Authorization: {{authorizationToken}}
+Content-Type: application/json;charset=UTF-8
+
+{
+  "token": "tt",
+  "title": "테스트 333",
+  "body": "테스트입니다233."
+}

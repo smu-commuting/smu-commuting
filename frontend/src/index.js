@@ -8,6 +8,20 @@ import configureStore from './modules/store/configureStore';
 import App from './pages/App';
 import './styles/_reset.scss';
 
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register(`/firebase-messaging-sw.js`)
+        .then(function (registration) {
+            // messaging.useServiceWorker(registration);
+            console.log(
+                'Registration successful, scope is:',
+                registration.scope,
+            );
+        })
+        .catch(function (err) {
+            console.log('Service worker registration failed, error:', err);
+        });
+}
 axios.defaults.withCredentials = true;
 const store = configureStore();
 const persistor = persistStore(store);

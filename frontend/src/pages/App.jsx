@@ -2,6 +2,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { initializeApp } from 'firebase/app';
+import { getMessaging, getToken, onMessage } from 'firebase/messaging';
 import BusModal from '../components/BusPage/BusClickModal/BusClickModal';
 import TaxiModal from '../components/TaxiPage/TaxiClickModal/TaxiClickModal';
 import TaxiCreateModal from '../components/TaxiPage/TaxiCreateModal/TaxiCreateModal';
@@ -31,6 +33,37 @@ import TaxiNotCreateModal from '../components/TaxiPage/TaxiNotCreateModal/TaxiNo
 import TaxiPartyDeleteModal from '../components/TaxiPage/TaxiPartyDeleteModal/TaxiPartyDeleteModal';
 import TaxiPartyDeleteCompleteModal from '../components/TaxiPage/TaxiPartyDeleteCompleteModal/TaxiPartyDeleteCompleteModal';
 
+const firebaseConfig = {};
+
+// Initialize Firebase
+initializeApp(firebaseConfig);
+
+// Get registration token. Initially this makes a network call, once retrieved
+// subsequent calls to getToken will return from cache.
+const messaging = getMessaging();
+getToken(messaging, {
+    vapidKey: 'key',
+})
+    .then(currentToken => {
+        if (currentToken) {
+            console.log(currentToken);
+        } else {
+            // Show permission request UI
+            console.log(
+                'No registration token available. Request permission to generate one.',
+            );
+            // ...
+        }
+    })
+    .catch(err => {
+        console.log('An error occurred while retrieving token. ', err);
+        // ...
+    });
+
+onMessage(messaging, payload => {
+    console.log('Message received. ', payload);
+    console.log('messaging.', messaging);
+});
 function App() {
     const { isBusModalOpen, isTaxiModalOpen, isCommunityModalOpen } =
         useSelector(state => state.user);
