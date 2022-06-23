@@ -23,6 +23,7 @@ import ChattingPage from './ChattingPage/ChattingPage';
 import LostItemPage from './lostItemPage/lostItemPage';
 import LostItemDetailPage from './lostItemDetailPage/lostItemDetailPage';
 import LostItemWritePage from './lostItemWritePage/lostItemWritePage';
+import ProtestPage from './ProtestPage/ProtestPage';
 
 function App() {
     const { isBusModalOpen } = useSelector(state => state.user);
@@ -80,6 +81,7 @@ function App() {
                     element={<LostItemDetailPage />}
                 />
                 <Route path="/lostitemwrite" element={<LostItemWritePage />} />
+                <Route path="/protest" element={<ProtestPage />} />
             </Routes>
         </Router>
     );

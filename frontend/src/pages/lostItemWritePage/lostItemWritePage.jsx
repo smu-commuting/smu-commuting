@@ -26,7 +26,12 @@ const lostItemWritePage = () => {
                 </button>
             </div>
             <div className="lostitemwritepage-content">
-                <p className="header">제목을 입력해주세요.</p>
+                <p className="item-hash">
+                    # 습득 물품명을 간단한 해시태그로 입력해주세요.
+                </p>
+                <p className="place-hash">
+                    # 습득 장소명을 간단한 해시태그로 입력해주세요.
+                </p>
                 <p className="content">내용을 입력해주세요. </p>
             </div>
             <img
