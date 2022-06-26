@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <title>네트워크가 끊겼어요</title>
+
+        <!-- Inline the page's stylesheet. -->
+        <style>
+            body {
+                margin: 0rem;
+            }
+            .offline {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: helvetica, arial, sans-serif;
+                width: 100vw;
+                min-width: 360px;
+                height: 100vh;
+                background-color: #373fff;
+            }
+
+            h1 {
+                font-style: italic;
+                color: white;
+            }
+
+            p {
+                text-align: center;
+                margin-top: 5rem;
+                color: white;
+            }
+
+            button {
+                background-color: white;
+                color: cornflowerblue;
+                display: block;
+                border-radius: 1.2rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="offline">
+            <div>
+                <h1>네트워크 연결상태를 확인해 주세요 :(</h1>
+                <p>버튼을 눌러서 다시 연결해볼래요?</p>
+                <button type="button">다시 연결하기</button>
+            </div>
+        </div>
+        <!-- Inline the page's JavaScript file. -->
+        <script>
+            // Manual reload feature.
+            document.querySelector('button').addEventListener('click', () => {
+                window.location.reload();
+            });
+
+            // Listen to changes in the network state, reload when online.
+            // This handles the case when the device is completely offline.
+            window.addEventListener('online', () => {
+                window.location.reload();
+            });
+
+            // Check if the server is responding and reload the page if it is.
+            // This handles the case when the device is online, but the server
+            // is offline or misbehaving.
+            async function checkNetworkAndReload() {
+                try {
+                    const response = await fetch('.');
+                    // Verify we get a valid response from the server
+                    if (response.status >= 200 && response.status < 500) {
+                        window.location.reload();
+                        return;
+                    }
+                } catch {
+                    // Unable to connect to the server, ignore.
+                }
+                window.setTimeout(checkNetworkAndReload, 2500);
+            }
+
+            checkNetworkAndReload();
+        </script>
+    </body>
+</html>

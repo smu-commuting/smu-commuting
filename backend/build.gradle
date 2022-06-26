@@ -1,9 +1,9 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.7'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id "org.flywaydb.flyway" version "7.0.3"
-	id "org.asciidoctor.convert" version "1.5.9.2"
-	id 'java'
+    id 'org.springframework.boot' version '2.6.7'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id "org.flywaydb.flyway" version "7.0.3"
+    id "org.asciidoctor.convert" version "1.5.9.2"
+    id 'java'
 }
 
 group = 'com.api'
@@ -11,144 +11,150 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-	/**
-	 * QueryDSL
-	 */
-	implementation("com.querydsl:querydsl-core") // querydsl
-	implementation("com.querydsl:querydsl-jpa") // querydsl
-	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa" // querydsl JPAAnnotationProcessor 사용 지정
-	annotationProcessor("jakarta.persistence:jakarta.persistence-api")
-	annotationProcessor("jakarta.annotation:jakarta.annotation-api")
+    /**
+     * QueryDSL
+     */
+    implementation("com.querydsl:querydsl-core") // querydsl
+    implementation("com.querydsl:querydsl-jpa") // querydsl
+    annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa"
+    // querydsl JPAAnnotationProcessor 사용 지정
+    annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+    annotationProcessor("jakarta.annotation:jakarta.annotation-api")
 
-	/**
-	 * Security
-	 */
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-	implementation 'org.junit.jupiter:junit-jupiter:5.7.0'
+    /**
+     * Security
+     */
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.junit.jupiter:junit-jupiter:5.7.0'
 
-	/**
-	 * Lombok
-	 */
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
+    /**
+     * Lombok
+     */
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 
-	testCompileOnly 'org.projectlombok:lombok'
-	testAnnotationProcessor 'org.projectlombok:lombok'
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
 
-	/**
-	 * JWT Dependencies
-	 */
-	implementation 'io.jsonwebtoken:jjwt-api:0.11.1'
-	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.1', 'io.jsonwebtoken:jjwt-jackson:0.11.1'
+    /**
+     * JWT Dependencies
+     */
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.1'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.1', 'io.jsonwebtoken:jjwt-jackson:0.11.1'
 
-	//websocket
-	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    //websocket
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
-	/**
-	 * Mail
-	 */
-	implementation 'org.springframework.boot:spring-boot-starter-mail'
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    /**
+     * Mail
+     */
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
-	/**
-	 * Aws
-	 */
-	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.0.1.RELEASE'
+    /**
+     * Aws
+     */
+    implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.0.1.RELEASE'
 
-	/**
-	 * Database
-	 */
-	runtimeOnly 'mysql:mysql-connector-java'
-	implementation "org.flywaydb:flyway-core"
+    /**
+     * Database
+     */
+    runtimeOnly 'mysql:mysql-connector-java'
+    implementation "org.flywaydb:flyway-core"
 
-	/**
-	 * Test Dependencies
-	 */
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
+    /**
+     * Firebase
+     */
+    implementation 'com.google.firebase:firebase-admin:6.8.1'
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.2.2'
+    /**
+     * Test Dependencies
+     */
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
 
-	/**
-	 * RestDocs
-	 */
-	asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor:2.0.4.RELEASE'
-	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+    /**
+     * RestDocs
+     */
+    asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor:2.0.4.RELEASE'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 
-	/**
-	 * p6spy
-	 */
-	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.8'
+    /**
+     * p6spy
+     */
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.8'
 }
 
 jar {
-	enabled = false
+    enabled = false
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
 
 /*************************
  * RestDocs
  *************************/
 ext {
-	set('snippetsDir', file("build/generated-snippets"))
+    set('snippetsDir', file("build/generated-snippets"))
 }
 
 test {
-	outputs.dir snippetsDir
-	useJUnitPlatform()
+    outputs.dir snippetsDir
+    useJUnitPlatform()
 }
 
 asciidoctor {
-	inputs.dir snippetsDir
-	dependsOn test
+    inputs.dir snippetsDir
+    dependsOn test
 }
 
 task copyDocument(type: Copy) {
-	dependsOn asciidoctor
-	from file("build/asciidoc/html5/")
-	into file("src/main/resources/static/docs")
+    dependsOn asciidoctor
+    from file("build/asciidoc/html5/")
+    into file("src/main/resources/static/docs")
 }
 
 build {
-	dependsOn copyDocument
+    dependsOn copyDocument
 }
 
 bootJar {
-	dependsOn asciidoctor
-	from ("${asciidoctor.outputDir}/html5") {
-		into 'static/docs'
-	}
+    dependsOn asciidoctor
+    from("${asciidoctor.outputDir}/html5") {
+        into 'static/docs'
+    }
 }
 
 /*************************
  * Query DSL
  *************************/
-def generated='src/main/generated'
+def generated = 'src/main/generated'
 sourceSets {
-	main.java.srcDirs += [ generated ]
+    main.java.srcDirs += [generated]
 }
 
 tasks.withType(JavaCompile) {
-	options.annotationProcessorGeneratedSourcesDirectory = file(generated)
+    options.annotationProcessorGeneratedSourcesDirectory = file(generated)
 }
 
 clean.doLast {
-	file(generated).deleteDir()
+    file(generated).deleteDir()
 }
 
 
@@ -156,9 +162,9 @@ clean.doLast {
  * Flyway
  *************************/
 flyway {
-	baselineVersion = 0
-	encoding = 'UTF-8'
-	validateOnMigrate = true
-	baselineOnMigrate = true
-	locations = ["filesystem:${file('src/main/resources/db/migration').absolutePath}"]
+    baselineVersion = 0
+    encoding = 'UTF-8'
+    validateOnMigrate = true
+    baselineOnMigrate = true
+    locations = ["filesystem:${file('src/main/resources/db/migration').absolutePath}"]
 }

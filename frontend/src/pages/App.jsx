@@ -1,7 +1,14 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable consistent-return */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-undef */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { initializeApp } from 'firebase/app';
+import { getMessaging, getToken, onMessage } from 'firebase/messaging';
 import BusModal from '../components/BusPage/BusClickModal/BusClickModal';
 import TaxiModal from '../components/TaxiPage/TaxiClickModal/TaxiClickModal';
 import TaxiCreateModal from '../components/TaxiPage/TaxiCreateModal/TaxiCreateModal';
@@ -30,6 +37,37 @@ import TaxiNotEnterModal from '../components/TaxiPage/TaxiNotEnterModal/TaxiNotE
 import TaxiNotCreateModal from '../components/TaxiPage/TaxiNotCreateModal/TaxiNotCreateModal';
 import TaxiPartyDeleteModal from '../components/TaxiPage/TaxiPartyDeleteModal/TaxiPartyDeleteModal';
 import TaxiPartyDeleteCompleteModal from '../components/TaxiPage/TaxiPartyDeleteCompleteModal/TaxiPartyDeleteCompleteModal';
+import { firebaseConfig } from '../constants/firebaseConfig';
+
+// Initialize Firebase
+initializeApp(firebaseConfig);
+
+const messaging = getMessaging();
+
+getToken(messaging, {
+    vapidKey:
+        'BNglI-efqMG6EoE8u72FXsYiGGFL94A9M7SdKDWrqFeqA1qL8mLwVd5Mm3sVTO2km4IFu-CABXjO7Bnw9aAKsMw',
+})
+    .then(currentToken => {
+        if (currentToken) {
+            console.log('파베토큰', currentToken);
+        } else {
+            // Show permission request UI
+            console.log(
+                'No registration token available. Request permission to generate one.',
+            );
+            // ...
+        }
+    })
+    .catch(err => {
+        console.log('An error occurred while retrieving token. ', err);
+        // ...
+    });
+
+onMessage(messaging, payload => {
+    console.log('Message received. ', payload);
+    console.log('messaging. ', messaging);
+});
 
 function App() {
     const { isBusModalOpen, isTaxiModalOpen, isCommunityModalOpen } =
