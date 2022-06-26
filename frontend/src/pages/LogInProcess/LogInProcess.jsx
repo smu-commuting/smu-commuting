@@ -11,6 +11,7 @@ function LogInProcess() {
     const dispatch = useDispatch();
     const { id, accessToken, studentId } = useParams();
     useEffect(() => {
+        console.log(accessToken);
         axios.defaults.headers.common['Authorization'] = accessToken;
         if (studentId !== 'null') {
             const userInfo = {

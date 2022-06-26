@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
+import axios from 'axios';
 import ChattingRoomHeader from '../../components/ChattingRoomPage/ChattingRoomHeader/ChattingRoomHeader';
 import Refusal from '../../assets/ChattingList/ChatInputArea/합승거부.png';
 import {
@@ -18,6 +19,7 @@ import { firstEnterDateParser } from '../../constants/FirstEnterDateParser';
 import MeChatBox from '../../components/ChattingRoomPage/MeChatBox/MeChatBox';
 import SenderChatBox from '../../components/ChattingRoomPage/SenderChatBox/SenderChatBox';
 import { taxiPartyEnter } from '../../modules/reducers/taxi';
+import { withAuthInstance } from '../../utils/common';
 
 function ChattingPage() {
     const scrollRef = useRef();
@@ -128,7 +130,6 @@ function ChattingPage() {
             }),
         );
         setMyChat('');
-        window.scrollTo(0, document.body.offsetHeight);
     };
 
     return (

@@ -21,7 +21,7 @@ function ChattingRoomHeader() {
             myChatRoom => myChatRoom.chatRoomId === parseInt(id, 10),
         );
         setMeetInfo(() => `${info && info.place} ${info && info.time}`);
-        console.log(info);
+        console.log('info', info);
         setMyTaxiParty(() => info);
         if (!info) {
             setMeetInfo(
