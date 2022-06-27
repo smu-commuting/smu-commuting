@@ -7,8 +7,8 @@ import './lostItemWritePage.scss';
 const lostItemWritePage = () => {
     const navigate = useNavigate();
 
-    const inquiryPage = () => {
-        navigate(`/inquiry`);
+    const lostItemPage = () => {
+        navigate(`/lostitem`);
     };
 
     return (
@@ -17,11 +17,15 @@ const lostItemWritePage = () => {
                 <img
                     src={Arrow}
                     alt="화살표"
-                    onClick={inquiryPage}
+                    onClick={lostItemPage}
                     aria-hidden="true"
                 />
                 <div>분실물 습득 글 쓰기</div>
-                <button className="regist-btn" type="submit">
+                <button
+                    className="regist-btn"
+                    type="submit"
+                    // onClick={}
+                >
                     등록
                 </button>
             </div>

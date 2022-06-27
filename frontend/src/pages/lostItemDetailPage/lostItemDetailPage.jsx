@@ -21,7 +21,7 @@ const lostItemDetailPage = () => {
                     onClick={lostItemPage}
                     aria-hidden="true"
                 />
-                <div>문의하기</div>
+                <div>분실물 - 상세 페이지</div>
                 <img
                     className="menu"
                     src={Menu}
@@ -36,8 +36,8 @@ const lostItemDetailPage = () => {
                         <p className="item">#(물품이름)</p>
                         <p className="place">#(습득장소)</p>
                     </div>
-                    <p className="content">(게시글 내용) </p>
-                    <p className="picture">(사진)</p>
+                    <div className="content">(게시글 내용) </div>
+                    <div className="item-picture">(사진)</div>
                 </div>
                 <div className="comment">
                     <div className="comment-header">
@@ -59,7 +59,12 @@ const lostItemDetailPage = () => {
                 <input type="checkbox" className="checkbox" />
                 <span>익명</span>
                 <input type="text" className="input" />
-                <button type="submit">등록</button>
+                <button
+                    type="submit"
+                    // onClick={}
+                >
+                    등록
+                </button>
             </div>
         </div>
     );
