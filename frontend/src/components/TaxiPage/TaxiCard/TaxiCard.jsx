@@ -33,6 +33,8 @@ function TaxiCard({ taxiPartyId, headcount, maximum, time }) {
             placeName: taxiPageInfo.placeName,
             time,
             taxiPartyId,
+            headcount,
+            maximum,
         };
         // useSelector로 해당 클릭한 id(chatRoomId) 와 비교하여
         // 존재(taxiPartyId)한다면 바로 채팅방으로 이동, 없다면 모달 띄워준다.

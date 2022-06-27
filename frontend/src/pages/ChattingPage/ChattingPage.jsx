@@ -18,8 +18,6 @@ import {
 import { firstEnterDateParser } from '../../constants/FirstEnterDateParser';
 import MeChatBox from '../../components/ChattingRoomPage/MeChatBox/MeChatBox';
 import SenderChatBox from '../../components/ChattingRoomPage/SenderChatBox/SenderChatBox';
-import { taxiPartyEnter } from '../../modules/reducers/taxi';
-import { withAuthInstance } from '../../utils/common';
 
 function ChattingPage() {
     const scrollRef = useRef();
