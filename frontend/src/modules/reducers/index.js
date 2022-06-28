@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable no-underscore-dangle */
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
@@ -6,6 +7,7 @@ import user from './user';
 import bus from './bus';
 import taxi from './taxi';
 import chat from './chat';
+import community from './community';
 
 const persistConfig = {
     key: 'root',
@@ -18,5 +20,6 @@ const rootReducer = combineReducers({
     bus,
     taxi,
     chat,
+    community,
 });
 export default persistReducer(persistConfig, rootReducer);

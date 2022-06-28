@@ -171,7 +171,7 @@ function App() {
                 />
                 <Route path="/lostitem" element={<LostItemPage />} />
                 <Route
-                    path="/lostitemdetail"
+                    path="/lostitemdetail/:id"
                     element={<LostItemDetailPage />}
                 />
                 <Route path="/lostitemwrite" element={<LostItemWritePage />} />

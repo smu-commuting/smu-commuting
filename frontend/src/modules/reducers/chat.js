@@ -13,7 +13,6 @@ import {
 
 export const initialState = {
     chatMessageList: [],
-    chatMessageAllList: [],
     chatLoadEnd: false,
     chatMessageListLoading: false,
     chatMessageListDone: false,

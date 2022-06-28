@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { communityModalClick } from '../../../modules/reducers/user';
 import './CommunityModal.scss';
@@ -8,8 +9,17 @@ import seewe from '../../../assets/CommunityPage/seewi-1.png';
 
 function CommunityModal() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const onCommunityClick = useCallback(() => {
         dispatch(communityModalClick());
+    }, [dispatch]);
+    const goLostItemPage = useCallback(() => {
+        dispatch(communityModalClick());
+        navigate('/lostitem');
+    }, [dispatch]);
+    const goProtestPage = useCallback(() => {
+        dispatch(communityModalClick());
+        navigate('/protest');
     }, [dispatch]);
     return (
         <div className="communitymodal-wrapper">
@@ -28,11 +38,19 @@ function CommunityModal() {
                         선택해 주세요.
                     </p>
                     <div className="community-wrapper">
-                        <div className="lost">
+                        <div
+                            className="lost"
+                            onClick={() => goLostItemPage()}
+                            aria-hidden
+                        >
                             <img src={lost} alt="분실물" />
                             <p>분실물</p>
                         </div>
-                        <div className="seewe">
+                        <div
+                            className="seewe"
+                            onClick={() => goProtestPage()}
+                            aria-hidden
+                        >
                             <img src={seewe} alt="시위정보" />
                             <p>시위정보</p>
                         </div>
