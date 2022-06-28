@@ -13,6 +13,7 @@ import {
 
 export const initialState = {
     lostItemList: [],
+    lostItemEnd: false,
     lostItemListLoading: false,
     lostItemListDone: false,
     lostItemListError: null,
@@ -43,6 +44,7 @@ const reducer = (state = initialState, action) => {
                 draft.lostItemListLoading = false;
                 draft.lostItemListDone = true;
                 draft.lostItemList = action.data;
+                draft.lostItemEnd = action.data.length !== 10;
                 break;
             case COMMUNITY_GET_LOST_ITEM_LIST_FAILURE:
                 draft.lostItemListLoading = false;

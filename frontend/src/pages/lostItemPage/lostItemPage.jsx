@@ -16,7 +16,9 @@ const lostItemPage = () => {
     const dispatch = useDispatch();
     const [page, setPage] = useState(1);
     const [itemBottle, setItemBottle] = useState([]);
-    const { lostItemList } = useSelector(state => state.community);
+    const { lostItemList, lostItemEnd, lostItemListLoading } = useSelector(
+        state => state.community,
+    );
     const homePage = () => {
         navigate(`/home`);
     };
@@ -42,6 +44,35 @@ const lostItemPage = () => {
             return [...prev, ...lostItemList];
         });
     }, [lostItemList]);
+
+    useEffect(() => {
+        dispatch(
+            getLostItemList({
+                page,
+                size: 10,
+            }),
+        ); // 다 내리면 새로운거 로딩
+    }, [page]);
+
+    // 스크롤이 내려갈 때마다 데이터를 불러오는 로직
+    useEffect(() => {
+        function onScroll() {
+            if (
+                window.innerHeight + window.scrollY >
+                document.body.offsetHeight - 10
+            ) {
+                if (!lostItemEnd && !lostItemListLoading) {
+                    setPage(prev => {
+                        return prev + 1;
+                    });
+                }
+            }
+        }
+        window.addEventListener('scroll', onScroll);
+        return () => {
+            window.removeEventListener('scroll', onScroll);
+        };
+    }, [window.screenY, lostItemEnd, lostItemListLoading]);
 
     return (
         <div className="lostitempage-wrapper">
