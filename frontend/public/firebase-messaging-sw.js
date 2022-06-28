@@ -6,7 +6,6 @@ importScripts(
 );
 
 firebase.initializeApp({
-
 });
 
 const messaging = firebase.messaging();

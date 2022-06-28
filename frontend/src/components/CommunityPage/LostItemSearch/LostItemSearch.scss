@@ -1,0 +1,28 @@
+@import '../../../styles/utils.scss';
+.lostitemsearch-wrapper {
+    .lostitempage-search {
+        padding-top: 2rem;
+        display: flex;
+        justify-content: space-between;
+        select {
+            flex: 0.5;
+            margin-left: 0rem;
+            text-align: center;
+            border: 2px solid black;
+            padding: 0.5rem 0;
+            font-size: 1.5rem;
+            font-family: 'NotoSansKR-Medium';
+        }
+        input {
+            margin: 0 0.5rem;
+            flex: 2;
+            border: 2px solid #000000;
+        }
+        button {
+            flex: 1;
+            background-color: #7b88f2;
+            text-align: center;
+            @include font-face(NotoSansKR-Medium, 1.5rem, 2.5rem, #ffffff);
+        }
+    }
+}
