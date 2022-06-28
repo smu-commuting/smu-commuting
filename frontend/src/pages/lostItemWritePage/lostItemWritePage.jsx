@@ -8,7 +8,7 @@ import Arrow from '../../assets/MyPage/arrow.png';
 import picture from '../../assets/LostItemWritePage/picture.png';
 import cancel from '../../assets/LostItemWritePage/cancel.png';
 import './lostItemWritePage.scss';
-import { postLostItem } from '../../utils/communityApi';
+import { postLostItemApi } from '../../utils/communityApi';
 
 const lostItemWritePage = () => {
     const navigate = useNavigate();
@@ -78,7 +78,7 @@ const lostItemWritePage = () => {
                 'info',
                 new Blob([JSON.stringify(info)], { type: 'application/json' }),
             );
-            postLostItem(formData)
+            postLostItemApi(formData)
                 .then(res => window.location.replace('/lostitem'))
                 .catch(err => alert('글을 게시할 수 없습니다.'));
         },

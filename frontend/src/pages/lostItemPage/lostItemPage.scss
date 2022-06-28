@@ -25,26 +25,27 @@
 
     .lostitempage-content {
         margin-top: 2.5rem;
-        display: flex;
-        flex-direction: row;
-        border-bottom: 0.063rem solid #a19fad;
-        justify-content: space-around;
-        @include font-face(NotoSansKR-Medium, 1.345rem, 0rem, #000000);
-        .picture {
-            flex: 1;
-            text-align: center;
-        }
-        .date {
-            flex: 1;
-            text-align: center;
-        }
-        .item {
-            flex: 1;
-            text-align: center;
-        }
-        .place {
-            flex: 1;
-            text-align: center;
+        li {
+            display: flex;
+            border-bottom: 0.063rem solid #a19fad;
+            justify-content: space-between;
+            @include font-face(NotoSansKR-Medium, 1.345rem, 0rem, #000000);
+            .picture {
+                flex: 2;
+                text-align: center;
+            }
+            .date {
+                flex: 1;
+                text-align: center;
+            }
+            .item {
+                flex: 1;
+                text-align: center;
+            }
+            .place {
+                flex: 2;
+                text-align: center;
+            }
         }
     }
     .add {
