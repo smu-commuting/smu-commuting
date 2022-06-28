@@ -37,6 +37,10 @@ import TaxiNotEnterModal from '../components/TaxiPage/TaxiNotEnterModal/TaxiNotE
 import TaxiNotCreateModal from '../components/TaxiPage/TaxiNotCreateModal/TaxiNotCreateModal';
 import TaxiPartyDeleteModal from '../components/TaxiPage/TaxiPartyDeleteModal/TaxiPartyDeleteModal';
 import TaxiPartyDeleteCompleteModal from '../components/TaxiPage/TaxiPartyDeleteCompleteModal/TaxiPartyDeleteCompleteModal';
+import LostItemPage from './lostItemPage/lostItemPage';
+import LostItemDetailPage from './lostItemDetailPage/lostItemDetailPage';
+import LostItemWritePage from './lostItemWritePage/lostItemWritePage';
+import ProtestPage from './ProtestPage/ProtestPage';
 import { firebaseConfig } from '../constants/firebaseConfig';
 
 // Initialize Firebase
@@ -68,7 +72,6 @@ onMessage(messaging, payload => {
     console.log('Message received. ', payload);
     console.log('messaging. ', messaging);
 });
-
 function App() {
     const { isBusModalOpen, isTaxiModalOpen, isCommunityModalOpen } =
         useSelector(state => state.user);
@@ -166,6 +169,13 @@ function App() {
                         </>
                     }
                 />
+                <Route path="/lostitem" element={<LostItemPage />} />
+                <Route
+                    path="/lostitemdetail"
+                    element={<LostItemDetailPage />}
+                />
+                <Route path="/lostitemwrite" element={<LostItemWritePage />} />
+                <Route path="/protest" element={<ProtestPage />} />
             </Routes>
         </Router>
     );

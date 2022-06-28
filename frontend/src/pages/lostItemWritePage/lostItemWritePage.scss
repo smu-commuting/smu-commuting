@@ -1,8 +1,8 @@
 @import '../../styles/utils.scss';
 
-.inquirywritepage-wrapper {
+.lostitemwritepage-wrapper {
     padding: 4.6rem 3.1rem;
-    .inquirywritepage-header {
+    .lostitemwritepage-header {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -17,7 +17,7 @@
             flex: 1;
             text-align: center;
             font-weight: bold;
-            @include font-face(NotoSansKR-Regular, 2.5rem, 2.5rem, #292733);
+            @include font-face(NotoSansKR-Regular, 1.7rem, 2.5rem, #292733);
         }
         button {    
             display: block;
@@ -30,19 +30,38 @@
             @include font-face(NotoSansKR-Regular, 0.5rem, 2.5rem, #ffffff);
         }
     }
-    .inquirywritepage-content {
-        .header {
+    .lostitemwritepage-content {
+        .item-hash {
             padding-bottom: 1rem;
             padding-top: 1rem;
             padding-left: 0.5rem;
             border-bottom: 0.063rem solid #A19FAD;
             text-align: left;
-            @include font-face(NotoSansKR-Regular, 2rem, 2.5rem, #A19FAD);
+            margin-bottom: 0rem;
+            @include font-face(NotoSansKR-Regular, 1.4rem, 2.5rem, #A19FAD);
+        }
+        .place-hash {
+            padding-bottom: 1rem;
+            padding-top: 1rem;
+            padding-left: 0.5rem;
+            border-bottom: 0.063rem solid #A19FAD;
+            text-align: left;
+            margin-bottom: 0rem;
+            margin-top: 0rem;
+            @include font-face(NotoSansKR-Regular, 1.4rem, 2.5rem, #A19FAD);
         }
         .content {
             padding-left: 0.5rem;
             text-align: left;
             @include font-face(NotoSansKR-Regular, 1.5rem, 2.5rem, #A19FAD);
         }
+    }
+
+    .picture{
+        z-index: 1;
+        display: block;
+        position: fixed;
+        left : 3.1rem;
+        bottom : 3.1rem;
     }
 }
