@@ -2,7 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Arrow from '../../assets/MyPage/arrow.png';
-import add from '../../assets/InquiryPage/add.png';
+import add from '../../assets/InquiryPage/addcopy.png';
 import './lostItemPage.scss';
 import LostItemSearch from '../../components/CommunityPage/LostItemSearch/LostItemSearch';
 

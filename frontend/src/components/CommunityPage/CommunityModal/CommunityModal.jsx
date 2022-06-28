@@ -14,11 +14,13 @@ function CommunityModal() {
         dispatch(communityModalClick());
     }, [dispatch]);
     const goLostItemPage = useCallback(() => {
+        dispatch(communityModalClick());
         navigate('/lostitem');
-    }, []);
+    }, [dispatch]);
     const goProtestPage = useCallback(() => {
+        dispatch(communityModalClick());
         navigate('/protest');
-    }, []);
+    }, [dispatch]);
     return (
         <div className="communitymodal-wrapper">
             <div className="communitymodal">
