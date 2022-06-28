@@ -22,3 +22,11 @@ export const getLostItemListApi = async data => {
         },
     );
 };
+
+// 게시물 단건 조회
+export const getDetailInfoApi = async id => {
+    console.log('해당 id 를 조회합니다.', id);
+    return await withAuthInstance.get(
+        `${process.env.REACT_APP_API_URL}/api/post/${id}`,
+    );
+};

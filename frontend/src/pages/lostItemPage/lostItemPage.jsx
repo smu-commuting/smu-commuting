@@ -27,6 +27,10 @@ const lostItemPage = () => {
         navigate(`/lostitemwrite`);
     };
 
+    const goLostDetailPage = () => {
+        navigate(`/lostitemdetail/7`);
+    };
+
     useEffect(() => {
         dispatch(
             getLostItemList({
@@ -102,7 +106,11 @@ const lostItemPage = () => {
                 ) : (
                     itemBottle.map((lostItem, idx) => {
                         return (
-                            <li key={idx}>
+                            <li
+                                key={idx}
+                                onClick={goLostDetailPage}
+                                aria-hidden
+                            >
                                 <div className="picture">
                                     {lostItem.image ? (
                                         <img

@@ -9,14 +9,23 @@ import {
     COMMUNITY_LIST_DELETE_REQUEST,
     COMMUNITY_LIST_DELETE_SUCCESS,
     COMMUNITY_LIST_DELETE_FAILURE,
+    COMMUNITY_GET_DETAIL_INFO_REQUEST,
+    COMMUNITY_GET_DETAIL_INFO_SUCCESS,
+    COMMUNITY_GET_DETAIL_INFO_FAILURE,
 } from '../../constants';
 
 export const initialState = {
+    // 리스트 목록
     lostItemList: [],
     lostItemEnd: false,
     lostItemListLoading: false,
     lostItemListDone: false,
     lostItemListError: null,
+    // 분실물 단건 조회
+    lostItemInfo: null,
+    lostItemInfoLoading: false,
+    lostItemInfoDone: false,
+    lostItemInfoError: null,
 };
 
 export const getLostItemList = data => {
@@ -29,6 +38,13 @@ export const getLostItemList = data => {
 export const deleteLostItemList = () => {
     return {
         type: COMMUNITY_LIST_DELETE_REQUEST,
+    };
+};
+
+export const getLostItemDetailInfo = id => {
+    return {
+        type: COMMUNITY_GET_DETAIL_INFO_REQUEST,
+        id,
     };
 };
 
@@ -56,6 +72,20 @@ const reducer = (state = initialState, action) => {
                 draft.lostItemList = [];
                 break;
             case COMMUNITY_LIST_DELETE_FAILURE:
+                break;
+            case COMMUNITY_GET_DETAIL_INFO_REQUEST:
+                draft.lostItemInfoLoading = true;
+                draft.lostItemInfoDone = false;
+                draft.lostItemInfoError = false;
+                break;
+            case COMMUNITY_GET_DETAIL_INFO_SUCCESS:
+                draft.lostItemInfoLoading = false;
+                draft.lostItemInfoDone = true;
+                draft.lostItemInfo = action.data;
+                break;
+            case COMMUNITY_GET_DETAIL_INFO_FAILURE:
+                draft.lostItemInfoLoading = false;
+                draft.lostItemInfoError = action.error;
                 break;
             default:
                 break;

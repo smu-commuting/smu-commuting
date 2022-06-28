@@ -1,0 +1,25 @@
+.download-wrapper {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: white;
+    .download-header {
+        height: 3rem;
+        display: flex;
+        justify-content: space-between;
+        .cancel {
+            height: 100%;
+        }
+        .download {
+            background-color: white;
+            height: 100%;
+        }
+    }
+    .img-wrapper {
+        margin-top: 25%;
+        .zoom-img {
+            display: block;
+            width: 100%;
+        }
+    }
+}
