@@ -12,7 +12,6 @@ export const postLostItemApi = async data => {
 };
 
 export const getLostItemListApi = async data => {
-    console.log(data);
     return await withAuthInstance.get(
         `${process.env.REACT_APP_API_URL}/api/posts`,
         {

@@ -6,13 +6,16 @@ import { useNavigate } from 'react-router-dom';
 import Arrow from '../../assets/MyPage/arrow.png';
 import add from '../../assets/InquiryPage/addcopy.png';
 import './lostItemPage.scss';
-import LostItemSearch from '../../components/CommunityPage/LostItemSearch/LostItemSearch';
-import { getLostItemList } from '../../modules/reducers/community';
+import {
+    deleteLostItemList,
+    getLostItemList,
+} from '../../modules/reducers/community';
 
 const lostItemPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [page, setPage] = useState(1);
+    const [itemBottle, setItemBottle] = useState([]);
     const { lostItemList } = useSelector(state => state.community);
     const homePage = () => {
         navigate(`/home`);
@@ -29,7 +32,16 @@ const lostItemPage = () => {
                 size: 10,
             }),
         );
+        return () => {
+            dispatch(deleteLostItemList());
+        };
     }, [dispatch]);
+
+    useEffect(() => {
+        setItemBottle(prev => {
+            return [...prev, ...lostItemList];
+        });
+    }, [lostItemList]);
 
     return (
         <div className="lostitempage-wrapper">
@@ -46,34 +58,50 @@ const lostItemPage = () => {
                 <div />
             </div>
             {/* <LostItemSearch /> */}
+
             <ul className="lostitempage-content">
                 <li>
-                    <p className="picture">사진</p>
-                    <p className="date">날짜</p>
-                    <p className="item">물품</p>
-                    <p className="place">장소</p>
+                    <div className="picture">사진</div>
+                    <div className="date">날짜</div>
+                    <div className="item">물품</div>
+                    <div className="place">장소</div>
                 </li>
-                {lostItemList.length === 0 ? (
+                {itemBottle.length === 0 ? (
                     <p>아직 데이터가 없습니다.</p>
                 ) : (
-                    lostItemList.map((lostItem, idx) => {
+                    itemBottle.map((lostItem, idx) => {
                         return (
                             <li key={idx}>
-                                <img
-                                    src={lostItem.image && lostItem.image}
-                                    alt="분실물"
-                                />
-                                <p>
-                                    {lostItem.cretedDate &&
+                                <div className="picture">
+                                    {lostItem.image ? (
+                                        <img
+                                            src={
+                                                lostItem.image && lostItem.image
+                                            }
+                                            alt="분실물"
+                                        />
+                                    ) : (
+                                        <div className="non-picture">
+                                            (사진)
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="date">
+                                    {lostItem.createdDate &&
                                         lostItem.createdDate}
-                                </p>
-                                <p>{lostItem.item && lostItem.item}</p>
-                                <p>{lostItem.place && lostItem.place}</p>
+                                </div>
+                                <div className="item">
+                                    {lostItem.item && lostItem.item}
+                                </div>
+                                <div className="place">
+                                    {lostItem.place && lostItem.place}
+                                </div>
                             </li>
                         );
                     })
                 )}
             </ul>
+
             <img
                 className="add"
                 src={add}

@@ -25,10 +25,6 @@ const lostItemWritePage = () => {
         obtainDate: null,
     });
 
-    useEffect(() => {
-        console.log(image);
-    }, [image]);
-
     const onImgSelect = useCallback(() => {
         imgRef.current.click();
     }, []);
@@ -36,7 +32,7 @@ const lostItemWritePage = () => {
     const onInfoChange = useCallback(
         e => {
             if (e.target.name === 'obtainDate') {
-                console.log(`${e.target.value}T15:30`);
+                // console.log(`${e.target.value}T15:30`);
                 setInfo({
                     ...info,
                     [e.target.name]: `${e.target.value}T15:30`,
@@ -47,7 +43,6 @@ const lostItemWritePage = () => {
                     [e.target.name]: e.target.value,
                 });
             }
-            console.log(info);
         },
         [info],
     );
@@ -71,15 +66,19 @@ const lostItemWritePage = () => {
     const onSubmitHandler = useCallback(
         e => {
             e.preventDefault();
-            console.log(JSON.stringify(info));
             const formData = new FormData();
-            if (image) formData.append('image', image);
+            if (image) {
+                formData.append('image', image);
+            } else {
+                alert('이미지를 추가해주세요');
+                return;
+            }
             formData.append(
                 'info',
                 new Blob([JSON.stringify(info)], { type: 'application/json' }),
             );
             postLostItemApi(formData)
-                .then(res => window.location.replace('/lostitem'))
+                .then(res => lostItemPage())
                 .catch(err => alert('글을 게시할 수 없습니다.'));
         },
         [info.content, info.item, info.obtainDate, info.place, image],
@@ -95,7 +94,7 @@ const lostItemWritePage = () => {
                         onClick={lostItemPage}
                         aria-hidden="true"
                     />
-                    <div>분실물 습득 글 쓰기</div>
+                    <div>분실물 습득 등록</div>
                     <button className="regist-btn" type="submit">
                         등록
                     </button>

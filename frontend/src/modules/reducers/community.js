@@ -6,6 +6,9 @@ import {
     COMMUNITY_GET_LOST_ITEM_LIST_REQUEST,
     COMMUNITY_GET_LOST_ITEM_LIST_SUCCESS,
     COMMUNITY_GET_LOST_ITEM_LIST_FAILURE,
+    COMMUNITY_LIST_DELETE_REQUEST,
+    COMMUNITY_LIST_DELETE_SUCCESS,
+    COMMUNITY_LIST_DELETE_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -19,6 +22,12 @@ export const getLostItemList = data => {
     return {
         type: COMMUNITY_GET_LOST_ITEM_LIST_REQUEST,
         data,
+    };
+};
+
+export const deleteLostItemList = () => {
+    return {
+        type: COMMUNITY_LIST_DELETE_REQUEST,
     };
 };
 
@@ -38,6 +47,13 @@ const reducer = (state = initialState, action) => {
             case COMMUNITY_GET_LOST_ITEM_LIST_FAILURE:
                 draft.lostItemListLoading = false;
                 draft.lostItemListError = action.data;
+                break;
+            case COMMUNITY_LIST_DELETE_REQUEST:
+                break;
+            case COMMUNITY_LIST_DELETE_SUCCESS:
+                draft.lostItemList = [];
+                break;
+            case COMMUNITY_LIST_DELETE_FAILURE:
                 break;
             default:
                 break;
