@@ -6,14 +6,15 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: space-around;
         .img {
-            padding: 0.813rem;
+            flex: 1;
             display: block;
             width: 1.938rem;
             height: 1.938rem;
         }
         div {
-            padding: 0 0 0 8rem;
+            flex: 1;
             text-align: center;
             font-weight: bold;
             @include font-face(NotoSansKR-Regular, 2.5rem, 2.5rem, #292733);
@@ -23,17 +24,20 @@
         padding-top: 18rem;
         display: flex;
         flex-direction: column;
+        justify-content: space-around;
         p {
+            flex: 1;
             align-items: left;
             text-align: left;
             padding-bottom: 2rem;
             @include font-face(NotoSansKR-Regular, 2.3rem, 2.5rem, #292733);
         }
         .studentid-input {
-            
+            flex: 1;
             display: flex;
             flex-direction: row;
             input{
+                flex: 1;
                 border: 0.063rem solid #000000;
             }
             .confirm-btn{

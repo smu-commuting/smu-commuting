@@ -16,6 +16,7 @@ function ChattingRoomHeader() {
     );
     const [myTaxiParty, setMyTaxiParty] = useState();
     const [meetInfo, setMeetInfo] = useState();
+    const [peopleCount, setPeopleCount] = useState();
     const getInfo = useCallback(() => {
         const info = myTaxiParties.find(
             myChatRoom => myChatRoom.chatRoomId === parseInt(id, 10),
@@ -23,6 +24,10 @@ function ChattingRoomHeader() {
         setMeetInfo(() => `${info && info.place} ${info && info.time}`);
         console.log('info', info);
         setMyTaxiParty(() => info);
+        setPeopleCount(
+            () => `${info && info.headcount} / ${info && info.maximum}`,
+        );
+        // 다른 사람이 생성한 채팅방에 입장했을 때 사용되는 로직
         if (!info) {
             setMeetInfo(
                 () =>
@@ -31,6 +36,12 @@ function ChattingRoomHeader() {
                     }`,
             );
             setMyTaxiParty(() => chattingRoomInfo);
+            setPeopleCount(
+                () =>
+                    `${chattingRoomInfo && chattingRoomInfo.headcount} / ${
+                        chattingRoomInfo && chattingRoomInfo.maximum
+                    }`,
+            );
         }
     }, []);
 
@@ -47,17 +58,21 @@ function ChattingRoomHeader() {
     }, []);
 
     const onDeleteClick = useCallback(() => {
-        console.log(myTaxiParty);
         dispatch(deleteModal(myTaxiParty));
     }, [myTaxiParty]);
+
+    // const
 
     return (
         <div className="chattingroomheader-wrapper">
             <div>
                 <img src={Talk} alt="talk" onClick={gotoBackPage} aria-hidden />
             </div>
-            <div>
+            <div className="info">
                 <div>{meetInfo}</div>
+                <div className="people" onClick={() => {}} aria-hidden>
+                    {peopleCount}
+                </div>
             </div>
             <div>
                 <img

@@ -13,8 +13,8 @@ import {
 } from '../../modules/reducers/user';
 
 function HomePage() {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const onBusClick = useCallback(() => {
         dispatch(busModalClick());
     }, [dispatch]);

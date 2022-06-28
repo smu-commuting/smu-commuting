@@ -6,14 +6,15 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: space-around;
         .img {
-            padding: 0.813rem;
+            flex: 1;
             display: block;
             width: 1.938rem;
             height: 1.938rem;
         }
         div {
-            padding: 0 0 0 8rem;
+            flex: 1;
             text-align: center;
             font-weight: bold;
             @include font-face(NotoSansKR-Regular, 2.5rem, 2.5rem, #292733);
@@ -22,22 +23,30 @@
     .withdrawalpage-content {
         display: flex;
         flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
         img {
-            padding-top: 6rem;
-            padding-left: 6rem;
-            padding-right: 6rem;
-            padding-bottom: 1rem;
+            flex: 1;
             align-items: center;
-            width: 60%;
+            margin-top: 5rem;
+            //padding-top: 6rem;
+            //padding-left: 6rem;
+            //padding-right: 6rem;
+            //padding-bottom: 1rem;
+            width: 20rem;
         }
         p {
+            flex: 1;
+            display: block;
             text-align: center;
             @include font-face(NotoSansKR-Regular, 2.3rem, 2.5rem, #292733);
         }
         .withdrawal-btn {
             display: flex;
             flex-direction: row;
-            padding-left: 5rem;
+            //flex: 1;
+            justify-content: space-around;
+            //padding-left: 5rem;
             .yes {
                 margin: 1rem;
                 padding-left: 2.5rem;

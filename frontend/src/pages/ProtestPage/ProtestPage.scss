@@ -1,0 +1,42 @@
+@import '../../styles/utils.scss';
+
+.protestpage-wrapper {
+    padding: 4.6rem 3.1rem;
+    .protestpage-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        .img {
+            flex: 1;
+            display: block;
+            width: 1.938rem;
+            height: 1.938rem;
+        }
+        div {
+            flex: 1;
+            text-align: center;
+            font-weight: bold;
+            @include font-face(NotoSansKR-Regular, 2.5rem, 2.5rem, #292733);
+        }
+    }
+    .protestpage-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        img {
+
+            flex: 1;
+            align-items: center;
+            margin-top: 10rem;
+            width: 20rem;
+        }
+        p {
+            margin-top: 10rem;
+            flex: 1;
+            display: block;
+            text-align: center;
+            @include font-face(NotoSansKR-Regular, 1.5rem, 2.5rem, #292733);        }
+    }
+}

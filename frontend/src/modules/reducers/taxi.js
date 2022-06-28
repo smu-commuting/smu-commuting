@@ -282,6 +282,7 @@ const reducer = (state = initialState, action) => {
                 draft.isEnterChattingRoomModalOpen =
                     !draft.isEnterChattingRoomModalOpen;
                 draft.chattingRoomInfo = action.data;
+                console.log('chattingRoomInfo', action.data);
                 break;
             case TAXI_TO_CHAT_INFO_MODAL_FAILURE:
                 break;
