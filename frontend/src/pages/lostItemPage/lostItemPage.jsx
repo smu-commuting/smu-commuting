@@ -1,15 +1,17 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Arrow from '../../assets/MyPage/arrow.png';
 import add from '../../assets/InquiryPage/addcopy.png';
+import Lost from '../../assets/LostItemPage/card.png';
 import './lostItemPage.scss';
 import {
     deleteLostItemList,
     getLostItemList,
 } from '../../modules/reducers/community';
+import { communityModalClick } from '../../modules/reducers/user';
 
 const lostItemPage = () => {
     const navigate = useNavigate();
@@ -19,6 +21,9 @@ const lostItemPage = () => {
     const { lostItemList, lostItemEnd, lostItemListLoading } = useSelector(
         state => state.community,
     );
+    const onCommunityClick = useCallback(() => {
+        dispatch(communityModalClick());
+    }, [dispatch]);
     const homePage = () => {
         navigate(`/home`);
     };
@@ -44,9 +49,7 @@ const lostItemPage = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        setItemBottle(prev => {
-            return [...prev, ...lostItemList];
-        });
+        setItemBottle(prev => [...prev, ...lostItemList]);
     }, [lostItemList]);
 
     useEffect(() => {
@@ -93,7 +96,15 @@ const lostItemPage = () => {
                 <div />
             </div>
             {/* <LostItemSearch /> */}
-
+            <div className="lost-icon-wrapper">
+                <img
+                    className="lost-icon"
+                    src={Lost}
+                    alt="분실물 로고"
+                    onClick={onCommunityClick}
+                    aria-hidden
+                />
+            </div>
             <ul className="lostitempage-content">
                 <li>
                     <div className="picture">사진</div>
