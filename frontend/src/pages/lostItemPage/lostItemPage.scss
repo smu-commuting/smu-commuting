@@ -27,6 +27,17 @@
         }
     }
 
+    .lost-icon-wrapper {
+        margin-top: 2rem;
+        width: 100%;
+        height: 10rem;
+        .lost-icon {
+            display: block;
+            margin: auto;
+            height: 100%;
+        }
+    }
+
     .lostitempage-content {
         margin-top: 2.5rem;
         li {

@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Arrow from '../../assets/MyPage/arrow.png';
 import add from '../../assets/InquiryPage/addcopy.png';
+import Lost from '../../assets/LostItemPage/lost.png';
 import './lostItemPage.scss';
 import {
     deleteLostItemList,
@@ -44,9 +45,7 @@ const lostItemPage = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        setItemBottle(prev => {
-            return [...prev, ...lostItemList];
-        });
+        setItemBottle(prev => [...prev, ...lostItemList]);
     }, [lostItemList]);
 
     useEffect(() => {
@@ -93,7 +92,9 @@ const lostItemPage = () => {
                 <div />
             </div>
             {/* <LostItemSearch /> */}
-
+            <div className="lost-icon-wrapper">
+                <img className="lost-icon" src={Lost} alt="분실물 로고" />
+            </div>
             <ul className="lostitempage-content">
                 <li>
                     <div className="picture">사진</div>

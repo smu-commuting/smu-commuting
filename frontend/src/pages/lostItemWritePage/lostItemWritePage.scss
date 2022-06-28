@@ -30,9 +30,11 @@
             @include font-face(NotoSansKR-Regular, 1.3rem, 2.5rem, #ffffff);
         }
     }
+
     .lostitemwritepage-content {
         margin-top: 3rem;
         .date-hash {
+            width: 100%;
             border: none;
             @include font-face(NotoSansKR-Regular, 1.4rem, 2.5rem, #a19fad);
             padding-bottom: 1rem;
@@ -41,6 +43,7 @@
             border-bottom: 0.063rem solid #a19fad;
         }
         .item-hash {
+            width: 100%;
             border: none;
             padding-bottom: 1rem;
             padding-top: 2rem;
@@ -51,6 +54,7 @@
             @include font-face(NotoSansKR-Regular, 1.4rem, 2.5rem, #a19fad);
         }
         .place-hash {
+            width: 100%;
             border: none;
             padding-bottom: 1rem;
             padding-top: 2rem;
@@ -102,7 +106,7 @@
         position: fixed;
         width: 5rem;
         height: 5rem;
-        left: 3.1rem;
+        right: 3.1rem;
         bottom: 3.1rem;
     }
 }
