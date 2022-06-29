@@ -1,9 +1,8 @@
 /* eslint-disable prefer-const */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-unused-vars */
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { withAuthInstance } from '../../utils/common';
 import Arrow from '../../assets/MyPage/arrow.png';
 import picture from '../../assets/LostItemWritePage/picture.png';
 import cancel from '../../assets/LostItemWritePage/cancel.png';
@@ -18,11 +17,22 @@ const lostItemWritePage = () => {
     };
     const [image, setImage] = useState();
     const [previewImg, setPreviewImg] = useState();
+    const [today, setToday] = useState(new Date());
     const [info, setInfo] = useState({
         content: '',
         item: null,
         place: null,
-        obtainDate: null,
+        obtainDate: `${today.getFullYear()}-${
+            today.getMonth() + 1 >= 10
+                ? today.getMonth() + 1
+                : `0${today.getMonth() + 1}`
+        }-${today.getDate() >= 10 ? today.getDate() : `0${today.getDate()}`}T${
+            today.getHours() >= 10 ? today.getHours() : `0${today.getHours()}`
+        }:${
+            today.getMinutes() >= 10
+                ? today.getMinutes()
+                : `0${today.getMinutes()}`
+        }`,
     });
 
     const onImgSelect = useCallback(() => {
@@ -31,18 +41,10 @@ const lostItemWritePage = () => {
 
     const onInfoChange = useCallback(
         e => {
-            if (e.target.name === 'obtainDate') {
-                // console.log(`${e.target.value}T15:30`);
-                setInfo({
-                    ...info,
-                    [e.target.name]: `${e.target.value}T15:30`,
-                });
-            } else {
-                setInfo({
-                    ...info,
-                    [e.target.name]: e.target.value,
-                });
-            }
+            setInfo({
+                ...info,
+                [e.target.name]: e.target.value,
+            });
         },
         [info],
     );
@@ -67,6 +69,7 @@ const lostItemWritePage = () => {
         e => {
             e.preventDefault();
             const formData = new FormData();
+            console.log(info.obtainDate);
             if (image) {
                 formData.append('image', image);
             } else {
@@ -100,14 +103,6 @@ const lostItemWritePage = () => {
                     </button>
                 </div>
                 <div className="lostitemwritepage-content">
-                    <input
-                        name="obtainDate"
-                        type="date"
-                        className="date-hash"
-                        defaultValue={info.obtainDate && info.obtainDate}
-                        onChange={onInfoChange}
-                        required
-                    />
                     <input
                         name="item"
                         className="item-hash"
