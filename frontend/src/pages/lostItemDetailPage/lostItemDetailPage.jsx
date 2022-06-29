@@ -23,16 +23,16 @@ const lostItemDetailPage = () => {
         navigate(`/lostitem`);
     };
 
+    const onPostModalClick = useCallback(() => {
+        dispatch(isClickDetailUpdateDeleteModal());
+    }, [dispatch]);
+
     const imgZoom = () => {
         setImgClick(prev => !prev);
     };
 
     useEffect(() => {
         dispatch(getLostItemDetailInfo(id));
-    }, [dispatch]);
-
-    const onPostModalClick = useCallback(() => {
-        dispatch(isClickDetailUpdateDeleteModal());
     }, [dispatch]);
 
     return (

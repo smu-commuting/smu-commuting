@@ -1,0 +1,44 @@
+/* eslint-disable no-unused-vars */
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import {
+    deleteConfirmModal,
+    deleteLostItemDetailInfo,
+} from '../../../modules/reducers/community';
+import { deleteDetailInfoApi } from '../../../utils/communityApi';
+import './LostItemDeleteConfirmModal.scss';
+
+function LostItemDeleteConfirmModal() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const onCancelClick = useCallback(() => {
+        dispatch(deleteConfirmModal());
+    }, [dispatch]);
+    const onAgreeClick = useCallback(async () => {
+        // 동적 id 받아서 이후에 다시 처리할 것
+        const result = await deleteDetailInfoApi(9);
+        // const result = await deleteDetailInfoApi(id);
+        if (result.data.status === 200) {
+            navigate(`/lostitem`);
+        }
+    }, []);
+    return (
+        <div className="lostitemdeleteconfirmmodal-wrapper">
+            <div className="lostitemdeleteconfirm-modal">
+                <p>주인을 찾아주셨나요?</p>
+                <p>게시글을 삭제하시겠습니까?</p>
+                <div className="button-wrapper">
+                    <div className="cancel" onClick={onCancelClick} aria-hidden>
+                        <p>취소</p>
+                    </div>
+                    <div className="agree" onClick={onAgreeClick} aria-hidden>
+                        <p>확인</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default LostItemDeleteConfirmModal;

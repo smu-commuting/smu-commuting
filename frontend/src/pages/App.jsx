@@ -43,6 +43,7 @@ import LostItemWritePage from './lostItemWritePage/lostItemWritePage';
 import ProtestPage from './ProtestPage/ProtestPage';
 import { firebaseConfig } from '../constants/firebaseConfig';
 import LostItemDetailModal from '../components/CommunityPage/LostItemDetailModal/LostItemDetailModal';
+import LostItemDeleteConfirmModal from '../components/CommunityPage/LostItemDeleteConfirmModal/LostItemDeleteConfirmModal';
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
@@ -84,9 +85,8 @@ function App() {
         isDeleteTaxiPartyModal,
         isDeleteAllowModal,
     } = useSelector(state => state.taxi);
-    const { isClickDetailUpdateDeleteModal } = useSelector(
-        state => state.community,
-    );
+    const { isClickDetailUpdateDeleteModal, isDeleteConfirmModal } =
+        useSelector(state => state.community);
 
     return (
         <Router>
@@ -188,6 +188,9 @@ function App() {
                         <>
                             {isClickDetailUpdateDeleteModal && (
                                 <LostItemDetailModal />
+                            )}
+                            {isDeleteConfirmModal && (
+                                <LostItemDeleteConfirmModal />
                             )}
                             <LostItemDetailPage />
                         </>

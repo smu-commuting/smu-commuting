@@ -15,6 +15,12 @@ import {
     COMMUNITY_CLICK_DETAIL_UD_MODAL_REQUEST,
     COMMUNITY_CLICK_DETAIL_UD_MODAL_SUCCESS,
     COMMUNITY_CLICK_DETAIL_UD_MODAL_FAILURE,
+    COMMUNITY_DELETE_CONFIRM_MODAL_REQUEST,
+    COMMUNITY_DELETE_CONFIRM_MODAL_SUCCESS,
+    COMMUNITY_DELETE_CONFIRM_MODAL_FAILURE,
+    COMMINITY_DETAIL_PAGE_DELETE_REQUEST,
+    COMMINITY_DETAIL_PAGE_DELETE_SUCCESS,
+    COMMINITY_DETAIL_PAGE_DELETE_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -31,6 +37,12 @@ export const initialState = {
     lostItemInfoError: null,
     // 수정, 삭제 모달 클릭
     isClickDetailUpdateDeleteModal: false,
+    // 삭제 확인 모달 띄우기
+    isDeleteConfirmModal: false,
+    // 분실물 삭제
+    lostItemInfoDeleteLoading: false,
+    lostItemInfoDeleteDone: false,
+    lostItemInfoDeleteError: null,
 };
 
 export const getLostItemList = data => {
@@ -56,6 +68,18 @@ export const getLostItemDetailInfo = id => {
 export const isClickDetailUpdateDeleteModal = () => {
     return {
         type: COMMUNITY_CLICK_DETAIL_UD_MODAL_REQUEST,
+    };
+};
+export const deleteConfirmModal = () => {
+    return {
+        type: COMMUNITY_DELETE_CONFIRM_MODAL_REQUEST,
+    };
+};
+
+export const deleteLostItemDetailInfo = id => {
+    return {
+        type: COMMINITY_DETAIL_PAGE_DELETE_REQUEST,
+        id,
     };
 };
 
@@ -105,6 +129,27 @@ const reducer = (state = initialState, action) => {
                     !draft.isClickDetailUpdateDeleteModal;
                 break;
             case COMMUNITY_CLICK_DETAIL_UD_MODAL_FAILURE:
+                break;
+            case COMMUNITY_DELETE_CONFIRM_MODAL_REQUEST:
+                draft.isClickDetailUpdateDeleteModal = false;
+                break;
+            case COMMUNITY_DELETE_CONFIRM_MODAL_SUCCESS:
+                draft.isDeleteConfirmModal = !draft.isDeleteConfirmModal;
+                break;
+            case COMMUNITY_DELETE_CONFIRM_MODAL_FAILURE:
+                break;
+            case COMMINITY_DETAIL_PAGE_DELETE_REQUEST:
+                draft.lostItemInfoDeleteLoading = true;
+                draft.lostItemInfoDeleteDone = false;
+                draft.lostItemInfoDeleteError = null;
+                break;
+            case COMMINITY_DETAIL_PAGE_DELETE_SUCCESS:
+                draft.lostItemInfoDeleteLoading = false;
+                draft.lostItemInfoDeleteDone = true;
+                break;
+            case COMMINITY_DETAIL_PAGE_DELETE_FAILURE:
+                draft.lostItemInfoDeleteLoading = false;
+                draft.lostItemInfoDeleteError = action.error;
                 break;
             default:
                 break;
