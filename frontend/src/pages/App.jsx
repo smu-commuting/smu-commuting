@@ -44,6 +44,7 @@ import ProtestPage from './ProtestPage/ProtestPage';
 import { firebaseConfig } from '../constants/firebaseConfig';
 import LostItemDetailModal from '../components/CommunityPage/LostItemDetailModal/LostItemDetailModal';
 import LostItemDeleteConfirmModal from '../components/CommunityPage/LostItemDeleteConfirmModal/LostItemDeleteConfirmModal';
+import LostItemEditPage from './LostItemEditPage/LostItemEditPage';
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
@@ -197,6 +198,10 @@ function App() {
                     }
                 />
                 <Route path="/lostitemwrite" element={<LostItemWritePage />} />
+                <Route
+                    path="/lostitemedit/:id"
+                    element={<LostItemEditPage />}
+                />
                 <Route path="/protest" element={<ProtestPage />} />
             </Routes>
         </Router>

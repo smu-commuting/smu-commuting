@@ -33,7 +33,7 @@ const lostItemPage = () => {
     };
 
     const goLostDetailPage = () => {
-        navigate(`/lostitemdetail/8`);
+        navigate(`/lostitemdetail/9`);
     };
 
     useEffect(() => {
