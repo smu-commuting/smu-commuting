@@ -12,6 +12,9 @@ import {
     COMMUNITY_GET_DETAIL_INFO_REQUEST,
     COMMUNITY_GET_DETAIL_INFO_SUCCESS,
     COMMUNITY_GET_DETAIL_INFO_FAILURE,
+    COMMUNITY_CLICK_DETAIL_UD_MODAL_REQUEST,
+    COMMUNITY_CLICK_DETAIL_UD_MODAL_SUCCESS,
+    COMMUNITY_CLICK_DETAIL_UD_MODAL_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -26,6 +29,8 @@ export const initialState = {
     lostItemInfoLoading: false,
     lostItemInfoDone: false,
     lostItemInfoError: null,
+    // 수정, 삭제 모달 클릭
+    isClickDetailUpdateDeleteModal: false,
 };
 
 export const getLostItemList = data => {
@@ -45,6 +50,12 @@ export const getLostItemDetailInfo = id => {
     return {
         type: COMMUNITY_GET_DETAIL_INFO_REQUEST,
         id,
+    };
+};
+
+export const isClickDetailUpdateDeleteModal = () => {
+    return {
+        type: COMMUNITY_CLICK_DETAIL_UD_MODAL_REQUEST,
     };
 };
 
@@ -86,6 +97,14 @@ const reducer = (state = initialState, action) => {
             case COMMUNITY_GET_DETAIL_INFO_FAILURE:
                 draft.lostItemInfoLoading = false;
                 draft.lostItemInfoError = action.error;
+                break;
+            case COMMUNITY_CLICK_DETAIL_UD_MODAL_REQUEST:
+                break;
+            case COMMUNITY_CLICK_DETAIL_UD_MODAL_SUCCESS:
+                draft.isClickDetailUpdateDeleteModal =
+                    !draft.isClickDetailUpdateDeleteModal;
+                break;
+            case COMMUNITY_CLICK_DETAIL_UD_MODAL_FAILURE:
                 break;
             default:
                 break;

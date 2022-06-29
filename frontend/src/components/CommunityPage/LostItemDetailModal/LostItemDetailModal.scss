@@ -1,0 +1,33 @@
+@import '../../../styles/utils.scss';
+
+.lostitemdetailmodal-wrapper {
+    animation-name: modalopen;
+    animation-duration: 0.1s;
+    position: fixed;
+    background-color: white;
+    top: 5rem;
+    right: 2rem;
+    z-index: 2;
+    border: 1px solid black;
+    box-shadow: -3px 3px 12px 5px rgba(0, 0, 0, 0.1);
+    p {
+        font-family: 'NotoSansKR-Medium';
+        font-size: 1.5rem;
+        padding: 0 1rem;
+    }
+    div {
+        height: 1px;
+        border-top: 1px solid black;
+    }
+}
+
+@keyframes modalopen {
+    0% {
+        top: 4.5rem;
+        right: 1.5rem;
+    }
+    100% {
+        top: 5rem;
+        right: 2rem;
+    }
+}

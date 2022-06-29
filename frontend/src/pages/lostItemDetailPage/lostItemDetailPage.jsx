@@ -1,13 +1,15 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Arrow from '../../assets/MyPage/arrow.png';
 import Menu from '../../assets/LostItemDetailPage/menu.png';
-
 import './lostItemDetailPage.scss';
-import { getLostItemDetailInfo } from '../../modules/reducers/community';
+import {
+    getLostItemDetailInfo,
+    isClickDetailUpdateDeleteModal,
+} from '../../modules/reducers/community';
 import ImgDownload from '../../components/CommunityPage/ImgDownload/ImgDownload';
 
 const lostItemDetailPage = () => {
@@ -29,6 +31,10 @@ const lostItemDetailPage = () => {
         dispatch(getLostItemDetailInfo(id));
     }, [dispatch]);
 
+    const onPostModalClick = useCallback(() => {
+        dispatch(isClickDetailUpdateDeleteModal());
+    }, [dispatch]);
+
     return (
         <>
             {imgClick ? (
@@ -44,12 +50,15 @@ const lostItemDetailPage = () => {
                             aria-hidden="true"
                         />
                         <div>분실물 - 상세 페이지</div>
-                        <img
-                            className="menu"
-                            src={Menu}
-                            alt="메뉴"
-                            aria-hidden="true"
-                        />
+                        {lostItemInfo && lostItemInfo.isMine && (
+                            <img
+                                className="menu"
+                                src={Menu}
+                                alt="메뉴"
+                                aria-hidden="true"
+                                onClick={onPostModalClick}
+                            />
+                        )}
                     </div>
                     <div className="lostitemdetailpage-content">
                         <div className="lostitemdetailpage-content">

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { all, fork, put, takeLatest, call } from 'redux-saga/effects';
 
 import {
@@ -10,6 +11,9 @@ import {
     COMMUNITY_GET_DETAIL_INFO_REQUEST,
     COMMUNITY_GET_DETAIL_INFO_SUCCESS,
     COMMUNITY_GET_DETAIL_INFO_FAILURE,
+    COMMUNITY_CLICK_DETAIL_UD_MODAL_REQUEST,
+    COMMUNITY_CLICK_DETAIL_UD_MODAL_SUCCESS,
+    COMMUNITY_CLICK_DETAIL_UD_MODAL_FAILURE,
 } from '../../constants';
 import { getDetailInfoApi, getLostItemListApi } from '../../utils/communityApi';
 
@@ -57,6 +61,18 @@ function* getLostItemDetailInfo(action) {
     }
 }
 
+function* isClickDetailUpdateDeleteModal() {
+    try {
+        yield put({
+            type: COMMUNITY_CLICK_DETAIL_UD_MODAL_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: COMMUNITY_CLICK_DETAIL_UD_MODAL_FAILURE,
+        });
+    }
+}
+
 function* watchGetLostItemList() {
     yield takeLatest(COMMUNITY_GET_LOST_ITEM_LIST_REQUEST, getLostItemList);
 }
@@ -66,11 +82,18 @@ function* watchDeleteLostItemList() {
 function* watchGetLostItemDetailInfo() {
     yield takeLatest(COMMUNITY_GET_DETAIL_INFO_REQUEST, getLostItemDetailInfo);
 }
+function* watchIsClickDetailUpdateDeleteModal() {
+    yield takeLatest(
+        COMMUNITY_CLICK_DETAIL_UD_MODAL_REQUEST,
+        isClickDetailUpdateDeleteModal,
+    );
+}
 
 export default function* communitySaga() {
     yield all([
         fork(watchGetLostItemList),
         fork(watchDeleteLostItemList),
         fork(watchGetLostItemDetailInfo),
+        fork(watchIsClickDetailUpdateDeleteModal),
     ]);
 }
