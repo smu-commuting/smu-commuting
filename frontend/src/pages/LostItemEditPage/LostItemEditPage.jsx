@@ -1,27 +1,32 @@
-/* eslint-disable prefer-const */
-/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
-import React, { useState, useRef, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getLostItemDetailInfo } from '../../modules/reducers/community';
 import Arrow from '../../assets/MyPage/arrow.png';
 import picture from '../../assets/LostItemWritePage/picture.png';
 import cancel from '../../assets/LostItemWritePage/cancel.png';
-import './lostItemWritePage.scss';
-import { postLostItemApi } from '../../utils/communityApi';
+import './LostItemEditPage.scss';
+import { editDetailInfoApi } from '../../utils/communityApi';
 
-const lostItemWritePage = () => {
+function LostItemEditPage() {
+    const { id } = useParams();
     const navigate = useNavigate();
     const imgRef = useRef();
-    const lostItemPage = () => {
-        navigate(`/lostitem`);
+    const { lostItemInfo } = useSelector(state => state.community);
+    const lostItemDetailPage = () => {
+        navigate(`/lostitemdetail/${id}`);
     };
-    const [image, setImage] = useState();
-    const [previewImg, setPreviewImg] = useState();
+    const [image, setImage] = useState(lostItemInfo.image);
+    const [previewImg, setPreviewImg] = useState(lostItemInfo.image);
     const [today, setToday] = useState(new Date());
+    const [imageChanged, setImageChanged] = useState(false);
     const [info, setInfo] = useState({
-        content: '',
-        item: null,
-        place: null,
+        content: lostItemInfo.content,
+        item: lostItemInfo.item,
+        place: lostItemInfo.place,
         obtainDate: `${today.getFullYear()}-${
             today.getMonth() + 1 >= 10
                 ? today.getMonth() + 1
@@ -52,6 +57,7 @@ const lostItemWritePage = () => {
     const onFileChange = e => {
         const reader = new FileReader();
         setImage(e.target.files[0]);
+        setImageChanged(true);
         console.log(e.target.files[0]);
         reader.readAsDataURL(e.target.files[0]);
         reader.onloadend = finished => {
@@ -69,24 +75,26 @@ const lostItemWritePage = () => {
         e => {
             e.preventDefault();
             const formData = new FormData();
-            console.log(info.obtainDate);
             if (image) {
                 formData.append('image', image);
             } else {
                 alert('이미지를 추가해주세요');
                 return;
             }
+            const temp = { ...info, imageChanged };
+            console.log(temp);
             formData.append(
                 'info',
-                new Blob([JSON.stringify(info)], { type: 'application/json' }),
+                new Blob([JSON.stringify(temp)], { type: 'application/json' }),
             );
-            postLostItemApi(formData)
-                .then(res => lostItemPage())
-                .catch(err => alert('글을 게시할 수 없습니다.'));
+            editDetailInfoApi({ id, formData })
+                .then(res => {
+                    lostItemDetailPage();
+                })
+                .catch(err => alert('글을 수정할 수 없습니다.'));
         },
         [info.content, info.item, info.obtainDate, info.place, image],
     );
-
     return (
         <div className="lostitemwritepage-wrapper">
             <form onSubmit={onSubmitHandler}>
@@ -94,7 +102,7 @@ const lostItemWritePage = () => {
                     <img
                         src={Arrow}
                         alt="화살표"
-                        onClick={lostItemPage}
+                        onClick={lostItemDetailPage}
                         aria-hidden="true"
                     />
                     <div>분실물 습득 등록</div>
@@ -107,7 +115,7 @@ const lostItemWritePage = () => {
                         name="item"
                         className="item-hash"
                         placeholder="# 습득 물품명을 간단한 해시태그로 입력해주세요."
-                        defaultValue={info.item && info.item}
+                        value={info.item && info.item}
                         onChange={onInfoChange}
                         required
                     />
@@ -170,6 +178,6 @@ const lostItemWritePage = () => {
             </form>
         </div>
     );
-};
+}
 
-export default lostItemWritePage;
+export default LostItemEditPage;

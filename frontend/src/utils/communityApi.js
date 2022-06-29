@@ -30,3 +30,20 @@ export const getDetailInfoApi = async id => {
         `${process.env.REACT_APP_API_URL}/api/post/${id}`,
     );
 };
+
+// 게시물 삭제
+export const deleteDetailInfoApi = async id => {
+    console.log('해당 id 를 삭제합니다.', id);
+    return await withAuthInstance.delete(
+        `${process.env.REACT_APP_API_URL}/api/post/${id}`,
+    );
+};
+
+// 게시글 수정
+export const editDetailInfoApi = async ({ id, data }) => {
+    console.log('해당 id 를 수정합니다.', id);
+    return await withAuthInstance.put(
+        `${process.env.REACT_APP_API_URL}/api/post/9`,
+        data,
+    );
+};

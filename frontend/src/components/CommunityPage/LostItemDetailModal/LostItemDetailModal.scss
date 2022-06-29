@@ -1,0 +1,43 @@
+@import '../../../styles/utils.scss';
+
+.lostitemdetailmodal-wrapper {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(6, 2, 19, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    .lostitemdetail-modal {
+        animation: hamburger 0.5s backwards;
+        width: 100%;
+        height: 15rem;
+        position: absolute;
+        bottom: 0;
+        background: white;
+        padding: 2.41rem 2.38rem 3rem 3rem;
+        border-radius: 2rem 2rem 0rem 0rem;
+        p {
+            cursor: pointer;
+            font-family: 'NotoSansKR-Medium';
+            font-size: 1.6rem;
+            line-height: 1.5;
+            color: #474451;
+            img {
+                margin-right: 1.2rem;
+            }
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.82rem;
+        }
+    }
+}
+
+@keyframes hamburger {
+    0% {
+        bottom: -50%;
+    }
+    100% {
+        bottom: 0;
+    }
+}

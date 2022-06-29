@@ -26,9 +26,28 @@
             flex: 1;
         }
     }
+    .lost-icon-wrapper {
+        padding-top: 2rem;
+        position: sticky;
+        top: -0.1rem;
+        background-color: white;
+        z-index: 1;
+        width: 100%;
+        .lost-icon {
+            display: block;
+            margin: auto;
+            height: 80%;
+        }
+    }
 
     .lostitempage-content {
-        margin-top: 2.5rem;
+        padding-top: 2.5rem;
+        li:first-child {
+            position: sticky;
+            top: 12rem;
+            background-color: white;
+            z-index: 1;
+        }
         li {
             display: flex;
             border-bottom: 0.063rem solid #a19fad;

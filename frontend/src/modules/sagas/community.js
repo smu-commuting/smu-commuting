@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { all, fork, put, takeLatest, call } from 'redux-saga/effects';
 
 import {
@@ -10,8 +11,21 @@ import {
     COMMUNITY_GET_DETAIL_INFO_REQUEST,
     COMMUNITY_GET_DETAIL_INFO_SUCCESS,
     COMMUNITY_GET_DETAIL_INFO_FAILURE,
+    COMMUNITY_CLICK_DETAIL_UD_MODAL_REQUEST,
+    COMMUNITY_CLICK_DETAIL_UD_MODAL_SUCCESS,
+    COMMUNITY_CLICK_DETAIL_UD_MODAL_FAILURE,
+    COMMUNITY_DELETE_CONFIRM_MODAL_REQUEST,
+    COMMUNITY_DELETE_CONFIRM_MODAL_SUCCESS,
+    COMMUNITY_DELETE_CONFIRM_MODAL_FAILURE,
+    COMMINITY_DETAIL_PAGE_DELETE_REQUEST,
+    COMMINITY_DETAIL_PAGE_DELETE_SUCCESS,
+    COMMINITY_DETAIL_PAGE_DELETE_FAILURE,
 } from '../../constants';
-import { getDetailInfoApi, getLostItemListApi } from '../../utils/communityApi';
+import {
+    deleteDetailInfoApi,
+    getDetailInfoApi,
+    getLostItemListApi,
+} from '../../utils/communityApi';
 
 function* getLostItemList(action) {
     try {
@@ -57,6 +71,46 @@ function* getLostItemDetailInfo(action) {
     }
 }
 
+function* isClickDetailUpdateDeleteModal() {
+    try {
+        yield put({
+            type: COMMUNITY_CLICK_DETAIL_UD_MODAL_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: COMMUNITY_CLICK_DETAIL_UD_MODAL_FAILURE,
+        });
+    }
+}
+
+function* isDeleteConfirmModal() {
+    try {
+        yield put({
+            type: COMMUNITY_DELETE_CONFIRM_MODAL_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: COMMUNITY_DELETE_CONFIRM_MODAL_FAILURE,
+        });
+    }
+}
+
+function* deleteLostItemDetailInfo(action) {
+    try {
+        console.log('이전', action.id);
+        const result = yield call(deleteDetailInfoApi, action.id);
+        console.log('요청 이후', result.data);
+        yield put({
+            type: COMMINITY_DETAIL_PAGE_DELETE_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: COMMINITY_DETAIL_PAGE_DELETE_FAILURE,
+            error: err,
+        });
+    }
+}
+
 function* watchGetLostItemList() {
     yield takeLatest(COMMUNITY_GET_LOST_ITEM_LIST_REQUEST, getLostItemList);
 }
@@ -66,11 +120,32 @@ function* watchDeleteLostItemList() {
 function* watchGetLostItemDetailInfo() {
     yield takeLatest(COMMUNITY_GET_DETAIL_INFO_REQUEST, getLostItemDetailInfo);
 }
+function* watchIsClickDetailUpdateDeleteModal() {
+    yield takeLatest(
+        COMMUNITY_CLICK_DETAIL_UD_MODAL_REQUEST,
+        isClickDetailUpdateDeleteModal,
+    );
+}
+function* watchDeleteConfirmModal() {
+    yield takeLatest(
+        COMMUNITY_DELETE_CONFIRM_MODAL_REQUEST,
+        isDeleteConfirmModal,
+    );
+}
+function* watchDeleteLostItemDetailInfo() {
+    yield takeLatest(
+        COMMINITY_DETAIL_PAGE_DELETE_REQUEST,
+        deleteLostItemDetailInfo,
+    );
+}
 
 export default function* communitySaga() {
     yield all([
         fork(watchGetLostItemList),
         fork(watchDeleteLostItemList),
         fork(watchGetLostItemDetailInfo),
+        fork(watchIsClickDetailUpdateDeleteModal),
+        fork(watchDeleteConfirmModal),
+        fork(watchDeleteLostItemDetailInfo),
     ]);
 }

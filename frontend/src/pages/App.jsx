@@ -42,6 +42,9 @@ import LostItemDetailPage from './lostItemDetailPage/lostItemDetailPage';
 import LostItemWritePage from './lostItemWritePage/lostItemWritePage';
 import ProtestPage from './ProtestPage/ProtestPage';
 import { firebaseConfig } from '../constants/firebaseConfig';
+import LostItemDetailModal from '../components/CommunityPage/LostItemDetailModal/LostItemDetailModal';
+import LostItemDeleteConfirmModal from '../components/CommunityPage/LostItemDeleteConfirmModal/LostItemDeleteConfirmModal';
+import LostItemEditPage from './LostItemEditPage/LostItemEditPage';
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
@@ -83,6 +86,8 @@ function App() {
         isDeleteTaxiPartyModal,
         isDeleteAllowModal,
     } = useSelector(state => state.taxi);
+    const { isClickDetailUpdateDeleteModal, isDeleteConfirmModal } =
+        useSelector(state => state.community);
 
     return (
         <Router>
@@ -169,12 +174,34 @@ function App() {
                         </>
                     }
                 />
-                <Route path="/lostitem" element={<LostItemPage />} />
+                <Route
+                    path="/lostitem"
+                    element={
+                        <>
+                            {isCommunityModalOpen && <CommunityModal />}
+                            <LostItemPage />
+                        </>
+                    }
+                />
                 <Route
                     path="/lostitemdetail/:id"
-                    element={<LostItemDetailPage />}
+                    element={
+                        <>
+                            {isClickDetailUpdateDeleteModal && (
+                                <LostItemDetailModal />
+                            )}
+                            {isDeleteConfirmModal && (
+                                <LostItemDeleteConfirmModal />
+                            )}
+                            <LostItemDetailPage />
+                        </>
+                    }
                 />
                 <Route path="/lostitemwrite" element={<LostItemWritePage />} />
+                <Route
+                    path="/lostitemedit/:id"
+                    element={<LostItemEditPage />}
+                />
                 <Route path="/protest" element={<ProtestPage />} />
             </Routes>
         </Router>
