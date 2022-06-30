@@ -12,12 +12,17 @@ import './ReplyUpdateDeleteModal.scss';
 import update from '../../../assets/LostItemDetailModal/update.png';
 import Delete from '../../../assets/LostItemDetailModal/delete.png';
 import { prevent } from '../../../constants';
+import { deleteReplyApi } from '../../../utils/communityApi';
 
 function ReplyUpdateDeleteModal() {
+    const { clickReplyContent } = useSelector(state => state.community);
     const dispatch = useDispatch();
     const onDeleteConfirmModal = useCallback(() => {
-        dispatch(isClickDetailUpdateDeleteModal());
-        dispatch(deleteConfirmModal());
+        deleteReplyApi(clickReplyContent.id)
+            .then(res => {
+                dispatch(replyModalClick());
+            })
+            .catch(e => console.log(e));
     }, [dispatch]);
     const onReplyModal = useCallback(() => {
         dispatch(replyModalClick());
