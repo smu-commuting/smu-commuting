@@ -21,6 +21,9 @@ import {
     COMMINITY_DETAIL_PAGE_DELETE_REQUEST,
     COMMINITY_DETAIL_PAGE_DELETE_SUCCESS,
     COMMINITY_DETAIL_PAGE_DELETE_FAILURE,
+    COMMUNITY_REPLY_POST_REQUEST,
+    COMMUNITY_REPLY_POST_SUCCESS,
+    COMMUNITY_REPLY_POST_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -43,6 +46,10 @@ export const initialState = {
     lostItemInfoDeleteLoading: false,
     lostItemInfoDeleteDone: false,
     lostItemInfoDeleteError: null,
+    // 댓글 생성
+    replyPostLoading: false,
+    replyPostDone: false,
+    replyPostError: null,
 };
 
 export const getLostItemList = data => {
@@ -80,6 +87,15 @@ export const deleteLostItemDetailInfo = id => {
     return {
         type: COMMINITY_DETAIL_PAGE_DELETE_REQUEST,
         id,
+    };
+};
+
+export const postReply = dataObject => {
+    console.log('action', dataObject.id, dataObject.reply);
+    return {
+        type: COMMUNITY_REPLY_POST_REQUEST,
+        id: dataObject.id,
+        data: dataObject.reply,
     };
 };
 
@@ -150,6 +166,19 @@ const reducer = (state = initialState, action) => {
             case COMMINITY_DETAIL_PAGE_DELETE_FAILURE:
                 draft.lostItemInfoDeleteLoading = false;
                 draft.lostItemInfoDeleteError = action.error;
+                break;
+            case COMMUNITY_REPLY_POST_REQUEST:
+                draft.replyPostLoading = true;
+                draft.replyPostDone = false;
+                draft.replyPostError = null;
+                break;
+            case COMMUNITY_REPLY_POST_SUCCESS:
+                draft.replyPostLoading = false;
+                draft.replyPostDone = true;
+                break;
+            case COMMUNITY_REPLY_POST_FAILURE:
+                draft.replyPostLoading = false;
+                draft.replyPostError = action.error;
                 break;
             default:
                 break;

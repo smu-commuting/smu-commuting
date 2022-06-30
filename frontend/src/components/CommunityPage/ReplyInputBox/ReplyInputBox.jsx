@@ -1,15 +1,23 @@
 import React, { useState, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { postReply } from '../../../modules/reducers/community';
 import './ReplyInputBox.scss';
 
 function ReplyInputBox() {
+    const dispatch = useDispatch();
     const [reply, setReply] = useState('');
     const onReplyChange = e => {
-        console.log(e.target.value);
         setReply(e.target.value);
     };
     const onSubmitHandler = useCallback(
         e => {
             e.preventDefault();
+            if (reply === '') return;
+            const data = {
+                id: 9,
+                reply,
+            };
+            dispatch(postReply(data));
             setReply('');
         },
         [reply],

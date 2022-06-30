@@ -47,3 +47,23 @@ export const editDetailInfoApi = async ({ id, data }) => {
         data,
     );
 };
+
+// 댓글 생성
+export const postReplyApi = async dataObject => {
+    console.log(
+        '해당 게시글에 댓글을 생성하겠습니다.',
+        dataObject.id,
+        dataObject.data,
+    );
+    const data = {
+        content: dataObject.data,
+    };
+    return await withAuthInstance.post(
+        `${process.env.REACT_APP_API_URL}/api/post/9/reply`,
+        data,
+    );
+    // return await withAuthInstance.post(
+    //     `${process.env.REACT_APP_API_URL}/api/post/${id}/reply`,
+    //     data,
+    // );
+};

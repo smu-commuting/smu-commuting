@@ -20,11 +20,15 @@ import {
     COMMINITY_DETAIL_PAGE_DELETE_REQUEST,
     COMMINITY_DETAIL_PAGE_DELETE_SUCCESS,
     COMMINITY_DETAIL_PAGE_DELETE_FAILURE,
+    COMMUNITY_REPLY_POST_REQUEST,
+    COMMUNITY_REPLY_POST_SUCCESS,
+    COMMUNITY_REPLY_POST_FAILURE,
 } from '../../constants';
 import {
     deleteDetailInfoApi,
     getDetailInfoApi,
     getLostItemListApi,
+    postReplyApi,
 } from '../../utils/communityApi';
 
 function* getLostItemList(action) {
@@ -111,6 +115,23 @@ function* deleteLostItemDetailInfo(action) {
     }
 }
 
+function* postReply(action) {
+    try {
+        console.log('saga', action);
+        console.log('댓글 생성 요청 이전', action.id);
+        const result = yield call(postReplyApi, action);
+        console.log('댓글 생성 요청 이후', result.data);
+        yield put({
+            type: COMMUNITY_REPLY_POST_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: COMMUNITY_REPLY_POST_FAILURE,
+            error: err,
+        });
+    }
+}
+
 function* watchGetLostItemList() {
     yield takeLatest(COMMUNITY_GET_LOST_ITEM_LIST_REQUEST, getLostItemList);
 }
@@ -139,6 +160,10 @@ function* watchDeleteLostItemDetailInfo() {
     );
 }
 
+function* watchPostReply() {
+    yield takeLatest(COMMUNITY_REPLY_POST_REQUEST, postReply);
+}
+
 export default function* communitySaga() {
     yield all([
         fork(watchGetLostItemList),
@@ -147,5 +172,6 @@ export default function* communitySaga() {
         fork(watchIsClickDetailUpdateDeleteModal),
         fork(watchDeleteConfirmModal),
         fork(watchDeleteLostItemDetailInfo),
+        fork(watchPostReply),
     ]);
 }
