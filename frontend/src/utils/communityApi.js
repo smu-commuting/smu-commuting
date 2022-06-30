@@ -40,11 +40,11 @@ export const deleteDetailInfoApi = async id => {
 };
 
 // 게시글 수정
-export const editDetailInfoApi = async ({ id, data }) => {
-    console.log('해당 id 를 수정합니다.', id);
-    return await withAuthInstance.put(
+export const editDetailInfoApi = async data => {
+    console.log('해당 id 를 수정합니다.', data.id, data.formData);
+    return await withAuthInstance.post(
         `${process.env.REACT_APP_API_URL}/api/post/9`,
-        data,
+        data.formData,
     );
 };
 
