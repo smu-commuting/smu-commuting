@@ -45,6 +45,7 @@ import { firebaseConfig } from '../constants/firebaseConfig';
 import LostItemDetailModal from '../components/CommunityPage/LostItemDetailModal/LostItemDetailModal';
 import LostItemDeleteConfirmModal from '../components/CommunityPage/LostItemDeleteConfirmModal/LostItemDeleteConfirmModal';
 import LostItemEditPage from './LostItemEditPage/LostItemEditPage';
+import ReplyInputBox from '../components/CommunityPage/ReplyInputBox/ReplyInputBox';
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
@@ -194,6 +195,7 @@ function App() {
                                 <LostItemDeleteConfirmModal />
                             )}
                             <LostItemDetailPage />
+                            <ReplyInputBox />
                         </>
                     }
                 />

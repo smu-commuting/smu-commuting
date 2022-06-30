@@ -115,17 +115,6 @@ const lostItemDetailPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="lostitemdetailpage-bottom">
-                        <input type="checkbox" className="checkbox" />
-                        <span>익명</span>
-                        <input type="text" className="input" />
-                        <button
-                            type="submit"
-                            // onClick={}
-                        >
-                            등록
-                        </button>
-                    </div>
                 </div>
             )}
         </>
