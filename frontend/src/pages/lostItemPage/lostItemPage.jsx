@@ -141,10 +141,14 @@ const lostItemPage = () => {
                                         lostItem.createdDate}
                                 </div>
                                 <div className="item">
-                                    {lostItem.item && lostItem.item}
+                                    {lostItem.item.length >= 5
+                                        ? `${lostItem.item.substring(0, 4)}..`
+                                        : lostItem.item}
                                 </div>
                                 <div className="place">
-                                    {lostItem.place && lostItem.place}
+                                    {lostItem.place.length >= 5
+                                        ? `${lostItem.place.substring(0, 4)}..`
+                                        : lostItem.place}
                                 </div>
                             </li>
                         );

@@ -46,6 +46,10 @@ export const editDetailInfoApi = async data => {
         `${process.env.REACT_APP_API_URL}/api/post/9`,
         data.formData,
     );
+    // return await withAuthInstance.post(
+    //     `${process.env.REACT_APP_API_URL}/api/post/${data.id}`,
+    //     data.formData,
+    // );
 };
 
 // 댓글 생성
@@ -63,7 +67,7 @@ export const postReplyApi = async dataObject => {
         data,
     );
     // return await withAuthInstance.post(
-    //     `${process.env.REACT_APP_API_URL}/api/post/${id}/reply`,
+    //     `${process.env.REACT_APP_API_URL}/api/post/${dataObject.id}/reply`,
     //     data,
     // );
 };
