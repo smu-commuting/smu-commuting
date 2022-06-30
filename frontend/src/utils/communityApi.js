@@ -71,3 +71,11 @@ export const postReplyApi = async dataObject => {
     //     data,
     // );
 };
+
+// 댓글 리스트 조회
+export const getReplyListApi = async id => {
+    console.log(`${id}번째 게시물의 댓글을 조회합니다.`);
+    return await withAuthInstance.get(
+        `${process.env.REACT_APP_API_URL}/api/post/9/replies`,
+    );
+};

@@ -24,6 +24,9 @@ import {
     COMMUNITY_REPLY_POST_REQUEST,
     COMMUNITY_REPLY_POST_SUCCESS,
     COMMUNITY_REPLY_POST_FAILURE,
+    COMMUNITY_GET_REPLY_LIST_REQUEST,
+    COMMUNITY_GET_REPLY_LIST_SUCCESS,
+    COMMUNITY_GET_REPLY_LIST_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -50,6 +53,11 @@ export const initialState = {
     replyPostLoading: false,
     replyPostDone: false,
     replyPostError: null,
+    // 댓글 목록 조회
+    replyList: [],
+    replyListLoading: false,
+    replyListDone: false,
+    replyListError: null,
 };
 
 export const getLostItemList = data => {
@@ -96,6 +104,13 @@ export const postReply = dataObject => {
         type: COMMUNITY_REPLY_POST_REQUEST,
         id: dataObject.id,
         data: dataObject.reply,
+    };
+};
+
+export const getReplyList = id => {
+    return {
+        type: COMMUNITY_GET_REPLY_LIST_REQUEST,
+        id,
     };
 };
 
@@ -179,6 +194,21 @@ const reducer = (state = initialState, action) => {
             case COMMUNITY_REPLY_POST_FAILURE:
                 draft.replyPostLoading = false;
                 draft.replyPostError = action.error;
+                break;
+            case COMMUNITY_GET_REPLY_LIST_REQUEST:
+                draft.replyListLoading = true;
+                draft.replyListDone = false;
+                draft.replyListError = null;
+                break;
+            case COMMUNITY_GET_REPLY_LIST_SUCCESS:
+                draft.replyListLoading = false;
+                draft.replyListDone = true;
+                draft.replyList = action.data;
+                console.log('댓글 조회', action.data);
+                break;
+            case COMMUNITY_GET_REPLY_LIST_FAILURE:
+                draft.replyListLoading = false;
+                draft.replyListError = action.error;
                 break;
             default:
                 break;

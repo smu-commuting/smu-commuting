@@ -8,13 +8,17 @@ import Menu from '../../assets/LostItemDetailPage/menu.png';
 import './lostItemDetailPage.scss';
 import {
     getLostItemDetailInfo,
+    getReplyList,
     isClickDetailUpdateDeleteModal,
 } from '../../modules/reducers/community';
 import ImgDownload from '../../components/CommunityPage/ImgDownload/ImgDownload';
+import LostItemReplyBox from '../../components/CommunityPage/LostItemReplyBox/LostItemReplyBox';
 
 const lostItemDetailPage = () => {
     const { id } = useParams();
-    const { lostItemInfo } = useSelector(state => state.community);
+    const { lostItemInfo, replyList, replyPostDone } = useSelector(
+        state => state.community,
+    );
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [imgClick, setImgClick] = useState(false);
@@ -34,6 +38,10 @@ const lostItemDetailPage = () => {
     useEffect(() => {
         dispatch(getLostItemDetailInfo(id));
     }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(getReplyList(id));
+    }, [dispatch, replyPostDone]);
 
     return (
         <>
@@ -97,24 +105,16 @@ const lostItemDetailPage = () => {
                                 />
                             </div>
                         </div>
-                        <div className="comment">
-                            <div className="comment-header">
-                                <p className="number">2019*****</p>
-                                <img
-                                    className="menu"
-                                    src={Menu}
-                                    alt="메뉴"
-                                    aria-hidden="true"
-                                />
-                            </div>
-                            <div className="comment-content">
-                                <p className="content">(댓글 내용)</p>
-                                <p className="write-date">
-                                    2022.06.11.23:55:02
-                                </p>
-                            </div>
-                        </div>
                     </div>
+                    {replyList &&
+                        replyList.map((reply, idx) => {
+                            return (
+                                <LostItemReplyBox
+                                    reply={reply}
+                                    key={reply.createdDate}
+                                />
+                            );
+                        })}
                 </div>
             )}
         </>

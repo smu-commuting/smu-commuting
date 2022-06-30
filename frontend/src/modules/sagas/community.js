@@ -23,11 +23,15 @@ import {
     COMMUNITY_REPLY_POST_REQUEST,
     COMMUNITY_REPLY_POST_SUCCESS,
     COMMUNITY_REPLY_POST_FAILURE,
+    COMMUNITY_GET_REPLY_LIST_REQUEST,
+    COMMUNITY_GET_REPLY_LIST_SUCCESS,
+    COMMUNITY_GET_REPLY_LIST_FAILURE,
 } from '../../constants';
 import {
     deleteDetailInfoApi,
     getDetailInfoApi,
     getLostItemListApi,
+    getReplyListApi,
     postReplyApi,
 } from '../../utils/communityApi';
 
@@ -132,6 +136,24 @@ function* postReply(action) {
     }
 }
 
+function* getReplyList(action) {
+    try {
+        console.log('saga', action);
+        console.log('댓글 조회 요청 이전', action.id);
+        const result = yield call(getReplyListApi, action.id);
+        console.log('댓글 조회 요청 이후', result.data);
+        yield put({
+            type: COMMUNITY_GET_REPLY_LIST_SUCCESS,
+            data: result.data.data,
+        });
+    } catch (err) {
+        yield put({
+            type: COMMUNITY_GET_REPLY_LIST_FAILURE,
+            error: err,
+        });
+    }
+}
+
 function* watchGetLostItemList() {
     yield takeLatest(COMMUNITY_GET_LOST_ITEM_LIST_REQUEST, getLostItemList);
 }
@@ -159,9 +181,11 @@ function* watchDeleteLostItemDetailInfo() {
         deleteLostItemDetailInfo,
     );
 }
-
 function* watchPostReply() {
     yield takeLatest(COMMUNITY_REPLY_POST_REQUEST, postReply);
+}
+function* watchGetReplyList() {
+    yield takeLatest(COMMUNITY_GET_REPLY_LIST_REQUEST, getReplyList);
 }
 
 export default function* communitySaga() {
@@ -173,5 +197,6 @@ export default function* communitySaga() {
         fork(watchDeleteConfirmModal),
         fork(watchDeleteLostItemDetailInfo),
         fork(watchPostReply),
+        fork(watchGetReplyList),
     ]);
 }
