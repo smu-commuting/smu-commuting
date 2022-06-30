@@ -41,6 +41,15 @@ const lostItemWritePage = () => {
 
     const onInfoChange = useCallback(
         e => {
+            if (e.target.name === 'content') {
+                if (e.target.value.length > 200) {
+                    alert('200자 내로 작성해주세요.');
+                    setInfo({
+                        ...info,
+                        content: '',
+                    });
+                }
+            }
             setInfo({
                 ...info,
                 [e.target.name]: e.target.value,

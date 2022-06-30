@@ -1,11 +1,24 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './LostItemReplyBox.scss';
+import { useDispatch, useSelector } from 'react-redux';
 import Menu from '../../../assets/LostItemDetailPage/menu.png';
 import Sumung from '../../../assets/LostItemDetailPage/sumung.jpg';
+import ReplyUpdateDeleteModal from '../ReplyUpdateDeleteModal/ReplyUpdateDeleteModal';
+import { replyModalClick } from '../../../modules/reducers/community';
 
 function LostItemReplyBox({ reply }) {
+    const dispatch = useDispatch();
     const [time, setTime] = useState();
+    const onReplyModal = useCallback(() => {
+        const data = {
+            // id : reply.id,
+            id: 1,
+            data: reply.content,
+        };
+        dispatch(replyModalClick(data));
+    }, [dispatch]);
     useEffect(() => {
         const today = new Date();
         const todayDate = `${today.getFullYear()}-${
@@ -38,6 +51,9 @@ function LostItemReplyBox({ reply }) {
                             src={Menu}
                             alt="메뉴"
                             aria-hidden="true"
+                            onClick={() => {
+                                onReplyModal();
+                            }}
                         />
                     )}
                 </div>

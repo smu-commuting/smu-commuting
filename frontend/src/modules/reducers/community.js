@@ -27,6 +27,9 @@ import {
     COMMUNITY_GET_REPLY_LIST_REQUEST,
     COMMUNITY_GET_REPLY_LIST_SUCCESS,
     COMMUNITY_GET_REPLY_LIST_FAILURE,
+    COMMUNITY_REPLY_UPDATE_DELETE_MODAL_REQUEST,
+    COMMUNITY_REPLY_UPDATE_DELETE_MODAL_SUCCESS,
+    COMMUNITY_REPLY_UPDATE_DELETE_MODAL_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -58,6 +61,9 @@ export const initialState = {
     replyListLoading: false,
     replyListDone: false,
     replyListError: null,
+    // 댓글 수정/삭제 모달
+    isReplyDetailUpdateDeleteModal: false,
+    clickReplyContent: null,
 };
 
 export const getLostItemList = data => {
@@ -111,6 +117,13 @@ export const getReplyList = id => {
     return {
         type: COMMUNITY_GET_REPLY_LIST_REQUEST,
         id,
+    };
+};
+
+export const replyModalClick = data => {
+    return {
+        type: COMMUNITY_REPLY_UPDATE_DELETE_MODAL_REQUEST,
+        data,
     };
 };
 
@@ -209,6 +222,15 @@ const reducer = (state = initialState, action) => {
             case COMMUNITY_GET_REPLY_LIST_FAILURE:
                 draft.replyListLoading = false;
                 draft.replyListError = action.error;
+                break;
+            case COMMUNITY_REPLY_UPDATE_DELETE_MODAL_REQUEST:
+                break;
+            case COMMUNITY_REPLY_UPDATE_DELETE_MODAL_SUCCESS:
+                draft.isReplyDetailUpdateDeleteModal =
+                    !draft.isReplyDetailUpdateDeleteModal;
+                draft.clickReplyContent = action.data;
+                break;
+            case COMMUNITY_REPLY_UPDATE_DELETE_MODAL_FAILURE:
                 break;
             default:
                 break;

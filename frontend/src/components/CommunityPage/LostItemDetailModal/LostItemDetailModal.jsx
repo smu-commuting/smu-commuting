@@ -38,11 +38,11 @@ function LostItemDetailModal() {
             <div className="lostitemdetail-modal">
                 <p onClick={prevent(() => onEditPage())} aria-hidden>
                     <img src={update} alt="수정" />
-                    수정하기
+                    게시글 수정하기
                 </p>
                 <p onClick={prevent(() => onDeleteConfirmModal())} aria-hidden>
                     <img src={Delete} alt="삭제" />
-                    삭제하기
+                    게시글 삭제하기
                 </p>
             </div>
         </div>

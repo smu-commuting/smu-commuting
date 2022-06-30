@@ -26,6 +26,9 @@ import {
     COMMUNITY_GET_REPLY_LIST_REQUEST,
     COMMUNITY_GET_REPLY_LIST_SUCCESS,
     COMMUNITY_GET_REPLY_LIST_FAILURE,
+    COMMUNITY_REPLY_UPDATE_DELETE_MODAL_REQUEST,
+    COMMUNITY_REPLY_UPDATE_DELETE_MODAL_SUCCESS,
+    COMMUNITY_REPLY_UPDATE_DELETE_MODAL_FAILURE,
 } from '../../constants';
 import {
     deleteDetailInfoApi,
@@ -153,6 +156,19 @@ function* getReplyList(action) {
         });
     }
 }
+function* replyDetailUpdateDeleteModal(action) {
+    console.log('모달데이터', action.data);
+    try {
+        yield put({
+            type: COMMUNITY_REPLY_UPDATE_DELETE_MODAL_SUCCESS,
+            data: action.data,
+        });
+    } catch (err) {
+        yield put({
+            type: COMMUNITY_REPLY_UPDATE_DELETE_MODAL_FAILURE,
+        });
+    }
+}
 
 function* watchGetLostItemList() {
     yield takeLatest(COMMUNITY_GET_LOST_ITEM_LIST_REQUEST, getLostItemList);
@@ -187,6 +203,12 @@ function* watchPostReply() {
 function* watchGetReplyList() {
     yield takeLatest(COMMUNITY_GET_REPLY_LIST_REQUEST, getReplyList);
 }
+function* watchReplyDetailUpdateDeleteModal() {
+    yield takeLatest(
+        COMMUNITY_REPLY_UPDATE_DELETE_MODAL_REQUEST,
+        replyDetailUpdateDeleteModal,
+    );
+}
 
 export default function* communitySaga() {
     yield all([
@@ -198,5 +220,6 @@ export default function* communitySaga() {
         fork(watchDeleteLostItemDetailInfo),
         fork(watchPostReply),
         fork(watchGetReplyList),
+        fork(watchReplyDetailUpdateDeleteModal),
     ]);
 }
