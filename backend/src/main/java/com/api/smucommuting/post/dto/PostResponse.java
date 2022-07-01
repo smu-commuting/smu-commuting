@@ -54,14 +54,16 @@ public class PostResponse {
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class GetList {
+        private Long postId;
         private String item;
         private String place;
         private String image;
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm", timezone = "Asia/Seoul")
         private LocalDateTime createdDate;
 
         public static PostResponse.GetList build(Post post) {
-            return PostResponse.GetList.builder()
+            return GetList.builder()
+                    .postId(post.getId())
                     .item(post.getItem())
                     .place(post.getPlace())
                     .image(post.getPostFile().getUrl())

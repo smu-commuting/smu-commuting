@@ -5,7 +5,7 @@ import com.api.smucommuting.user.domain.User;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class Post extends BaseTimeEntity {
     private String item;
 
     @Column(name = "obtain_date")
-    private LocalDateTime obtainDate;
+    private LocalDate obtainDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
