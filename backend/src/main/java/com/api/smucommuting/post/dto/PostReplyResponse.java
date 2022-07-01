@@ -27,6 +27,7 @@ public class PostReplyResponse {
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class GetList {
+        private Long replyId;
         private String content;
         private Boolean isMine;
         private String writer;
@@ -35,6 +36,7 @@ public class PostReplyResponse {
 
         public static PostReplyResponse.GetList build(PostReply reply, User loginUser) {
             return GetList.builder()
+                    .replyId(reply.getId())
                     .content(reply.getContent())
                     .writer(reply.getWriter().getStudentId().toString())
                     .isMine(reply.isMine(loginUser))
