@@ -43,13 +43,9 @@ export const deleteDetailInfoApi = async id => {
 export const editDetailInfoApi = async data => {
     console.log('해당 id 를 수정합니다.', data.id, data.formData);
     return await withAuthInstance.post(
-        `${process.env.REACT_APP_API_URL}/api/post/9`,
+        `${process.env.REACT_APP_API_URL}/api/post/${data.id}`,
         data.formData,
     );
-    // return await withAuthInstance.post(
-    //     `${process.env.REACT_APP_API_URL}/api/post/${data.id}`,
-    //     data.formData,
-    // );
 };
 
 // 댓글 생성
@@ -66,10 +62,6 @@ export const postReplyApi = async dataObject => {
         `${process.env.REACT_APP_API_URL}/api/post/${dataObject.id}/reply`,
         data,
     );
-    // return await withAuthInstance.post(
-    //     `${process.env.REACT_APP_API_URL}/api/post/${dataObject.id}/reply`,
-    //     data,
-    // );
 };
 
 // 댓글 리스트 조회
