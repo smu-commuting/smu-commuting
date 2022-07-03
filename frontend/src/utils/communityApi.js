@@ -80,10 +80,21 @@ export const getReplyListApi = async id => {
     );
 };
 
-// 게시물 삭제
+// 댓글 삭제
 export const deleteReplyApi = async id => {
     console.log('해당 댓글 id 를 삭제합니다.', id);
     return await withAuthInstance.delete(
         `${process.env.REACT_APP_API_URL}/api/post/reply/${id}`,
+    );
+};
+
+// 댓글 수정
+export const editReplyApi = async dataObject => {
+    const data = {
+        content: dataObject.content,
+    };
+    return await withAuthInstance.put(
+        `${process.env.REACT_APP_API_URL}/api/post/reply/${dataObject.id}`,
+        data,
     );
 };

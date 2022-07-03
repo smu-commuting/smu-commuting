@@ -17,6 +17,42 @@
         background: white;
         padding: 2.41rem 2.38rem 1rem 3rem;
         border-radius: 2rem 2rem 0rem 0rem;
+        .edit-wrapper {
+            width: 100%;
+            .edit-box {
+                width: 100%;
+                height: 5rem;
+                resize: none;
+                border: 1px solid #f6f6f6;
+                font-family: 'NotoSansKR-Regular';
+            }
+            .bottom-wrapper {
+                margin-top: 1rem;
+                display: flex;
+                .left {
+                    flex: 1;
+                }
+                .right {
+                    flex: 1;
+                    display: flex;
+                    justify-content: space-between;
+                    button {
+                        flex: 1;
+                        color: white;
+                        padding: 0.5rem;
+                        border-radius: 1.2rem;
+                        font-family: 'NotoSansKR-Regular';
+                    }
+                    .cancel-btn {
+                        background-color: darkgrey;
+                    }
+                    .edit-btn {
+                        margin-left: 1.5rem;
+                        background-color: #7b88f2;
+                    }
+                }
+            }
+        }
         p {
             cursor: pointer;
             font-family: 'NotoSansKR-Medium';

@@ -5,7 +5,6 @@ import './LostItemReplyBox.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import Menu from '../../../assets/LostItemDetailPage/menu.png';
 import Sumung from '../../../assets/LostItemDetailPage/sumung.jpg';
-import ReplyUpdateDeleteModal from '../ReplyUpdateDeleteModal/ReplyUpdateDeleteModal';
 import { replyModalClick } from '../../../modules/reducers/community';
 
 function LostItemReplyBox({ reply }) {
@@ -17,7 +16,7 @@ function LostItemReplyBox({ reply }) {
             data: reply.content,
         };
         dispatch(replyModalClick(data));
-    }, [dispatch]);
+    }, [dispatch, reply.replyId, reply.content]);
     useEffect(() => {
         const today = new Date();
         const todayDate = `${today.getFullYear()}-${
