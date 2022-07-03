@@ -31,13 +31,7 @@ function LostItemEditPage() {
             today.getMonth() + 1 >= 10
                 ? today.getMonth() + 1
                 : `0${today.getMonth() + 1}`
-        }-${today.getDate() >= 10 ? today.getDate() : `0${today.getDate()}`}T${
-            today.getHours() >= 10 ? today.getHours() : `0${today.getHours()}`
-        }:${
-            today.getMinutes() >= 10
-                ? today.getMinutes()
-                : `0${today.getMinutes()}`
-        }`,
+        }-${today.getDate() >= 10 ? today.getDate() : `0${today.getDate()}`}`,
     });
 
     const onImgSelect = useCallback(() => {
