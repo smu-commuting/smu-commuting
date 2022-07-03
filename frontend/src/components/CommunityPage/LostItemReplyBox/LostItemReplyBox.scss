@@ -1,0 +1,48 @@
+@import '../../../styles/utils.scss';
+
+.lostitemreply-box-wrapper {
+    margin-top: 2rem;
+    border-top: 0.063rem solid #eeeeee;
+    text-align: left;
+    @include font-face(NotoSansKR-Regular, 1rem, 1rem, #292733);
+    .lostitemreply-box-header {
+        padding-top: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 4rem;
+        .left {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            .sumung {
+                display: block;
+                height: 100%;
+            }
+            .number {
+                padding-left: 1rem;
+                @include font-face(NotoSansKR-Regular, 1.3rem, 0rem, darkgray);
+            }
+        }
+        .right {
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            .write-date {
+                text-align: right;
+                @include font-face(NotoSansKR-Regular, 1rem, 0rem, darkgray);
+            }
+            .menu {
+                padding-left: 1rem;
+                height: 2rem;
+            }
+        }
+    }
+    .lostitemreply-box-content {
+        padding-left: 0.5rem;
+        .content {
+            @include font-face(NotoSansKR-Medium, 1.5rem, 0rem, #292733);
+        }
+    }
+}

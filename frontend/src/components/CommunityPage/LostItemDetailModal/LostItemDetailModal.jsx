@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
     deleteConfirmModal,
     deleteLostItemDetailInfo,
@@ -13,6 +13,7 @@ import Delete from '../../../assets/LostItemDetailModal/delete.png';
 import { prevent } from '../../../constants';
 
 function LostItemDetailModal() {
+    const { id } = useParams();
     const { lostItemInfo } = useSelector(state => state.community);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -21,9 +22,8 @@ function LostItemDetailModal() {
         dispatch(deleteConfirmModal());
     }, [dispatch]);
     const onEditPage = useCallback(() => {
-        // navigate(`/lostitemedit/${lostItemInfo.id}`)
         dispatch(isClickDetailUpdateDeleteModal());
-        navigate('/lostitemedit/9');
+        navigate(`/lostitemedit/${id}`);
     }, [dispatch]);
     const onPostModalClick = useCallback(() => {
         dispatch(isClickDetailUpdateDeleteModal());
@@ -38,11 +38,11 @@ function LostItemDetailModal() {
             <div className="lostitemdetail-modal">
                 <p onClick={prevent(() => onEditPage())} aria-hidden>
                     <img src={update} alt="수정" />
-                    수정하기
+                    게시글 수정하기
                 </p>
                 <p onClick={prevent(() => onDeleteConfirmModal())} aria-hidden>
                     <img src={Delete} alt="삭제" />
-                    삭제하기
+                    게시글 삭제하기
                 </p>
             </div>
         </div>
