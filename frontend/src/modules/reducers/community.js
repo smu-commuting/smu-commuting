@@ -30,9 +30,9 @@ import {
     COMMUNITY_REPLY_UPDATE_DELETE_MODAL_REQUEST,
     COMMUNITY_REPLY_UPDATE_DELETE_MODAL_SUCCESS,
     COMMUNITY_REPLY_UPDATE_DELETE_MODAL_FAILURE,
-    COMMUNITY_REPLY_DELETE_REQUEST,
-    COMMUNITY_REPLY_DELETE_SUCCESS,
-    COMMUNITY_REPLY_DELETE_FAILURE,
+    COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_REQUEST,
+    COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_SUCCESS,
+    COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -67,6 +67,8 @@ export const initialState = {
     // 댓글 수정/삭제 모달
     isReplyDetailUpdateDeleteModal: false,
     clickReplyContent: null,
+    // 삭제 확인 모달
+    isReplyDeleteConfirmModal: false,
 };
 
 export const getLostItemList = data => {
@@ -127,6 +129,12 @@ export const replyModalClick = data => {
     return {
         type: COMMUNITY_REPLY_UPDATE_DELETE_MODAL_REQUEST,
         data,
+    };
+};
+
+export const replyDeleteConfirmModal = () => {
+    return {
+        type: COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_REQUEST,
     };
 };
 
@@ -234,6 +242,14 @@ const reducer = (state = initialState, action) => {
                 draft.clickReplyContent = action.data;
                 break;
             case COMMUNITY_REPLY_UPDATE_DELETE_MODAL_FAILURE:
+                break;
+            case COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_REQUEST:
+                break;
+            case COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_SUCCESS:
+                draft.isReplyDeleteConfirmModal =
+                    !draft.isReplyDeleteConfirmModal;
+                break;
+            case COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_FAILURE:
                 break;
             default:
                 break;

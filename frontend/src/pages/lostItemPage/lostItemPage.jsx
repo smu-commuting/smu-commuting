@@ -32,8 +32,8 @@ const lostItemPage = () => {
         navigate(`/lostitemwrite`);
     };
 
-    const goLostDetailPage = () => {
-        navigate(`/lostitemdetail/9`);
+    const goLostDetailPage = id => {
+        navigate(`/lostitemdetail/${id}`);
     };
 
     useEffect(() => {
@@ -119,7 +119,9 @@ const lostItemPage = () => {
                         return (
                             <li
                                 key={idx}
-                                onClick={goLostDetailPage}
+                                onClick={() =>
+                                    goLostDetailPage(lostItem.postId)
+                                }
                                 aria-hidden
                             >
                                 <div className="picture">
@@ -138,7 +140,16 @@ const lostItemPage = () => {
                                 </div>
                                 <div className="date">
                                     {lostItem.createdDate &&
-                                        lostItem.createdDate}
+                                        `${
+                                            lostItem.createdDate
+                                                .split('T')[0]
+                                                .split('-')[1]
+                                        }월
+                                            ${
+                                                lostItem.createdDate
+                                                    .split('T')[0]
+                                                    .split('-')[2]
+                                            }일`}
                                 </div>
                                 <div className="item">
                                     {lostItem.item.length >= 5

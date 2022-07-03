@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
     deleteConfirmModal,
     deleteLostItemDetailInfo,
+    getReplyList,
     isClickDetailUpdateDeleteModal,
+    replyDeleteConfirmModal,
     replyModalClick,
 } from '../../../modules/reducers/community';
 import './ReplyUpdateDeleteModal.scss';
@@ -15,14 +17,17 @@ import { prevent } from '../../../constants';
 import { deleteReplyApi } from '../../../utils/communityApi';
 
 function ReplyUpdateDeleteModal() {
+    const { id } = useParams();
     const { clickReplyContent } = useSelector(state => state.community);
     const dispatch = useDispatch();
     const onDeleteConfirmModal = useCallback(() => {
-        deleteReplyApi(clickReplyContent.id)
-            .then(res => {
-                dispatch(replyModalClick());
-            })
-            .catch(e => console.log(e));
+        dispatch(replyDeleteConfirmModal());
+        // deleteReplyApi(clickReplyContent.id)
+        //     .then(res => {
+        //         dispatch(replyModalClick());
+        //         dispatch(getReplyList(id));
+        //     })
+        //     .catch(e => console.log(e));
     }, [dispatch]);
     const onReplyModal = useCallback(() => {
         dispatch(replyModalClick());

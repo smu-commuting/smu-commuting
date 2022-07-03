@@ -47,6 +47,7 @@ import LostItemDeleteConfirmModal from '../components/CommunityPage/LostItemDele
 import LostItemEditPage from './LostItemEditPage/LostItemEditPage';
 import ReplyInputBox from '../components/CommunityPage/ReplyInputBox/ReplyInputBox';
 import ReplyUpdateDeleteModal from '../components/CommunityPage/ReplyUpdateDeleteModal/ReplyUpdateDeleteModal';
+import ReplyDeleteConfirmModal from '../components/CommunityPage/ReplyDeleteConfirmModal/ReplyDeleteConfirmModal';
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
@@ -92,6 +93,7 @@ function App() {
         isClickDetailUpdateDeleteModal,
         isReplyDetailUpdateDeleteModal,
         isDeleteConfirmModal,
+        isReplyDeleteConfirmModal,
     } = useSelector(state => state.community);
 
     return (
@@ -200,6 +202,9 @@ function App() {
                             )}
                             {isReplyDetailUpdateDeleteModal && (
                                 <ReplyUpdateDeleteModal />
+                            )}
+                            {isReplyDeleteConfirmModal && (
+                                <ReplyDeleteConfirmModal />
                             )}
                             <LostItemDetailPage />
                             <ReplyInputBox />

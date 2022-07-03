@@ -13,8 +13,7 @@ function LostItemReplyBox({ reply }) {
     const [time, setTime] = useState();
     const onReplyModal = useCallback(() => {
         const data = {
-            // id : reply.id,
-            id: 9,
+            id: reply.replyId,
             data: reply.content,
         };
         dispatch(replyModalClick(data));

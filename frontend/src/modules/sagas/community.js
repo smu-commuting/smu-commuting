@@ -29,6 +29,9 @@ import {
     COMMUNITY_REPLY_UPDATE_DELETE_MODAL_REQUEST,
     COMMUNITY_REPLY_UPDATE_DELETE_MODAL_SUCCESS,
     COMMUNITY_REPLY_UPDATE_DELETE_MODAL_FAILURE,
+    COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_REQUEST,
+    COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_SUCCESS,
+    COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_FAILURE,
 } from '../../constants';
 import {
     deleteDetailInfoApi,
@@ -169,6 +172,17 @@ function* replyDetailUpdateDeleteModal(action) {
         });
     }
 }
+function* replyDeleteConfirmModal() {
+    try {
+        yield put({
+            type: COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_FAILURE,
+        });
+    }
+}
 
 function* watchGetLostItemList() {
     yield takeLatest(COMMUNITY_GET_LOST_ITEM_LIST_REQUEST, getLostItemList);
@@ -209,6 +223,12 @@ function* watchReplyDetailUpdateDeleteModal() {
         replyDetailUpdateDeleteModal,
     );
 }
+function* watchReplyDeleteConfirmModal() {
+    yield takeLatest(
+        COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_REQUEST,
+        replyDeleteConfirmModal,
+    );
+}
 
 export default function* communitySaga() {
     yield all([
@@ -221,5 +241,6 @@ export default function* communitySaga() {
         fork(watchPostReply),
         fork(watchGetReplyList),
         fork(watchReplyDetailUpdateDeleteModal),
+        fork(watchReplyDeleteConfirmModal),
     ]);
 }

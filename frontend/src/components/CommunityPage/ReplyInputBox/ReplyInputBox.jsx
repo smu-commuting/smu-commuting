@@ -1,9 +1,11 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { postReply } from '../../../modules/reducers/community';
 import './ReplyInputBox.scss';
 
 function ReplyInputBox() {
+    const { id } = useParams();
     const dispatch = useDispatch();
     const [reply, setReply] = useState('');
     const onReplyChange = e => {
@@ -14,7 +16,7 @@ function ReplyInputBox() {
             e.preventDefault();
             if (reply === '') return;
             const data = {
-                id: 9,
+                id,
                 reply,
             };
             dispatch(postReply(data));
