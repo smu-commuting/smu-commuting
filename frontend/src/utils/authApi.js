@@ -37,3 +37,14 @@ export const signupApi = data => {
         data,
     );
 };
+
+// 탈퇴 API
+export const deleteUserApi = () => {
+    console.log(
+        '탈퇴 API 연동 테스트',
+        `${process.env.REACT_APP_API_URL}${API_USER}`,
+    );
+    return withAuthInstance.delete(
+        `${process.env.REACT_APP_API_URL}${API_USER}`,
+    );
+};
