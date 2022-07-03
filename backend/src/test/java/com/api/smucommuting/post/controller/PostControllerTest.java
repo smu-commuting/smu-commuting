@@ -16,6 +16,7 @@ import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
@@ -41,7 +42,8 @@ class PostControllerTest extends MvcTest {
     private static final String PLACE2 = "미백관";
     private static final String CONTENT = "공학관 휴대폰 분실";
     private static final String IMAGE_URL = "image url";
-    private static final LocalDateTime DATE = LocalDateTime.of(2022, 6, 6, 15, 30);
+    private static final LocalDate DATE = LocalDate.of(2022, 6, 30);
+    private static final LocalDateTime DATE_TIME = LocalDateTime.of(2022, 6, 30, 9, 30);
 
     @Test
     @DisplayName("게시물 생성 문서화")
@@ -105,7 +107,7 @@ class PostControllerTest extends MvcTest {
 
         given(postService.update(any(), any(), any(), any())).willReturn(response);
 
-        ResultActions results = mvc.perform(multipart("/api/post/{postId}",1)
+        ResultActions results = mvc.perform(multipart("/api/post/{postId}", 1)
                 .file(infoRequest)
                 .file(img)
                 .contentType(MediaType.MULTIPART_MIXED)
@@ -137,7 +139,7 @@ class PostControllerTest extends MvcTest {
         PostResponse.GetOne response = PostResponse.GetOne.builder()
                 .content(CONTENT)
                 .place(PLACE)
-                .createdDate(DATE)
+                .createdDate(DATE_TIME)
                 .item(ITEM)
                 .image(IMAGE_URL)
                 .writer("123456")
@@ -174,15 +176,17 @@ class PostControllerTest extends MvcTest {
     @DisplayName("게시물 목록 조회")
     public void getList() throws Exception {
         PostResponse.GetList response1 = PostResponse.GetList.builder()
+                .postId(1L)
                 .place(PLACE)
-                .createdDate(DATE)
+                .createdDate(DATE_TIME)
                 .item(ITEM)
                 .image(IMAGE_URL)
                 .build();
 
         PostResponse.GetList response2 = PostResponse.GetList.builder()
+                .postId(2L)
                 .place(PLACE2)
-                .createdDate(DATE)
+                .createdDate(DATE_TIME)
                 .item(ITEM2)
                 .image(IMAGE_URL)
                 .build();
@@ -205,6 +209,7 @@ class PostControllerTest extends MvcTest {
                         responseFields(
                                 fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
                                 fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
+                                fieldWithPath("data.[].postId").type(JsonFieldType.NUMBER).description("게시물 식별자"),
                                 fieldWithPath("data.[].item").type(JsonFieldType.STRING).description("물건"),
                                 fieldWithPath("data.[].place").type(JsonFieldType.STRING).description("장소"),
                                 fieldWithPath("data.[].image").type(JsonFieldType.STRING).description("게시물 이미지 url"),

@@ -21,6 +21,18 @@ import {
     COMMINITY_DETAIL_PAGE_DELETE_REQUEST,
     COMMINITY_DETAIL_PAGE_DELETE_SUCCESS,
     COMMINITY_DETAIL_PAGE_DELETE_FAILURE,
+    COMMUNITY_REPLY_POST_REQUEST,
+    COMMUNITY_REPLY_POST_SUCCESS,
+    COMMUNITY_REPLY_POST_FAILURE,
+    COMMUNITY_GET_REPLY_LIST_REQUEST,
+    COMMUNITY_GET_REPLY_LIST_SUCCESS,
+    COMMUNITY_GET_REPLY_LIST_FAILURE,
+    COMMUNITY_REPLY_UPDATE_DELETE_MODAL_REQUEST,
+    COMMUNITY_REPLY_UPDATE_DELETE_MODAL_SUCCESS,
+    COMMUNITY_REPLY_UPDATE_DELETE_MODAL_FAILURE,
+    COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_REQUEST,
+    COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_SUCCESS,
+    COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -43,6 +55,20 @@ export const initialState = {
     lostItemInfoDeleteLoading: false,
     lostItemInfoDeleteDone: false,
     lostItemInfoDeleteError: null,
+    // 댓글 생성
+    replyPostLoading: false,
+    replyPostDone: false,
+    replyPostError: null,
+    // 댓글 목록 조회
+    replyList: [],
+    replyListLoading: false,
+    replyListDone: false,
+    replyListError: null,
+    // 댓글 수정/삭제 모달
+    isReplyDetailUpdateDeleteModal: false,
+    clickReplyContent: null,
+    // 삭제 확인 모달
+    isReplyDeleteConfirmModal: false,
 };
 
 export const getLostItemList = data => {
@@ -80,6 +106,35 @@ export const deleteLostItemDetailInfo = id => {
     return {
         type: COMMINITY_DETAIL_PAGE_DELETE_REQUEST,
         id,
+    };
+};
+
+export const postReply = dataObject => {
+    console.log('action', dataObject.id, dataObject.reply);
+    return {
+        type: COMMUNITY_REPLY_POST_REQUEST,
+        id: dataObject.id,
+        data: dataObject.reply,
+    };
+};
+
+export const getReplyList = id => {
+    return {
+        type: COMMUNITY_GET_REPLY_LIST_REQUEST,
+        id,
+    };
+};
+
+export const replyModalClick = data => {
+    return {
+        type: COMMUNITY_REPLY_UPDATE_DELETE_MODAL_REQUEST,
+        data,
+    };
+};
+
+export const replyDeleteConfirmModal = () => {
+    return {
+        type: COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_REQUEST,
     };
 };
 
@@ -150,6 +205,51 @@ const reducer = (state = initialState, action) => {
             case COMMINITY_DETAIL_PAGE_DELETE_FAILURE:
                 draft.lostItemInfoDeleteLoading = false;
                 draft.lostItemInfoDeleteError = action.error;
+                break;
+            case COMMUNITY_REPLY_POST_REQUEST:
+                draft.replyPostLoading = true;
+                draft.replyPostDone = false;
+                draft.replyPostError = null;
+                break;
+            case COMMUNITY_REPLY_POST_SUCCESS:
+                draft.replyPostLoading = false;
+                draft.replyPostDone = true;
+                break;
+            case COMMUNITY_REPLY_POST_FAILURE:
+                draft.replyPostLoading = false;
+                draft.replyPostError = action.error;
+                break;
+            case COMMUNITY_GET_REPLY_LIST_REQUEST:
+                draft.replyListLoading = true;
+                draft.replyListDone = false;
+                draft.replyListError = null;
+                break;
+            case COMMUNITY_GET_REPLY_LIST_SUCCESS:
+                draft.replyListLoading = false;
+                draft.replyListDone = true;
+                draft.replyList = action.data;
+                console.log('댓글 조회', action.data);
+                break;
+            case COMMUNITY_GET_REPLY_LIST_FAILURE:
+                draft.replyListLoading = false;
+                draft.replyListError = action.error;
+                break;
+            case COMMUNITY_REPLY_UPDATE_DELETE_MODAL_REQUEST:
+                break;
+            case COMMUNITY_REPLY_UPDATE_DELETE_MODAL_SUCCESS:
+                draft.isReplyDetailUpdateDeleteModal =
+                    !draft.isReplyDetailUpdateDeleteModal;
+                draft.clickReplyContent = action.data;
+                break;
+            case COMMUNITY_REPLY_UPDATE_DELETE_MODAL_FAILURE:
+                break;
+            case COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_REQUEST:
+                break;
+            case COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_SUCCESS:
+                draft.isReplyDeleteConfirmModal =
+                    !draft.isReplyDeleteConfirmModal;
+                break;
+            case COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_FAILURE:
                 break;
             default:
                 break;

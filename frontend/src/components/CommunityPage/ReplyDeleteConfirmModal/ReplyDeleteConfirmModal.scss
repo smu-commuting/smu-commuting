@@ -1,0 +1,52 @@
+@import '../../../styles/utils.scss';
+
+%font {
+    font-family: 'NotoSansKR-Medium';
+    font-size: 2rem;
+}
+.replydeleteconfirmmodal-wrapper {
+    position: fixed;
+    z-index: 11;
+    width: 100vw;
+    height: 100%;
+    overflow: hidden;
+    touch-action: none;
+    background: $modal-background;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .replydeleteconfirm-modal {
+        width: 80%;
+        border-radius: 1.2rem;
+        background-color: #ffffff;
+        padding-top: 1.5rem ;
+        p {
+            text-align: center;
+            @extend %font;
+            color: black;
+        }
+        .button-wrapper {
+            margin-top : 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            height: 4.8rem;
+            font-family: 'NotoSansKR-Medium';
+            font-size: 2rem;
+            .cancel {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-top: 1px solid black;
+                border-right: 1px solid black;
+            }
+            .agree {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-top: 1px solid black;
+            }
+        }
+    }
+}

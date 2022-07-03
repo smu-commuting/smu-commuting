@@ -70,6 +70,7 @@ class PostReplyControllerTest extends MvcTest {
     @DisplayName("댓글 목록 조회")
     public void getList() throws Exception {
         PostReplyResponse.GetList response1 = PostReplyResponse.GetList.builder()
+                .replyId(1L)
                 .content("감사합니다!")
                 .isMine(false)
                 .writer("123456")
@@ -77,6 +78,7 @@ class PostReplyControllerTest extends MvcTest {
                 .build();
 
         PostReplyResponse.GetList response2 = PostReplyResponse.GetList.builder()
+                .replyId(2L)
                 .content("네!")
                 .isMine(true)
                 .writer("123789")
@@ -98,6 +100,7 @@ class PostReplyControllerTest extends MvcTest {
                         responseFields(
                                 fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
                                 fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
+                                fieldWithPath("data.[].replyId").type(JsonFieldType.NUMBER).description("댓글 식별자"),
                                 fieldWithPath("data.[].content").type(JsonFieldType.STRING).description("내용"),
                                 fieldWithPath("data.[].writer").type(JsonFieldType.STRING).description("댓쓴이 학번"),
                                 fieldWithPath("data.[].isMine").type(JsonFieldType.BOOLEAN).description("자신의 댓글이라면 true"),

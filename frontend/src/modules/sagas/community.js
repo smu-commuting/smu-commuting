@@ -20,11 +20,25 @@ import {
     COMMINITY_DETAIL_PAGE_DELETE_REQUEST,
     COMMINITY_DETAIL_PAGE_DELETE_SUCCESS,
     COMMINITY_DETAIL_PAGE_DELETE_FAILURE,
+    COMMUNITY_REPLY_POST_REQUEST,
+    COMMUNITY_REPLY_POST_SUCCESS,
+    COMMUNITY_REPLY_POST_FAILURE,
+    COMMUNITY_GET_REPLY_LIST_REQUEST,
+    COMMUNITY_GET_REPLY_LIST_SUCCESS,
+    COMMUNITY_GET_REPLY_LIST_FAILURE,
+    COMMUNITY_REPLY_UPDATE_DELETE_MODAL_REQUEST,
+    COMMUNITY_REPLY_UPDATE_DELETE_MODAL_SUCCESS,
+    COMMUNITY_REPLY_UPDATE_DELETE_MODAL_FAILURE,
+    COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_REQUEST,
+    COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_SUCCESS,
+    COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_FAILURE,
 } from '../../constants';
 import {
     deleteDetailInfoApi,
     getDetailInfoApi,
     getLostItemListApi,
+    getReplyListApi,
+    postReplyApi,
 } from '../../utils/communityApi';
 
 function* getLostItemList(action) {
@@ -111,6 +125,65 @@ function* deleteLostItemDetailInfo(action) {
     }
 }
 
+function* postReply(action) {
+    try {
+        console.log('saga', action);
+        console.log('댓글 생성 요청 이전', action.id);
+        const result = yield call(postReplyApi, action);
+        console.log('댓글 생성 요청 이후', result.data);
+        yield put({
+            type: COMMUNITY_REPLY_POST_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: COMMUNITY_REPLY_POST_FAILURE,
+            error: err,
+        });
+    }
+}
+
+function* getReplyList(action) {
+    try {
+        console.log('saga', action);
+        console.log('댓글 조회 요청 이전', action.id);
+        const result = yield call(getReplyListApi, action.id);
+        console.log('댓글 조회 요청 이후', result.data);
+        yield put({
+            type: COMMUNITY_GET_REPLY_LIST_SUCCESS,
+            data: result.data.data,
+        });
+    } catch (err) {
+        yield put({
+            type: COMMUNITY_GET_REPLY_LIST_FAILURE,
+            error: err,
+        });
+    }
+}
+function* replyDetailUpdateDeleteModal(action) {
+    console.log('모달데이터', action.data);
+    try {
+        yield put({
+            type: COMMUNITY_REPLY_UPDATE_DELETE_MODAL_SUCCESS,
+            data: action.data,
+        });
+    } catch (err) {
+        yield put({
+            type: COMMUNITY_REPLY_UPDATE_DELETE_MODAL_FAILURE,
+        });
+    }
+}
+function* replyDeleteConfirmModal() {
+    try {
+        yield put({
+            type: COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_FAILURE,
+        });
+    }
+}
+
 function* watchGetLostItemList() {
     yield takeLatest(COMMUNITY_GET_LOST_ITEM_LIST_REQUEST, getLostItemList);
 }
@@ -138,6 +211,24 @@ function* watchDeleteLostItemDetailInfo() {
         deleteLostItemDetailInfo,
     );
 }
+function* watchPostReply() {
+    yield takeLatest(COMMUNITY_REPLY_POST_REQUEST, postReply);
+}
+function* watchGetReplyList() {
+    yield takeLatest(COMMUNITY_GET_REPLY_LIST_REQUEST, getReplyList);
+}
+function* watchReplyDetailUpdateDeleteModal() {
+    yield takeLatest(
+        COMMUNITY_REPLY_UPDATE_DELETE_MODAL_REQUEST,
+        replyDetailUpdateDeleteModal,
+    );
+}
+function* watchReplyDeleteConfirmModal() {
+    yield takeLatest(
+        COMMUNITY_REPLY_DELETE_CONFIRM_MODAL_REQUEST,
+        replyDeleteConfirmModal,
+    );
+}
 
 export default function* communitySaga() {
     yield all([
@@ -147,5 +238,9 @@ export default function* communitySaga() {
         fork(watchIsClickDetailUpdateDeleteModal),
         fork(watchDeleteConfirmModal),
         fork(watchDeleteLostItemDetailInfo),
+        fork(watchPostReply),
+        fork(watchGetReplyList),
+        fork(watchReplyDetailUpdateDeleteModal),
+        fork(watchReplyDeleteConfirmModal),
     ]);
 }

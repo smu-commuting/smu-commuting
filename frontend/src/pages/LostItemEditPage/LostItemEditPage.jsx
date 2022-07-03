@@ -87,7 +87,11 @@ function LostItemEditPage() {
                 'info',
                 new Blob([JSON.stringify(temp)], { type: 'application/json' }),
             );
-            editDetailInfoApi({ id, formData })
+            const data = {
+                id,
+                formData,
+            };
+            editDetailInfoApi(data)
                 .then(res => {
                     lostItemDetailPage();
                 })
