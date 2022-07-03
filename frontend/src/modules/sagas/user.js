@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { all, fork, put, takeLatest, call } from 'redux-saga/effects';
 
 import {
@@ -17,7 +18,6 @@ import {
     USER_COMMUNITY_MODAL_SUCCESS,
     USER_COMMUNITY_MODAL_FAILURE,
 } from '../../constants';
-import { signupApi } from '../../utils';
 
 function* login(action) {
     console.log('saga In action', action);
@@ -36,10 +36,9 @@ function* login(action) {
 
 function* signup(action) {
     try {
-        const result = yield call(signupApi, action.data);
         yield put({
             type: USER_SIGN_UP_SUCCESS,
-            data: result.data,
+            data: action.data,
         });
     } catch (err) {
         yield put({
