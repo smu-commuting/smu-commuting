@@ -35,15 +35,6 @@ const lostItemWritePage = () => {
 
     const onInfoChange = useCallback(
         e => {
-            if (e.target.name === 'content') {
-                if (e.target.value.length > 200) {
-                    alert('200자 내로 작성해주세요.');
-                    setInfo({
-                        ...info,
-                        content: '',
-                    });
-                }
-            }
             setInfo({
                 ...info,
                 [e.target.name]: e.target.value,
@@ -125,12 +116,12 @@ const lostItemWritePage = () => {
                     <textarea
                         name="content"
                         className="content"
-                        placeholder="내용을 입력해주세요. (200자 이내)"
+                        placeholder="내용을 입력해주세요."
                         defaultValue={info.content && info.content}
                         onChange={onInfoChange}
                         required
                     />
-                    <p className="content-limit">{info.content.length} / 200</p>
+                    <p className="content-limit">{info.content.length} 자</p>
                 </div>
                 {previewImg && (
                     <div className="preview-wrapper">
