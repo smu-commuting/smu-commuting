@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Close from '../../assets/ManualPage/close.png';
+import Close from '../../assets/BusPage/cancel.png';
 import './ManualPage.scss';
 
 function ManualPage() {
@@ -74,27 +74,7 @@ function ManualPage() {
                             표시됩니다. 자신이 속한 채팅방 리스트는 메인 화면
                             왼쪽 상단 아이콘을 통해 확인 가능합니다.
                             <br />
-                            채팅방 이용 규칙은 다음과 같습니다.
-                            <br />
-                            <br />
-                            1. 헌법에 위배되는 행위 금지
-                            <br />
-                            2. 국제 평화를 무너뜨릴 우려가 있는 행위 금지
-                            <br />
-                            3. 성적 도의 관념에 반하는 행위 금지
-                            <br />
-                            4. 폭력적인 행위 금지
-                            <br />
-                            5. 사회질서를 저해하는 행위 금지
-                            <br />
-                            6. 타인의 권리를 침해하는 행위 금지
-                            <br />
-                            <br />
-                            그 외에 도덕적으로 문제가 되거나 비윤리적인 모든
-                            행위를 금합니다.
-                            <br />
-                            모두 건강하고 활기찬 SMU로를 위해 협조해 주시기
-                            바랍니다.
+                            자세한 채팅방 이용 규칙은 금지 행위 항목 참고하세요.
                         </p>
                         <h4>3) 승차 거부</h4>
                         <p>
@@ -110,6 +90,31 @@ function ManualPage() {
                     <p className="community-info">
                         커뮤니티에서는 분실물에 대한 정보와 시위 정보를
                         제공합니다.
+                    </p>
+                    <h3 className="ban-header">금지 행위</h3>
+                    <p className="ban-info">
+                        채팅방, 글쓰기 및 댓글 작성 시 다음과 같은 행위를
+                        금지합니다.
+                        <br />
+                        <br />
+                        1. 헌법에 위배되는 행위 금지
+                        <br />
+                        2. 국제 평화를 무너뜨릴 우려가 있는 행위 금지
+                        <br />
+                        3. 성적 도의 관념에 반하는 행위 금지
+                        <br />
+                        4. 폭력적인 행위 금지
+                        <br />
+                        5. 사회질서를 저해하는 행위 금지
+                        <br />
+                        6. 타인의 권리를 침해하는 행위 금지
+                        <br />
+                        <br />
+                        그 외에 도덕적으로 문제가 되거나 비윤리적인 모든 행위를
+                        금합니다.
+                        <br />
+                        모두 건강하고 활기찬 SMU로를 위해 협조해 주시기
+                        바랍니다.
                     </p>
                 </div>
             </div>
