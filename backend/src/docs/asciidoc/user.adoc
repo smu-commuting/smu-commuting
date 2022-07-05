@@ -55,3 +55,16 @@ include::{snippets}/user_quit/http-request.adoc[]
 성공 응답 HTTP
 include::{snippets}/user_quit/http-response.adoc[]
 include::{snippets}/user_quit/response-fields.adoc[]
+
+== Profile Image
+
+=== 프로필 이미지 목록 조회
+
+`GET /api/profiles`
+
+요청 HTTP
+include::{snippets}/profile_getList/http-request.adoc[]
+
+성공 응답 HTTP
+include::{snippets}/profile_getList/http-response.adoc[]
+include::{snippets}/profile_getList/response-fields.adoc[]

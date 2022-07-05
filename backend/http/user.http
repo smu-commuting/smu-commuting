@@ -26,5 +26,9 @@ Content-Type: application/json;charset=UTF-8
 }
 
 ###
+GET {{apiUrl}}/profiles
+Authorization: {{authorizationToken}}
+
+###
 DELETE {{apiUrl}}/user
 Authorization: {{authorizationToken}}
