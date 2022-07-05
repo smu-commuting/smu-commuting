@@ -25,7 +25,6 @@ public class PostReplyService {
     private final PostRepository postRepository;
     private final PostReplyValidator postReplyValidator;
 
-
     public PostReplyResponse.OnlyId create(Long postId, PostReplyRequest.CreateOrUpdate request, User loginUser) {
         Post post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
         PostReply reply = PostReply.create(request.toEntity(), post, loginUser);

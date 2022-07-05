@@ -38,12 +38,6 @@ public class UserService {
         mailSender.mailSend(request.getEmail(), userVerificationCode);
     }
 
-    public void update(UserRequest.Update request, User loginUser) {
-        User user = userRepository.findById(loginUser.getId()).orElseThrow(UserNotFoundException::new);
-        ProfileImage profileImage = profileImageRepository.findById(request.getImageId()).orElseThrow(ProfileImageNotFoundException::new);
-        user.update(profileImage);
-    }
-
     @Transactional(readOnly = true)
     public void codeVerification(UserRequest.EmailVerification request, User loginUser, LocalDateTime now) {
         userVerificationCodeService.validateCode(loginUser, request.getCode(), now);
@@ -55,9 +49,14 @@ public class UserService {
         return UserResponse.GetOne.build(user);
     }
 
+    public void update(UserRequest.Update request, User loginUser) {
+        User user = userRepository.findById(loginUser.getId()).orElseThrow(UserNotFoundException::new);
+        ProfileImage profileImage = profileImageRepository.findById(request.getImageId()).orElseThrow(ProfileImageNotFoundException::new);
+        user.update(profileImage);
+    }
+
     public void delete(User loginUser) {
         loginUser.quit(loginUser.getId());
         userRepository.delete(loginUser);
     }
-
 }

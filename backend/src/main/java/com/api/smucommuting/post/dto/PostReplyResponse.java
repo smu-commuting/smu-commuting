@@ -30,7 +30,7 @@ public class PostReplyResponse {
         private Long replyId;
         private String content;
         private Boolean isMine;
-        private String writer;
+        private PostDto.Writer writer;
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm", timezone = "Asia/Seoul")
         private LocalDateTime createdDate;
 
@@ -38,7 +38,7 @@ public class PostReplyResponse {
             return GetList.builder()
                     .replyId(reply.getId())
                     .content(reply.getContent())
-                    .writer(reply.getWriter().getStudentId().toString())
+                    .writer(PostDto.Writer.build(reply.getWriter()))
                     .isMine(reply.isMine(loginUser))
                     .createdDate(reply.getCreatedAt())
                     .build();
