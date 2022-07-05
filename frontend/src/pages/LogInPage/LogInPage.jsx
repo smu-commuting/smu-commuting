@@ -1,6 +1,8 @@
+/* eslint-disable dot-notation */
 /* eslint-disable no-unused-vars */
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import './LogInPage.scss';
+import axios from 'axios';
 import { ReactComponent as Sumuro } from '../../assets/LogInPage/스뮤로.svg';
 import Google from '../../assets/LogInPage/Google.png';
 import Kakao from '../../assets/LogInPage/Kakao.png';

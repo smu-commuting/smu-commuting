@@ -32,8 +32,8 @@ const lostItemPage = () => {
         navigate(`/lostitemwrite`);
     };
 
-    const goLostDetailPage = () => {
-        navigate(`/lostitemdetail/9`);
+    const goLostDetailPage = id => {
+        navigate(`/lostitemdetail/${id}`);
     };
 
     useEffect(() => {
@@ -119,7 +119,9 @@ const lostItemPage = () => {
                         return (
                             <li
                                 key={idx}
-                                onClick={goLostDetailPage}
+                                onClick={() =>
+                                    goLostDetailPage(lostItem.postId)
+                                }
                                 aria-hidden
                             >
                                 <div className="picture">
@@ -138,13 +140,26 @@ const lostItemPage = () => {
                                 </div>
                                 <div className="date">
                                     {lostItem.createdDate &&
-                                        lostItem.createdDate}
+                                        `${
+                                            lostItem.createdDate
+                                                .split('T')[0]
+                                                .split('-')[1]
+                                        }월
+                                            ${
+                                                lostItem.createdDate
+                                                    .split('T')[0]
+                                                    .split('-')[2]
+                                            }일`}
                                 </div>
                                 <div className="item">
-                                    {lostItem.item && lostItem.item}
+                                    {lostItem.item.length >= 5
+                                        ? `${lostItem.item.substring(0, 4)}..`
+                                        : lostItem.item}
                                 </div>
                                 <div className="place">
-                                    {lostItem.place && lostItem.place}
+                                    {lostItem.place.length >= 5
+                                        ? `${lostItem.place.substring(0, 4)}..`
+                                        : lostItem.place}
                                 </div>
                             </li>
                         );

@@ -26,13 +26,7 @@ const lostItemWritePage = () => {
             today.getMonth() + 1 >= 10
                 ? today.getMonth() + 1
                 : `0${today.getMonth() + 1}`
-        }-${today.getDate() >= 10 ? today.getDate() : `0${today.getDate()}`}T${
-            today.getHours() >= 10 ? today.getHours() : `0${today.getHours()}`
-        }:${
-            today.getMinutes() >= 10
-                ? today.getMinutes()
-                : `0${today.getMinutes()}`
-        }`,
+        }-${today.getDate() >= 10 ? today.getDate() : `0${today.getDate()}`}`,
     });
 
     const onImgSelect = useCallback(() => {
@@ -122,12 +116,12 @@ const lostItemWritePage = () => {
                     <textarea
                         name="content"
                         className="content"
-                        placeholder="내용을 입력해주세요. (200자 이내)"
+                        placeholder="내용을 입력해주세요."
                         defaultValue={info.content && info.content}
                         onChange={onInfoChange}
                         required
                     />
-                    <p className="content-limit">{info.content.length} / 200</p>
+                    <p className="content-limit">{info.content.length} 자</p>
                 </div>
                 {previewImg && (
                     <div className="preview-wrapper">
