@@ -36,6 +36,10 @@ public class User extends BaseTimeEntity {
     @Column(name = "role")
     private Role role;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_image_id")
+    private ProfileImage profileImage;
+
     public void signup(String email, int studentId, UserValidator userValidator) {
         userValidator.emailValidate(email);
         this.email = email;

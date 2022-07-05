@@ -6,6 +6,7 @@ CREATE TABLE `user`
     `oauth_id`              VARCHAR(50) NOT NULL,
     `email`                 VARCHAR(100),
     `student_id`            INT      DEFAULT NULL,
+    `profile_image_id`      BIGINT      NOT NULL,
     `social_login_provider` VARCHAR(30) NOT NULL,
     `role`                  VARCHAR(20) NOT NULL,
     `created_at`            DATETIME    NOT NULL,
