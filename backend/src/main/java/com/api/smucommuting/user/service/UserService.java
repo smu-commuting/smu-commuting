@@ -1,5 +1,6 @@
 package com.api.smucommuting.user.service;
 
+import com.api.smucommuting.common.exception.user.ProfileImageNotFoundException;
 import com.api.smucommuting.common.exception.user.UserNotFoundException;
 import com.api.smucommuting.common.mail.infra.CustomMailSender;
 import com.api.smucommuting.user.domain.ProfileImage;
@@ -27,13 +28,19 @@ public class UserService {
 
     public void signup(UserRequest.Signup request, User loginUser) {
         User findUser = userRepository.findById(loginUser.getId()).orElseThrow(UserNotFoundException::new);
-        ProfileImage profileImage = profileImageRepository.findById(request.getImageId()).orElseThrow();
+        ProfileImage profileImage = profileImageRepository.findById(request.getImageId()).orElseThrow(ProfileImageNotFoundException::new);
         findUser.signup(request.getEmail(), request.getStudentId(), profileImage, userValidator);
     }
 
-    public void sendEmailCode(UserRequest.Email request, User user) {
-        UserVerificationCode userVerificationCode = userVerificationCodeService.create(user);
+    public void sendEmailCode(UserRequest.Email request, User loginUser) {
+        UserVerificationCode userVerificationCode = userVerificationCodeService.create(loginUser);
         mailSender.mailSend(request.getEmail(), userVerificationCode);
+    }
+
+    public void update(UserRequest.Update request, User loginUser) {
+        User user = userRepository.findById(loginUser.getId()).orElseThrow(UserNotFoundException::new);
+        ProfileImage profileImage = profileImageRepository.findById(request.getImageId()).orElseThrow(ProfileImageNotFoundException::new);
+        user.update(profileImage);
     }
 
     @Transactional(readOnly = true)

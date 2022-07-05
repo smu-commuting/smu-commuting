@@ -28,4 +28,12 @@ public class UserRequest {
     public static class EmailVerification {
         private String code;
     }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
+    public static class Update {
+        private Long imageId;
+    }
 }

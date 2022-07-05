@@ -31,5 +31,14 @@ GET {{apiUrl}}/profiles
 Authorization: {{authorizationToken}}
 
 ###
+PUT {{apiUrl}}/user
+Authorization: {{authorizationToken}}
+Content-Type: application/json;charset=UTF-8
+
+{
+  "imageId": "2"
+}
+
+###
 DELETE {{apiUrl}}/user
 Authorization: {{authorizationToken}}

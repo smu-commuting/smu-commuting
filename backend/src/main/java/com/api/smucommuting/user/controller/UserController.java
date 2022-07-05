@@ -26,14 +26,23 @@ public class UserController {
     }
 
     @PostMapping("/email")
-    public ResponseEntity<ApiResult<Void>> sendEmailCode(@RequestBody UserRequest.Email request, @CurrentUser CustomUserDetails customUserDetails) {
+    public ResponseEntity<ApiResult<Void>> sendEmailCode(@RequestBody UserRequest.Email request,
+                                                         @CurrentUser CustomUserDetails customUserDetails) {
         userService.sendEmailCode(request, customUserDetails.getUser());
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
     }
 
     @PostMapping("/email/verification")
-    public ResponseEntity<ApiResult<Void>> codeVerification(@RequestBody UserRequest.EmailVerification request, @CurrentUser CustomUserDetails customUserDetails) {
+    public ResponseEntity<ApiResult<Void>> codeVerification(@RequestBody UserRequest.EmailVerification request,
+                                                            @CurrentUser CustomUserDetails customUserDetails) {
         userService.codeVerification(request, customUserDetails.getUser(), LocalDateTime.now());
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
+    }
+
+    @PutMapping
+    public ResponseEntity<ApiResult<Object>> updateProfile(@RequestBody UserRequest.Update request,
+                                                           @CurrentUser CustomUserDetails customUserDetails) {
+        userService.update(request, customUserDetails.getUser());
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
     }
 

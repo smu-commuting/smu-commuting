@@ -51,6 +51,10 @@ public class User extends BaseTimeEntity {
         Events.raise(new UserDeletedEvent(userId));
     }
 
+    public void update(ProfileImage profileImage) {
+        this.profileImage = profileImage;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
