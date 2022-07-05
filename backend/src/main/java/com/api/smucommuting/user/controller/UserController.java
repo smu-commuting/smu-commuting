@@ -19,7 +19,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<ApiResult<Void>> signup(@RequestBody UserRequest.Signup request, @CurrentUser CustomUserDetails customUserDetails) {
+    public ResponseEntity<ApiResult<Void>> signup(@RequestBody UserRequest.Signup request,
+                                                  @CurrentUser CustomUserDetails customUserDetails) {
         userService.signup(request, customUserDetails.getUser());
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
     }

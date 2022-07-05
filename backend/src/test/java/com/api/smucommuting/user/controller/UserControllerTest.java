@@ -1,11 +1,8 @@
 package com.api.smucommuting.user.controller;
 
 import com.api.smucommuting.MvcTest;
-import com.api.smucommuting.user.domain.SocialLoginProvider;
-import com.api.smucommuting.user.domain.User;
 import com.api.smucommuting.user.dto.UserRequest;
 import com.api.smucommuting.user.service.UserService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -26,26 +23,15 @@ class UserControllerTest extends MvcTest {
     @MockBean
     private UserService userService;
 
-    private User user;
-
     private static final String EMAIL = "test@test.com";
     private static final Integer STUDENT_ID = 123456;
     private static final String EMAIL_VERIFICATION_CDE = "CODE";
-
-    @BeforeEach
-    public void setup() {
-        user = User.builder()
-                .id(1L)
-                .email(EMAIL)
-                .studentId(STUDENT_ID)
-                .socialLoginProvider(SocialLoginProvider.GOOGLE)
-                .build();
-    }
+    private static final Long PROFILE_IMAGE_ID = 1L;
 
     @Test
     @DisplayName("회원가입 문서화")
     public void signup() throws Exception {
-        UserRequest.Signup request = UserRequest.Signup.builder().email(EMAIL).studentId(STUDENT_ID).build();
+        UserRequest.Signup request = UserRequest.Signup.builder().email(EMAIL).studentId(STUDENT_ID).imageId(PROFILE_IMAGE_ID).build();
 
         ResultActions results = mvc.perform(RestDocumentationRequestBuilders
                 .post("/api/user/signup")
@@ -59,7 +45,8 @@ class UserControllerTest extends MvcTest {
                 .andDo(document("user_signup",
                         requestFields(
                                 fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
-                                fieldWithPath("studentId").type(JsonFieldType.NUMBER).description("학번")
+                                fieldWithPath("studentId").type(JsonFieldType.NUMBER).description("학번"),
+                                fieldWithPath("imageId").type(JsonFieldType.NUMBER).description("프로필 이미지 식별자")
                         ),
                         responseFields(
                                 fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),

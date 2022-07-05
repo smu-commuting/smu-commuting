@@ -40,10 +40,11 @@ public class User extends BaseTimeEntity {
     @JoinColumn(name = "profile_image_id")
     private ProfileImage profileImage;
 
-    public void signup(String email, int studentId, UserValidator userValidator) {
+    public void signup(String email, int studentId, ProfileImage profileImage, UserValidator userValidator) {
         userValidator.emailValidate(email);
         this.email = email;
         this.studentId = studentId;
+        this.profileImage = profileImage;
     }
 
     public void quit(Long userId) {

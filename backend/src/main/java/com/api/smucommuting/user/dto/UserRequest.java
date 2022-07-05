@@ -10,6 +10,7 @@ public class UserRequest {
     public static class Signup {
         private String email;
         private int studentId;
+        private Long imageId;
     }
 
     @Getter
@@ -24,7 +25,7 @@ public class UserRequest {
     @Builder
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class EmailVerification{
+    public static class EmailVerification {
         private String code;
     }
 }
