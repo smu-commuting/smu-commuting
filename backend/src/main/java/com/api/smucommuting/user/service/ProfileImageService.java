@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -16,6 +15,6 @@ public class ProfileImageService {
 
     public List<ProfileImageResponse.GetList> getList() {
         List<ProfileImage> images = profileImageRepository.findAll();
-        return images.stream().map(ProfileImageResponse.GetList::build).collect(Collectors.toList());
+        return ProfileImageResponse.GetList.listsOf(images);
     }
 }

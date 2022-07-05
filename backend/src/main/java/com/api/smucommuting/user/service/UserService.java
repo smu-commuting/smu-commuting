@@ -10,6 +10,7 @@ import com.api.smucommuting.user.domain.UserVerificationCode;
 import com.api.smucommuting.user.domain.repository.ProfileImageRepository;
 import com.api.smucommuting.user.domain.repository.UserRepository;
 import com.api.smucommuting.user.dto.UserRequest;
+import com.api.smucommuting.user.dto.UserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,12 +45,19 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public void codeVerification(UserRequest.EmailVerification request, User user, LocalDateTime now) {
-        userVerificationCodeService.validateCode(user, request.getCode(), now);
+    public void codeVerification(UserRequest.EmailVerification request, User loginUser, LocalDateTime now) {
+        userVerificationCodeService.validateCode(loginUser, request.getCode(), now);
+    }
+
+    @Transactional(readOnly = true)
+    public UserResponse.GetOne getOne(User loginUser) {
+        User user = userRepository.findByIdWithProfileImage(loginUser.getId()).orElseThrow(UserNotFoundException::new);
+        return UserResponse.GetOne.build(user);
     }
 
     public void delete(User loginUser) {
         loginUser.quit(loginUser.getId());
         userRepository.delete(loginUser);
     }
+
 }

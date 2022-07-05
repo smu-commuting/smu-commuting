@@ -31,6 +31,10 @@ GET {{apiUrl}}/profiles
 Authorization: {{authorizationToken}}
 
 ###
+GET {{apiUrl}}/user
+Authorization: {{authorizationToken}}
+
+###
 PUT {{apiUrl}}/user
 Authorization: {{authorizationToken}}
 Content-Type: application/json;charset=UTF-8

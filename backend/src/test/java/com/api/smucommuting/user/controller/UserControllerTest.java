@@ -2,6 +2,7 @@ package com.api.smucommuting.user.controller;
 
 import com.api.smucommuting.MvcTest;
 import com.api.smucommuting.user.dto.UserRequest;
+import com.api.smucommuting.user.dto.UserResponse;
 import com.api.smucommuting.user.service.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,8 @@ import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.ResultActions;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -23,10 +26,12 @@ class UserControllerTest extends MvcTest {
     @MockBean
     private UserService userService;
 
+    private static final Long USER_ID = 1L;
     private static final String EMAIL = "test@test.com";
     private static final Integer STUDENT_ID = 123456;
     private static final String EMAIL_VERIFICATION_CDE = "CODE";
     private static final Long PROFILE_IMAGE_ID = 1L;
+    private static final String PROFILE_IMAGE_URL = "image url";
 
     @Test
     @DisplayName("회원가입 문서화")
@@ -104,6 +109,30 @@ class UserControllerTest extends MvcTest {
                                 fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
                                 fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
                                 fieldWithPath("data").description("응답 데이터가 없다면 null")
+                        )
+                ));
+    }
+
+    @Test
+    @DisplayName("내 정보 조회")
+    public void getMe() throws Exception {
+        UserResponse.GetOne response = UserResponse.GetOne.builder().userId(USER_ID).studentId(STUDENT_ID).imageUrl(PROFILE_IMAGE_URL).build();
+
+        given(userService.getOne(any())).willReturn(response);
+
+        ResultActions results = mvc.perform(RestDocumentationRequestBuilders
+                .get("/api/user"));
+
+        results.andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("user_getOne",
+                        responseFields(
+                                fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
+                                fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
+                                fieldWithPath("data.userId").type(JsonFieldType.NUMBER).description("유저 식별자"),
+                                fieldWithPath("data.studentId").type(JsonFieldType.NUMBER).description("학번"),
+                                fieldWithPath("data.imageUrl").type(JsonFieldType.STRING).description("이미지 url")
+
                         )
                 ));
     }

@@ -57,6 +57,17 @@ include::{snippets}/user_update/request-fields.adoc[]
 include::{snippets}/user_update/http-response.adoc[]
 include::{snippets}/user_update/response-fields.adoc[]
 
+=== 내 정보 조회
+
+`GET /api/user`
+
+요청 HTTP
+include::{snippets}/user_getOne/http-request.adoc[]
+
+성공 응답 HTTP
+include::{snippets}/user_getOne/http-response.adoc[]
+include::{snippets}/user_getOne/response-fields.adoc[]
+
 === 회원탈퇴
 
 `DELETE /api/user`

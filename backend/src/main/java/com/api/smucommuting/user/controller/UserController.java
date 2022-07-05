@@ -4,6 +4,7 @@ import com.api.smucommuting.auth.domain.security.CurrentUser;
 import com.api.smucommuting.auth.domain.security.CustomUserDetails;
 import com.api.smucommuting.common.dto.ApiResult;
 import com.api.smucommuting.user.dto.UserRequest;
+import com.api.smucommuting.user.dto.UserResponse;
 import com.api.smucommuting.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -39,9 +40,15 @@ public class UserController {
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
     }
 
+    @GetMapping
+    public ResponseEntity<ApiResult<UserResponse.GetOne>> getMe(@CurrentUser CustomUserDetails customUserDetails) {
+        UserResponse.GetOne resposne = userService.getOne(customUserDetails.getUser());
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), resposne));
+    }
+
     @PutMapping
-    public ResponseEntity<ApiResult<Object>> updateProfile(@RequestBody UserRequest.Update request,
-                                                           @CurrentUser CustomUserDetails customUserDetails) {
+    public ResponseEntity<ApiResult<Void>> updateProfile(@RequestBody UserRequest.Update request,
+                                                         @CurrentUser CustomUserDetails customUserDetails) {
         userService.update(request, customUserDetails.getUser());
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
     }
