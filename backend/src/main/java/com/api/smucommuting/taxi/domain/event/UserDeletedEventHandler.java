@@ -1,5 +1,6 @@
-package com.api.smucommuting.taxi.domain;
+package com.api.smucommuting.taxi.domain.event;
 
+import com.api.smucommuting.taxi.domain.TaxiGroup;
 import com.api.smucommuting.taxi.domain.repository.TaxiGroupRepository;
 import com.api.smucommuting.taxi.domain.repository.TaxiPartyRepository;
 import com.api.smucommuting.user.domain.event.UserDeletedEvent;
