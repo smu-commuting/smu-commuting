@@ -32,6 +32,8 @@ class UserControllerTest extends MvcTest {
     private static final String EMAIL_VERIFICATION_CDE = "CODE";
     private static final Long PROFILE_IMAGE_ID = 1L;
     private static final String PROFILE_IMAGE_URL = "image url";
+    private static final String FCM_TOKEN = "fcmToken";
+
 
     @Test
     @DisplayName("회원가입 문서화")
@@ -52,6 +54,32 @@ class UserControllerTest extends MvcTest {
                                 fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
                                 fieldWithPath("studentId").type(JsonFieldType.NUMBER).description("학번"),
                                 fieldWithPath("imageId").type(JsonFieldType.NUMBER).description("프로필 이미지 식별자")
+                        ),
+                        responseFields(
+                                fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
+                                fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
+                                fieldWithPath("data").description("응답 데이터가 없다면 null")
+                        )
+                ));
+    }
+
+    @Test
+    @DisplayName("FCM 토큰 저장 문서화")
+    public void fcmTokenCreate() throws Exception {
+        UserRequest.FcmToken request = UserRequest.FcmToken.builder().fcmToken(FCM_TOKEN).build();
+
+        ResultActions results = mvc.perform(RestDocumentationRequestBuilders
+                .post("/api/user/fcm/token")
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(objectMapper.writeValueAsString(request))
+        );
+
+        results.andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("user_fcmToken_create",
+                        requestFields(
+                                fieldWithPath("fcmToken").type(JsonFieldType.STRING).description("이메일")
                         ),
                         responseFields(
                                 fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),

@@ -21,6 +21,18 @@ include::{snippets}/user_signup/request-fields.adoc[]
 include::{snippets}/user_signup/http-response.adoc[]
 include::{snippets}/user_signup/response-fields.adoc[]
 
+=== FCM 코드 저장 및 갱신
+
+`POST /api/user/fcm/token`
+
+요청 HTTP
+include::{snippets}/user_fcmToken_create/http-request.adoc[]
+include::{snippets}/user_fcmToken_create/request-fields.adoc[]
+
+성공 응답 HTTP
+include::{snippets}/user_fcmToken_create/http-response.adoc[]
+include::{snippets}/user_fcmToken_create/response-fields.adoc[]
+
 === 이메일 인증 코드 전송
 
 `POST /api/user/email`

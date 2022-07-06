@@ -18,6 +18,15 @@ Content-Type: application/json;charset=UTF-8
 }
 
 ###
+POST {{apiUrl}}/user/fcm/token
+Authorization: {{authorizationToken}}
+Content-Type: application/json;charset=UTF-8
+
+{
+  "fcmToken": "as123dfzxcv"
+}
+
+###
 POST {{apiUrl}}/user/email/verification
 Authorization: {{authorizationToken}}
 Content-Type: application/json;charset=UTF-8

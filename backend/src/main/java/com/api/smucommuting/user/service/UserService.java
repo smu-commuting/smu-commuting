@@ -33,6 +33,10 @@ public class UserService {
         findUser.signup(request.getEmail(), request.getStudentId(), profileImage, userValidator);
     }
 
+    public void fcmTokenSave(UserRequest.FcmToken request, User loginUser) {
+        userVerificationCodeService.updateFcmToken(request.getFcmToken(), loginUser);
+    }
+
     public void sendEmailCode(UserRequest.Email request, User loginUser) {
         UserVerificationCode userVerificationCode = userVerificationCodeService.create(loginUser);
         mailSender.mailSend(request.getEmail(), userVerificationCode);

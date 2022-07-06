@@ -26,6 +26,13 @@ public class UserController {
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
     }
 
+    @PostMapping("/fcm/token")
+    public ResponseEntity<ApiResult<Void>> fcmTokenCreate(@RequestBody UserRequest.FcmToken request,
+                                                            @CurrentUser CustomUserDetails customUserDetails) {
+        userService.fcmTokenSave(request, customUserDetails.getUser());
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
+    }
+
     @PostMapping("/email")
     public ResponseEntity<ApiResult<Void>> sendEmailCode(@RequestBody UserRequest.Email request,
                                                          @CurrentUser CustomUserDetails customUserDetails) {
