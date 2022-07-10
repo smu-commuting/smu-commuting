@@ -2,10 +2,13 @@
 
 .updateprofile-wrapper {
     .updateprofile-header {
+        position: sticky;
+        top: -1rem;
         display: flex;
         align-items: center;
         justify-content: space-around;
-        padding: 3rem;
+        padding: 2rem;
+        background-color: white;
         .arrow {
             flex: 1;
             img {

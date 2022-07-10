@@ -3,12 +3,20 @@
     padding: 1rem 3rem;
     margin-bottom: 6.4rem;
     li {
+        height: 5rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 1rem 0;
         border-bottom: 1px solid #a19fad;
         @include font-face('NotoSansKR-Medium', 1.5rem, 0, #000000);
+        .img-wrapper {
+            height: 100%;
+            img {
+                display: block;
+                height: 100%;
+            }
+        }
     }
     .non-chat-wrapper {
         height: 70vh;

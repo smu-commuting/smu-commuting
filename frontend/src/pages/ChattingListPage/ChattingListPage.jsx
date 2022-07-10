@@ -9,14 +9,17 @@ import sumung from '../../assets/ChattingList/ChattingListPage/sample_sumung.png
 import nonchat from '../../assets/ChattingList/ChattingListPage/non-chat.png';
 import { prevent } from '../../constants';
 import { deleteModal, getMyTaxiParties } from '../../modules/reducers/taxi';
+import { getProfileImgList } from '../../modules/reducers/user';
 
 function ChattingListPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { myTaxiParties, deleteTaxiPartyDone, isDeleteAllowModal } =
         useSelector(state => state.taxi);
+    const { profileImgList } = useSelector(state => state.user);
     useEffect(() => {
         dispatch(getMyTaxiParties());
+        dispatch(getProfileImgList());
     }, [dispatch, deleteTaxiPartyDone, isDeleteAllowModal]);
     const onChatRoomEnter = useCallback(id => {
         navigate(`/chatroom/${id}`);
@@ -36,8 +39,19 @@ function ChattingListPage() {
                             }
                             aria-hidden
                         >
-                            <div>
-                                <img src={sumung} alt="스뭉이 임시" />
+                            <div className="img-wrapper">
+                                <img
+                                    src={
+                                        profileImgList &&
+                                        profileImgList[
+                                            Math.floor(
+                                                Math.random() *
+                                                    profileImgList.length,
+                                            )
+                                        ].url
+                                    }
+                                    alt="스뭉이 임시"
+                                />
                             </div>
                             <div>{myTaxiParty.date}</div>
                             <div>{myTaxiParty.place}</div>
