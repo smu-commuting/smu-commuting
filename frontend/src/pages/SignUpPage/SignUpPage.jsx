@@ -39,6 +39,7 @@ function SignUpPage() {
     // 인증번호 검사 API
     const postAuthNum = async () => {
         const response = await verificationNumApi(authNum);
+        console.log(response);
         if (response.data.success) {
             const userInfo = {
                 email: `${studentId}@sangmyung.kr`,

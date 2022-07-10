@@ -102,13 +102,13 @@ function App() {
     return (
         <Router>
             <Routes>
+                <Route path="/" element={<LogInPage />} />
                 <Route
                     path="/callback/:id/:accessToken/:studentId"
                     element={<LogInProcess />}
                 />
-                <Route path="/" element={<LogInPage />} />
-                <Route path="/signup" element={<SignUpPage />} />
                 <Route element={<ProtectedRoutes />}>
+                    <Route path="/signup" element={<SignUpPage />} />
                     <Route
                         path="/home"
                         element={
