@@ -1,15 +1,18 @@
-// import React, { useState } from 'react';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Profile from '../../assets/MyPage/수뭉이프로필.svg';
 import Arrow from '../../assets/MyPage/arrow.png';
 import './MyPage.scss';
+import { getUserInfo } from '../../modules/reducers/user';
 
 function MyPage() {
     const navigate = useNavigate();
-    // const [value, setValue] = useState(false);
-    const { me } = useSelector(state => state.user);
+    const dispatch = useDispatch();
+    const { userProfile } = useSelector(state => state.user);
+
+    useEffect(() => {
+        dispatch(getUserInfo());
+    }, [dispatch]);
 
     const onChangeText = e => {
         if (e.target.checked === false) {
@@ -18,16 +21,6 @@ function MyPage() {
             alert('알림설정ON(기능연결필요)');
         }
     };
-
-    /* const isOn = () => {
-        return value;
-    };
-    const onColor = () => {
-        return '#7B88F2';
-    };
-     const handleToggle = () => {
-        setValue(!value);
-    }; */
 
     const homePage = () => {
         navigate(`/home`);
@@ -41,6 +34,9 @@ function MyPage() {
     const inquiry = () => {
         navigate(`/inquiry`);
     };
+    const goUpdatePage = useCallback(() => {
+        navigate('/updateprofile');
+    }, []);
 
     return (
         <div className="mypage-wrapper">
@@ -57,32 +53,29 @@ function MyPage() {
             </div>
             <div className="mypage-content">
                 <div className="std-profile">
-                    <img className="sumung" src={Profile} alt="프로필사진" />
+                    <img
+                        className="sumung"
+                        src={userProfile && userProfile.imageUrl}
+                        alt="프로필사진"
+                        onClick={goUpdatePage}
+                        aria-hidden
+                    />
                     <div className="student-info">
-                        {me.studentId}
+                        {userProfile && userProfile.studentId}
                         <br /> 상명대학교 서울캠퍼스
                     </div>
                 </div>
                 <div className="notification-setting">
                     <p>알림 설정</p>
                     <div className="toggleSwitch">
-                        <label
-                            className="label"
-                            htmlFor="toggleSwitch"
-                            // style={{ background: isOn && onColor }}
-                        >
+                        <label className="label" htmlFor="toggleSwitch">
                             <input
                                 type="checkbox"
                                 className="checkbox"
                                 id="toggleSwitch"
                                 onClick={onChangeText}
-                                // checked={isOn}
-                                // onChange={handleToggle}
                             />
-                            <span
-                                className="switch"
-                                // style={{ background: isOn && '#000000' }}
-                            />
+                            <span className="switch" />
                         </label>
                     </div>
                 </div>

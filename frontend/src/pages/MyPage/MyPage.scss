@@ -26,22 +26,22 @@
     .mypage-content {
         display: flex;
         flex-direction: column;
-        padding-top: 3rem;
+        padding-top: 2rem;
         .std-profile {
             display: flex;
             flex-direction: row;
             padding: 1rem;
             align-items: center;
             justify-content: space-around;
+            height: 13rem;
             .sumung {
                 flex: 1;
-                display: inline;
-                width: 5.494rem;
-                height: 5.438rem;
-                align-items: center;
+                height: 100%;
+                display: block;
+                max-width: 8rem;
             }
             .student-info {
-                flex: 1;
+                flex: 3;
                 text-align: center;
                 font-weight: bold;
                 @include font-face(NotoSansKR-Regular, 1.5rem, 2.5rem, #292733);
@@ -55,7 +55,7 @@
             justify-content: space-around;
             @include font-face(NotoSansKR-Regular, 1.5rem, 2.5rem, #292733);
             border-bottom: 0.063rem solid #a19fad;
-            p{
+            p {
                 padding-right: 10rem;
                 margin-top: 0.5rem;
             }
@@ -78,7 +78,7 @@
                     background: grey;
                     border-radius: 100px;
                     position: relative;
-                    transition: background-color .2s;
+                    transition: background-color 0.2s;
                 }
                 .label {
                     .switch {
@@ -95,16 +95,16 @@
                 }
                 .label {
                     .checkbox {
-                        &:checked + .switch{
+                        &:checked + .switch {
                             left: calc(100% - 4px);
                             transform: translateX(-100%);
-                            background-color: #7B88F2;
-                            }
+                            background-color: #7b88f2;
                         }
+                    }
                 }
                 .label {
                     &:active {
-                        .span{
+                        .span {
                             width: 60px;
                         }
                     }

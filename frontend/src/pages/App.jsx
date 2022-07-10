@@ -51,6 +51,7 @@ import ReplyInputBox from '../components/CommunityPage/ReplyInputBox/ReplyInputB
 import ReplyUpdateDeleteModal from '../components/CommunityPage/ReplyUpdateDeleteModal/ReplyUpdateDeleteModal';
 import ReplyDeleteConfirmModal from '../components/CommunityPage/ReplyDeleteConfirmModal/ReplyDeleteConfirmModal';
 import ProtectedRoutes from './ProtectedRoutes';
+import UpdateProfile from './UpdateProfile/UpdateProfile';
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
@@ -64,6 +65,7 @@ getToken(messaging, {
     .then(currentToken => {
         if (currentToken) {
             console.log('파베토큰', currentToken);
+            localStorage.setItem('FBToken', currentToken);
         } else {
             // Show permission request UI
             console.log(
@@ -102,13 +104,13 @@ function App() {
     return (
         <Router>
             <Routes>
+                <Route path="/" element={<LogInPage />} />
                 <Route
                     path="/callback/:id/:accessToken/:studentId"
                     element={<LogInProcess />}
                 />
-                <Route path="/" element={<LogInPage />} />
-                <Route path="/signup" element={<SignUpPage />} />
                 <Route element={<ProtectedRoutes />}>
+                    <Route path="/signup" element={<SignUpPage />} />
                     <Route
                         path="/home"
                         element={
@@ -169,6 +171,7 @@ function App() {
                     />
                     <Route path="/refusal" element={<RefusalTaxiSharePage />} />
                     <Route path="/mypage" element={<MyPage />} />
+                    <Route path="/updateprofile" element={<UpdateProfile />} />
                     <Route path="/inquiry" element={<InquiryPage />} />
                     <Route path="/withdrawal" element={<WithdrawalPage />} />
                     <Route

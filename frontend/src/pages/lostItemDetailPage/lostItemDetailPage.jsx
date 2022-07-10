@@ -36,6 +36,7 @@ const lostItemDetailPage = () => {
     };
 
     useEffect(() => {
+        console.log(id, '번째 게시글의 상세 조회');
         dispatch(getLostItemDetailInfo(id));
     }, [dispatch]);
 

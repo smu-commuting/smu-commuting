@@ -1,0 +1,63 @@
+@import '../../styles/utils.scss';
+
+.updateprofile-wrapper {
+    .updateprofile-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 3rem;
+        .arrow {
+            flex: 1;
+            img {
+                display: block;
+                height: 100%;
+            }
+        }
+        .setting {
+            flex: 3;
+            div {
+                text-align: center;
+                font-weight: bold;
+                @include font-face(NotoSansKR-Regular, 2.5rem, 2.5rem, #292733);
+            }
+        }
+        .submit {
+            flex: 1;
+            display: flex;
+            justify-content: end;
+            button {
+                width: 6rem;
+                background-color: cornflowerblue;
+                color: white;
+                border-radius: 1.2rem;
+                padding: 1rem;
+                font-family: NotoSansKR-Regular;
+            }
+        }
+    }
+    .item-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 1rem;
+        grid-auto-rows: 10rem;
+        padding: 0 3rem;
+        .select-item {
+            border-radius: 1.2rem;
+            border: 5px solid cornflowerblue;
+            img {
+                height: 100%;
+                display: block;
+                margin: auto;
+            }
+        }
+        .item {
+            border-radius: 1.2rem;
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            img {
+                height: 100%;
+                display: block;
+                margin: auto;
+            }
+        }
+    }
+}
