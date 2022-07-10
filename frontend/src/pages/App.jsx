@@ -65,6 +65,7 @@ getToken(messaging, {
     .then(currentToken => {
         if (currentToken) {
             console.log('파베토큰', currentToken);
+            localStorage.setItem('FBToken', currentToken);
         } else {
             // Show permission request UI
             console.log(

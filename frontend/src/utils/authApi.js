@@ -8,6 +8,17 @@ import { withAuthInstance } from './common';
 
 const { API_USER, API_PROFILES } = API_URLS;
 
+export const fcmApi = async token => {
+    const data = {
+        fcmToken: token,
+    };
+    console.log(`${process.env.REACT_APP_API_URL}${API_USER}fcm/token`, data);
+    return await withAuthInstance.post(
+        `${process.env.REACT_APP_API_URL}${API_USER}fcm/token`,
+        data,
+    );
+};
+
 // 인증번호 요청 API
 export const sendNumberApi = async studentId => {
     const data = {

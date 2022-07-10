@@ -5,6 +5,7 @@ export {
     userInfoReadApi,
     userInfoUpdateApi,
     getProfileListApi,
+    fcmApi,
 } from './authApi';
 export {
     getMyTaxiPartiesApi,
