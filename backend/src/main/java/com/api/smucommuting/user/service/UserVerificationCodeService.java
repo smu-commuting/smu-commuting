@@ -27,8 +27,19 @@ class UserVerificationCodeService {
 
     public void validateCode(User loginUser, String verificationCode, LocalDateTime now) {
         UserVerificationCode myCode = userVerificationCodeRepository.findByUserId(loginUser.getId()).orElseThrow(VerificationCodeNotFoundException::new);
-        if (!verificationCode.equals(myCode.getCode()) || myCode.getExpirationDate().isBefore(now)) {
+        if (!verificationCode.equals(myCode.getEmailCode()) || myCode.getExpirationDate().isBefore(now)) {
             throw new InvalidValueException("잘못된 코드입니다.");
+        }
+    }
+
+    public void updateFcmToken(String token, User user) {
+        UserVerificationCode verificationCode = UserVerificationCode.createFcm(token, user);
+        Optional<UserVerificationCode> findVerification = userVerificationCodeRepository.findByUserId(user.getId());
+        if (findVerification.isPresent()) {
+            UserVerificationCode userVerificationCode = findVerification.get();
+            userVerificationCode.update(token);
+        } else {
+            userVerificationCodeRepository.save(verificationCode);
         }
     }
 }

@@ -3,8 +3,9 @@ Authorization: {{authorizationToken}}
 Content-Type: application/json;charset=UTF-8
 
 {
-  "email": "test3@test.com",
-  "studentId": 12345
+  "email": "test11@test.com",
+  "studentId": 12345,
+  "imageId": 1
 }
 
 ###
@@ -17,12 +18,38 @@ Content-Type: application/json;charset=UTF-8
 }
 
 ###
+POST {{apiUrl}}/user/fcm/token
+Authorization: {{authorizationToken}}
+Content-Type: application/json;charset=UTF-8
+
+{
+  "fcmToken": "as123dfzxcv"
+}
+
+###
 POST {{apiUrl}}/user/email/verification
 Authorization: {{authorizationToken}}
 Content-Type: application/json;charset=UTF-8
 
 {
   "code": "9922748"
+}
+
+###
+GET {{apiUrl}}/profiles
+Authorization: {{authorizationToken}}
+
+###
+GET {{apiUrl}}/user
+Authorization: {{authorizationToken}}
+
+###
+PUT {{apiUrl}}/user
+Authorization: {{authorizationToken}}
+Content-Type: application/json;charset=UTF-8
+
+{
+  "imageId": "2"
 }
 
 ###

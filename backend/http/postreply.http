@@ -7,6 +7,10 @@ Content-Type: application/json;charset=UTF-8
 }
 
 ###
+GET {{apiUrl}}/post/1/replies
+Authorization: {{authorizationToken}}
+
+###
 PUT {{apiUrl}}/post/reply/1
 Authorization: {{authorizationToken}}
 Content-Type: application/json;charset=UTF-8

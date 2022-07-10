@@ -1,5 +1,6 @@
 package com.api.smucommuting.common.notification;
 
+import com.api.smucommuting.common.exception.notification.MessageSendException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -23,20 +24,24 @@ public class FirebaseCloudMessageService {
     private String API_URL;
     private final ObjectMapper objectMapper;
 
-    public void sendMessageTo(String targetToken, String title, String body) throws IOException {
-        String message = makeMessage(targetToken, title, body);
+    public void sendMessageTo(String targetToken, String title, String body) {
+        try {
+            String message = makeMessage(targetToken, title, body);
 
-        OkHttpClient client = new OkHttpClient();
-        RequestBody requestBody = RequestBody.create(message,
-                MediaType.get("application/json; charset=utf-8"));
-        Request request = new Request.Builder()
-                .url(API_URL)
-                .post(requestBody)
-                .addHeader(HttpHeaders.AUTHORIZATION, "Bearer " + getAccessToken())
-                .addHeader(HttpHeaders.CONTENT_TYPE, "application/json; UTF-8")
-                .build();
+            OkHttpClient client = new OkHttpClient();
+            RequestBody requestBody = RequestBody.create(message,
+                    MediaType.get("application/json; charset=utf-8"));
+            Request request = new Request.Builder()
+                    .url(API_URL)
+                    .post(requestBody)
+                    .addHeader(HttpHeaders.AUTHORIZATION, "Bearer " + getAccessToken())
+                    .addHeader(HttpHeaders.CONTENT_TYPE, "application/json; UTF-8")
+                    .build();
 
-        client.newCall(request).execute();
+            client.newCall(request).execute();
+        } catch (IOException e) {
+            throw new MessageSendException("파이어베이스 푸시 알림 보내는 과정에서 오류가 발생했습니다.", e);
+        }
     }
 
     private String makeMessage(String targetToken, String title, String body) throws JsonProcessingException {

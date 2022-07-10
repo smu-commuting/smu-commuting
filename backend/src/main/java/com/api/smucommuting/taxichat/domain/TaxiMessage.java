@@ -1,6 +1,8 @@
 package com.api.smucommuting.taxichat.domain;
 
 import com.api.smucommuting.common.entity.BaseTimeEntity;
+import com.api.smucommuting.common.event.Events;
+import com.api.smucommuting.taxichat.domain.event.MessageSendEvent;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,4 +30,8 @@ public class TaxiMessage extends BaseTimeEntity {
 
     @Column(name = "taxi_party_id")
     private Long taxiPartyId;
+
+    public void send() {
+        Events.raise(new MessageSendEvent(this.taxiPartyId, this.senderId.toString(), this.content));
+    }
 }

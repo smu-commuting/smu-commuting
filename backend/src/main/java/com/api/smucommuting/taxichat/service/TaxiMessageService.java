@@ -20,6 +20,7 @@ public class TaxiMessageService {
 
     public TaxiMessageResponse save(TaxiMessageRequest request) {
         TaxiMessage taxiMessage = taxiMessageRepository.save(request.toEntity());
+        taxiMessage.send();
         return TaxiMessageResponse.build(taxiMessage);
     }
 
