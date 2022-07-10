@@ -52,27 +52,28 @@ function UpdateProfile() {
                 </div>
             </div>
             <div className="item-container">
-                {profileImgList.map(profileImg => {
-                    return (
-                        <div
-                            className={
-                                selectPicId === profileImg.imageId
-                                    ? 'select-item'
-                                    : 'item'
-                            }
-                            onClick={() => {
-                                setSelectedPicId(profileImg.imageId);
-                            }}
-                            aria-hidden
-                        >
-                            <img
-                                key={profileImg.id}
-                                src={profileImg.url}
-                                alt="목록"
-                            />
-                        </div>
-                    );
-                })}
+                {profileImgList &&
+                    profileImgList.map(profileImg => {
+                        return (
+                            <div
+                                className={
+                                    selectPicId === profileImg.imageId
+                                        ? 'select-item'
+                                        : 'item'
+                                }
+                                onClick={() => {
+                                    setSelectedPicId(profileImg.imageId);
+                                }}
+                                aria-hidden
+                            >
+                                <img
+                                    key={profileImg.id}
+                                    src={profileImg.url}
+                                    alt="목록"
+                                />
+                            </div>
+                        );
+                    })}
             </div>
         </div>
     );
