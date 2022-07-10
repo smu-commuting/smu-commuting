@@ -48,3 +48,12 @@ export const deleteUserApi = () => {
         `${process.env.REACT_APP_API_URL}${API_USER}`,
     );
 };
+
+// 내 정보 조회 API
+export const userInfoReadApi = () => {
+    console.log(
+        '유저 정보 조회 API ',
+        `${process.env.REACT_APP_API_URL}${API_USER}`,
+    );
+    return withAuthInstance.get(`${process.env.REACT_APP_API_URL}${API_USER}`);
+};

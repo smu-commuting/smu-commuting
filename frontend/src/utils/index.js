@@ -1,4 +1,9 @@
-export { sendNumberApi, verificationNumApi, signupApi } from './authApi';
+export {
+    sendNumberApi,
+    verificationNumApi,
+    signupApi,
+    userInfoReadApi,
+} from './authApi';
 export {
     getMyTaxiPartiesApi,
     deleteTaxiPartyApi,

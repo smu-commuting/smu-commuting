@@ -12,7 +12,6 @@ import Timer from '../../components/common/Timer';
 function SignUpPage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    // const { signupDone } = useSelector(state => state.user);
     const [checkSend, setCheckSend] = useState(false);
     const [studentId, setStudentId] = useState(''); // 학번
     const [authNum, setAuthNum] = useState(''); // 인증번호
@@ -44,6 +43,7 @@ function SignUpPage() {
             const userInfo = {
                 email: `${studentId}@sangmyung.kr`,
                 studentId,
+                imageId: 1,
             };
             dispatch(signupRequest(userInfo));
             alert('가입을 축하합니다.');

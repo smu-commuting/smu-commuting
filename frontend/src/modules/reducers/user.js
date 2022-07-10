@@ -17,6 +17,9 @@ import {
     USER_COMMUNITY_MODAL,
     USER_COMMUNITY_MODAL_SUCCESS,
     USER_COMMUNITY_MODAL_FAILURE,
+    USER_INFO_GET_REQUEST,
+    USER_INFO_GET_SUCCESS,
+    USER_INFO_GET_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -35,6 +38,11 @@ export const initialState = {
     isBusModalOpen: false,
     isTaxiModalOpen: false,
     isCommunityModalOpen: false,
+
+    userProfile: null,
+    userProfileLoding: false,
+    userProfileDone: false,
+    userProfileError: null,
 };
 
 export const loginRequest = data => {
@@ -67,6 +75,12 @@ export const taxiModalClick = () => {
 export const communityModalClick = () => {
     return {
         type: USER_COMMUNITY_MODAL,
+    };
+};
+
+export const getUserInfo = () => {
+    return {
+        type: USER_INFO_GET_REQUEST,
     };
 };
 
@@ -134,6 +148,21 @@ const reducer = (state = initialState, action) => {
                 break;
             case USER_COMMUNITY_MODAL_FAILURE:
                 draft.isCommunityModalOpen = false;
+                break;
+            case USER_INFO_GET_REQUEST:
+                draft.userProfileLoding = true;
+                draft.userProfileDone = false;
+                draft.userProfileError = null;
+                break;
+            case USER_INFO_GET_SUCCESS:
+                draft.userProfileLoading = false;
+                draft.userProfileDone = true;
+                draft.userProfile = action.data;
+                console.log('프로필 조회 성공 데이터', action.data);
+                break;
+            case USER_INFO_GET_FAILURE:
+                draft.userProfileLoading = false;
+                draft.userProfileError = action.error;
                 break;
             default:
                 break;
