@@ -3,6 +3,8 @@ export {
     verificationNumApi,
     signupApi,
     userInfoReadApi,
+    userInfoUpdateApi,
+    getProfileListApi,
 } from './authApi';
 export {
     getMyTaxiPartiesApi,

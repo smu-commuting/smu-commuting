@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Arrow from '../../assets/MyPage/arrow.png';
@@ -34,6 +34,9 @@ function MyPage() {
     const inquiry = () => {
         navigate(`/inquiry`);
     };
+    const goUpdatePage = useCallback(() => {
+        navigate('/updateprofile');
+    }, []);
 
     return (
         <div className="mypage-wrapper">
@@ -54,6 +57,8 @@ function MyPage() {
                         className="sumung"
                         src={userProfile && userProfile.imageUrl}
                         alt="프로필사진"
+                        onClick={goUpdatePage}
+                        aria-hidden
                     />
                     <div className="student-info">
                         {userProfile && userProfile.studentId}

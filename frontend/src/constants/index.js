@@ -97,6 +97,9 @@ export {
     USER_INFO_GET_REQUEST,
     USER_INFO_GET_SUCCESS,
     USER_INFO_GET_FAILURE,
+    USER_GET_PROFILE_IMG_LIST_REQUEST,
+    USER_GET_PROFILE_IMG_LIST_SUCCESS,
+    USER_GET_PROFILE_IMG_LIST_FAILURE,
 } from './actions';
 
 export { default as prevent } from './prevent';

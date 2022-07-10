@@ -20,8 +20,15 @@ import {
     USER_INFO_GET_REQUEST,
     USER_INFO_GET_SUCCESS,
     USER_INFO_GET_FAILURE,
+    USER_GET_PROFILE_IMG_LIST_REQUEST,
+    USER_GET_PROFILE_IMG_LIST_SUCCESS,
+    USER_GET_PROFILE_IMG_LIST_FAILURE,
 } from '../../constants';
-import { userInfoReadApi } from '../../utils';
+import {
+    userInfoReadApi,
+    userInfoUpdateApi,
+    getProfileListApi,
+} from '../../utils';
 
 function* login(action) {
     console.log('saga In action', action);
@@ -107,6 +114,22 @@ function* getUserInfo() {
     }
 }
 
+function* getProfileImgList() {
+    try {
+        const result = yield call(getProfileListApi);
+        console.log('saga - profile Img List result', result);
+        yield put({
+            type: USER_GET_PROFILE_IMG_LIST_SUCCESS,
+            data: result.data,
+        });
+    } catch (err) {
+        yield put({
+            type: USER_GET_PROFILE_IMG_LIST_FAILURE,
+            error: err,
+        });
+    }
+}
+
 function* watchLogin() {
     yield takeLatest(USER_LOG_IN_REQUEST, login);
 }
@@ -131,6 +154,10 @@ function* watchGetUserInfo() {
     yield takeLatest(USER_INFO_GET_REQUEST, getUserInfo);
 }
 
+function* watchGetProfileImgList() {
+    yield takeLatest(USER_GET_PROFILE_IMG_LIST_REQUEST, getProfileImgList);
+}
+
 export default function* userSaga() {
     yield all([
         fork(watchLogin),
@@ -139,5 +166,6 @@ export default function* userSaga() {
         fork(watchTaxiModal),
         fork(watchCommunityModal),
         fork(watchGetUserInfo),
+        fork(watchGetProfileImgList),
     ]);
 }

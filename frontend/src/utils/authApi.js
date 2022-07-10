@@ -6,7 +6,7 @@ import axios from 'axios';
 import { API_URLS } from '../constants';
 import { withAuthInstance } from './common';
 
-const { API_USER } = API_URLS;
+const { API_USER, API_PROFILES } = API_URLS;
 
 // 인증번호 요청 API
 export const sendNumberApi = async studentId => {
@@ -56,4 +56,27 @@ export const userInfoReadApi = () => {
         `${process.env.REACT_APP_API_URL}${API_USER}`,
     );
     return withAuthInstance.get(`${process.env.REACT_APP_API_URL}${API_USER}`);
+};
+
+// 내 정보 수정 API
+export const userInfoUpdateApi = id => {
+    console.log(
+        '유저 정보 수정 API의 수정될 사진 id',
+        id,
+        `${process.env.REACT_APP_API_URL}${API_USER}`,
+    );
+    const data = {
+        imageId: id,
+    };
+    return withAuthInstance.put(
+        `${process.env.REACT_APP_API_URL}${API_USER}`,
+        data,
+    );
+};
+
+// 프로필 이미지 리스트 조회 API
+export const getProfileListApi = () => {
+    return withAuthInstance.get(
+        `${process.env.REACT_APP_API_URL}${API_PROFILES}`,
+    );
 };

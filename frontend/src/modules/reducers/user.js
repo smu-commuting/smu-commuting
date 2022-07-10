@@ -20,6 +20,9 @@ import {
     USER_INFO_GET_REQUEST,
     USER_INFO_GET_SUCCESS,
     USER_INFO_GET_FAILURE,
+    USER_GET_PROFILE_IMG_LIST_REQUEST,
+    USER_GET_PROFILE_IMG_LIST_SUCCESS,
+    USER_GET_PROFILE_IMG_LIST_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -43,6 +46,11 @@ export const initialState = {
     userProfileLoding: false,
     userProfileDone: false,
     userProfileError: null,
+
+    profileImgList: null,
+    profileImgListLoading: false,
+    profileImgListDone: false,
+    profileImgListError: null,
 };
 
 export const loginRequest = data => {
@@ -81,6 +89,12 @@ export const communityModalClick = () => {
 export const getUserInfo = () => {
     return {
         type: USER_INFO_GET_REQUEST,
+    };
+};
+
+export const getProfileImgList = () => {
+    return {
+        type: USER_GET_PROFILE_IMG_LIST_REQUEST,
     };
 };
 
@@ -163,6 +177,21 @@ const reducer = (state = initialState, action) => {
             case USER_INFO_GET_FAILURE:
                 draft.userProfileLoading = false;
                 draft.userProfileError = action.error;
+                break;
+            case USER_GET_PROFILE_IMG_LIST_REQUEST:
+                draft.profileImgListLoading = true;
+                draft.profileImgListDone = false;
+                draft.profileImgListError = null;
+                break;
+            case USER_GET_PROFILE_IMG_LIST_SUCCESS:
+                draft.profileImgListLoading = false;
+                draft.profileImgListDone = true;
+                draft.profileImgList = action.data.data;
+                console.log('로딩된 이미지 리스트입니다.', action.data.data);
+                break;
+            case USER_GET_PROFILE_IMG_LIST_FAILURE:
+                draft.profileImgListLoading = false;
+                draft.profileImgListError = action.error;
                 break;
             default:
                 break;

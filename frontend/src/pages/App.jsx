@@ -51,6 +51,7 @@ import ReplyInputBox from '../components/CommunityPage/ReplyInputBox/ReplyInputB
 import ReplyUpdateDeleteModal from '../components/CommunityPage/ReplyUpdateDeleteModal/ReplyUpdateDeleteModal';
 import ReplyDeleteConfirmModal from '../components/CommunityPage/ReplyDeleteConfirmModal/ReplyDeleteConfirmModal';
 import ProtectedRoutes from './ProtectedRoutes';
+import UpdateProfile from './UpdateProfile/UpdateProfile';
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
@@ -169,6 +170,7 @@ function App() {
                     />
                     <Route path="/refusal" element={<RefusalTaxiSharePage />} />
                     <Route path="/mypage" element={<MyPage />} />
+                    <Route path="/updateprofile" element={<UpdateProfile />} />
                     <Route path="/inquiry" element={<InquiryPage />} />
                     <Route path="/withdrawal" element={<WithdrawalPage />} />
                     <Route
