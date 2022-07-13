@@ -52,6 +52,7 @@ import ReplyUpdateDeleteModal from '../components/CommunityPage/ReplyUpdateDelet
 import ReplyDeleteConfirmModal from '../components/CommunityPage/ReplyDeleteConfirmModal/ReplyDeleteConfirmModal';
 import ProtectedRoutes from './ProtectedRoutes';
 import UpdateProfile from './UpdateProfile/UpdateProfile';
+import ChattingListBusBtn from '../components/ChattingListPage/ChattingListBusBtn/ChattingListBusBtn';
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
@@ -164,6 +165,7 @@ function App() {
                                     <TaxiPartyDeleteCompleteModal />
                                 )}
                                 <ChattingListHeader />
+                                <ChattingListBusBtn />
                                 <ChattingListPage />
                                 <ChattingListFooter />
                             </>
