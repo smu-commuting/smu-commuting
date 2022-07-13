@@ -55,13 +55,13 @@ function MyPage() {
                 <div className="std-profile">
                     <img
                         className="sumung"
-                        src={userProfile && userProfile.imageUrl}
+                        src={userProfile.imageUrl && userProfile.imageUrl}
                         alt="프로필사진"
                         onClick={goUpdatePage}
                         aria-hidden
                     />
                     <div className="student-info">
-                        {userProfile && userProfile.studentId}
+                        {userProfile.studentId && userProfile.studentId}
                         <br /> 상명대학교 서울캠퍼스
                     </div>
                 </div>

@@ -71,6 +71,7 @@ function* deleteLostItemList() {
 
 function* getLostItemDetailInfo(action) {
     try {
+        console.log('요청 이전', action);
         const result = yield call(getDetailInfoApi, action.id);
         console.log('요청 이후', result.data.data);
         yield put({

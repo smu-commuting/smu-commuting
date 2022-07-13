@@ -16,9 +16,8 @@ import LostItemReplyBox from '../../components/CommunityPage/LostItemReplyBox/Lo
 
 const lostItemDetailPage = () => {
     const { id } = useParams();
-    const { lostItemInfo, replyList, replyPostDone } = useSelector(
-        state => state.community,
-    );
+    const { lostItemInfo, lostItemInfoDone, replyList, replyPostDone } =
+        useSelector(state => state.community);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [imgClick, setImgClick] = useState(false);
@@ -59,7 +58,7 @@ const lostItemDetailPage = () => {
                             aria-hidden="true"
                         />
                         <div>분실물 - 상세 페이지</div>
-                        {lostItemInfo && lostItemInfo.isMine && (
+                        {lostItemInfo && lostItemInfo.isMine === true && (
                             <img
                                 className="menu"
                                 src={Menu}
@@ -109,6 +108,7 @@ const lostItemDetailPage = () => {
                     </div>
                     {replyList &&
                         replyList.map((reply, idx) => {
+                            console.log('부모노드', reply);
                             return (
                                 <LostItemReplyBox
                                     reply={reply}
