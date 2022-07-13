@@ -17,13 +17,14 @@
             justify-content: center;
             img:nth-child(1) {
                 width: 70%;
+                max-width: 7rem;
             }
         }
         div:nth-child(3) {
             text-align: right;
             p {
                 text-align: right;
-                @include font-face('NotoSansKR-Bold', 1.5rem, 0, #000000);   
+                @include font-face('NotoSansKR-Bold', 1.5rem, 0, #000000);
             }
             img {
                 width: 3rem;

@@ -171,6 +171,7 @@ const reducer = (state = initialState, action) => {
             case COMMUNITY_GET_DETAIL_INFO_SUCCESS:
                 draft.lostItemInfoLoading = false;
                 draft.lostItemInfoDone = true;
+                console.log('여기', action.data);
                 draft.lostItemInfo = action.data;
                 break;
             case COMMUNITY_GET_DETAIL_INFO_FAILURE:

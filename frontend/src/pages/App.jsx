@@ -52,6 +52,9 @@ import ReplyUpdateDeleteModal from '../components/CommunityPage/ReplyUpdateDelet
 import ReplyDeleteConfirmModal from '../components/CommunityPage/ReplyDeleteConfirmModal/ReplyDeleteConfirmModal';
 import ProtectedRoutes from './ProtectedRoutes';
 import UpdateProfile from './UpdateProfile/UpdateProfile';
+import ChattingListBusBtn from '../components/ChattingListPage/ChattingListBusBtn/ChattingListBusBtn';
+import OpenChattingPage from './OpenChattingPage/OpenChattingPage';
+import OpenChattingHeader from '../components/OpenChatting/OpenChattingHeader/OpenChattingHeader';
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
@@ -109,138 +112,132 @@ function App() {
                     path="/callback/:id/:accessToken/:studentId"
                     element={<LogInProcess />}
                 />
-                <Route element={<ProtectedRoutes />}>
-                    <Route path="/signup" element={<SignUpPage />} />
-                    <Route
-                        path="/home"
-                        element={
-                            <>
-                                {isBusModalOpen && <BusModal />}
-                                {isTaxiModalOpen && <TaxiModal />}
-                                {isCommunityModalOpen && <CommunityModal />}
-                                <Header />
-                                <HomePage />
-                            </>
-                        }
-                    />
-                    <Route
-                        path="/bus/:busNum"
-                        element={
-                            <>
-                                {isBusModalOpen && <BusModal />}
-                                {isTaxiModalOpen && <TaxiModal />}
-                                <Header />
-                                <BusPage />
-                            </>
-                        }
-                    />
-                    <Route
-                        path="/taxi/:placeId/:date/:placeName"
-                        element={
-                            <>
-                                {isTaxiModalOpen && <TaxiModal />}
-                                {isTaxiCreateModalOpen && <TaxiCreateModal />}
-                                {isEnterChattingRoomModalOpen && (
-                                    <TaxiToChatModal />
-                                )}
-                                {isDeleteAllowModal && (
-                                    <TaxiPartyDeleteCompleteModal />
-                                )}
-                                {showErrorModal && <TaxiNotEnterModal />}
-                                {showCreateErrorModal && <TaxiNotCreateModal />}
-                                <Header />
-                                <TaxiPage />
-                            </>
-                        }
-                    />
-                    <Route
-                        path="/chatlist"
-                        element={
-                            <>
-                                {isDeleteTaxiPartyModal && (
-                                    <TaxiPartyDeleteModal />
-                                )}
-                                {isDeleteAllowModal && (
-                                    <TaxiPartyDeleteCompleteModal />
-                                )}
-                                <ChattingListHeader />
-                                <ChattingListPage />
-                                <ChattingListFooter />
-                            </>
-                        }
-                    />
-                    <Route path="/refusal" element={<RefusalTaxiSharePage />} />
-                    <Route path="/mypage" element={<MyPage />} />
-                    <Route path="/updateprofile" element={<UpdateProfile />} />
-                    <Route path="/inquiry" element={<InquiryPage />} />
-                    <Route path="/withdrawal" element={<WithdrawalPage />} />
-                    <Route
-                        path="/confirm"
-                        element={<WithdrawalConfirmPage />}
-                    />
-                    <Route path="/manual" element={<ManualPage />} />
-                    <Route
-                        path="/inquirydetail"
-                        element={<InquiryDetailPage />}
-                    />
-                    <Route
-                        path="/inquirywrite"
-                        element={<InquiryWritePage />}
-                    />
-                    <Route
-                        path="/chatroom/:id"
-                        element={
-                            <>
-                                {isDeleteTaxiPartyModal && (
-                                    <TaxiPartyDeleteModal />
-                                )}
-                                {isDeleteAllowModal && (
-                                    <TaxiPartyDeleteCompleteModal />
-                                )}
-                                <ChattingPage />
-                            </>
-                        }
-                    />
-                    <Route
-                        path="/lostitem"
-                        element={
-                            <>
-                                {isCommunityModalOpen && <CommunityModal />}
-                                <LostItemPage />
-                            </>
-                        }
-                    />
-                    <Route
-                        path="/lostitemdetail/:id"
-                        element={
-                            <>
-                                {isClickDetailUpdateDeleteModal && (
-                                    <LostItemDetailModal />
-                                )}
-                                {isDeleteConfirmModal && (
-                                    <LostItemDeleteConfirmModal />
-                                )}
-                                {isReplyDetailUpdateDeleteModal && (
-                                    <ReplyUpdateDeleteModal />
-                                )}
-                                {isReplyDeleteConfirmModal && (
-                                    <ReplyDeleteConfirmModal />
-                                )}
-                                <LostItemDetailPage />
-                                <ReplyInputBox />
-                            </>
-                        }
-                    />
-                    <Route
-                        path="/lostitemwrite"
-                        element={<LostItemWritePage />}
-                    />
-                    <Route
-                        path="/lostitemedit/:id"
-                        element={<LostItemEditPage />}
-                    />
-                    <Route path="/protest" element={<ProtestPage />} />
-                </Route>
+                {/* <Route element={<ProtectedRoutes />}> */}
+                <Route path="/signup" element={<SignUpPage />} />
+                <Route
+                    path="/home"
+                    element={
+                        <>
+                            {isBusModalOpen && <BusModal />}
+                            {isTaxiModalOpen && <TaxiModal />}
+                            {isCommunityModalOpen && <CommunityModal />}
+                            <Header />
+                            <HomePage />
+                        </>
+                    }
+                />
+                <Route
+                    path="/bus/:busNum"
+                    element={
+                        <>
+                            {isBusModalOpen && <BusModal />}
+                            {isTaxiModalOpen && <TaxiModal />}
+                            <Header />
+                            <BusPage />
+                        </>
+                    }
+                />
+                <Route
+                    path="/taxi/:placeId/:date/:placeName"
+                    element={
+                        <>
+                            {isTaxiModalOpen && <TaxiModal />}
+                            {isTaxiCreateModalOpen && <TaxiCreateModal />}
+                            {isEnterChattingRoomModalOpen && (
+                                <TaxiToChatModal />
+                            )}
+                            {isDeleteAllowModal && (
+                                <TaxiPartyDeleteCompleteModal />
+                            )}
+                            {showErrorModal && <TaxiNotEnterModal />}
+                            {showCreateErrorModal && <TaxiNotCreateModal />}
+                            <Header />
+                            <TaxiPage />
+                        </>
+                    }
+                />
+                <Route
+                    path="/chatlist"
+                    element={
+                        <>
+                            {isDeleteTaxiPartyModal && <TaxiPartyDeleteModal />}
+                            {isDeleteAllowModal && (
+                                <TaxiPartyDeleteCompleteModal />
+                            )}
+                            <ChattingListHeader />
+                            <ChattingListBusBtn />
+                            <ChattingListPage />
+                            <ChattingListFooter />
+                        </>
+                    }
+                />
+                <Route path="/refusal" element={<RefusalTaxiSharePage />} />
+                <Route path="/mypage" element={<MyPage />} />
+                <Route path="/updateprofile" element={<UpdateProfile />} />
+                <Route path="/inquiry" element={<InquiryPage />} />
+                <Route path="/withdrawal" element={<WithdrawalPage />} />
+                <Route path="/confirm" element={<WithdrawalConfirmPage />} />
+                <Route path="/manual" element={<ManualPage />} />
+                <Route path="/inquirydetail" element={<InquiryDetailPage />} />
+                <Route path="/inquirywrite" element={<InquiryWritePage />} />
+                <Route
+                    path="/chatroom/:id"
+                    element={
+                        <>
+                            {isDeleteTaxiPartyModal && <TaxiPartyDeleteModal />}
+                            {isDeleteAllowModal && (
+                                <TaxiPartyDeleteCompleteModal />
+                            )}
+                            <ChattingPage />
+                        </>
+                    }
+                />
+                <Route
+                    path="/openchat/:id"
+                    element={
+                        <>
+                            <OpenChattingHeader />
+                            <OpenChattingPage />
+                        </>
+                    }
+                />
+                <Route
+                    path="/lostitem"
+                    element={
+                        <>
+                            {isCommunityModalOpen && <CommunityModal />}
+                            <LostItemPage />
+                        </>
+                    }
+                />
+                <Route
+                    path="/lostitemdetail/:id"
+                    element={
+                        <>
+                            {isClickDetailUpdateDeleteModal && (
+                                <LostItemDetailModal />
+                            )}
+                            {isDeleteConfirmModal && (
+                                <LostItemDeleteConfirmModal />
+                            )}
+                            {isReplyDetailUpdateDeleteModal && (
+                                <ReplyUpdateDeleteModal />
+                            )}
+                            {isReplyDeleteConfirmModal && (
+                                <ReplyDeleteConfirmModal />
+                            )}
+                            <LostItemDetailPage />
+                            <ReplyInputBox />
+                        </>
+                    }
+                />
+                <Route path="/lostitemwrite" element={<LostItemWritePage />} />
+                <Route
+                    path="/lostitemedit/:id"
+                    element={<LostItemEditPage />}
+                />
+                <Route path="/protest" element={<ProtestPage />} />
+                {/* </Route> */}
             </Routes>
         </Router>
     );

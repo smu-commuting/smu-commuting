@@ -14,6 +14,7 @@ import {
     getMyTaxiParties,
     getTaxiPartyList,
     taxiCreateModalClick,
+    taxiPartyListDelete,
     taxiPartyListRestart,
 } from '../../modules/reducers/taxi';
 import TaxiCard from '../../components/TaxiPage/TaxiCard/TaxiCard';
@@ -44,28 +45,25 @@ function TaxiPage() {
     }, [dispatch]);
 
     useEffect(() => {
-        setTimeout(() => {
-            setPartyList(() => {
-                return [];
-            });
-            setPage(() => {
-                return 1;
-            });
-            dispatch(getMyTaxiParties()); // 택시 리스트 들어왔을 때, 내가 속해있는 채팅방 리스트 redux 관리
-            dispatch(taxiPartyListRestart());
-            if (isTaxiCreateModalOpen) dispatch(taxiCreateModalClick());
-            const temp = date.split('-');
-            setMonth(temp[1]);
-            setDay(temp[2]);
-            dispatch(
-                getTaxiPartyList({
-                    page,
-                    size: 10,
-                    placeId,
-                    date,
-                }),
-            );
-        }, 1);
+        setPartyList([]);
+        setPage(1);
+        dispatch(getMyTaxiParties()); // 택시 리스트 들어왔을 때, 내가 속해있는 채팅방 리스트 redux 관리
+        dispatch(taxiPartyListRestart());
+        if (isTaxiCreateModalOpen) dispatch(taxiCreateModalClick());
+        dispatch(
+            getTaxiPartyList({
+                page,
+                size: 10,
+                placeId,
+                date,
+            }),
+        );
+        const temp = date.split('-');
+        setMonth(temp[1]);
+        setDay(temp[2]);
+        return () => {
+            dispatch(taxiPartyListDelete());
+        };
     }, [
         dispatch,
         placeId,
@@ -77,7 +75,7 @@ function TaxiPage() {
     ]);
 
     useEffect(() => {
-        setPartyList([...partyList, ...taxiPartyList]);
+        setPartyList(prev => [...prev, ...taxiPartyList]);
     }, [taxiPartyList]);
 
     useEffect(() => {

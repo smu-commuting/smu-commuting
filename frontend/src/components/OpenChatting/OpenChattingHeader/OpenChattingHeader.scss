@@ -1,0 +1,13 @@
+@import '../../../styles/utils.scss';
+
+.openchattingheader-wrapper {
+    padding: 2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    div:nth-child(2) {
+        font-family: 'NotoSansKR-Bold';
+        font-size: 2rem;
+        text-align: center;
+    }
+}

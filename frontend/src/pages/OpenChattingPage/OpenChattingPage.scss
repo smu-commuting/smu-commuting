@@ -1,0 +1,31 @@
+@import '../../styles/utils.scss';
+
+.openchattingpage-wrapper {
+    padding: 0 1.5rem;
+    margin-top: 3rem;
+    .input-area {
+        width: 100%;
+        height: 4rem;
+        display: flex;
+        margin-bottom: 2rem;
+        textarea {
+            flex: 4;
+            resize: none;
+            border: 1px solid #eeee;
+        }
+        textarea:focus {
+            // textarea 클릭 후, focusing 되는 현상 방지
+            outline: none;
+        }
+        button {
+            margin-left: 1rem;
+            flex: 1;
+            background-color: #7b88f2;
+            color: white;
+            font-size: 1.7rem;
+            font-family: 'NotoSansKR-Regular';
+        }
+    }
+    .openchatting-list {
+    }
+}

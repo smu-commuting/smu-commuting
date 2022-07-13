@@ -37,20 +37,20 @@ function SignUpPage() {
 
     // 인증번호 검사 API
     const postAuthNum = async () => {
-        const response = await verificationNumApi(authNum);
-        console.log(response);
-        if (response.data.success) {
-            const userInfo = {
-                email: `${studentId}@sangmyung.kr`,
-                studentId,
-                imageId: 1,
-            };
-            dispatch(signupRequest(userInfo));
-            alert('가입을 축하합니다.');
-            navigate(`/home`);
-        } else {
-            alert('올바른 인증번호가 아닙니다.');
-        }
+        verificationNumApi(authNum)
+            .then(res => {
+                const userInfo = {
+                    email: `${studentId}@sangmyung.kr`,
+                    studentId,
+                    imageId: 1,
+                };
+                dispatch(signupRequest(userInfo));
+                alert('가입을 축하합니다.');
+                navigate(`/home`);
+            })
+            .catch(err => {
+                alert('올바른 인증번호가 아닙니다.');
+            });
     };
     return (
         <div className="signuppage-wrapper">

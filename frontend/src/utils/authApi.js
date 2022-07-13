@@ -12,7 +12,6 @@ export const fcmApi = async token => {
     const data = {
         fcmToken: token,
     };
-    console.log(`${process.env.REACT_APP_API_URL}${API_USER}fcm/token`, data);
     return await withAuthInstance.post(
         `${process.env.REACT_APP_API_URL}${API_USER}fcm/token`,
         data,
@@ -43,6 +42,7 @@ export const verificationNumApi = async authNum => {
 
 // 회원가입 API -> saga
 export const signupApi = data => {
+    console.log(data, 'signupApi 통과');
     return withAuthInstance.post(
         `${process.env.REACT_APP_API_URL}${API_USER}signup`,
         data,

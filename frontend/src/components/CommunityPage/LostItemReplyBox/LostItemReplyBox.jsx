@@ -10,6 +10,7 @@ import { replyModalClick } from '../../../modules/reducers/community';
 function LostItemReplyBox({ reply }) {
     const dispatch = useDispatch();
     const [time, setTime] = useState();
+
     const onReplyModal = useCallback(() => {
         const data = {
             id: reply.replyId,
@@ -17,29 +18,36 @@ function LostItemReplyBox({ reply }) {
         };
         dispatch(replyModalClick(data));
     }, [dispatch, reply.replyId, reply.content]);
+
     useEffect(() => {
+        console.log('reply', reply);
         const today = new Date();
+
         const todayDate = `${today.getFullYear()}-${
             today.getMonth() + 1 >= 10
                 ? today.getMonth() + 1
                 : `0${today.getMonth() + 1}`
         }-${today.getDate() >= 10 ? today.getDate() : `0${today.getDate()}`}`;
+
         if (todayDate === reply.createdDate.split('T')[0])
             setTime(reply.createdDate.split('T')[1]);
-        else {
+        else
             setTime(
                 `${reply.createdDate.split('T')[0].split('-')[1]}월 ${
                     reply.createdDate.split('T')[0].split('-')[2]
                 }일`,
             );
-        }
     }, []);
     return (
         <div className="lostitemreply-box-wrapper">
             <div className="lostitemreply-box-header">
                 <div className="left">
-                    <img className="sumung" src={Sumung} alt="스뭉" />
-                    <p className="number">{reply && reply.writer}</p>
+                    <img
+                        className="sumung"
+                        src={reply.writer.profileImageUrl}
+                        alt="스뭉"
+                    />
+                    <p className="number">{reply && reply.writer.studentId}</p>
                 </div>
                 <div className="right">
                     <p className="write-date">{time}</p>

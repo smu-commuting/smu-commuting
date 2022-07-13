@@ -67,7 +67,7 @@ function UpdateProfile() {
                                 aria-hidden
                             >
                                 <img
-                                    key={profileImg.id}
+                                    key={profileImg.imageId}
                                     src={profileImg.url}
                                     alt="목록"
                                 />
