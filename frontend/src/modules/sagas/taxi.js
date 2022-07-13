@@ -38,6 +38,9 @@ import {
     TAXI_ROOM_DELETE_MODAL_REQUEST,
     TAXI_ROOM_DELETE_MODAL_SUCCESS,
     TAXI_ROOM_DELETE_MODAL_FAILURE,
+    TAXI_PARTY_LIST_DELETE_REQUEST,
+    TAXI_PARTY_LIST_DELETE_SUCCESS,
+    TAXI_PARTY_LIST_DELETE_FAILURE,
 } from '../../constants';
 import {
     getMyTaxiPartiesApi,
@@ -228,6 +231,17 @@ function* taxiRoomDeleteModal(action) {
         });
     }
 }
+function* taxiPartyListDelete() {
+    try {
+        yield put({
+            type: TAXI_PARTY_LIST_DELETE_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: TAXI_PARTY_LIST_DELETE_FAILURE,
+        });
+    }
+}
 
 function* watchTaxiRoomDeleteModal() {
     yield takeLatest(TAXI_ROOM_DELETE_MODAL_REQUEST, taxiRoomDeleteModal);
@@ -277,6 +291,9 @@ function* watchSecondModalClose() {
     yield takeLatest(TAXI_SECOND_MODAL_CLICK_REQUEST, errorModalClose);
 }
 
+function* watchTaxiPartyListDelete() {
+    yield takeLatest(TAXI_PARTY_LIST_DELETE_REQUEST, taxiPartyListDelete);
+}
 export default function* taxiSaga() {
     yield all([
         fork(watchTaxiPartiesList),
@@ -291,5 +308,6 @@ export default function* taxiSaga() {
         fork(watchTaxiPartyEnter),
         fork(watchSecondModalClose),
         fork(watchTaxiRoomDeleteModal),
+        fork(watchTaxiPartyListDelete),
     ]);
 }

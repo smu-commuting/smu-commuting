@@ -40,6 +40,9 @@ import {
     TAXI_ROOM_DELETE_MODAL_REQUEST,
     TAXI_ROOM_DELETE_MODAL_SUCCESS,
     TAXI_ROOM_DELETE_MODAL_FAILURE,
+    TAXI_PARTY_LIST_DELETE_REQUEST,
+    TAXI_PARTY_LIST_DELETE_SUCCESS,
+    TAXI_PARTY_LIST_DELETE_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -166,6 +169,12 @@ export const taxiSecondModalClose = () => {
     };
 };
 
+export const taxiPartyListDelete = () => {
+    return {
+        type: TAXI_PARTY_LIST_DELETE_REQUEST,
+    };
+};
+
 const reducer = (state = initialState, action) => {
     return produce(state, draft => {
         switch (action.type) {
@@ -215,6 +224,13 @@ const reducer = (state = initialState, action) => {
             case TAXI_PARTY_LIST_FAILURE:
                 draft.taxiPartyListLoading = false;
                 draft.taxiPartyListError = action.err;
+                break;
+            case TAXI_PARTY_LIST_DELETE_REQUEST:
+                break;
+            case TAXI_PARTY_LIST_DELETE_SUCCESS:
+                draft.taxiPartyList = [];
+                break;
+            case TAXI_PARTY_LIST_DELETE_FAILURE:
                 break;
             case TAXI_CREATE_MODAL_REQUEST:
                 break;
