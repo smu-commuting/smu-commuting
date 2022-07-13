@@ -3,7 +3,7 @@ Authorization: {{authorizationToken}}
 Content-Type: application/json;charset=UTF-8
 
 {
-  "token": "tt",
-  "title": "테스트 333",
-  "body": "테스트입니다233."
+  "token": "do3myqLpd7DLuNe1K0zdpj:APA91bGC4cDyKDmt4H6_E8Jry_sR4_GK8g6j7vJ0CPXP6D3_bcJa7r8tTZASemdZVQU2zF-6vBq02nhmEXsaxRJFhpdIJp7NJczA6jNt9XzmGMfOdMKXJj9KTxJdGkyNmEjhpAF6uYER",
+  "title": "푸시알림!",
+  "body": "테스트 푸시 !!!"
 }
