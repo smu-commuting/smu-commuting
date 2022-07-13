@@ -46,6 +46,7 @@ function TaxiPage() {
 
     useEffect(() => {
         setPartyList([]);
+        setPage(1);
         dispatch(getMyTaxiParties()); // 택시 리스트 들어왔을 때, 내가 속해있는 채팅방 리스트 redux 관리
         dispatch(taxiPartyListRestart());
         if (isTaxiCreateModalOpen) dispatch(taxiCreateModalClick());

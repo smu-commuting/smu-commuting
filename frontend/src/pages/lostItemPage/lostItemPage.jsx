@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Arrow from '../../assets/MyPage/arrow.png';
 import add from '../../assets/InquiryPage/addcopy.png';
 import Lost from '../../assets/LostItemPage/card.png';
+import nodata from '../../assets/LostItemPage/nodatalostItem.png';
 import './lostItemPage.scss';
 import {
     deleteLostItemList,
@@ -113,7 +114,10 @@ const lostItemPage = () => {
                     <div className="place">장소</div>
                 </li>
                 {itemBottle.length === 0 ? (
-                    <p>아직 데이터가 없습니다.</p>
+                    <div className="nodata">
+                        <img src={nodata} alt="없음" />
+                        <p>분실물이 존재하지 않습니다.</p>
+                    </div>
                 ) : (
                     itemBottle.map((lostItem, idx) => {
                         return (

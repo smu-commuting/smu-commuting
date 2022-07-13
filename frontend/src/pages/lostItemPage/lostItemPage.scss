@@ -48,6 +48,18 @@
             background-color: white;
             z-index: 1;
         }
+        .nodata {
+            width: 100%;
+            margin-top: 6rem;
+            img {
+                display: block;
+                margin: auto;
+            }
+            p {
+                text-align: center;
+                @include font-face('NotoSansKR-Bold', 1.3rem, 0, #a19fad);
+            }
+        }
         li {
             display: flex;
             border-bottom: 0.063rem solid #a19fad;
