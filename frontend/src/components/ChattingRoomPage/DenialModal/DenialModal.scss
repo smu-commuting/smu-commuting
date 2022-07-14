@@ -19,8 +19,6 @@
         .denialmodal-header {
             display: flex;
             justify-content: flex-end;
-            height: 2.4rem;
-            background-color: red;
             .cancel {
                 display: block;
                 height: 100%;
@@ -31,6 +29,46 @@
             font-size: 2rem;
             font-family: 'NotoSansKR-Bold';
             text-align: center;
+        }
+        .tab-wrapper {
+            display: flex;
+            div {
+                &:nth-child(1) {
+                    border-right: 1px solid black;
+                }
+                flex: 1;
+                border-bottom: 1px solid black;
+                display: flex;
+                justify-content: center;
+                button {
+                    color: #ababac;
+                    font-family: 'NotoSansKR-Bold';
+                    font-size: 1.3rem;
+                    padding: 0.5rem 0;
+                }
+            }
+            .active-tab {
+                color: black !important;
+                font-family: 'NotoSansKR-Bold';
+                font-size: 1.6rem !important;
+            }
+        }
+        .content-wrapper {
+            min-height: 1.8rem;
+            .no-data {
+                width: 100%;
+                padding: 3rem;
+                img {
+                    display: block;
+                    margin: auto;
+                }
+                p {
+                    text-align: center;
+                    font-family: 'NotoSansKR-Regular';
+                    font-size: 1.3rem;
+                    color: #ababac;
+                }
+            }
         }
     }
 }
