@@ -70,22 +70,60 @@ function DenialModal() {
                         getPeopleList.length === 0 ? (
                             <div className="no-data">
                                 <img src={denial} alt="없음" />
-                                <p>아직 들어온 슴우가 없어요</p>
+                                <p>아직 들어온 슴우가 없어요😥</p>
                             </div>
                         ) : (
-                            getPeopleList.map(people => (
-                                <li>{people.studentId}</li>
-                            ))
+                            <>
+                                {getPeopleList.map(people => (
+                                    <li key={people.studentId}>
+                                        <p>{people.studentId}</p>
+                                        <button
+                                            type="button"
+                                            onClick={() =>
+                                                console.log(people.userId)
+                                            }
+                                        >
+                                            거부
+                                        </button>
+                                    </li>
+                                ))}
+                                <div className="notice-wrapper">
+                                    <img src={denial} alt="스뭉" />
+                                    <p className="notice-content">
+                                        원하지 않는 탑승 메이트를 <br />
+                                        설정해보세요!
+                                    </p>
+                                </div>
+                            </>
                         )
                     ) : getOutPeopleList.length === 0 ? (
                         <div className="no-data">
                             <img src={denial} alt="없음" />
-                            <p>아직 나간 슴우가 없어요</p>
+                            <p>아직 나간 슴우가 없어요😥</p>
                         </div>
                     ) : (
-                        getOutPeopleList.map(people => (
-                            <li>{people.studentId}</li>
-                        ))
+                        <>
+                            {getOutPeopleList.map(people => (
+                                <li key={people.studentId}>
+                                    <p>{people.studentId}</p>
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            console.log(people.userId)
+                                        }
+                                    >
+                                        거부
+                                    </button>
+                                </li>
+                            ))}
+                            <div className="notice-wrapper">
+                                <img src={denial} alt="스뭉" />
+                                <p className="notice-content">
+                                    원하지 않는 탑승 메이트를 <br />
+                                    설정해보세요!
+                                </p>
+                            </div>
+                        </>
                     )}
                 </ul>
             </div>

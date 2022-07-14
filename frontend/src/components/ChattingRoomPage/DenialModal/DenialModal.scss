@@ -69,6 +69,42 @@
                     color: #ababac;
                 }
             }
+            li {
+                height: 3rem;
+                border-bottom: 1px solid #cbced5;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                p {
+                    font-family: 'NotoSansKR-Medium';
+                    font-size: 1.4rem;
+                }
+                button {
+                    min-width: 6.5rem;
+                    max-height: 2rem;
+                    font-family: 'NotoSansKR-Medium';
+                    font-size: 1.4rem;
+                    background-color: #f1f1e6;
+                    border-radius: 1.2rem;
+                }
+            }
+            .notice-wrapper {
+                display: flex;
+                align-items: flex-end;
+                img {
+                    flex: 1;
+                    display: block;
+                    height: 100%;
+                }
+                .notice-content {
+                    flex: 3;
+                    text-align: center;
+                    font-family: 'NotoSansKR-Regular';
+                    font-size: 1.3rem;
+                    color: #ababac;
+                    line-height: 2rem;
+                }
+            }
         }
     }
 }
