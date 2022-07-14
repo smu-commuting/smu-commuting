@@ -1,0 +1,74 @@
+@import '../../../styles/utils.scss';
+
+.denialmodal-wrapper {
+    position: fixed;
+    z-index: 11;
+    width: 100vw;
+    height: 100%;
+    overflow: hidden;
+    touch-action: none;
+    background: $modal-background;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .denialmodal {
+        width: 29.5rem;
+        border-radius: 1.2rem;
+        background-color: #ffffff;
+        padding: 1.5rem 1.3rem;
+        .denialmodal-header {
+            display: flex;
+            justify-content: flex-end;
+            .cancel {
+                display: block;
+                height: 100%;
+            }
+        }
+        .title {
+            margin-top: 0rem;
+            font-size: 2rem;
+            font-family: 'NotoSansKR-Bold';
+            text-align: center;
+        }
+        .tab-wrapper {
+            display: flex;
+            div {
+                &:nth-child(1) {
+                    border-right: 1px solid black;
+                }
+                flex: 1;
+                border-bottom: 1px solid black;
+                display: flex;
+                justify-content: center;
+                button {
+                    color: #ababac;
+                    font-family: 'NotoSansKR-Bold';
+                    font-size: 1.3rem;
+                    padding: 0.5rem 0;
+                }
+            }
+            .active-tab {
+                color: black !important;
+                font-family: 'NotoSansKR-Bold';
+                font-size: 1.6rem !important;
+            }
+        }
+        .content-wrapper {
+            min-height: 1.8rem;
+            .no-data {
+                width: 100%;
+                padding: 3rem;
+                img {
+                    display: block;
+                    margin: auto;
+                }
+                p {
+                    text-align: center;
+                    font-family: 'NotoSansKR-Regular';
+                    font-size: 1.3rem;
+                    color: #ababac;
+                }
+            }
+        }
+    }
+}

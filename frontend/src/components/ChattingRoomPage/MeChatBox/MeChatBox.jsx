@@ -7,7 +7,6 @@ function MeChatBox({ id, content, senderId, createdTime }) {
     return (
         <div className="mechatbox-wrapper">
             <p className="content">{content}</p>
-            <p>{id}</p>
         </div>
     );
 }
