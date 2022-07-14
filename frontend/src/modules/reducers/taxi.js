@@ -150,6 +150,7 @@ export const taxiPartyListRestart = () => {
 };
 
 export const taxiToChatModal = data => {
+    console.log(data);
     return {
         type: TAXI_TO_CHAT_INFO_MODAL_REQUEST,
         data,

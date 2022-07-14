@@ -7,7 +7,6 @@ function SenderChatBox({ id, content, senderId, createdTime }) {
     return (
         <div className="senderchatbox-wrapper">
             <p className="content">{content}</p>
-            <p>{id}</p>
         </div>
     );
 }

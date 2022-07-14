@@ -1,0 +1,36 @@
+@import '../../../styles/utils.scss';
+
+.denialmodal-wrapper {
+    position: fixed;
+    z-index: 11;
+    width: 100vw;
+    height: 100%;
+    overflow: hidden;
+    touch-action: none;
+    background: $modal-background;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .denialmodal {
+        width: 29.5rem;
+        border-radius: 1.2rem;
+        background-color: #ffffff;
+        padding: 1.5rem 1.3rem;
+        .denialmodal-header {
+            display: flex;
+            justify-content: flex-end;
+            height: 2.4rem;
+            background-color: red;
+            .cancel {
+                display: block;
+                height: 100%;
+            }
+        }
+        .title {
+            margin-top: 0rem;
+            font-size: 2rem;
+            font-family: 'NotoSansKR-Bold';
+            text-align: center;
+        }
+    }
+}

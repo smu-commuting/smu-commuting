@@ -55,6 +55,7 @@ import UpdateProfile from './UpdateProfile/UpdateProfile';
 import ChattingListBusBtn from '../components/ChattingListPage/ChattingListBusBtn/ChattingListBusBtn';
 import OpenChattingPage from './OpenChattingPage/OpenChattingPage';
 import OpenChattingHeader from '../components/OpenChatting/OpenChattingHeader/OpenChattingHeader';
+import DenialModal from '../components/ChattingRoomPage/DenialModal/DenialModal';
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
@@ -103,6 +104,7 @@ function App() {
         isDeleteConfirmModal,
         isReplyDeleteConfirmModal,
     } = useSelector(state => state.community);
+    const { chatRoomPeopleModal } = useSelector(state => state.chat);
 
     return (
         <Router>
@@ -188,6 +190,7 @@ function App() {
                             {isDeleteAllowModal && (
                                 <TaxiPartyDeleteCompleteModal />
                             )}
+                            {chatRoomPeopleModal && <DenialModal />}
                             <ChattingPage />
                         </>
                     }

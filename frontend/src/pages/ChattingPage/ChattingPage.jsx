@@ -14,6 +14,7 @@ import Refusal from '../../assets/ChattingList/ChatInputArea/합승거부.png';
 import {
     deleteChatMessageList,
     getChatMessageList,
+    denialModalClick,
 } from '../../modules/reducers/chat';
 import { firstEnterDateParser } from '../../constants/FirstEnterDateParser';
 import MeChatBox from '../../components/ChattingRoomPage/MeChatBox/MeChatBox';
@@ -35,6 +36,11 @@ function ChattingPage() {
     const [prevHeight, setPrevHeight] = useState();
     const [messageBottle, setMessageBottle] = useState([]);
     const [myChat, setMyChat] = useState();
+
+    const denialModalClickHandler = useCallback(() => {
+        dispatch(denialModalClick());
+    }, [dispatch]);
+
     const myChatChange = e => {
         setMyChat(e.target.value);
     };
@@ -164,7 +170,7 @@ function ChattingPage() {
                 )}
             </div>
             <div className="chatinputarea-wrapper">
-                <div>
+                <div onClick={denialModalClickHandler} aria-hidden>
                     <img src={Refusal} alt="합승거부" />
                 </div>
                 <textarea value={myChat} onChange={myChatChange} required />

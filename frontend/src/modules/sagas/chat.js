@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { all, fork, put, takeLatest, call } from 'redux-saga/effects';
 
 import {
@@ -7,8 +8,18 @@ import {
     CHAT_ROOM_DELETE_MESSAGE_REQUEST,
     CHAT_ROOM_DELETE_MESSAGE_SUCCESS,
     CHAT_ROOM_DELETE_MESSAGE_FAILURE,
+    CHAT_ROOM_PEOPLE_LIST_MODAL_REQUEST,
+    CHAT_ROOM_PEOPLE_LIST_MODAL_SUCCESS,
+    CHAT_ROOM_PEOPLE_LIST_MODAL_FAILURE,
+    CHAT_ROOM_GET_PEOPLE_LIST_REQUEST,
+    CHAT_ROOM_GET_PEOPLE_LIST_SUCCESS,
+    CHAT_ROOM_GET_PEOPLE_LIST_FAILURE,
+    CHAT_ROOM_GET_OUT_PEOPLE_LIST_REQUEST,
+    CHAT_ROOM_GET_OUT_PEOPLE_LIST_SUCCESS,
+    CHAT_ROOM_GET_OUT_PEOPLE_LIST_FAILURE,
 } from '../../constants';
 import { getRoomMessage } from '../../utils';
+import { getOutPeopleListApi, getPeopleListApi } from '../../utils/chatApi';
 
 function* chatMessageList(action) {
     try {
@@ -39,15 +50,72 @@ function* deleteChatMessageList() {
     }
 }
 
+function* denialModalClick() {
+    try {
+        yield put({
+            type: CHAT_ROOM_PEOPLE_LIST_MODAL_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: CHAT_ROOM_PEOPLE_LIST_MODAL_FAILURE,
+        });
+    }
+}
+
+function* getPeopleList(action) {
+    try {
+        const result = yield call(getPeopleListApi, action.id);
+        console.log('채팅 요청 이후 result', result);
+        yield put({
+            type: CHAT_ROOM_GET_PEOPLE_LIST_SUCCESS,
+            data: result.data.data,
+        });
+    } catch (err) {
+        yield put({
+            type: CHAT_ROOM_GET_PEOPLE_LIST_FAILURE,
+            error: err,
+        });
+    }
+}
+
+function* getOutPeopleList(action) {
+    try {
+        const result = yield call(getOutPeopleListApi, action.id);
+        console.log('채팅 요청 이후 result', result);
+        yield put({
+            type: CHAT_ROOM_GET_OUT_PEOPLE_LIST_SUCCESS,
+            data: result.data.data,
+        });
+    } catch (err) {
+        yield put({
+            type: CHAT_ROOM_GET_OUT_PEOPLE_LIST_FAILURE,
+            error: err,
+        });
+    }
+}
+
 function* watchChatRoomMessage() {
     yield takeLatest(CHAT_ROOM_MESSAGE_REQUEST, chatMessageList);
 }
-
 function* watchDeleteChatRoomMessage() {
     yield takeLatest(CHAT_ROOM_DELETE_MESSAGE_REQUEST, deleteChatMessageList);
 }
+function* watchDenialModalClick() {
+    yield takeLatest(CHAT_ROOM_PEOPLE_LIST_MODAL_REQUEST, denialModalClick);
+}
+function* watchGetPeopleList() {
+    yield takeLatest(CHAT_ROOM_GET_PEOPLE_LIST_REQUEST, getPeopleList);
+}
+function* watchGetOutPeopleList() {
+    yield takeLatest(CHAT_ROOM_GET_OUT_PEOPLE_LIST_REQUEST, getOutPeopleList);
+}
 
 export default function* chatSaga() {
-    yield all([fork(watchChatRoomMessage)]);
-    yield all([fork(watchDeleteChatRoomMessage)]);
+    yield all([
+        fork(watchChatRoomMessage),
+        fork(watchDeleteChatRoomMessage),
+        fork(watchDenialModalClick),
+        fork(watchGetPeopleList),
+        fork(watchGetOutPeopleList),
+    ]);
 }

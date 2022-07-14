@@ -5,15 +5,18 @@ import { useParams, useNavigate } from 'react-router-dom';
 import './ChattingRoomHeader.scss';
 import Talk from '../../../assets/ChattingList/ChattingListHeader/talk.png';
 import getOut from '../../../assets/ChattingList/ChattingListPage/첫줄.png';
-import { deleteModal } from '../../../modules/reducers/taxi';
+import { deleteModal, taxiToChatModal } from '../../../modules/reducers/taxi';
 
 function ChattingRoomHeader() {
     const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { myTaxiParties, chattingRoomInfo, isDeleteAllowModal } = useSelector(
-        state => state.taxi,
-    );
+    const {
+        myTaxiParties,
+        taxiPageInfo,
+        chattingRoomInfo,
+        isDeleteAllowModal,
+    } = useSelector(state => state.taxi);
     const [myTaxiParty, setMyTaxiParty] = useState();
     const [meetInfo, setMeetInfo] = useState();
     const [peopleCount, setPeopleCount] = useState();
@@ -22,7 +25,6 @@ function ChattingRoomHeader() {
             myChatRoom => myChatRoom.chatRoomId === parseInt(id, 10),
         );
         setMeetInfo(() => `${info && info.place} ${info && info.time}`);
-        console.log('info', info);
         setMyTaxiParty(() => info);
         setPeopleCount(
             () => `${info && info.headcount} / ${info && info.maximum}`,
@@ -30,17 +32,15 @@ function ChattingRoomHeader() {
         // 다른 사람이 생성한 채팅방에 입장했을 때 사용되는 로직
         if (!info) {
             setMeetInfo(
-                () =>
-                    `${chattingRoomInfo && chattingRoomInfo.placeName} ${
-                        chattingRoomInfo && chattingRoomInfo.time
-                    }`,
+                `${chattingRoomInfo && chattingRoomInfo.place} ${
+                    chattingRoomInfo && chattingRoomInfo.time
+                }`,
             );
-            setMyTaxiParty(() => chattingRoomInfo);
+            setMyTaxiParty(chattingRoomInfo);
             setPeopleCount(
-                () =>
-                    `${chattingRoomInfo && chattingRoomInfo.headcount} / ${
-                        chattingRoomInfo && chattingRoomInfo.maximum
-                    }`,
+                `${chattingRoomInfo && chattingRoomInfo.headcount} / ${
+                    chattingRoomInfo && chattingRoomInfo.maximum
+                }`,
             );
         }
     }, []);
@@ -60,8 +60,6 @@ function ChattingRoomHeader() {
     const onDeleteClick = useCallback(() => {
         dispatch(deleteModal(myTaxiParty));
     }, [myTaxiParty]);
-
-    // const
 
     return (
         <div className="chattingroomheader-wrapper">
