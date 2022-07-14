@@ -19,7 +19,7 @@ function ChattingListPage() {
     const { profileImgList } = useSelector(state => state.user);
     useEffect(() => {
         dispatch(getMyTaxiParties());
-        if (profileImgList.length === 0) dispatch(getProfileImgList());
+        dispatch(getProfileImgList());
     }, [dispatch, deleteTaxiPartyDone, isDeleteAllowModal]);
     const onChatRoomEnter = useCallback(id => {
         navigate(`/chatroom/${id}`);
