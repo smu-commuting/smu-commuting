@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable dot-notation */
 /* eslint-disable prettier/prettier */
 /* eslint-disable consistent-return */

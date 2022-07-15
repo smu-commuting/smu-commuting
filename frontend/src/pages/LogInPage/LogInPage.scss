@@ -1,24 +1,33 @@
-@import '../../styles/utils.scss'; 
+@import '../../styles/utils.scss';
 
-.loginpage-wrapper{
-    .sammulro{ 
-        display: block;
-        margin: 6.3rem auto 1.3rem auto;
-    }
-    .sumuro{
-        display: block;
-        width : 100%;
-        margin : 5.6rem auto; 
-    }
-    .login-btn{
-        margin-top : 2.1rem; 
-        img:nth-child(1){
-            display : block;
-            margin : 0 auto 1.8rem auto; 
-        }
-        img:nth-child(2){
+.loginpage-wrapper {
+    width: 100vw;
+    height : 90vh;
+    min-width: 360px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .loginpage-inner-wrapper {
+        .sammulro {
             display: block;
-            margin : 0 auto; 
+            // margin: 6.3rem auto 1.3rem auto;
+        }
+        .sumuro {
+            display: block;
+            width: 100%;
+            margin: 5.6rem auto;
+        }
+        .login-btn {
+            margin-top: 2.1rem;
+            img:nth-child(1) {
+                display: block;
+                margin: 0 auto 1.8rem auto;
+            }
+            img:nth-child(2) {
+                display: block;
+                margin: 0 auto;
+            }
         }
     }
 }

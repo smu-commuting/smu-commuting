@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
     deleteConfirmModal,
     deleteLostItemDetailInfo,
@@ -10,6 +10,7 @@ import { deleteDetailInfoApi } from '../../../utils/communityApi';
 import './LostItemDeleteConfirmModal.scss';
 
 function LostItemDeleteConfirmModal() {
+    const { id } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const onCancelClick = useCallback(() => {
@@ -17,8 +18,7 @@ function LostItemDeleteConfirmModal() {
     }, [dispatch]);
     const onAgreeClick = useCallback(async () => {
         // 동적 id 받아서 이후에 다시 처리할 것
-        const result = await deleteDetailInfoApi(9);
-        // const result = await deleteDetailInfoApi(id);
+        const result = await deleteDetailInfoApi(id);
         if (result.data.status === 200) {
             navigate(`/lostitem`);
         }
