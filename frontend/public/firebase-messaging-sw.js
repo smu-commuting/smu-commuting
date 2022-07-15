@@ -14,6 +14,7 @@ messaging.onBackgroundMessage(payload => {
         '[firebase-messaging-sw.js] Received background message 뒷단',
         payload,
     );
+    //
     const notificationTitle = payload.notification.title;
     const notificationOptions = {
         body: payload.notification.body,
