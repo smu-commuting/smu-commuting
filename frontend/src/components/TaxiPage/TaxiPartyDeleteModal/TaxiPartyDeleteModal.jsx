@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable no-unused-vars */
 import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,7 +8,10 @@ import './TaxiPartyDeleteModal.scss';
 function TaxiPartyDeleteModal() {
     const dispatch = useDispatch();
     const { chattingRoomInfo } = useSelector(state => state.taxi);
-
+    useEffect(() => {
+        document.body.style = `overflow: hidden`;
+        return () => (document.body.style = `overflow: auto`);
+    }, []);
     const onCancelClick = useCallback(() => {
         dispatch(deleteModal());
     }, [dispatch]);

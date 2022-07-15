@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable no-unused-vars */
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,6 +23,10 @@ function TaxiClickModal() {
     const [date, setDate] = useState();
     const [placeId, setPlaceId] = useState(0);
     const [placeName, setPlaceName] = useState();
+    useEffect(() => {
+        document.body.style = `overflow: hidden`;
+        return () => (document.body.style = `overflow: auto`);
+    }, []);
     useEffect(() => {
         if (!taxiMeetPlaceList) dispatch(getTaxiMeetPlaceList());
         const now = new Date();

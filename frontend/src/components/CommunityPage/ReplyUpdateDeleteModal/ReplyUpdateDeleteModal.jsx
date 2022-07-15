@@ -1,5 +1,6 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable no-unused-vars */
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
@@ -21,8 +22,11 @@ function ReplyUpdateDeleteModal() {
     const { clickReplyContent } = useSelector(state => state.community);
     const [replyMode, setReplyMode] = useState(false);
     const dispatch = useDispatch();
-
     const [reply, setReply] = useState(clickReplyContent.data);
+    useEffect(() => {
+        document.body.style = `overflow: hidden`;
+        return () => (document.body.style = `overflow: auto`);
+    }, []);
     const onReplyChange = e => {
         setReply(e.target.value);
     };

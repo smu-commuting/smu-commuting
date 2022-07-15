@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+/* eslint-disable no-return-assign */
+import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { taxiSecondModalClose } from '../../../modules/reducers/taxi';
 import './TaxiPartyDeleteCompleteModal.scss';
@@ -6,6 +7,10 @@ import './TaxiPartyDeleteCompleteModal.scss';
 function TaxiPartyDeleteCompleteModal() {
     const dispatch = useDispatch();
     const { chattingRoomInfo } = useSelector(state => state.taxi);
+    useEffect(() => {
+        document.body.style = `overflow: hidden`;
+        return () => (document.body.style = `overflow: auto`);
+    }, []);
     const onModalClose = useCallback(() => {
         dispatch(taxiSecondModalClose());
     }, [dispatch]);

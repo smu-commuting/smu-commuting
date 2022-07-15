@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable no-unused-vars */
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,6 +21,10 @@ function TaxiToChatModal() {
         isTaxiPartyEnterDone,
     } = useSelector(state => state.taxi);
 
+    useEffect(() => {
+        document.body.style = `overflow: hidden`;
+        return () => (document.body.style = `overflow: auto`);
+    }, []);
     const onCancelClick = useCallback(() => {
         dispatch(taxiToChatModal());
     }, [dispatch]);

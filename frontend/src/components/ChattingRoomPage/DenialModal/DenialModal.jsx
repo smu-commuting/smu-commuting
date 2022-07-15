@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable consistent-return */
 /* eslint-disable no-useless-return */
@@ -21,6 +22,12 @@ function DenialModal() {
     );
     const [tabNumber, setTabNumber] = useState(0);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        document.body.style = `overflow: hidden`;
+        return () => (document.body.style = `overflow: auto`);
+    }, []);
+
     useEffect(() => {
         dispatch(getPeopleListRequest(id));
         dispatch(getOutPeopleListRequest(id));

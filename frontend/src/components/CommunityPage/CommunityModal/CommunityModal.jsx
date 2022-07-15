@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+/* eslint-disable no-return-assign */
+import React, { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { communityModalClick } from '../../../modules/reducers/user';
@@ -10,6 +11,10 @@ import seewe from '../../../assets/CommunityPage/seewi-1.png';
 function CommunityModal() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    useEffect(() => {
+        document.body.style = `overflow: hidden`;
+        return () => (document.body.style = `overflow: auto`);
+    }, []);
     const onCommunityClick = useCallback(() => {
         dispatch(communityModalClick());
     }, [dispatch]);
