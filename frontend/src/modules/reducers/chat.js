@@ -18,6 +18,12 @@ import {
     CHAT_ROOM_GET_OUT_PEOPLE_LIST_REQUEST,
     CHAT_ROOM_GET_OUT_PEOPLE_LIST_SUCCESS,
     CHAT_ROOM_GET_OUT_PEOPLE_LIST_FAILURE,
+    CHAT_ROOM_CHANGE_MAXIMUM_MODAL_REQUEST,
+    CHAT_ROOM_CHANGE_MAXIMUM_MODAL_SUCCESS,
+    CHAT_ROOM_CHANGE_MAXIMUM_MODAL_FAILURE,
+    CHAT_ROOM_CHANGE_MAXIMUM_REQUEST,
+    CHAT_ROOM_CHANGE_MAXIMUM_SUCCESS,
+    CHAT_ROOM_CHANGE_MAXIMUM_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -38,6 +44,14 @@ export const initialState = {
     getOutPeopleListLoading: false,
     getOutPeopleListDone: false,
     getOutPeopleListError: null,
+
+    // 채팅방 인원 변경 모달 클릭
+    changeMaximumModal: false,
+
+    // 채팅방 인원수 변경
+    changeMaximumLoading: false,
+    changeMaximumDone: false,
+    changeMaximumError: null,
 };
 
 export const getChatMessageList = data => {
@@ -70,6 +84,19 @@ export const getOutPeopleListRequest = id => {
     return {
         type: CHAT_ROOM_GET_OUT_PEOPLE_LIST_REQUEST,
         id,
+    };
+};
+
+export const changeMaximumModalClick = () => {
+    return {
+        type: CHAT_ROOM_CHANGE_MAXIMUM_MODAL_REQUEST,
+    };
+};
+
+export const changeMaximum = data => {
+    return {
+        type: CHAT_ROOM_CHANGE_MAXIMUM_REQUEST,
+        data,
     };
 };
 
@@ -133,6 +160,27 @@ const reducer = (state = initialState, action) => {
             case CHAT_ROOM_GET_OUT_PEOPLE_LIST_FAILURE:
                 draft.getOutPeopleListLoading = false;
                 draft.getOutPeopleListError = action.err;
+                break;
+            case CHAT_ROOM_CHANGE_MAXIMUM_MODAL_REQUEST:
+                break;
+            case CHAT_ROOM_CHANGE_MAXIMUM_MODAL_SUCCESS:
+                draft.changeMaximumModal = !draft.changeMaximumModal;
+                break;
+            case CHAT_ROOM_CHANGE_MAXIMUM_MODAL_FAILURE:
+                break;
+            case CHAT_ROOM_CHANGE_MAXIMUM_REQUEST:
+                draft.changeMaximumLoading = true;
+                draft.changeMaximumDone = false;
+                draft.changeMaximumError = null;
+                break;
+            case CHAT_ROOM_CHANGE_MAXIMUM_SUCCESS:
+                draft.changeMaximumLoading = false;
+                draft.changeMaximumDone = true;
+                draft.changeMaximumModal = false;
+                break;
+            case CHAT_ROOM_CHANGE_MAXIMUM_FAILURE:
+                draft.changeMaximumLoading = false;
+                draft.changeMaximumError = action.error;
                 break;
             default:
                 break;

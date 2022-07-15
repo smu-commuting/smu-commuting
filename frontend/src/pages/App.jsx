@@ -10,7 +10,6 @@ import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { initializeApp } from 'firebase/app';
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
-import axios from 'axios';
 import BusModal from '../components/BusPage/BusClickModal/BusClickModal';
 import TaxiModal from '../components/TaxiPage/TaxiClickModal/TaxiClickModal';
 import TaxiCreateModal from '../components/TaxiPage/TaxiCreateModal/TaxiCreateModal';
@@ -56,6 +55,7 @@ import ChattingListBusBtn from '../components/ChattingListPage/ChattingListBusBt
 import OpenChattingPage from './OpenChattingPage/OpenChattingPage';
 import OpenChattingHeader from '../components/OpenChatting/OpenChattingHeader/OpenChattingHeader';
 import DenialModal from '../components/ChattingRoomPage/DenialModal/DenialModal';
+import ChangeMaximumModal from '../components/ChattingRoomPage/ChangeMaximumModal/ChangeMaximumModal';
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
@@ -104,7 +104,9 @@ function App() {
         isDeleteConfirmModal,
         isReplyDeleteConfirmModal,
     } = useSelector(state => state.community);
-    const { chatRoomPeopleModal } = useSelector(state => state.chat);
+    const { chatRoomPeopleModal, changeMaximumModal } = useSelector(
+        state => state.chat,
+    );
 
     return (
         <Router>
@@ -186,6 +188,7 @@ function App() {
                     path="/chatroom/:id"
                     element={
                         <>
+                            {changeMaximumModal && <ChangeMaximumModal />}
                             {isDeleteTaxiPartyModal && <TaxiPartyDeleteModal />}
                             {isDeleteAllowModal && (
                                 <TaxiPartyDeleteCompleteModal />

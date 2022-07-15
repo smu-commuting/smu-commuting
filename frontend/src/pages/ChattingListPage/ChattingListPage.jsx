@@ -8,7 +8,11 @@ import getOut from '../../assets/ChattingList/ChattingListPage/첫줄.png';
 import sumung from '../../assets/ChattingList/ChattingListPage/sample_sumung.png';
 import nonchat from '../../assets/ChattingList/ChattingListPage/non-chat.png';
 import { prevent } from '../../constants';
-import { deleteModal, getMyTaxiParties } from '../../modules/reducers/taxi';
+import {
+    deleteModal,
+    getMyTaxiParties,
+    listToTaxiInfo,
+} from '../../modules/reducers/taxi';
 import { getProfileImgList } from '../../modules/reducers/user';
 
 function ChattingListPage() {
@@ -19,14 +23,27 @@ function ChattingListPage() {
     const { profileImgList } = useSelector(state => state.user);
     useEffect(() => {
         dispatch(getMyTaxiParties());
-        if (profileImgList.length === 0) dispatch(getProfileImgList());
+        dispatch(getProfileImgList());
     }, [dispatch, deleteTaxiPartyDone, isDeleteAllowModal]);
     const onChatRoomEnter = useCallback(id => {
         navigate(`/chatroom/${id}`);
     }, []);
-    const onDeleteClick = useCallback(myTaxiParty => {
-        dispatch(deleteModal(myTaxiParty));
+    const onDeleteClick = useCallback(() => {
+        dispatch(deleteModal());
     }, []);
+    const chattingInfo = useCallback(
+        info => {
+            const data = {
+                taxiPartyId: info.chatRoomId,
+                placeName: info.place,
+                headcount: info.headcount,
+                maximum: info.maximum,
+                time: info.time,
+            };
+            dispatch(listToTaxiInfo(data));
+        },
+        [dispatch],
+    );
     return (
         <ul className="chattinglist-wrapper">
             {myTaxiParties.length !== 0 ? (
@@ -34,9 +51,10 @@ function ChattingListPage() {
                     return (
                         <li
                             key={myTaxiParty.chatRoomId}
-                            onClick={() =>
-                                onChatRoomEnter(myTaxiParty.chatRoomId)
-                            }
+                            onClick={() => {
+                                onChatRoomEnter(myTaxiParty.chatRoomId);
+                                chattingInfo(myTaxiParty);
+                            }}
                             aria-hidden
                         >
                             <div className="img-wrapper">
@@ -60,9 +78,10 @@ function ChattingListPage() {
                                 ({myTaxiParty.headcount}/{myTaxiParty.maximum})
                             </div>
                             <div
-                                onClick={prevent(() =>
-                                    onDeleteClick(myTaxiParty),
-                                )}
+                                onClick={prevent(() => {
+                                    chattingInfo(myTaxiParty);
+                                    onDeleteClick();
+                                })}
                                 aria-hidden
                             >
                                 <img src={getOut} alt="나가기" />

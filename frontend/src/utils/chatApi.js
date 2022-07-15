@@ -33,3 +33,15 @@ export const getOutPeopleListApi = async id => {
         `${process.env.REACT_APP_API_URL}${API_TAXI}party/${id}/exit/users`,
     );
 };
+
+// 최대 인원수 변경 API
+export const updateChatRoomMaximunHeadApi = async dataObj => {
+    console.log(dataObj);
+    const data = {
+        maximum: dataObj.maximum,
+    };
+    return await withAuthInstance.put(
+        `${process.env.REACT_APP_API_URL}${API_TAXI}party/${dataObj.id}`,
+        data,
+    );
+};
