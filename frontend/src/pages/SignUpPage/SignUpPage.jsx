@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/anchor-has-content */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -31,6 +33,7 @@ function SignUpPage() {
 
     // 인증번호 요청 API
     const sendNumber = async () => {
+        if (studentId.length < 8) return;
         const response = await sendNumberApi(studentId);
         if (response.data.success) setCheckSend(true);
     };
@@ -92,6 +95,18 @@ function SignUpPage() {
                         />
                         <Timer mm={5} ss={0} />
                     </div>
+                    <p
+                        className="info"
+                        onClick={() =>
+                            window.open(
+                                'https://outlook.office.com/mail/inbox',
+                                '_blank',
+                            )
+                        }
+                        aria-hidden
+                    >
+                        인증번호 확인하기
+                    </p>
                     <button
                         className="student-id-btn"
                         type="submit"
