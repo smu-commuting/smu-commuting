@@ -2,7 +2,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useCallback, useEffect } from 'react';
 import './LogInPage.scss';
-import axios from 'axios';
 import { ReactComponent as Sumuro } from '../../assets/LogInPage/스뮤로.svg';
 import Google from '../../assets/LogInPage/Google.png';
 import Kakao from '../../assets/LogInPage/Kakao.png';
@@ -21,21 +20,23 @@ function LogInPage() {
 
     return (
         <div className="loginpage-wrapper">
-            <Sumuro className="sammulro" />
-            <div className="login-btn">
-                <img
-                    src={Google}
-                    alt="Google"
-                    onClick={onGoogleLogIn}
-                    aria-hidden="true"
-                />
+            <div className="loginpage-inner-wrapper">
+                <Sumuro className="sammulro" />
+                <div className="login-btn">
+                    <img
+                        src={Google}
+                        alt="Google"
+                        onClick={onGoogleLogIn}
+                        aria-hidden="true"
+                    />
 
-                <img
-                    src={Kakao}
-                    alt="Kakao"
-                    onClick={onKakaoLogIn}
-                    aria-hidden="true"
-                />
+                    <img
+                        src={Kakao}
+                        alt="Kakao"
+                        onClick={onKakaoLogIn}
+                        aria-hidden="true"
+                    />
+                </div>
             </div>
         </div>
     );
