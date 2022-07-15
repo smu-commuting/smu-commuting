@@ -15,6 +15,7 @@ import {
     deleteChatMessageList,
     getChatMessageList,
     denialModalClick,
+    changeMaximumModalClick,
 } from '../../modules/reducers/chat';
 import { firstEnterDateParser } from '../../constants/FirstEnterDateParser';
 import MeChatBox from '../../components/ChattingRoomPage/MeChatBox/MeChatBox';

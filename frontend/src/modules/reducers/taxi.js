@@ -43,6 +43,9 @@ import {
     TAXI_PARTY_LIST_DELETE_REQUEST,
     TAXI_PARTY_LIST_DELETE_SUCCESS,
     TAXI_PARTY_LIST_DELETE_FAILURE,
+    TAXI_LIST_TO_CHAT_INFO_REQUEST,
+    TAXI_LIST_TO_CHAT_INFO_SUCCESS,
+    TAXI_LIST_TO_CHAT_INFO_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -64,7 +67,7 @@ export const initialState = {
     taxiPartyEnd: false,
     // 택시 파티 참여
     isTaxiPartyEnterError: null,
-    // 현재 조회중인 택시 페이지의 날짜
+    // 현재 조회중인 택시 페이지 정보(택시 무한 스크롤에 따른 when/placeId/placeName)
     taxiPageInfo: null,
     // 택시 생성 모달창 오픈
     isTaxiCreateModalOpen: false,
@@ -73,7 +76,6 @@ export const initialState = {
     deleteTaxiPartyDone: false,
     deleteTaxiPartyError: null,
     // 삭제 모달에 뜰 정보
-    deleteInfo: null, // myTaxiParty
     isDeleteTaxiPartyModal: false,
     isDeleteAllowModal: false,
     // 택시 파티 생성
@@ -83,7 +85,7 @@ export const initialState = {
     showCreateErrorModal: false,
     // 채팅방 입장 알림 모달창
     isEnterChattingRoomModalOpen: false,
-    // 알림 모달창에 뜨게 될 정보들
+    // 알림 모달창에 뜨게 될 정보들, 채팅방 정보
     chattingRoomInfo: null,
     // 입장 에러창 뜨게할까요
     showErrorModal: false,
@@ -173,6 +175,13 @@ export const taxiSecondModalClose = () => {
 export const taxiPartyListDelete = () => {
     return {
         type: TAXI_PARTY_LIST_DELETE_REQUEST,
+    };
+};
+
+export const listToTaxiInfo = data => {
+    return {
+        type: TAXI_LIST_TO_CHAT_INFO_REQUEST,
+        data,
     };
 };
 
@@ -301,12 +310,18 @@ const reducer = (state = initialState, action) => {
                 draft.chattingRoomInfo = action.data;
                 console.log('chattingRoomInfo', action.data);
                 break;
+            case TAXI_LIST_TO_CHAT_INFO_REQUEST:
+                break;
+            case TAXI_LIST_TO_CHAT_INFO_SUCCESS:
+                draft.chattingRoomInfo = action.data;
+                break;
+            case TAXI_LIST_TO_CHAT_INFO_FAILURE:
+                break;
             case TAXI_TO_CHAT_INFO_MODAL_FAILURE:
                 break;
             case TAXI_ROOM_DELETE_MODAL_REQUEST:
                 break;
             case TAXI_ROOM_DELETE_MODAL_SUCCESS:
-                draft.deleteInfo = action.data;
                 draft.isDeleteTaxiPartyModal = !draft.isDeleteTaxiPartyModal;
                 break;
             case TAXI_ROOM_DELETE_MODAL_FAILURE:

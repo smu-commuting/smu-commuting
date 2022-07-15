@@ -17,6 +17,9 @@ import {
     CHAT_ROOM_GET_OUT_PEOPLE_LIST_REQUEST,
     CHAT_ROOM_GET_OUT_PEOPLE_LIST_SUCCESS,
     CHAT_ROOM_GET_OUT_PEOPLE_LIST_FAILURE,
+    CHAT_ROOM_CHANGE_MAXIMUM_MODAL_REQUEST,
+    CHAT_ROOM_CHANGE_MAXIMUM_MODAL_SUCCESS,
+    CHAT_ROOM_CHANGE_MAXIMUM_MODAL_FAILURE,
 } from '../../constants';
 import { getRoomMessage } from '../../utils';
 import { getOutPeopleListApi, getPeopleListApi } from '../../utils/chatApi';
@@ -93,6 +96,17 @@ function* getOutPeopleList(action) {
         });
     }
 }
+function* changeMaximumModalClick() {
+    try {
+        yield put({
+            type: CHAT_ROOM_CHANGE_MAXIMUM_MODAL_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: CHAT_ROOM_CHANGE_MAXIMUM_MODAL_FAILURE,
+        });
+    }
+}
 
 function* watchChatRoomMessage() {
     yield takeLatest(CHAT_ROOM_MESSAGE_REQUEST, chatMessageList);
@@ -109,7 +123,12 @@ function* watchGetPeopleList() {
 function* watchGetOutPeopleList() {
     yield takeLatest(CHAT_ROOM_GET_OUT_PEOPLE_LIST_REQUEST, getOutPeopleList);
 }
-
+function* watchChangeMaximumModalClick() {
+    yield takeLatest(
+        CHAT_ROOM_CHANGE_MAXIMUM_MODAL_REQUEST,
+        changeMaximumModalClick,
+    );
+}
 export default function* chatSaga() {
     yield all([
         fork(watchChatRoomMessage),
@@ -117,5 +136,6 @@ export default function* chatSaga() {
         fork(watchDenialModalClick),
         fork(watchGetPeopleList),
         fork(watchGetOutPeopleList),
+        fork(watchChangeMaximumModalClick),
     ]);
 }

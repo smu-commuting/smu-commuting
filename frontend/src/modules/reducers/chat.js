@@ -18,6 +18,9 @@ import {
     CHAT_ROOM_GET_OUT_PEOPLE_LIST_REQUEST,
     CHAT_ROOM_GET_OUT_PEOPLE_LIST_SUCCESS,
     CHAT_ROOM_GET_OUT_PEOPLE_LIST_FAILURE,
+    CHAT_ROOM_CHANGE_MAXIMUM_MODAL_REQUEST,
+    CHAT_ROOM_CHANGE_MAXIMUM_MODAL_SUCCESS,
+    CHAT_ROOM_CHANGE_MAXIMUM_MODAL_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -38,6 +41,9 @@ export const initialState = {
     getOutPeopleListLoading: false,
     getOutPeopleListDone: false,
     getOutPeopleListError: null,
+
+    // 채팅방 인원 변경 모달 클릭
+    changeMaximumModal: false,
 };
 
 export const getChatMessageList = data => {
@@ -70,6 +76,12 @@ export const getOutPeopleListRequest = id => {
     return {
         type: CHAT_ROOM_GET_OUT_PEOPLE_LIST_REQUEST,
         id,
+    };
+};
+
+export const changeMaximumModalClick = () => {
+    return {
+        type: CHAT_ROOM_CHANGE_MAXIMUM_MODAL_REQUEST,
     };
 };
 
@@ -133,6 +145,13 @@ const reducer = (state = initialState, action) => {
             case CHAT_ROOM_GET_OUT_PEOPLE_LIST_FAILURE:
                 draft.getOutPeopleListLoading = false;
                 draft.getOutPeopleListError = action.err;
+                break;
+            case CHAT_ROOM_CHANGE_MAXIMUM_MODAL_REQUEST:
+                break;
+            case CHAT_ROOM_CHANGE_MAXIMUM_MODAL_SUCCESS:
+                draft.changeMaximumModal = !draft.changeMaximumModal;
+                break;
+            case CHAT_ROOM_CHANGE_MAXIMUM_MODAL_FAILURE:
                 break;
             default:
                 break;

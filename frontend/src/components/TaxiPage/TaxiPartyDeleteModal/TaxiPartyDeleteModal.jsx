@@ -6,31 +6,23 @@ import './TaxiPartyDeleteModal.scss';
 
 function TaxiPartyDeleteModal() {
     const dispatch = useDispatch();
-    const { deleteInfo, chattingRoomInfo } = useSelector(state => state.taxi);
+    const { chattingRoomInfo } = useSelector(state => state.taxi);
 
     const onCancelClick = useCallback(() => {
-        dispatch(deleteModal(deleteInfo));
+        dispatch(deleteModal());
     }, [dispatch]);
 
     const onAgreeClick = useCallback(() => {
-        dispatch(
-            deleteTaxiParty(
-                deleteInfo.chatRoomId
-                    ? deleteInfo.chatRoomId
-                    : chattingRoomInfo.taxiPartyId,
-            ),
-        );
+        dispatch(deleteTaxiParty(chattingRoomInfo.taxiPartyId));
     }, [dispatch]);
 
     return (
         <div className="taxipartydeletemodal-wrapper">
             <div className="taxipartydeletemodal">
                 <p>
-                    {deleteInfo.place
-                        ? deleteInfo.place
-                        : chattingRoomInfo.placeName}
+                    {chattingRoomInfo.placeName}
                     &nbsp;
-                    {deleteInfo.time ? deleteInfo.time : chattingRoomInfo.time}
+                    {chattingRoomInfo.time}
                     <br />
                     채팅방을 나가시겠습니까?
                 </p>
