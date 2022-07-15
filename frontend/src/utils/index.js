@@ -15,4 +15,4 @@ export {
     createTaxiPartyApi,
 } from './taxiApi';
 export { busApi } from './busApi';
-export { getRoomMessage } from './chatApi';
+export { getRoomMessage, updateChatRoomMaximunHeadApi } from './chatApi';

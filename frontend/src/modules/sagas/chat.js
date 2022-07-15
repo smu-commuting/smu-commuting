@@ -20,9 +20,16 @@ import {
     CHAT_ROOM_CHANGE_MAXIMUM_MODAL_REQUEST,
     CHAT_ROOM_CHANGE_MAXIMUM_MODAL_SUCCESS,
     CHAT_ROOM_CHANGE_MAXIMUM_MODAL_FAILURE,
+    CHAT_ROOM_CHANGE_MAXIMUM_REQUEST,
+    CHAT_ROOM_CHANGE_MAXIMUM_SUCCESS,
+    CHAT_ROOM_CHANGE_MAXIMUM_FAILURE,
 } from '../../constants';
 import { getRoomMessage } from '../../utils';
-import { getOutPeopleListApi, getPeopleListApi } from '../../utils/chatApi';
+import {
+    getOutPeopleListApi,
+    getPeopleListApi,
+    updateChatRoomMaximunHeadApi,
+} from '../../utils/chatApi';
 
 function* chatMessageList(action) {
     try {
@@ -107,6 +114,20 @@ function* changeMaximumModalClick() {
         });
     }
 }
+function* changeMaximum(action) {
+    try {
+        console.log(action);
+        const result = yield call(updateChatRoomMaximunHeadApi, action.data);
+        console.log('변경 요청 result', result);
+        yield put({
+            type: CHAT_ROOM_CHANGE_MAXIMUM_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: CHAT_ROOM_CHANGE_MAXIMUM_FAILURE,
+        });
+    }
+}
 
 function* watchChatRoomMessage() {
     yield takeLatest(CHAT_ROOM_MESSAGE_REQUEST, chatMessageList);
@@ -129,6 +150,9 @@ function* watchChangeMaximumModalClick() {
         changeMaximumModalClick,
     );
 }
+function* watchChangeMaximum() {
+    yield takeLatest(CHAT_ROOM_CHANGE_MAXIMUM_REQUEST, changeMaximum);
+}
 export default function* chatSaga() {
     yield all([
         fork(watchChatRoomMessage),
@@ -137,5 +161,6 @@ export default function* chatSaga() {
         fork(watchGetPeopleList),
         fork(watchGetOutPeopleList),
         fork(watchChangeMaximumModalClick),
+        fork(watchChangeMaximum),
     ]);
 }

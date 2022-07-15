@@ -1,8 +1,12 @@
+/* eslint-disable no-unused-vars */
 import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './ChangeMaximumModal.scss';
 import cancel from '../../../assets/ChattingPage/cancel.png';
-import { changeMaximumModalClick } from '../../../modules/reducers/chat';
+import {
+    changeMaximum,
+    changeMaximumModalClick,
+} from '../../../modules/reducers/chat';
 
 function ChangeMaximumModal() {
     const dispatch = useDispatch();
@@ -12,7 +16,12 @@ function ChangeMaximumModal() {
         dispatch(changeMaximumModalClick());
     }, [dispatch]);
     const onChangeSubmit = useCallback(() => {
-        console.log(maximum);
+        const data = {
+            id: chattingRoomInfo.taxiPartyId,
+            maximum,
+        };
+        console.log(data);
+        dispatch(changeMaximum(data));
     }, [maximum]);
     return (
         <div className="changemaximummodal-wrapper">
