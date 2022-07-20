@@ -8,9 +8,11 @@ CREATE TABLE `taxi_place`
 );
 
 INSERT INTO `taxi_place` (name)
-VALUES ('홍제역'),
-       ('경복궁역'),
+VALUES ('경복궁역'),
        ('남영역'),
        ('시청역'),
        ('서울역'),
-       ('KT 광화문지사')
+       ('KT 광화문지사'),
+       ('홍제역'),
+       ('유진상가'),
+       ('서울여자간호대학교')

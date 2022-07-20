@@ -83,7 +83,7 @@ public class TaxiPartyService {
             taxiPartyRepository.deleteById(taxiPartyId);
         } else {
             taxiGroupList.removeIf(taxiGroup -> taxiGroup.getUserId().equals(loginUserId));
-            taxiGroupRepository.deleteByUserId(loginUserId);
+            taxiGroupRepository.deleteByTaxiPartyIdAndUserId(taxiPartyId, loginUserId);
             TaxiExitGroup taxiExitGroup = TaxiExitGroup.create(loginUserId, taxiParty);
             taxiExitGroupRepository.save(taxiExitGroup);
         }
