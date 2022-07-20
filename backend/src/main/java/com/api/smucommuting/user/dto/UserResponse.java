@@ -8,6 +8,24 @@ public class UserResponse {
     @Builder
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
+    public static class Signup {
+        private Long userId;
+        private String email;
+        private Integer studentId;
+
+        public static UserResponse.Signup build(User user) {
+            return Signup.builder()
+                    .userId(user.getId())
+                    .studentId(user.getStudentId())
+                    .email(user.getEmail())
+                    .build();
+        }
+    }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class GetOne {
         private Long userId;
         private Integer studentId;
