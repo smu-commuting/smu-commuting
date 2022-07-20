@@ -46,6 +46,12 @@ public class TaxiPartyService {
     }
 
     @Transactional(readOnly = true)
+    public TaxiPartyResponse.GetOne getOne(Long taxiPartyId) {
+        TaxiParty taxiParty = taxiPartyRepository.findByIdWithTaxiGroupAndPlace(taxiPartyId).orElseThrow(TaxiPartyNotFoundException::new);
+        return TaxiPartyResponse.GetOne.build(taxiParty);
+    }
+
+    @Transactional(readOnly = true)
     public List<TaxiPartyResponse.GetList> getList(Long placeId, LocalDate meetingDate, LocalDateTime now, PageDto pageDto) {
         List<TaxiParty> taxiParties = taxiPartyRepository.findAllByPlaceAndDate(placeId, meetingDate, now, pageDto.of());
         return taxiParties.stream().map(TaxiPartyResponse.GetList::build).collect(Collectors.toList());

@@ -9,4 +9,8 @@ import java.util.Optional;
 public interface TaxiPartyRepository extends JpaRepository<TaxiParty, Long>, TaxiPartyRepositoryCustom {
     @Query("select tp from TaxiParty tp join fetch tp.taxiGroupList where tp.id=:taxiPartyId")
     Optional<TaxiParty> findByIdWithTaxiGroup(Long taxiPartyId);
+
+    @Query("select tp from TaxiParty tp join fetch tp.taxiGroupList join fetch tp.taxiPlace where tp.id=:taxiPartyId")
+    Optional<TaxiParty> findByIdWithTaxiGroupAndPlace(Long taxiPartyId);
+
 }

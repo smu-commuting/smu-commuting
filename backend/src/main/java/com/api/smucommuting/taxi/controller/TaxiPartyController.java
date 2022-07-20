@@ -37,6 +37,12 @@ public class TaxiPartyController {
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
     }
 
+    @GetMapping("/party/{taxiPartyId}")
+    public ResponseEntity<ApiResult<TaxiPartyResponse.GetOne>> getOne(@PathVariable Long taxiPartyId) {
+        TaxiPartyResponse.GetOne response = taxiPartyService.getOne(taxiPartyId);
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
+    }
+
     @GetMapping("/parties")
     public ResponseEntity<ApiResult<List<TaxiPartyResponse.GetList>>> getList(@RequestParam(name = "placeId") Long placeId,
                                                                               @RequestParam(name = "date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate meetingDate,
