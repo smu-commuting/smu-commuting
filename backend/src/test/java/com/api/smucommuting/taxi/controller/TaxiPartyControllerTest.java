@@ -186,10 +186,10 @@ class TaxiPartyControllerTest extends MvcTest {
     @Test
     @DisplayName("택시채팅방 유저 목록 조회 문서화")
     public void getTaxiPartyUsers() throws Exception {
-        TaxiPartyResponse.TaxiPartyUsers response1 = TaxiPartyResponse.TaxiPartyUsers.builder().userId(1L).studentId(1234).build();
-        TaxiPartyResponse.TaxiPartyUsers response2 = TaxiPartyResponse.TaxiPartyUsers.builder().userId(2L).studentId(1111).build();
+        TaxiPartyResponse.TaxiPartyUsers response1 = TaxiPartyResponse.TaxiPartyUsers.builder().userId(1L).studentId(1234).isBlocked(false).build();
+        TaxiPartyResponse.TaxiPartyUsers response2 = TaxiPartyResponse.TaxiPartyUsers.builder().userId(2L).studentId(1111).isBlocked(false).build();
 
-        given(taxiPartyService.getTaxiPartyUsers(any())).willReturn(Arrays.asList(response1, response2));
+        given(taxiPartyService.getTaxiPartyUsers(any(), any())).willReturn(Arrays.asList(response1, response2));
 
         ResultActions results = mvc.perform(RestDocumentationRequestBuilders
                 .get("/api/taxi/party/{taxiPartyId}/users", 1)
@@ -205,7 +205,8 @@ class TaxiPartyControllerTest extends MvcTest {
                                 fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
                                 fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
                                 fieldWithPath("data.[].userId").type(JsonFieldType.NUMBER).description("유저 식별자"),
-                                fieldWithPath("data.[].studentId").type(JsonFieldType.NUMBER).description("유저 학번")
+                                fieldWithPath("data.[].studentId").type(JsonFieldType.NUMBER).description("유저 학번"),
+                                fieldWithPath("data.[].isBlocked").type(JsonFieldType.BOOLEAN).description("차단된 유저라면 true")
                         )
                 ));
     }
@@ -213,10 +214,10 @@ class TaxiPartyControllerTest extends MvcTest {
     @Test
     @DisplayName("택시채팅방 나간 유저 목록 조회 문서화")
     public void getTaxiPartyExitUsers() throws Exception {
-        TaxiPartyResponse.TaxiPartyUsers response1 = TaxiPartyResponse.TaxiPartyUsers.builder().userId(1L).studentId(1234).build();
-        TaxiPartyResponse.TaxiPartyUsers response2 = TaxiPartyResponse.TaxiPartyUsers.builder().userId(2L).studentId(1111).build();
+        TaxiPartyResponse.TaxiPartyUsers response1 = TaxiPartyResponse.TaxiPartyUsers.builder().userId(1L).studentId(1234).isBlocked(false).build();
+        TaxiPartyResponse.TaxiPartyUsers response2 = TaxiPartyResponse.TaxiPartyUsers.builder().userId(2L).studentId(1111).isBlocked(false).build();
 
-        given(taxiPartyService.getTaxiPartyExitUsers(any())).willReturn(Arrays.asList(response1, response2));
+        given(taxiPartyService.getTaxiPartyExitUsers(any(), any())).willReturn(Arrays.asList(response1, response2));
 
         ResultActions results = mvc.perform(RestDocumentationRequestBuilders
                 .get("/api/taxi/party/{taxiPartyId}/exit/users", 1)
@@ -232,7 +233,8 @@ class TaxiPartyControllerTest extends MvcTest {
                                 fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
                                 fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
                                 fieldWithPath("data.[].userId").type(JsonFieldType.NUMBER).description("유저 식별자"),
-                                fieldWithPath("data.[].studentId").type(JsonFieldType.NUMBER).description("유저 학번")
+                                fieldWithPath("data.[].studentId").type(JsonFieldType.NUMBER).description("유저 학번"),
+                                fieldWithPath("data.[].isBlocked").type(JsonFieldType.BOOLEAN).description("차단된 유저라면 true")
                         )
                 ));
     }

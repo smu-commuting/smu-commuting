@@ -1,5 +1,6 @@
 package com.api.smucommuting.taxi.service;
 
+import com.api.smucommuting.blockeduser.domain.BlockedUser;
 import com.api.smucommuting.common.dto.PageDto;
 import com.api.smucommuting.common.exception.taxi.TaxiPartyNotFoundException;
 import com.api.smucommuting.taxi.domain.*;
@@ -10,6 +11,7 @@ import com.api.smucommuting.taxi.dto.TaxiPartyRequest;
 import com.api.smucommuting.taxi.dto.TaxiPartyResponse;
 import com.api.smucommuting.taxi.service.integrate.TaxiPartyInfo;
 import com.api.smucommuting.user.domain.User;
+import com.api.smucommuting.user.service.integrate.BlockUsers;
 import com.api.smucommuting.user.service.integrate.Users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,6 +32,7 @@ public class TaxiPartyService {
     private final TaxiPartyInfo taxiPartyInfo;
     private final TaxiPartyValidator taxiPartyValidator;
     private final Users users;
+    private final BlockUsers blockUsers;
 
     public void create(TaxiPartyRequest.Create request, User loginUser) {
         TaxiPlace taxiPlace = taxiPartyInfo.getTaxiPlace(request.getPlaceId());
@@ -64,17 +67,21 @@ public class TaxiPartyService {
     }
 
     @Transactional(readOnly = true)
-    public List<TaxiPartyResponse.TaxiPartyUsers> getTaxiPartyUsers(Long taxiPartyId) {
+    public List<TaxiPartyResponse.TaxiPartyUsers> getTaxiPartyUsers(Long taxiPartyId, User loginUser) {
         List<Long> userIds = taxiGroupRepository.findAllByTaxiPartyId(taxiPartyId).stream().map(TaxiGroup::getUserId).collect(Collectors.toList());
         List<User> userList = users.findAllByUserIdIn(userIds);
-        return TaxiPartyResponse.TaxiPartyUsers.listsOf(userList);
+        List<Long> blockedUserIdList = blockUsers.findAllByUserId(loginUser.getId()).stream().map(BlockedUser::getBlockedUserId).collect(Collectors.toList());
+
+        return TaxiPartyResponse.TaxiPartyUsers.listsOf(userList, blockedUserIdList);
     }
 
     @Transactional(readOnly = true)
-    public List<TaxiPartyResponse.TaxiPartyUsers> getTaxiPartyExitUsers(Long taxiPartyId) {
+    public List<TaxiPartyResponse.TaxiPartyUsers> getTaxiPartyExitUsers(Long taxiPartyId, User loginUser) {
         List<Long> userIds = taxiExitGroupRepository.findAllByTaxiPartyId(taxiPartyId).stream().map(TaxiExitGroup::getUserId).collect(Collectors.toList());
         List<User> userList = users.findAllByUserIdIn(userIds);
-        return TaxiPartyResponse.TaxiPartyUsers.listsOf(userList);
+        List<Long> blockedUserIdList = blockUsers.findAllByUserId(loginUser.getId()).stream().map(BlockedUser::getBlockedUserId).collect(Collectors.toList());
+
+        return TaxiPartyResponse.TaxiPartyUsers.listsOf(userList, blockedUserIdList);
     }
 
     public void update(Long taxiPartyId, TaxiPartyRequest.Update request, User loginUser) {

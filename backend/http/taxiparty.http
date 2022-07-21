@@ -26,7 +26,7 @@ GET {{apiUrl}}/taxi/my-parties
 Authorization: {{authorizationToken}}
 
 ###
-GET {{apiUrl}}/taxi/party/2/users
+GET {{apiUrl}}/taxi/party/1/users
 Authorization: {{authorizationToken}}
 
 ###
