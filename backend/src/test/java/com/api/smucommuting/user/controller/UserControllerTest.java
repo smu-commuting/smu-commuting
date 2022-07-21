@@ -39,6 +39,9 @@ class UserControllerTest extends MvcTest {
     @DisplayName("회원가입 문서화")
     public void signup() throws Exception {
         UserRequest.Signup request = UserRequest.Signup.builder().email(EMAIL).studentId(STUDENT_ID).imageId(PROFILE_IMAGE_ID).build();
+        UserResponse.Signup response = UserResponse.Signup.builder().userId(USER_ID).studentId(STUDENT_ID).email(EMAIL).build();
+
+        given(userService.signup(any(), any())).willReturn(response);
 
         ResultActions results = mvc.perform(RestDocumentationRequestBuilders
                 .post("/api/user/signup")
@@ -58,7 +61,9 @@ class UserControllerTest extends MvcTest {
                         responseFields(
                                 fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
                                 fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
-                                fieldWithPath("data").description("응답 데이터가 없다면 null")
+                                fieldWithPath("data.userId").type(JsonFieldType.NUMBER).description("유저 식별자"),
+                                fieldWithPath("data.studentId").type(JsonFieldType.NUMBER).description("학번"),
+                                fieldWithPath("data.email").type(JsonFieldType.STRING).description("이메일")
                         )
                 ));
     }

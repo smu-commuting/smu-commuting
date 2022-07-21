@@ -37,6 +37,12 @@ public class TaxiPartyController {
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
     }
 
+    @GetMapping("/party/{taxiPartyId}")
+    public ResponseEntity<ApiResult<TaxiPartyResponse.GetOne>> getOne(@PathVariable Long taxiPartyId) {
+        TaxiPartyResponse.GetOne response = taxiPartyService.getOne(taxiPartyId);
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
+    }
+
     @GetMapping("/parties")
     public ResponseEntity<ApiResult<List<TaxiPartyResponse.GetList>>> getList(@RequestParam(name = "placeId") Long placeId,
                                                                               @RequestParam(name = "date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate meetingDate,
@@ -52,14 +58,16 @@ public class TaxiPartyController {
     }
 
     @GetMapping("/party/{taxiPartyId}/users")
-    public ResponseEntity<ApiResult<List<TaxiPartyResponse.TaxiPartyUsers>>> getTaxiPartyUsers(@PathVariable Long taxiPartyId) {
-        List<TaxiPartyResponse.TaxiPartyUsers> response = taxiPartyService.getTaxiPartyUsers(taxiPartyId);
+    public ResponseEntity<ApiResult<List<TaxiPartyResponse.TaxiPartyUsers>>> getTaxiPartyUsers(@PathVariable Long taxiPartyId,
+                                                                                               @CurrentUser CustomUserDetails customUserDetails) {
+        List<TaxiPartyResponse.TaxiPartyUsers> response = taxiPartyService.getTaxiPartyUsers(taxiPartyId, customUserDetails.getUser());
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
     }
 
     @GetMapping("/party/{taxiPartyId}/exit/users")
-    public ResponseEntity<ApiResult<List<TaxiPartyResponse.TaxiPartyUsers>>> getTaxiPartyExitUsers(@PathVariable Long taxiPartyId) {
-        List<TaxiPartyResponse.TaxiPartyUsers> response = taxiPartyService.getTaxiPartyExitUsers(taxiPartyId);
+    public ResponseEntity<ApiResult<List<TaxiPartyResponse.TaxiPartyUsers>>> getTaxiPartyExitUsers(@PathVariable Long taxiPartyId,
+                                                                                                   @CurrentUser CustomUserDetails customUserDetails) {
+        List<TaxiPartyResponse.TaxiPartyUsers> response = taxiPartyService.getTaxiPartyExitUsers(taxiPartyId,customUserDetails.getUser());
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
     }
 

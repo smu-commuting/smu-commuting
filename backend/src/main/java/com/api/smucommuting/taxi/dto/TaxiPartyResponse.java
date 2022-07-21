@@ -15,6 +15,32 @@ public class TaxiPartyResponse {
     @Builder
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
+    public static class GetOne {
+        private Long taxiPartyId;
+        private int headcount;
+        private String place;
+        private int maximum;
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd", timezone = "Asia/Seoul")
+        private LocalDateTime date;
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "Asia/Seoul")
+        private LocalDateTime time;
+
+        public static TaxiPartyResponse.GetOne build(TaxiParty taxiParty) {
+            return GetOne.builder()
+                    .taxiPartyId(taxiParty.getId())
+                    .headcount(taxiParty.getTaxiGroupList().size())
+                    .maximum(taxiParty.getMaximum())
+                    .date(taxiParty.getMeetingTime())
+                    .time(taxiParty.getMeetingTime())
+                    .place(taxiParty.getTaxiPlace().getName())
+                    .build();
+        }
+    }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class GetList {
         private Long taxiPartyId;
         private int headcount;
@@ -65,16 +91,18 @@ public class TaxiPartyResponse {
     public static class TaxiPartyUsers {
         private Long userId;
         private Integer studentId;
+        private Boolean isBlocked;
 
-        public static TaxiPartyUsers build(User user) {
+        public static TaxiPartyUsers build(User user, List<Long> blockedUserIdList) {
             return TaxiPartyUsers.builder()
                     .userId(user.getId())
                     .studentId(user.getStudentId())
+                    .isBlocked(blockedUserIdList.contains(user.getId()))
                     .build();
         }
 
-        public static List<TaxiPartyUsers> listsOf(List<User> userList) {
-            return userList.stream().map(TaxiPartyUsers::build).collect(Collectors.toList());
+        public static List<TaxiPartyUsers> listsOf(List<User> userList, List<Long> blockedUserIdList) {
+            return userList.stream().map(user -> TaxiPartyUsers.build(user, blockedUserIdList)).collect(Collectors.toList());
         }
     }
 }

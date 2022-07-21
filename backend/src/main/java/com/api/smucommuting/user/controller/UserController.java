@@ -20,15 +20,15 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<ApiResult<Void>> signup(@RequestBody UserRequest.Signup request,
-                                                  @CurrentUser CustomUserDetails customUserDetails) {
-        userService.signup(request, customUserDetails.getUser());
-        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
+    public ResponseEntity<ApiResult<UserResponse.Signup>> signup(@RequestBody UserRequest.Signup request,
+                                                                 @CurrentUser CustomUserDetails customUserDetails) {
+        UserResponse.Signup response = userService.signup(request, customUserDetails.getUser());
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
     }
 
     @PostMapping("/fcm/token")
     public ResponseEntity<ApiResult<Void>> fcmTokenCreate(@RequestBody UserRequest.FcmToken request,
-                                                            @CurrentUser CustomUserDetails customUserDetails) {
+                                                          @CurrentUser CustomUserDetails customUserDetails) {
         userService.fcmTokenSave(request, customUserDetails.getUser());
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
     }
@@ -49,8 +49,8 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<ApiResult<UserResponse.GetOne>> getMe(@CurrentUser CustomUserDetails customUserDetails) {
-        UserResponse.GetOne resposne = userService.getOne(customUserDetails.getUser());
-        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), resposne));
+        UserResponse.GetOne response = userService.getOne(customUserDetails.getUser());
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
     }
 
     @PutMapping

@@ -27,10 +27,11 @@ public class UserService {
     private final CustomMailSender mailSender;
     private final ProfileImageRepository profileImageRepository;
 
-    public void signup(UserRequest.Signup request, User loginUser) {
+    public UserResponse.Signup signup(UserRequest.Signup request, User loginUser) {
         User findUser = userRepository.findById(loginUser.getId()).orElseThrow(UserNotFoundException::new);
         ProfileImage profileImage = profileImageRepository.findById(request.getImageId()).orElseThrow(ProfileImageNotFoundException::new);
-        findUser.signup(request.getEmail(), request.getStudentId(), profileImage, userValidator);
+        User updatedUser = findUser.signup(request.getEmail(), request.getStudentId(), profileImage, userValidator);
+        return UserResponse.Signup.build(updatedUser);
     }
 
     public void fcmTokenSave(UserRequest.FcmToken request, User loginUser) {

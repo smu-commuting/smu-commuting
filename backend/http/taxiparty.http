@@ -5,7 +5,7 @@ Content-Type: application/json;charset=UTF-8
 {
   "placeId": 1,
   "headcount": 4,
-  "meetingDate": "2022-06-29T21:00"
+  "meetingDate": "2022-07-31T21:00"
 }
 
 ###
@@ -18,11 +18,15 @@ GET {{apiUrl}}/taxi/parties?placeId=1&date=2022-06-21&page=1&size=10
 Authorization: {{authorizationToken}}
 
 ###
+GET {{apiUrl}}/taxi/party/1
+Authorization: {{authorizationToken}}
+
+###
 GET {{apiUrl}}/taxi/my-parties
 Authorization: {{authorizationToken}}
 
 ###
-GET {{apiUrl}}/taxi/party/2/users
+GET {{apiUrl}}/taxi/party/1/users
 Authorization: {{authorizationToken}}
 
 ###

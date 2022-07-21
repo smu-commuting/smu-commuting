@@ -12,5 +12,5 @@ public interface TaxiGroupRepository extends JpaRepository<TaxiGroup, Long> {
 
     List<TaxiGroup> findAllByTaxiPartyId(Long taxiPartyId);
 
-    void deleteByUserId(Long loginUserId);
+    void deleteByTaxiPartyIdAndUserId(Long taxiPartyId, Long loginUserId);
 }

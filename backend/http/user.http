@@ -3,7 +3,7 @@ Authorization: {{authorizationToken}}
 Content-Type: application/json;charset=UTF-8
 
 {
-  "email": "test11@test.com",
+  "email": "test131@test.com",
   "studentId": 12345,
   "imageId": 1
 }
