@@ -1,4 +1,4 @@
-package com.api.smucommuting.taxichat.config;
+package com.api.smucommuting.chat.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

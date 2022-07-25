@@ -1,8 +1,8 @@
-package com.api.smucommuting.taxichat.controller;
+package com.api.smucommuting.chat.controller;
 
 import com.api.smucommuting.MvcTest;
-import com.api.smucommuting.taxichat.dto.TaxiMessageResponse;
-import com.api.smucommuting.taxichat.service.TaxiMessageService;
+import com.api.smucommuting.chat.dto.TaxiMessageResponse;
+import com.api.smucommuting.chat.service.TaxiMessageService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

@@ -5,7 +5,7 @@ import com.api.smucommuting.common.notification.FirebaseCloudMessageService;
 import com.api.smucommuting.taxi.domain.TaxiGroup;
 import com.api.smucommuting.taxi.domain.TaxiParty;
 import com.api.smucommuting.taxi.domain.repository.TaxiPartyRepository;
-import com.api.smucommuting.taxichat.domain.event.MessageSendEvent;
+import com.api.smucommuting.chat.domain.event.MessageSendEvent;
 import com.api.smucommuting.user.domain.UserVerificationCode;
 import com.api.smucommuting.user.service.integrate.UserVerifications;
 import lombok.RequiredArgsConstructor;

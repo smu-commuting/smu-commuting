@@ -1,9 +1,9 @@
-package com.api.smucommuting.taxichat.service;
+package com.api.smucommuting.chat.service;
 
-import com.api.smucommuting.taxichat.domain.TaxiMessage;
-import com.api.smucommuting.taxichat.domain.repository.TaxiMessageRepository;
-import com.api.smucommuting.taxichat.dto.TaxiMessageRequest;
-import com.api.smucommuting.taxichat.dto.TaxiMessageResponse;
+import com.api.smucommuting.chat.domain.TaxiMessage;
+import com.api.smucommuting.chat.domain.repository.TaxiMessageRepository;
+import com.api.smucommuting.chat.dto.TaxiMessageRequest;
+import com.api.smucommuting.chat.dto.TaxiMessageResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;

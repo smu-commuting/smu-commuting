@@ -1,6 +1,6 @@
-package com.api.smucommuting.taxichat.domain.repository;
+package com.api.smucommuting.chat.domain.repository;
 
-import com.api.smucommuting.taxichat.domain.TaxiMessage;
+import com.api.smucommuting.chat.domain.TaxiMessage;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 

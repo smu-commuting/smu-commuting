@@ -1,4 +1,4 @@
-package com.api.smucommuting.taxichat.domain.event;
+package com.api.smucommuting.chat.domain.event;
 
 import com.api.smucommuting.common.event.Event;
 

@@ -1,8 +1,8 @@
-package com.api.smucommuting.taxichat.controller;
+package com.api.smucommuting.chat.controller;
 
-import com.api.smucommuting.taxichat.dto.TaxiMessageRequest;
-import com.api.smucommuting.taxichat.dto.TaxiMessageResponse;
-import com.api.smucommuting.taxichat.service.TaxiMessageService;
+import com.api.smucommuting.chat.dto.TaxiMessageRequest;
+import com.api.smucommuting.chat.dto.TaxiMessageResponse;
+import com.api.smucommuting.chat.service.TaxiMessageService;
 import com.api.smucommuting.common.dto.ApiResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

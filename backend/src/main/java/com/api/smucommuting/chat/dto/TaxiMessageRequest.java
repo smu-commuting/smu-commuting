@@ -1,6 +1,6 @@
-package com.api.smucommuting.taxichat.dto;
+package com.api.smucommuting.chat.dto;
 
-import com.api.smucommuting.taxichat.domain.TaxiMessage;
+import com.api.smucommuting.chat.domain.TaxiMessage;
 import lombok.Getter;
 
 @Getter
