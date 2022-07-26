@@ -25,8 +25,7 @@ public class BusOpenChatMessage extends BaseTimeEntity {
     @Column(name = "content")
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bus_open_chat_id")
-    private BusOpenChat busOpenChat;
+    @Column(name = "bus_open_chat_id")
+    private Long busOpenChatId;
 
 }
