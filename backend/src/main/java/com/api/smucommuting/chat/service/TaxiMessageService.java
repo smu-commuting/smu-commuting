@@ -13,18 +13,17 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class TaxiMessageService {
     private final TaxiMessageRepository taxiMessageRepository;
 
+    @Transactional
     public TaxiMessageResponse save(TaxiMessageRequest request) {
         TaxiMessage taxiMessage = taxiMessageRepository.save(request.toEntity());
         taxiMessage.send();
         return TaxiMessageResponse.build(taxiMessage);
     }
 
-    @Transactional(readOnly = true)
     public List<TaxiMessageResponse> getMessages(Long roomId, int size, String lastMessageDate) {
         List<TaxiMessage> taxiMessages = taxiMessageRepository.findAllByTaxiPartyIdAndCreatedAtIsBeforeOrderByCreatedAtDesc(roomId, LocalDateTime.parse(lastMessageDate), PageRequest.of(0, size));
         return TaxiMessageResponse.listOf(taxiMessages);

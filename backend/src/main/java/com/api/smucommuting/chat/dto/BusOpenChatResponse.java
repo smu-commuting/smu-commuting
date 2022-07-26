@@ -31,8 +31,8 @@ public class BusOpenChatResponse {
                 .build();
     }
 
-    public static List<TaxiMessageResponse> listOf(List<TaxiMessage> taxiMessages) {
-        return taxiMessages.stream().map(TaxiMessageResponse::build).collect(Collectors.toList());
+    public static List<BusOpenChatResponse> listOf(List<BusOpenChatMessage> taxiMessages) {
+        return taxiMessages.stream().map(BusOpenChatResponse::build).collect(Collectors.toList());
     }
 }
 
