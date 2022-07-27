@@ -124,6 +124,9 @@ export {
     CHAT_ROOM_HEADER_INFO_REQUEST,
     CHAT_ROOM_HEADER_INFO_SUCCESS,
     CHAT_ROOM_HEADER_INFO_FAILURE,
+    USER_GET_BLOCKED_LIST_REQUEST,
+    USER_GET_BLOCKED_LIST_SUCCESS,
+    USER_GET_BLOCKED_LIST_FAILURE,
 } from './actions';
 
 export { default as prevent } from './prevent';
