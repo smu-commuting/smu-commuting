@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable default-case */
 /* eslint-disable no-unused-vars */
 import React, { useCallback, useEffect, useState } from 'react';
@@ -21,6 +22,10 @@ function TaxiCreateModal() {
     const [minute, setMinute] = useState();
     const [headCount, setHeadCount] = useState(0);
     const dispatch = useDispatch();
+    useEffect(() => {
+        document.body.style = `overflow: hidden`;
+        return () => (document.body.style = `overflow: auto`);
+    }, []);
     const onCancelClick = useCallback(() => {
         dispatch(taxiCreateModalClick());
     }, [dispatch]);

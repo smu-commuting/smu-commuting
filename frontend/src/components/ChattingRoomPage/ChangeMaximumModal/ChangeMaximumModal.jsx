@@ -1,5 +1,6 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable no-unused-vars */
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './ChangeMaximumModal.scss';
 import cancel from '../../../assets/ChattingPage/cancel.png';
@@ -12,6 +13,10 @@ function ChangeMaximumModal() {
     const dispatch = useDispatch();
     const { chattingRoomInfo } = useSelector(state => state.taxi);
     const [maximum, setMaximum] = useState(chattingRoomInfo.maximum);
+    useEffect(() => {
+        document.body.style = `overflow: hidden`;
+        return () => (document.body.style = `overflow: auto`);
+    }, []);
     const changeHeadCountClick = useCallback(() => {
         dispatch(changeMaximumModalClick());
     }, [dispatch]);

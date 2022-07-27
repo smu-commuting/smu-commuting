@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
@@ -19,6 +20,11 @@ function BusInfoModal() {
     const onModalClick = useCallback(() => {
         dispatch(isBusInfoModalClick());
     }, [dispatch]);
+
+    useEffect(() => {
+        document.body.style = `overflow: hidden`;
+        return () => (document.body.style = `overflow: auto`);
+    }, []);
 
     useEffect(() => {
         console.log(busData);
