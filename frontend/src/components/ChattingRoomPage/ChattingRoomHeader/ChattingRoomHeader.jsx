@@ -6,7 +6,10 @@ import './ChattingRoomHeader.scss';
 import Talk from '../../../assets/ChattingList/ChattingListHeader/talk.png';
 import getOut from '../../../assets/ChattingList/ChattingListPage/첫줄.png';
 import { deleteModal } from '../../../modules/reducers/taxi';
-import { changeMaximumModalClick } from '../../../modules/reducers/chat';
+import {
+    changeMaximumModalClick,
+    getChatRoomHeaderInfo,
+} from '../../../modules/reducers/chat';
 
 function ChattingRoomHeader() {
     const { id } = useParams();
@@ -15,6 +18,13 @@ function ChattingRoomHeader() {
     const { chattingRoomInfo, isDeleteAllowModal } = useSelector(
         state => state.taxi,
     );
+    const { chatRoomHeaderInfo, changeMaximumDone } = useSelector(
+        state => state.chat,
+    );
+
+    useEffect(() => {
+        dispatch(getChatRoomHeaderInfo(id));
+    }, [dispatch, changeMaximumDone]);
 
     useEffect(() => {
         if (isDeleteAllowModal) navigate(-1);
@@ -38,16 +48,16 @@ function ChattingRoomHeader() {
                 <img src={Talk} alt="talk" onClick={gotoBackPage} aria-hidden />
             </div>
             <div className="info">
-                <div>{`${chattingRoomInfo && chattingRoomInfo.placeName} ${
-                    chattingRoomInfo && chattingRoomInfo.time
+                <div>{`${chatRoomHeaderInfo && chatRoomHeaderInfo.place} ${
+                    chatRoomHeaderInfo && chatRoomHeaderInfo.time
                 }`}</div>
                 <div
                     className="people"
                     onClick={changeHeadCountClick}
                     aria-hidden
                 >
-                    {`${chattingRoomInfo && chattingRoomInfo.headcount} /
-                        ${chattingRoomInfo && chattingRoomInfo.maximum}`}
+                    {`${chatRoomHeaderInfo && chatRoomHeaderInfo.headcount} /
+                        ${chatRoomHeaderInfo && chatRoomHeaderInfo.maximum}`}
                 </div>
             </div>
             <div>

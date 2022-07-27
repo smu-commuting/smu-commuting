@@ -24,6 +24,9 @@ import {
     CHAT_ROOM_CHANGE_MAXIMUM_REQUEST,
     CHAT_ROOM_CHANGE_MAXIMUM_SUCCESS,
     CHAT_ROOM_CHANGE_MAXIMUM_FAILURE,
+    CHAT_ROOM_HEADER_INFO_REQUEST,
+    CHAT_ROOM_HEADER_INFO_SUCCESS,
+    CHAT_ROOM_HEADER_INFO_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -52,6 +55,12 @@ export const initialState = {
     changeMaximumLoading: false,
     changeMaximumDone: false,
     changeMaximumError: null,
+
+    // 채팅방 헤더 정보
+    chatRoomHeaderInfo: null,
+    chatRoomHeaderInfoLoading: false,
+    chatRoomHeaderInfoDone: false,
+    chatRoomHeaderInfoError: null,
 };
 
 export const getChatMessageList = data => {
@@ -97,6 +106,13 @@ export const changeMaximum = data => {
     return {
         type: CHAT_ROOM_CHANGE_MAXIMUM_REQUEST,
         data,
+    };
+};
+
+export const getChatRoomHeaderInfo = id => {
+    return {
+        type: CHAT_ROOM_HEADER_INFO_REQUEST,
+        id,
     };
 };
 
@@ -181,6 +197,21 @@ const reducer = (state = initialState, action) => {
             case CHAT_ROOM_CHANGE_MAXIMUM_FAILURE:
                 draft.changeMaximumLoading = false;
                 draft.changeMaximumError = action.error;
+                break;
+            case CHAT_ROOM_HEADER_INFO_REQUEST:
+                draft.chatRoomHeaderInfoLoading = true;
+                draft.chatRoomHeaderInfoDone = false;
+                draft.chatRoomHeaderInfoError = null;
+                break;
+            case CHAT_ROOM_HEADER_INFO_SUCCESS:
+                draft.chatRoomHeaderInfoLoading = false;
+                draft.chatRoomHeaderInfoDone = true;
+                draft.chatRoomHeaderInfo = action.data;
+                console.log('채팅방 헤더 정보 로드 성공', action.data);
+                break;
+            case CHAT_ROOM_HEADER_INFO_FAILURE:
+                draft.chatRoomHeaderInfoLoading = false;
+                draft.chatRoomHeaderInfoError = action.error;
                 break;
             default:
                 break;
