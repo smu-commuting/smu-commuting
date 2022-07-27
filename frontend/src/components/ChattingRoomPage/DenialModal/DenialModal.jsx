@@ -14,9 +14,11 @@ import {
     getOutPeopleListRequest,
     getPeopleListRequest,
 } from '../../../modules/reducers/chat';
+import { blockUserApi, unBlockUserApi } from '../../../utils/blockApi';
 
 function DenialModal() {
     const { id } = useParams();
+    const { me } = useSelector(state => state.user);
     const { getPeopleList, getOutPeopleList } = useSelector(
         state => state.chat,
     );
@@ -32,9 +34,23 @@ function DenialModal() {
         dispatch(getPeopleListRequest(id));
         dispatch(getOutPeopleListRequest(id));
     }, [dispatch]);
+
     const denialModalClickHandler = useCallback(() => {
         dispatch(denialModalClick());
     }, [dispatch]);
+
+    const blockUserHandler = (type, blockUserId) => {
+        blockUserApi(blockUserId).then(() => {
+            if (type === 'in') dispatch(getPeopleListRequest(id));
+            else dispatch(getOutPeopleListRequest(id));
+        });
+    };
+    const deleteBlockUserHandler = (type, blockUserId) => {
+        unBlockUserApi(blockUserId).then(() => {
+            if (type === 'in') dispatch(getPeopleListRequest(id));
+            else dispatch(getOutPeopleListRequest(id));
+        });
+    };
 
     return (
         <div className="denialmodal-wrapper">
@@ -84,14 +100,31 @@ function DenialModal() {
                                 {getPeopleList.map(people => (
                                     <li key={people.studentId}>
                                         <p>{people.studentId}</p>
-                                        <button
-                                            type="button"
-                                            onClick={() =>
-                                                console.log(people.userId)
-                                            }
-                                        >
-                                            거부
-                                        </button>
+                                        {people.isBlocked ? (
+                                            <button
+                                                type="button"
+                                                onClick={() => {
+                                                    deleteBlockUserHandler(
+                                                        'in',
+                                                        people.userId,
+                                                    );
+                                                }}
+                                            >
+                                                해제
+                                            </button>
+                                        ) : (
+                                            <button
+                                                type="button"
+                                                onClick={() => {
+                                                    blockUserHandler(
+                                                        'in',
+                                                        people.userId,
+                                                    );
+                                                }}
+                                            >
+                                                거부
+                                            </button>
+                                        )}
                                     </li>
                                 ))}
                                 <div className="notice-wrapper">
@@ -113,14 +146,31 @@ function DenialModal() {
                             {getOutPeopleList.map(people => (
                                 <li key={people.studentId}>
                                     <p>{people.studentId}</p>
-                                    <button
-                                        type="button"
-                                        onClick={() =>
-                                            console.log(people.userId)
-                                        }
-                                    >
-                                        거부
-                                    </button>
+                                    {people.isBlocked ? (
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                deleteBlockUserHandler(
+                                                    'out',
+                                                    people.userId,
+                                                );
+                                            }}
+                                        >
+                                            해제
+                                        </button>
+                                    ) : (
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                blockUserHandler(
+                                                    'out',
+                                                    people.userId,
+                                                );
+                                            }}
+                                        >
+                                            거부
+                                        </button>
+                                    )}
                                 </li>
                             ))}
                             <div className="notice-wrapper">
