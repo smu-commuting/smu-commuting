@@ -1,10 +1,9 @@
 @import '../../styles/utils.scss';
 
 .refusaltaxisharepage-wrapper {
-    padding: 4.6rem 3.1rem;
+    padding: 2rem 3.1rem;
     .refusaltaxisharepage-header {
         display: flex;
-        flex-direction: row;
         align-items: center;
         justify-content: space-around;
         .img {
@@ -20,10 +19,29 @@
             @include font-face(NotoSansKR-Regular, 2.5rem, 2.5rem, #292733);
         }
     }
+
+    .no-list-wrapper {
+        height: 75vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        p{
+            text-align: center;
+            font-family: 'NotoSansKR-Bold';
+            font-size: 1.3rem;
+            color: #A19FAD;
+        }
+    }
+
+    .headcount-text {
+        padding-top: 5rem;
+        text-align: left;
+        @include font-face(NotoSansKR-Regular, 1.2rem, 2.5rem, #a19fad);
+    }
     .refusaltaxisharepage-content {
         display: flex;
         flex-direction: column;
-        padding-top: 5rem;
+        padding-top: 2.5rem;
         div {
             padding-bottom: 2rem;
             text-align: left;
@@ -35,21 +53,21 @@
             border-bottom: 0.063rem solid #a19fad;
             padding-bottom: 0;
             justify-content: space-around;
+            align-items: center;
+            padding: 0 1rem;
             p {
-                margin-left: 1rem;
-                margin-top: 0.5rem;
                 flex: 1;
-                //padding-right: 20rem;
-                @include font-face(NotoSansKR-Regular, 1.3rem, 2.5rem, #000000);
+                font-family: 'NotoSansKR-Regular';
+                font-size: 1.5rem;
             }
             button {
-                margin-right: 1rem;
-                width: 6rem;
-                height: 3rem;
+                padding: 0.5rem 2rem;
+                border-radius: 1.2rem;
                 background-color: #f1f1e6;
                 text-align: center;
                 font-weight: bold;
-                @include font-face(NotoSansKR-Regular, 1.3rem, 2.5rem, #000000);
+                font-family: 'NotoSansKR-Regular';
+                font-size: 1.3rem;
             }
         }
     }

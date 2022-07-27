@@ -11,8 +11,8 @@ import {
 
 function ChangeMaximumModal() {
     const dispatch = useDispatch();
-    const { chattingRoomInfo } = useSelector(state => state.taxi);
-    const [maximum, setMaximum] = useState(chattingRoomInfo.maximum);
+    const { chatRoomHeaderInfo } = useSelector(state => state.chat);
+    const [maximum, setMaximum] = useState(chatRoomHeaderInfo.maximum);
     useEffect(() => {
         document.body.style = `overflow: hidden`;
         return () => (document.body.style = `overflow: auto`);
@@ -22,10 +22,9 @@ function ChangeMaximumModal() {
     }, [dispatch]);
     const onChangeSubmit = useCallback(() => {
         const data = {
-            id: chattingRoomInfo.taxiPartyId,
+            id: chatRoomHeaderInfo.taxiPartyId,
             maximum,
         };
-        console.log(data);
         dispatch(changeMaximum(data));
     }, [maximum]);
     return (

@@ -45,3 +45,11 @@ export const updateChatRoomMaximunHeadApi = async dataObj => {
         data,
     );
 };
+
+// 택시 채팅방에 나간 유저 목록 조회
+export const getChatRoomHeaderInfoApi = async id => {
+    console.log(id);
+    return await withAuthInstance.get(
+        `${process.env.REACT_APP_API_URL}${API_TAXI}party/${id}`,
+    );
+};

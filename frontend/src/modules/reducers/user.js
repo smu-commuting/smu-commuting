@@ -23,6 +23,9 @@ import {
     USER_GET_PROFILE_IMG_LIST_REQUEST,
     USER_GET_PROFILE_IMG_LIST_SUCCESS,
     USER_GET_PROFILE_IMG_LIST_FAILURE,
+    USER_GET_BLOCKED_LIST_REQUEST,
+    USER_GET_BLOCKED_LIST_SUCCESS,
+    USER_GET_BLOCKED_LIST_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -51,6 +54,11 @@ export const initialState = {
     profileImgListLoading: false,
     profileImgListDone: false,
     profileImgListError: null,
+
+    blockedUserList: [],
+    blockedUserListLoading: false,
+    blockedUserListDone: false,
+    blockedUserListFalse: null,
 };
 
 export const loginRequest = data => {
@@ -95,6 +103,12 @@ export const getUserInfo = () => {
 export const getProfileImgList = () => {
     return {
         type: USER_GET_PROFILE_IMG_LIST_REQUEST,
+    };
+};
+
+export const getBlockedUserList = () => {
+    return {
+        type: USER_GET_BLOCKED_LIST_REQUEST,
     };
 };
 
@@ -192,6 +206,21 @@ const reducer = (state = initialState, action) => {
             case USER_GET_PROFILE_IMG_LIST_FAILURE:
                 draft.profileImgListLoading = false;
                 draft.profileImgListError = action.error;
+                break;
+            case USER_GET_BLOCKED_LIST_REQUEST:
+                draft.blockedUserListLoading = true;
+                draft.blockedUserListDone = false;
+                draft.blockedUserListError = null;
+                break;
+            case USER_GET_BLOCKED_LIST_SUCCESS:
+                draft.blockedUserListLoading = false;
+                draft.blockedUserListDone = true;
+                draft.blockedUserList = action.data;
+                console.log('차단 리스트', action.data);
+                break;
+            case USER_GET_BLOCKED_LIST_FAILURE:
+                draft.blockedUserListLoading = false;
+                draft.blockedUserListError = action.error;
                 break;
             default:
                 break;
