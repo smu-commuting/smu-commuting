@@ -7,6 +7,11 @@ function SenderChatBox({ id, content, senderId, createdTime }) {
     return (
         <div className="senderchatbox-wrapper">
             <p className="content">{content}</p>
+            <div className="time">
+                <p>{`${createdTime.split('T')[1].split(':')[0]}:${
+                    createdTime.split('T')[1].split(':')[1]
+                }`}</p>
+            </div>
         </div>
     );
 }

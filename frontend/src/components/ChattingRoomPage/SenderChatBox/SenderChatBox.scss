@@ -14,6 +14,14 @@
         border-radius: 1rem;
         @include font-face('NotoSansKR-Medium', 1.3rem, 0, black);
     }
+    .time {
+        font-family: 'NotoSansKR-Medium';
+        font-size: 1rem;
+        display: flex;
+        align-items: flex-end;
+        margin-bottom: -0.5rem;
+        margin-left: 1rem;
+    }
 
     .content:after {
         content: '';

@@ -4,6 +4,14 @@
     display: flex;
     justify-content: end;
     padding-right: 2.5rem;
+    .time {
+        font-family: 'NotoSansKR-Medium';
+        font-size: 1rem;
+        display: flex;
+        align-items: flex-end;
+        margin-bottom: 1rem;
+        margin-right: 1rem;
+    }
     .content {
         position: relative;
         padding: 1.5rem;
