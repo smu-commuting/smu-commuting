@@ -127,6 +127,9 @@ export {
     USER_GET_BLOCKED_LIST_REQUEST,
     USER_GET_BLOCKED_LIST_SUCCESS,
     USER_GET_BLOCKED_LIST_FAILURE,
+    CHAT_BUS_ROOM_MESSAGE_REQUEST,
+    CHAT_BUS_ROOM_MESSAGE_SUCCESS,
+    CHAT_BUS_ROOM_MESSAGE_FAILURE,
 } from './actions';
 
 export { default as prevent } from './prevent';

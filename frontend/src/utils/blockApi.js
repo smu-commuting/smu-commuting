@@ -10,14 +10,12 @@ export const blockUserApi = async id => {
     const data = {
         blockUserId: id,
     };
-    console.log(`${process.env.REACT_APP_API_URL}${API_BLOCK}user`, data);
     return await withAuthInstance.post(
         `${process.env.REACT_APP_API_URL}${API_BLOCK}user`,
         data,
     );
 };
 export const unBlockUserApi = async id => {
-    console.log(`${process.env.REACT_APP_API_URL}${API_BLOCK}user/${id}`);
     return await withAuthInstance.delete(
         `${process.env.REACT_APP_API_URL}${API_BLOCK}user/${id}`,
     );
