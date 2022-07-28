@@ -46,7 +46,7 @@ function ChattingListPage() {
     );
     return (
         <ul className="chattinglist-wrapper">
-            {myTaxiParties.length !== 0 ? (
+            {myTaxiParties && myTaxiParties.length !== 0 ? (
                 myTaxiParties.map(myTaxiParty => {
                     return (
                         <li
@@ -71,11 +71,17 @@ function ChattingListPage() {
                                     alt="스뭉이 임시"
                                 />
                             </div>
-                            <div>{myTaxiParty.date}</div>
-                            <div>{myTaxiParty.place}</div>
-                            <div>{myTaxiParty.time}</div>
+                            <div>{myTaxiParty && myTaxiParty.date}</div>
                             <div>
-                                ({myTaxiParty.headcount}/{myTaxiParty.maximum})
+                                {myTaxiParty &&
+                                myTaxiParty.place === '서울여자간호대학교'
+                                    ? '간호대'
+                                    : myTaxiParty.place}
+                            </div>
+                            <div>{myTaxiParty && myTaxiParty.time}</div>
+                            <div>
+                                ({myTaxiParty && myTaxiParty.headcount}/
+                                {myTaxiParty && myTaxiParty.maximum})
                             </div>
                             <div
                                 onClick={prevent(() => {
