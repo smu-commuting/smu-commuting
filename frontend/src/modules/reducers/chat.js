@@ -27,6 +27,9 @@ import {
     CHAT_ROOM_HEADER_INFO_REQUEST,
     CHAT_ROOM_HEADER_INFO_SUCCESS,
     CHAT_ROOM_HEADER_INFO_FAILURE,
+    CHAT_BUS_ROOM_MESSAGE_REQUEST,
+    CHAT_BUS_ROOM_MESSAGE_SUCCESS,
+    CHAT_BUS_ROOM_MESSAGE_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -61,6 +64,13 @@ export const initialState = {
     chatRoomHeaderInfoLoading: false,
     chatRoomHeaderInfoDone: false,
     chatRoomHeaderInfoError: null,
+
+    // 오픈채팅방 메세지 리스트
+    busMessageList: [],
+    busLoadEnd: false,
+    busMessageListLoading: false,
+    busMessageListDone: false,
+    busMessageListError: null,
 };
 
 export const getChatMessageList = data => {
@@ -116,6 +126,13 @@ export const getChatRoomHeaderInfo = id => {
     };
 };
 
+export const getBusMessageList = data => {
+    return {
+        type: CHAT_BUS_ROOM_MESSAGE_REQUEST,
+        data,
+    };
+};
+
 const reducer = (state = initialState, action) => {
     return produce(state, draft => {
         switch (action.type) {
@@ -136,6 +153,24 @@ const reducer = (state = initialState, action) => {
             case CHAT_ROOM_MESSAGE_FAILURE:
                 draft.chatMessageListLoading = false;
                 draft.chatMessageListError = action.err;
+                break;
+            case CHAT_BUS_ROOM_MESSAGE_REQUEST:
+                draft.busMessageListLoading = true;
+                draft.busMessageListDone = false;
+                draft.busMessageListError = null;
+                break;
+            case CHAT_BUS_ROOM_MESSAGE_SUCCESS:
+                draft.busMessageListLoading = false;
+                draft.busMessageListDone = true;
+                draft.busMessageListError = null;
+                draft.busMessageList = action.data.data;
+                draft.busLoadEnd = action.data.data.length === 0;
+                // console.log('success', action.data.data);
+                // console.log('draft', draft.chatMessageList);
+                break;
+            case CHAT_BUS_ROOM_MESSAGE_FAILURE:
+                draft.busMessageListLoading = false;
+                draft.busMessageListError = action.err;
                 break;
             case CHAT_ROOM_DELETE_MESSAGE_REQUEST:
                 break;

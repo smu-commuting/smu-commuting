@@ -3,8 +3,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import './ChattingRoomHeader.scss';
-import Talk from '../../../assets/ChattingList/ChattingListHeader/talk.png';
-import getOut from '../../../assets/ChattingList/ChattingListPage/첫줄.png';
+import TalkIcon from '../../../assets/ChattingPage/chatting-icon.png';
+import ExitIcon from '../../../assets/ChattingPage/exit-icon.png';
 import { deleteModal } from '../../../modules/reducers/taxi';
 import {
     changeMaximumModalClick,
@@ -45,24 +45,32 @@ function ChattingRoomHeader() {
     return (
         <div className="chattingroomheader-wrapper">
             <div>
-                <img src={Talk} alt="talk" onClick={gotoBackPage} aria-hidden />
-            </div>
-            <div className="info">
-                <div>{`${chatRoomHeaderInfo && chatRoomHeaderInfo.place} ${
-                    chatRoomHeaderInfo && chatRoomHeaderInfo.time
-                }`}</div>
-                <div
-                    className="people"
-                    onClick={changeHeadCountClick}
+                <img
+                    src={TalkIcon}
+                    alt="talk"
+                    onClick={gotoBackPage}
                     aria-hidden
-                >
+                />
+            </div>
+            <div
+                className="room-info"
+                onClick={changeHeadCountClick}
+                aria-hidden
+            >
+                <div className="meet-time">
+                    {chatRoomHeaderInfo && chatRoomHeaderInfo.time}
+                </div>
+                <div className="meet-place">
+                    <p>{chatRoomHeaderInfo && chatRoomHeaderInfo.place}</p>
+                </div>
+                <div className="meet-people">
                     {`${chatRoomHeaderInfo && chatRoomHeaderInfo.headcount} /
                         ${chatRoomHeaderInfo && chatRoomHeaderInfo.maximum}`}
                 </div>
             </div>
             <div>
                 <img
-                    src={getOut}
+                    src={ExitIcon}
                     alt="out"
                     onClick={onDeleteClick}
                     aria-hidden

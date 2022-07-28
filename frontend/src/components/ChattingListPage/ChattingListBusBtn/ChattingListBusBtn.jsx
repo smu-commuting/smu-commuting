@@ -6,10 +6,10 @@ import './ChattingListBusBtn.scss';
 function ChattingListBusBtn() {
     const navigate = useNavigate();
     const gotoChatroom7016 = useCallback(() => {
-        navigate('/openchat/7016');
+        navigate('/openchat/1');
     }, []);
     const gotoChatroom08 = useCallback(() => {
-        navigate('/openchat/08');
+        navigate('/openchat/2');
     }, []);
     return (
         <div className="chattinglistbusbtn-wrapper">
