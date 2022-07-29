@@ -30,14 +30,15 @@ function TaxiToChatModal() {
     }, [dispatch]);
 
     const onAgreeClick = useCallback(async () => {
-        const result = await taxiPartyEnterApi(chattingRoomInfo.taxiPartyId);
-        dispatch(taxiPartyEnter());
-        if (result.data.status === 200) {
-            dispatch(taxiPartyEnter());
-            navigate(`/chatroom/${chattingRoomInfo.taxiPartyId}`);
-        } else {
-            dispatch(taxiPartyEnter(result.response.data.error.info));
-        }
+        taxiPartyEnterApi(chattingRoomInfo.taxiPartyId)
+            .then(res => {
+                dispatch(taxiPartyEnter());
+                navigate(`/chatroom/${chattingRoomInfo.taxiPartyId}`);
+            })
+            .catch(err => {
+                dispatch(taxiPartyEnter(err));
+                // result.response.data.error.info
+            });
     }, []);
 
     return (
