@@ -19,7 +19,7 @@ function TaxiClickModal() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { taxiMeetPlaceList } = useSelector(state => state.taxi);
-    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(new Date());
     const [yearLists, setYearLists] = useState([]);
     const [year, setYear] = useState();
     const [month, setMonth] = useState();
