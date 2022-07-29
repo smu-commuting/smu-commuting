@@ -15,7 +15,7 @@ import TimePick from '../TimePick/TimePick';
 
 function TaxiCreateModal() {
     const { taxiPageInfo } = useSelector(state => state.taxi);
-    const [selectedTime, setSelectedTime] = useState(new Date());
+    const [selectedTime, setSelectedTime] = useState(null);
     const [ampm, setAmpm] = useState();
     const [hour, setHour] = useState(
         new Date().getHours() > 12
