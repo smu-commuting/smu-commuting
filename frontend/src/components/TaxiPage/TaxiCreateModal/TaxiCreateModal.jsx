@@ -41,6 +41,7 @@ function TaxiCreateModal() {
 
     const onCreateTaxiParty = () => {
         const time = dayjs(selectedTime).format('HH:mm');
+        console.log(time);
         // let tempHour;
         // if (ampm === 'PM') {
         //     tempHour = hour + 12;

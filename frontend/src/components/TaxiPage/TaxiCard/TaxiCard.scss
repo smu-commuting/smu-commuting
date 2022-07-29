@@ -20,9 +20,24 @@
 .taxicard-soon-end-wrapper {
     @extend %taxicard-wrapper;
     background-color: #1a2962;
+    animation-name: soon-end;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
 }
 
 .taxicard-end-wrapper {
     @extend %taxicard-wrapper;
-    display: none;
+    background-color: coral;
+}
+
+@keyframes soon-end {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
