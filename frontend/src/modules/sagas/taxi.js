@@ -41,9 +41,6 @@ import {
     TAXI_PARTY_LIST_DELETE_REQUEST,
     TAXI_PARTY_LIST_DELETE_SUCCESS,
     TAXI_PARTY_LIST_DELETE_FAILURE,
-    TAXI_LIST_TO_CHAT_INFO_REQUEST,
-    TAXI_LIST_TO_CHAT_INFO_SUCCESS,
-    TAXI_LIST_TO_CHAT_INFO_FAILURE,
     CHAT_ROOM_CHANGE_MAXIMUM_REQUEST,
     CHAT_ROOM_CHANGE_MAXIMUM_SUCCESS,
     CHAT_ROOM_CHANGE_MAXIMUM_FAILURE,
@@ -247,19 +244,6 @@ function* taxiPartyListDelete() {
         });
     }
 }
-function* listToTaxiInfo(action) {
-    console.log(action.data);
-    try {
-        yield put({
-            type: TAXI_LIST_TO_CHAT_INFO_SUCCESS,
-            data: action.data,
-        });
-    } catch (err) {
-        yield put({
-            type: TAXI_LIST_TO_CHAT_INFO_FAILURE,
-        });
-    }
-}
 
 function* watchTaxiRoomDeleteModal() {
     yield takeLatest(TAXI_ROOM_DELETE_MODAL_REQUEST, taxiRoomDeleteModal);
@@ -312,9 +296,6 @@ function* watchSecondModalClose() {
 function* watchTaxiPartyListDelete() {
     yield takeLatest(TAXI_PARTY_LIST_DELETE_REQUEST, taxiPartyListDelete);
 }
-function* watchListToTaxiInfo() {
-    yield takeLatest(TAXI_LIST_TO_CHAT_INFO_REQUEST, listToTaxiInfo);
-}
 export default function* taxiSaga() {
     yield all([
         fork(watchTaxiPartiesList),
@@ -330,6 +311,5 @@ export default function* taxiSaga() {
         fork(watchSecondModalClose),
         fork(watchTaxiRoomDeleteModal),
         fork(watchTaxiPartyListDelete),
-        fork(watchListToTaxiInfo),
     ]);
 }

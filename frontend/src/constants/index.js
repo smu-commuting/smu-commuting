@@ -147,4 +147,4 @@ export {
     SeoulWomanNurseUniv,
 } from './BUS_NUM';
 
-export { day, monthDay, hoursArr, minutesArr } from './dayData';
+export { hoursArr, minutesArr } from './dayData';

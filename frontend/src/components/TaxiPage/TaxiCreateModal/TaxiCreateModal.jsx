@@ -3,6 +3,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import dayjs from 'dayjs';
 import {
     taxiCreateModalClick,
     taxiPartyCreate,
@@ -10,9 +11,11 @@ import {
 import './TaxiCreateModal.scss';
 import cancel from '../../../assets/TaxiPage/cancel.png';
 import { hoursArr, minutesArr } from '../../../constants';
+import TimePick from '../TimePick/TimePick';
 
 function TaxiCreateModal() {
     const { taxiPageInfo } = useSelector(state => state.taxi);
+    const [selectedTime, setSelectedTime] = useState(null);
     const [ampm, setAmpm] = useState();
     const [hour, setHour] = useState(
         new Date().getHours() > 12
@@ -37,16 +40,20 @@ function TaxiCreateModal() {
     }, []);
 
     const onCreateTaxiParty = () => {
-        let tempHour;
-        if (ampm === 'PM') {
-            tempHour = hour + 12;
-        } else if (ampm === 'AM') {
-            if (hour === 12) tempHour = 0;
-            else tempHour = hour;
+        const time = dayjs(selectedTime).format('HH:mm');
+        // let tempHour;
+        // if (ampm === 'PM') {
+        //     tempHour = hour + 12;
+        // } else if (ampm === 'AM') {
+        //     if (hour === 12) tempHour = 0;
+        //     else tempHour = hour;
+        // }
+
+        const when = `${taxiPageInfo.when}T${time}`;
+        if (time === 'Invalid Date') {
+            alert('탑승 시간을 선택해주세요.');
+            return;
         }
-        const when = `${taxiPageInfo.when}T${
-            tempHour >= 10 ? tempHour : `0${tempHour}`
-        }:${minute >= 10 ? minute : `0${minute}`}`;
         if (headCount === 0) {
             alert('인원수를 설정해주세요');
             return;
@@ -75,7 +82,11 @@ function TaxiCreateModal() {
                     <p className="modal-text">
                         가장 먼저 택시 인원을 <br /> 모집해보세요!
                     </p>
-                    <div className="time-wrapper">
+                    <TimePick
+                        selectedTime={selectedTime}
+                        setSelectedTime={setSelectedTime}
+                    />
+                    {/* <div className="time-wrapper">
                         <div className="am-pm-wrapper">
                             <div className="center-align">
                                 <p
@@ -140,7 +151,7 @@ function TaxiCreateModal() {
                                 })}
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="headcount-wrapper">
                         <div
                             className={

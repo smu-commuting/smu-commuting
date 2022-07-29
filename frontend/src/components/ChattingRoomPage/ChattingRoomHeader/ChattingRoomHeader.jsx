@@ -15,9 +15,7 @@ function ChattingRoomHeader() {
     const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { chattingRoomInfo, isDeleteAllowModal } = useSelector(
-        state => state.taxi,
-    );
+    const { isDeleteAllowModal } = useSelector(state => state.taxi);
     const { chatRoomHeaderInfo, changeMaximumDone } = useSelector(
         state => state.chat,
     );
@@ -35,8 +33,8 @@ function ChattingRoomHeader() {
     }, []);
 
     const onDeleteClick = useCallback(() => {
-        dispatch(deleteModal(chattingRoomInfo));
-    }, [chattingRoomInfo]);
+        dispatch(deleteModal(chatRoomHeaderInfo));
+    }, [chatRoomHeaderInfo]);
 
     const changeHeadCountClick = useCallback(() => {
         dispatch(changeMaximumModalClick());
@@ -44,7 +42,7 @@ function ChattingRoomHeader() {
 
     return (
         <div className="chattingroomheader-wrapper">
-            <div>
+            <div className="back-icon">
                 <img
                     src={TalkIcon}
                     alt="talk"
@@ -58,17 +56,25 @@ function ChattingRoomHeader() {
                 aria-hidden
             >
                 <div className="meet-time">
-                    {chatRoomHeaderInfo && chatRoomHeaderInfo.time}
+                    <p>{chatRoomHeaderInfo && chatRoomHeaderInfo.time}</p>
                 </div>
                 <div className="meet-place">
-                    <p>{chatRoomHeaderInfo && chatRoomHeaderInfo.place}</p>
+                    {chatRoomHeaderInfo && (
+                        <p>
+                            {chatRoomHeaderInfo.place === '서울여자간호대학교'
+                                ? '간호대'
+                                : chatRoomHeaderInfo.place}
+                        </p>
+                    )}
                 </div>
                 <div className="meet-people">
-                    {`${chatRoomHeaderInfo && chatRoomHeaderInfo.headcount} /
-                        ${chatRoomHeaderInfo && chatRoomHeaderInfo.maximum}`}
+                    <p>{`${chatRoomHeaderInfo && chatRoomHeaderInfo.headcount} /
+                        ${
+                            chatRoomHeaderInfo && chatRoomHeaderInfo.maximum
+                        }`}</p>
                 </div>
             </div>
-            <div>
+            <div className="out-icon">
                 <img
                     src={ExitIcon}
                     alt="out"
