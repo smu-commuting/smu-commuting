@@ -50,22 +50,22 @@ function TaxiCreateModal() {
         //     else tempHour = hour;
         // }
 
-        // const when = `${taxiPageInfo.when}T${time}`;
-        // if (time === 'Invalid Date') {
-        //     alert('탑승 시간을 선택해주세요.');
-        //     return;
-        // }
-        // if (headCount === 0) {
-        //     alert('인원수를 설정해주세요');
-        //     return;
-        // }
-        // const data = {
-        //     placeId: taxiPageInfo.placeId,
-        //     headCount,
-        //     meetingDate: when,
-        // };
-        // dispatch(taxiPartyCreate(data));
-        // dispatch(taxiCreateModalClick());
+        const when = `${taxiPageInfo.when}T${time}`;
+        if (time === 'Invalid Date') {
+            alert('탑승 시간을 선택해주세요.');
+            return;
+        }
+        if (headCount === 0) {
+            alert('인원수를 설정해주세요');
+            return;
+        }
+        const data = {
+            placeId: taxiPageInfo.placeId,
+            headCount,
+            meetingDate: when,
+        };
+        dispatch(taxiPartyCreate(data));
+        dispatch(taxiCreateModalClick());
     };
 
     return (
