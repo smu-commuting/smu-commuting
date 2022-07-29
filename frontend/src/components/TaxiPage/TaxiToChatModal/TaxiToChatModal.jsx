@@ -32,12 +32,10 @@ function TaxiToChatModal() {
     const onAgreeClick = useCallback(async () => {
         taxiPartyEnterApi(chattingRoomInfo.taxiPartyId)
             .then(res => {
-                dispatch(taxiPartyEnter());
                 navigate(`/chatroom/${chattingRoomInfo.taxiPartyId}`);
             })
             .catch(err => {
-                dispatch(taxiPartyEnter(err));
-                // result.response.data.error.info
+                dispatch(taxiPartyEnter(err.response.data.error.info));
             });
     }, []);
 

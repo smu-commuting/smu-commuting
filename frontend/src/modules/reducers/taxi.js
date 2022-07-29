@@ -272,11 +272,9 @@ const reducer = (state = initialState, action) => {
             case TAXI_PARTY_ENTER_REQUEST:
                 break;
             case TAXI_PARTY_ENTER_SUCCESS:
-                console.log(action.data);
                 draft.isEnterChattingRoomModalOpen = false;
                 draft.isTaxiPartyEnterError = action.data && action.data;
-                draft.showErrorModal = action.data && true;
-                console.log(action.data);
+                draft.showErrorModal = true;
                 break;
             case TAXI_PARTY_ENTER_FAILURE:
                 break;
