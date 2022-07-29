@@ -181,13 +181,6 @@ export const taxiPartyListDelete = () => {
     };
 };
 
-export const listToTaxiInfo = data => {
-    return {
-        type: TAXI_LIST_TO_CHAT_INFO_REQUEST,
-        data,
-    };
-};
-
 const reducer = (state = initialState, action) => {
     return produce(state, draft => {
         switch (action.type) {
@@ -312,13 +305,6 @@ const reducer = (state = initialState, action) => {
                     !draft.isEnterChattingRoomModalOpen;
                 draft.chattingRoomInfo = action.data;
                 console.log('chattingRoomInfo', action.data);
-                break;
-            case TAXI_LIST_TO_CHAT_INFO_REQUEST:
-                break;
-            case TAXI_LIST_TO_CHAT_INFO_SUCCESS:
-                draft.chattingRoomInfo = action.data;
-                break;
-            case TAXI_LIST_TO_CHAT_INFO_FAILURE:
                 break;
             case TAXI_TO_CHAT_INFO_MODAL_FAILURE:
                 break;
