@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { initializeApp } from 'firebase/app';
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
+import { Toaster, toast } from 'react-hot-toast';
 import BusModal from '../components/BusPage/BusClickModal/BusClickModal';
 import TaxiModal from '../components/TaxiPage/TaxiClickModal/TaxiClickModal';
 import TaxiCreateModal from '../components/TaxiPage/TaxiCreateModal/TaxiCreateModal';
@@ -85,9 +86,11 @@ getToken(messaging, {
     });
 
 onMessage(messaging, payload => {
+    toast(payload.notification.body);
     console.log('Message received. ', payload);
     console.log('messaging. ', messaging);
 });
+
 function App() {
     const { isBusModalOpen, isTaxiModalOpen, isCommunityModalOpen } =
         useSelector(state => state.user);
@@ -128,6 +131,7 @@ function App() {
                             {isCommunityModalOpen && <CommunityModal />}
                             <Header />
                             <HomePage />
+                            <Toaster />
                         </>
                     }
                 />
@@ -139,6 +143,7 @@ function App() {
                             {isTaxiModalOpen && <TaxiModal />}
                             <Header />
                             <BusPage />
+                            <Toaster />
                         </>
                     }
                 />
@@ -158,6 +163,7 @@ function App() {
                             {showCreateErrorModal && <TaxiNotCreateModal />}
                             <Header />
                             <TaxiPage />
+                            <Toaster />
                         </>
                     }
                 />
@@ -173,18 +179,91 @@ function App() {
                             <ChattingListBusBtn />
                             <ChattingListPage />
                             <ChattingListFooter />
+                            <Toaster />
                         </>
                     }
                 />
-                <Route path="/refusal" element={<RefusalTaxiSharePage />} />
-                <Route path="/mypage" element={<MyPage />} />
-                <Route path="/updateprofile" element={<UpdateProfile />} />
-                <Route path="/inquiry" element={<InquiryPage />} />
-                <Route path="/withdrawal" element={<WithdrawalPage />} />
-                <Route path="/confirm" element={<WithdrawalConfirmPage />} />
-                <Route path="/manual" element={<ManualPage />} />
-                <Route path="/inquirydetail" element={<InquiryDetailPage />} />
-                <Route path="/inquirywrite" element={<InquiryWritePage />} />
+                <Route
+                    path="/refusal"
+                    element={
+                        <>
+                            <RefusalTaxiSharePage />
+                            <Toaster />
+                        </>
+                    }
+                />
+                <Route
+                    path="/mypage"
+                    element={
+                        <>
+                            <MyPage />
+                            <Toaster />
+                        </>
+                    }
+                />
+                <Route
+                    path="/updateprofile"
+                    element={
+                        <>
+                            <UpdateProfile />
+                            <Toaster />
+                        </>
+                    }
+                />
+                <Route
+                    path="/inquiry"
+                    element={
+                        <>
+                            <InquiryPage />
+                            <Toaster />
+                        </>
+                    }
+                />
+                <Route
+                    path="/withdrawal"
+                    element={
+                        <>
+                            <WithdrawalPage />
+                            <Toaster />
+                        </>
+                    }
+                />
+                <Route
+                    path="/confirm"
+                    element={
+                        <>
+                            <WithdrawalConfirmPage />
+                            <Toaster />
+                        </>
+                    }
+                />
+                <Route
+                    path="/manual"
+                    element={
+                        <>
+                            <ManualPage />
+                            <Toaster />
+                        </>
+                    }
+                />
+                <Route
+                    path="/inquirydetail"
+                    element={
+                        <>
+                            <InquiryDetailPage />
+                            <Toaster />
+                        </>
+                    }
+                />
+                <Route
+                    path="/inquirywrite"
+                    element={
+                        <>
+                            <InquiryWritePage />
+                            <Toaster />
+                        </>
+                    }
+                />
                 <Route
                     path="/chatroom/:id"
                     element={
@@ -205,6 +284,7 @@ function App() {
                         <>
                             <OpenChattingHeader />
                             <OpenChattingPage />
+                            <Toaster />
                         </>
                     }
                 />
@@ -214,6 +294,7 @@ function App() {
                         <>
                             {isCommunityModalOpen && <CommunityModal />}
                             <LostItemPage />
+                            <Toaster />
                         </>
                     }
                 />
@@ -235,15 +316,37 @@ function App() {
                             )}
                             <LostItemDetailPage />
                             <ReplyInputBox />
+                            <Toaster />
                         </>
                     }
                 />
-                <Route path="/lostitemwrite" element={<LostItemWritePage />} />
+                <Route
+                    path="/lostitemwrite"
+                    element={
+                        <>
+                            <LostItemWritePage />
+                            <Toaster />
+                        </>
+                    }
+                />
                 <Route
                     path="/lostitemedit/:id"
-                    element={<LostItemEditPage />}
+                    element={
+                        <>
+                            <LostItemEditPage />
+                            <Toaster />
+                        </>
+                    }
                 />
-                <Route path="/protest" element={<ProtestPage />} />
+                <Route
+                    path="/protest"
+                    element={
+                        <>
+                            <ProtestPage />
+                            <Toaster />
+                        </>
+                    }
+                />
                 {/* </Route> */}
             </Routes>
         </Router>

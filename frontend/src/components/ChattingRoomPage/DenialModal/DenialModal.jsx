@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable no-return-assign */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable consistent-return */
 /* eslint-disable no-useless-return */
@@ -13,21 +15,43 @@ import {
     getOutPeopleListRequest,
     getPeopleListRequest,
 } from '../../../modules/reducers/chat';
+import { blockUserApi, unBlockUserApi } from '../../../utils/blockApi';
 
 function DenialModal() {
     const { id } = useParams();
+    const { me } = useSelector(state => state.user);
     const { getPeopleList, getOutPeopleList } = useSelector(
         state => state.chat,
     );
     const [tabNumber, setTabNumber] = useState(0);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        document.body.style = `overflow: hidden`;
+        return () => (document.body.style = `overflow: auto`);
+    }, []);
+
     useEffect(() => {
         dispatch(getPeopleListRequest(id));
         dispatch(getOutPeopleListRequest(id));
     }, [dispatch]);
+
     const denialModalClickHandler = useCallback(() => {
         dispatch(denialModalClick());
     }, [dispatch]);
+
+    const blockUserHandler = (type, blockUserId) => {
+        blockUserApi(blockUserId).then(() => {
+            if (type === 'in') dispatch(getPeopleListRequest(id));
+            else dispatch(getOutPeopleListRequest(id));
+        });
+    };
+    const deleteBlockUserHandler = (type, blockUserId) => {
+        unBlockUserApi(blockUserId).then(() => {
+            if (type === 'in') dispatch(getPeopleListRequest(id));
+            else dispatch(getOutPeopleListRequest(id));
+        });
+    };
 
     return (
         <div className="denialmodal-wrapper">
@@ -74,19 +98,45 @@ function DenialModal() {
                             </div>
                         ) : (
                             <>
-                                {getPeopleList.map(people => (
-                                    <li key={people.studentId}>
-                                        <p>{people.studentId}</p>
-                                        <button
-                                            type="button"
-                                            onClick={() =>
-                                                console.log(people.userId)
-                                            }
-                                        >
-                                            거부
-                                        </button>
-                                    </li>
-                                ))}
+                                {getPeopleList.map(people => {
+                                    return (
+                                        <li key={people.studentId}>
+                                            <p>{people.studentId}</p>
+                                            {people.studentId ===
+                                            parseInt(me.studentId, 10) ? (
+                                                <div />
+                                            ) : people.isBlocked ? (
+                                                <div>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => {
+                                                            deleteBlockUserHandler(
+                                                                'in',
+                                                                people.userId,
+                                                            );
+                                                        }}
+                                                    >
+                                                        해제
+                                                    </button>
+                                                </div>
+                                            ) : (
+                                                <div>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => {
+                                                            blockUserHandler(
+                                                                'in',
+                                                                people.userId,
+                                                            );
+                                                        }}
+                                                    >
+                                                        거부
+                                                    </button>
+                                                </div>
+                                            )}
+                                        </li>
+                                    );
+                                })}
                                 <div className="notice-wrapper">
                                     <img src={denial} alt="스뭉" />
                                     <p className="notice-content">
@@ -103,19 +153,45 @@ function DenialModal() {
                         </div>
                     ) : (
                         <>
-                            {getOutPeopleList.map(people => (
-                                <li key={people.studentId}>
-                                    <p>{people.studentId}</p>
-                                    <button
-                                        type="button"
-                                        onClick={() =>
-                                            console.log(people.userId)
-                                        }
-                                    >
-                                        거부
-                                    </button>
-                                </li>
-                            ))}
+                            {getOutPeopleList.map(people => {
+                                return (
+                                    <li key={people.studentId}>
+                                        <p>{people.studentId}</p>
+                                        {people.studentId ===
+                                        parseInt(me.studentId, 10) ? (
+                                            <div />
+                                        ) : people.isBlocked ? (
+                                            <div>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => {
+                                                        deleteBlockUserHandler(
+                                                            'out',
+                                                            people.userId,
+                                                        );
+                                                    }}
+                                                >
+                                                    해제
+                                                </button>
+                                            </div>
+                                        ) : (
+                                            <div>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => {
+                                                        blockUserHandler(
+                                                            'out',
+                                                            people.userId,
+                                                        );
+                                                    }}
+                                                >
+                                                    거부
+                                                </button>
+                                            </div>
+                                        )}
+                                    </li>
+                                );
+                            })}
                             <div className="notice-wrapper">
                                 <img src={denial} alt="스뭉" />
                                 <p className="notice-content">

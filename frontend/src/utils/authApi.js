@@ -6,7 +6,7 @@ import axios from 'axios';
 import { API_URLS } from '../constants';
 import { withAuthInstance } from './common';
 
-const { API_USER, API_PROFILES } = API_URLS;
+const { API_USER, API_PROFILES, API_BLOCK } = API_URLS;
 
 export const fcmApi = async token => {
     const data = {
@@ -70,7 +70,7 @@ export const userInfoReadApi = () => {
 };
 
 // 내 정보 수정 API
-export const userInfoUpdateApi = id => {
+export const userInfoUpdateApi = async id => {
     console.log(
         '유저 정보 수정 API의 수정될 사진 id',
         id,
@@ -89,5 +89,12 @@ export const userInfoUpdateApi = id => {
 export const getProfileListApi = () => {
     return withAuthInstance.get(
         `${process.env.REACT_APP_API_URL}${API_PROFILES}`,
+    );
+};
+
+// 차단 유저 list 조회 API
+export const getBlockedUserApi = () => {
+    return withAuthInstance.get(
+        `${process.env.REACT_APP_API_URL}${API_BLOCK}users`,
     );
 };

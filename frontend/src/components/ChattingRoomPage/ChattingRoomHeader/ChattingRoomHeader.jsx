@@ -3,18 +3,26 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import './ChattingRoomHeader.scss';
-import Talk from '../../../assets/ChattingList/ChattingListHeader/talk.png';
-import getOut from '../../../assets/ChattingList/ChattingListPage/첫줄.png';
+import TalkIcon from '../../../assets/ChattingPage/chatting-icon.png';
+import ExitIcon from '../../../assets/ChattingPage/exit-icon.png';
 import { deleteModal } from '../../../modules/reducers/taxi';
-import { changeMaximumModalClick } from '../../../modules/reducers/chat';
+import {
+    changeMaximumModalClick,
+    getChatRoomHeaderInfo,
+} from '../../../modules/reducers/chat';
 
 function ChattingRoomHeader() {
     const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { chattingRoomInfo, isDeleteAllowModal } = useSelector(
-        state => state.taxi,
+    const { isDeleteAllowModal } = useSelector(state => state.taxi);
+    const { chatRoomHeaderInfo, changeMaximumDone } = useSelector(
+        state => state.chat,
     );
+
+    useEffect(() => {
+        dispatch(getChatRoomHeaderInfo(id));
+    }, [dispatch, changeMaximumDone]);
 
     useEffect(() => {
         if (isDeleteAllowModal) navigate(-1);
@@ -25,8 +33,8 @@ function ChattingRoomHeader() {
     }, []);
 
     const onDeleteClick = useCallback(() => {
-        dispatch(deleteModal(chattingRoomInfo));
-    }, [chattingRoomInfo]);
+        dispatch(deleteModal(chatRoomHeaderInfo));
+    }, [chatRoomHeaderInfo]);
 
     const changeHeadCountClick = useCallback(() => {
         dispatch(changeMaximumModalClick());
@@ -34,25 +42,41 @@ function ChattingRoomHeader() {
 
     return (
         <div className="chattingroomheader-wrapper">
-            <div>
-                <img src={Talk} alt="talk" onClick={gotoBackPage} aria-hidden />
-            </div>
-            <div className="info">
-                <div>{`${chattingRoomInfo && chattingRoomInfo.placeName} ${
-                    chattingRoomInfo && chattingRoomInfo.time
-                }`}</div>
-                <div
-                    className="people"
-                    onClick={changeHeadCountClick}
+            <div className="back-icon">
+                <img
+                    src={TalkIcon}
+                    alt="talk"
+                    onClick={gotoBackPage}
                     aria-hidden
-                >
-                    {`${chattingRoomInfo && chattingRoomInfo.headcount} /
-                        ${chattingRoomInfo && chattingRoomInfo.maximum}`}
+                />
+            </div>
+            <div
+                className="room-info"
+                onClick={changeHeadCountClick}
+                aria-hidden
+            >
+                <div className="meet-time">
+                    <p>{chatRoomHeaderInfo && chatRoomHeaderInfo.time}</p>
+                </div>
+                <div className="meet-place">
+                    {chatRoomHeaderInfo && (
+                        <p>
+                            {chatRoomHeaderInfo.place === '서울여자간호대학교'
+                                ? '간호대'
+                                : chatRoomHeaderInfo.place}
+                        </p>
+                    )}
+                </div>
+                <div className="meet-people">
+                    <p>{`${chatRoomHeaderInfo && chatRoomHeaderInfo.headcount} /
+                        ${
+                            chatRoomHeaderInfo && chatRoomHeaderInfo.maximum
+                        }`}</p>
                 </div>
             </div>
-            <div>
+            <div className="out-icon">
                 <img
-                    src={getOut}
+                    src={ExitIcon}
                     alt="out"
                     onClick={onDeleteClick}
                     aria-hidden

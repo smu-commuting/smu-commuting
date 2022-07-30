@@ -1,5 +1,6 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable no-unused-vars */
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './BusClickModal.scss';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +14,10 @@ function BusModal() {
     const { isBusInfoModalOpen } = useSelector(state => state.bus);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    useEffect(() => {
+        document.body.style = `overflow: hidden`;
+        return () => (document.body.style = `overflow: auto`);
+    }, []);
     const onCancelClick = useCallback(() => {
         dispatch(busModalClick());
     }, [dispatch]);

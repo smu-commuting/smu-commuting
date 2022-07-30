@@ -41,9 +41,6 @@ import {
     TAXI_PARTY_LIST_DELETE_REQUEST,
     TAXI_PARTY_LIST_DELETE_SUCCESS,
     TAXI_PARTY_LIST_DELETE_FAILURE,
-    TAXI_LIST_TO_CHAT_INFO_REQUEST,
-    TAXI_LIST_TO_CHAT_INFO_SUCCESS,
-    TAXI_LIST_TO_CHAT_INFO_FAILURE,
     CHAT_ROOM_CHANGE_MAXIMUM_REQUEST,
     CHAT_ROOM_CHANGE_MAXIMUM_SUCCESS,
     CHAT_ROOM_CHANGE_MAXIMUM_FAILURE,
@@ -194,19 +191,14 @@ function* taxiToChatModal(action) {
 }
 
 function* taxiPartyEnter(action) {
-    // console.log('saga 요청 이전 action', action);
     try {
-        console.log('참여', action);
-        // const result = yield call(taxiPartyEnterApi, action.id);
         yield put({
             type: TAXI_PARTY_ENTER_SUCCESS,
-            data: action.data,
+            data: action.errorMessage,
         });
     } catch (err) {
-        // console.log('saga', err);
         yield put({
             type: TAXI_PARTY_ENTER_FAILURE,
-            // error: err.response.data.error.info, // 모달에 띄워질 문구
         });
     }
 }
@@ -244,19 +236,6 @@ function* taxiPartyListDelete() {
     } catch (err) {
         yield put({
             type: TAXI_PARTY_LIST_DELETE_FAILURE,
-        });
-    }
-}
-function* listToTaxiInfo(action) {
-    console.log(action.data);
-    try {
-        yield put({
-            type: TAXI_LIST_TO_CHAT_INFO_SUCCESS,
-            data: action.data,
-        });
-    } catch (err) {
-        yield put({
-            type: TAXI_LIST_TO_CHAT_INFO_FAILURE,
         });
     }
 }
@@ -312,9 +291,6 @@ function* watchSecondModalClose() {
 function* watchTaxiPartyListDelete() {
     yield takeLatest(TAXI_PARTY_LIST_DELETE_REQUEST, taxiPartyListDelete);
 }
-function* watchListToTaxiInfo() {
-    yield takeLatest(TAXI_LIST_TO_CHAT_INFO_REQUEST, listToTaxiInfo);
-}
 export default function* taxiSaga() {
     yield all([
         fork(watchTaxiPartiesList),
@@ -330,6 +306,5 @@ export default function* taxiSaga() {
         fork(watchSecondModalClose),
         fork(watchTaxiRoomDeleteModal),
         fork(watchTaxiPartyListDelete),
-        fork(watchListToTaxiInfo),
     ]);
 }

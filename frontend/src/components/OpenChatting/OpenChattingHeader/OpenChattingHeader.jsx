@@ -12,7 +12,7 @@ function OpenChattingHeader() {
     return (
         <div className="openchattingheader-wrapper">
             <div />
-            {id === '7016' ? (
+            {id === '1' ? (
                 <div>7016 번 버스 채팅방</div>
             ) : (
                 <div>서대문 08번 버스 채팅방</div>

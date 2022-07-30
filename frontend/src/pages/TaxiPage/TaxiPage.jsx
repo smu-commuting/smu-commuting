@@ -127,8 +127,9 @@ function TaxiPage() {
                 >
                     <div>
                         <p>
-                            {month}월 {day}일 '{placeName}'
+                            {month}월 {day}일
                         </p>
+                        <p>'{placeName}'</p>
                         <p>택시 탑승 예정 시간</p>
                     </div>
                     <div>

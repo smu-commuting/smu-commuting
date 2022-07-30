@@ -23,6 +23,9 @@ import {
     USER_GET_PROFILE_IMG_LIST_REQUEST,
     USER_GET_PROFILE_IMG_LIST_SUCCESS,
     USER_GET_PROFILE_IMG_LIST_FAILURE,
+    USER_GET_BLOCKED_LIST_REQUEST,
+    USER_GET_BLOCKED_LIST_SUCCESS,
+    USER_GET_BLOCKED_LIST_FAILURE,
 } from '../../constants';
 import {
     userInfoReadApi,
@@ -30,6 +33,7 @@ import {
     getProfileListApi,
     signupApi,
 } from '../../utils';
+import { getBlockedUserApi } from '../../utils/authApi';
 
 function* login(action) {
     console.log('saga In action', action);
@@ -48,11 +52,9 @@ function* login(action) {
 
 function* signup(action) {
     try {
-        const result = yield call(signupApi, action.data);
-        console.log(result);
         yield put({
             type: USER_SIGN_UP_SUCCESS,
-            data: result.data,
+            data: action.data,
         });
     } catch (err) {
         yield put({
@@ -133,6 +135,22 @@ function* getProfileImgList() {
     }
 }
 
+function* getBlockedUserList() {
+    try {
+        const result = yield call(getBlockedUserApi);
+        console.log('saga - Blocked User List', result);
+        yield put({
+            type: USER_GET_BLOCKED_LIST_SUCCESS,
+            data: result.data.data,
+        });
+    } catch (err) {
+        yield put({
+            type: USER_GET_BLOCKED_LIST_FAILURE,
+            error: err,
+        });
+    }
+}
+
 function* watchLogin() {
     yield takeLatest(USER_LOG_IN_REQUEST, login);
 }
@@ -160,6 +178,9 @@ function* watchGetUserInfo() {
 function* watchGetProfileImgList() {
     yield takeLatest(USER_GET_PROFILE_IMG_LIST_REQUEST, getProfileImgList);
 }
+function* watchGetBlockedUserList() {
+    yield takeLatest(USER_GET_BLOCKED_LIST_REQUEST, getBlockedUserList);
+}
 
 export default function* userSaga() {
     yield all([
@@ -170,5 +191,6 @@ export default function* userSaga() {
         fork(watchCommunityModal),
         fork(watchGetUserInfo),
         fork(watchGetProfileImgList),
+        fork(watchGetBlockedUserList),
     ]);
 }

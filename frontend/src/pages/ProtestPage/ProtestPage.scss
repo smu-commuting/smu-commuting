@@ -1,7 +1,7 @@
 @import '../../styles/utils.scss';
 
 .protestpage-wrapper {
-    padding: 4.6rem 3.1rem;
+    padding: 2rem 3.1rem;
     .protestpage-header {
         display: flex;
         flex-direction: row;
@@ -26,7 +26,6 @@
         justify-content: space-around;
         align-items: center;
         img {
-
             flex: 1;
             align-items: center;
             margin-top: 10rem;
@@ -37,6 +36,7 @@
             flex: 1;
             display: block;
             text-align: center;
-            @include font-face(NotoSansKR-Regular, 1.5rem, 2.5rem, #292733);        }
+            @include font-face(NotoSansKR-Regular, 1.5rem, 2.5rem, #292733);
+        }
     }
 }

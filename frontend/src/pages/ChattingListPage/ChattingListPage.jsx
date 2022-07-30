@@ -1,19 +1,15 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './ChattingListPage.scss';
-import getOut from '../../assets/ChattingList/ChattingListPage/첫줄.png';
-import sumung from '../../assets/ChattingList/ChattingListPage/sample_sumung.png';
+import getOut from '../../assets/ChattingList/ChattingListPage/exit.png';
 import nonchat from '../../assets/ChattingList/ChattingListPage/non-chat.png';
 import { prevent } from '../../constants';
-import {
-    deleteModal,
-    getMyTaxiParties,
-    listToTaxiInfo,
-} from '../../modules/reducers/taxi';
+import { deleteModal, getMyTaxiParties } from '../../modules/reducers/taxi';
 import { getProfileImgList } from '../../modules/reducers/user';
+import { getChatRoomHeaderInfo } from '../../modules/reducers/chat';
 
 function ChattingListPage() {
     const dispatch = useDispatch();
@@ -31,29 +27,15 @@ function ChattingListPage() {
     const onDeleteClick = useCallback(() => {
         dispatch(deleteModal());
     }, []);
-    const chattingInfo = useCallback(
-        info => {
-            const data = {
-                taxiPartyId: info.chatRoomId,
-                placeName: info.place,
-                headcount: info.headcount,
-                maximum: info.maximum,
-                time: info.time,
-            };
-            dispatch(listToTaxiInfo(data));
-        },
-        [dispatch],
-    );
     return (
         <ul className="chattinglist-wrapper">
-            {myTaxiParties.length !== 0 ? (
+            {myTaxiParties && myTaxiParties.length !== 0 ? (
                 myTaxiParties.map(myTaxiParty => {
                     return (
                         <li
                             key={myTaxiParty.chatRoomId}
                             onClick={() => {
                                 onChatRoomEnter(myTaxiParty.chatRoomId);
-                                chattingInfo(myTaxiParty);
                             }}
                             aria-hidden
                         >
@@ -71,15 +53,25 @@ function ChattingListPage() {
                                     alt="스뭉이 임시"
                                 />
                             </div>
-                            <div>{myTaxiParty.date}</div>
-                            <div>{myTaxiParty.place}</div>
-                            <div>{myTaxiParty.time}</div>
+                            <div>{myTaxiParty && myTaxiParty.date}</div>
                             <div>
-                                ({myTaxiParty.headcount}/{myTaxiParty.maximum})
+                                {myTaxiParty &&
+                                myTaxiParty.place === '서울여자간호대학교'
+                                    ? '간호대'
+                                    : myTaxiParty.place}
+                            </div>
+                            <div>{myTaxiParty && myTaxiParty.time}</div>
+                            <div>
+                                ({myTaxiParty && myTaxiParty.headcount}/
+                                {myTaxiParty && myTaxiParty.maximum})
                             </div>
                             <div
                                 onClick={prevent(() => {
-                                    chattingInfo(myTaxiParty);
+                                    dispatch(
+                                        getChatRoomHeaderInfo(
+                                            myTaxiParty.chatRoomId,
+                                        ),
+                                    );
                                     onDeleteClick();
                                 })}
                                 aria-hidden

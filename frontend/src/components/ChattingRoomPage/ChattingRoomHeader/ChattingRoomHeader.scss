@@ -8,50 +8,65 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #eeeeee;
     background-color: #ffffff;
     z-index: 2;
-    div:nth-child(1) {
+    .back-icon {
         height: 80%;
         flex: 1;
         display: flex;
         align-items: center;
         justify-content: center;
-        img {
-            height: 100%;
-        }
     }
-    .info {
-        height: 80%;
-        flex: 3;
+    .room-info {
+        flex: 3.5;
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        background: #7b88f2;
-        border-radius: 1.2rem;
-        @include font-face('NotoSans-KR', 1.8rem, 0, #ffffff);
-        div:nth-child(1) {
-            flex: 3.5;
-            // background-color: white;
+        height: 100%;
+        .meet-time {
+            flex: 1.5;
+            height: 45%;
+            color: black;
+            background-color: #7b88f2;
+            color: white;
+            font-family: 'NotoSansKR-Medium';
+            font-size: 1.5rem;
+            margin-right: -1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .people {
-            flex: 1;
-            color: #7b88f2;
+        .meet-place {
+            flex: 2;
+            height: 100%;
+            border-radius: 5rem;
+            font-family: 'NotoSansKR-Medium';
+            font-size: 2rem;
             background-color: white;
-            padding: 1.2rem;
-            border-radius: 1.2rem;
-            text-align: center;
-            margin-right: 1.2rem;
+            border: 1rem solid #7b88f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+        .meet-people {
+            flex: 1.5;
+            height: 45%;
+            background-color: #7b88f2;
+            color: white;
+            font-family: 'NotoSansKR-Medium';
+            font-size: 1.5rem;
+            margin-left: -1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
-    div:nth-child(3) {
+    .out-icon {
         height: 80%;
         flex: 1;
         display: flex;
         align-items: center;
         justify-content: center;
-        img {
-            height: 100%;
-        }
     }
 }

@@ -23,9 +23,17 @@ import {
     CHAT_ROOM_CHANGE_MAXIMUM_REQUEST,
     CHAT_ROOM_CHANGE_MAXIMUM_SUCCESS,
     CHAT_ROOM_CHANGE_MAXIMUM_FAILURE,
+    CHAT_ROOM_HEADER_INFO_REQUEST,
+    CHAT_ROOM_HEADER_INFO_SUCCESS,
+    CHAT_ROOM_HEADER_INFO_FAILURE,
+    CHAT_BUS_ROOM_MESSAGE_REQUEST,
+    CHAT_BUS_ROOM_MESSAGE_SUCCESS,
+    CHAT_BUS_ROOM_MESSAGE_FAILURE,
 } from '../../constants';
 import { getRoomMessage } from '../../utils';
 import {
+    getBusRoomMessageApi,
+    getChatRoomHeaderInfoApi,
     getOutPeopleListApi,
     getPeopleListApi,
     updateChatRoomMaximunHeadApi,
@@ -42,6 +50,22 @@ function* chatMessageList(action) {
     } catch (err) {
         yield put({
             type: CHAT_ROOM_MESSAGE_FAILURE,
+            error: err,
+        });
+    }
+}
+
+function* getBusMessageList(action) {
+    try {
+        const result = yield call(getBusRoomMessageApi, action.data);
+        console.log('채팅 요청 이후 result', result);
+        yield put({
+            type: CHAT_BUS_ROOM_MESSAGE_SUCCESS,
+            data: result.data,
+        });
+    } catch (err) {
+        yield put({
+            type: CHAT_BUS_ROOM_MESSAGE_FAILURE,
             error: err,
         });
     }
@@ -128,6 +152,21 @@ function* changeMaximum(action) {
         });
     }
 }
+function* getChatRoomHeaderInfo(action) {
+    try {
+        console.log(action);
+        const result = yield call(getChatRoomHeaderInfoApi, action.id);
+        console.log('채팅방 헤더 result', result);
+        yield put({
+            type: CHAT_ROOM_HEADER_INFO_SUCCESS,
+            data: result.data.data,
+        });
+    } catch (err) {
+        yield put({
+            type: CHAT_ROOM_HEADER_INFO_FAILURE,
+        });
+    }
+}
 
 function* watchChatRoomMessage() {
     yield takeLatest(CHAT_ROOM_MESSAGE_REQUEST, chatMessageList);
@@ -153,6 +192,13 @@ function* watchChangeMaximumModalClick() {
 function* watchChangeMaximum() {
     yield takeLatest(CHAT_ROOM_CHANGE_MAXIMUM_REQUEST, changeMaximum);
 }
+function* watchGetChatRoomHeaderInfo() {
+    yield takeLatest(CHAT_ROOM_HEADER_INFO_REQUEST, getChatRoomHeaderInfo);
+}
+function* watchGetBusMessageList() {
+    yield takeLatest(CHAT_BUS_ROOM_MESSAGE_REQUEST, getBusMessageList);
+}
+
 export default function* chatSaga() {
     yield all([
         fork(watchChatRoomMessage),
@@ -162,5 +208,7 @@ export default function* chatSaga() {
         fork(watchGetOutPeopleList),
         fork(watchChangeMaximumModalClick),
         fork(watchChangeMaximum),
+        fork(watchGetChatRoomHeaderInfo),
+        fork(watchGetBusMessageList),
     ]);
 }

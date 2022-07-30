@@ -15,14 +15,32 @@
 .taxicard-not-end-wrapper {
     @extend %taxicard-wrapper;
     background-color: #7b88f2;
+    animation-name: soon-end;
+    animation-iteration-count: 1;
+    animation-duration: 1.5s;
 }
 
 .taxicard-soon-end-wrapper {
     @extend %taxicard-wrapper;
     background-color: #1a2962;
+    animation-name: soon-end;
+    animation-iteration-count: 1;
+    animation-duration: 1.5s;
 }
 
 .taxicard-end-wrapper {
     @extend %taxicard-wrapper;
-    display: none;
+    background-color: coral;
+    animation-name: soon-end;
+    animation-iteration-count: 1;
+    animation-duration: 1.5s;
+}
+
+@keyframes soon-end {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }

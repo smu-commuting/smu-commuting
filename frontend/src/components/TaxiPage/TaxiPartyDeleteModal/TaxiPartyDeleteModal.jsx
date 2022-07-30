@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable no-unused-vars */
 import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,23 +7,26 @@ import './TaxiPartyDeleteModal.scss';
 
 function TaxiPartyDeleteModal() {
     const dispatch = useDispatch();
-    const { chattingRoomInfo } = useSelector(state => state.taxi);
-
+    const { chatRoomHeaderInfo } = useSelector(state => state.chat);
+    useEffect(() => {
+        document.body.style = `overflow: hidden`;
+        return () => (document.body.style = `overflow: auto`);
+    }, []);
     const onCancelClick = useCallback(() => {
         dispatch(deleteModal());
     }, [dispatch]);
 
     const onAgreeClick = useCallback(() => {
-        dispatch(deleteTaxiParty(chattingRoomInfo.taxiPartyId));
+        dispatch(deleteTaxiParty(chatRoomHeaderInfo.taxiPartyId));
     }, [dispatch]);
 
     return (
         <div className="taxipartydeletemodal-wrapper">
             <div className="taxipartydeletemodal">
                 <p>
-                    {chattingRoomInfo.placeName}
+                    {chatRoomHeaderInfo && chatRoomHeaderInfo.place}
                     &nbsp;
-                    {chattingRoomInfo.time}
+                    {chatRoomHeaderInfo && chatRoomHeaderInfo.time}
                     <br />
                     채팅방을 나가시겠습니까?
                 </p>

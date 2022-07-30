@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/anchor-has-content */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './SignUpPage.scss';
 import Search from '../../assets/SignUpPage/검색.png';
 import { signupRequest } from '../../modules/reducers/user';
-import { sendNumberApi, verificationNumApi } from '../../utils';
+import { sendNumberApi, signupApi, verificationNumApi } from '../../utils';
 import Timer from '../../components/common/Timer';
 
 function SignUpPage() {
@@ -31,6 +33,7 @@ function SignUpPage() {
 
     // 인증번호 요청 API
     const sendNumber = async () => {
+        if (studentId.length < 8) return;
         const response = await sendNumberApi(studentId);
         if (response.data.success) setCheckSend(true);
     };
@@ -39,17 +42,30 @@ function SignUpPage() {
     const postAuthNum = async () => {
         verificationNumApi(authNum)
             .then(res => {
+                console.log(res);
                 const userInfo = {
                     email: `${studentId}@sangmyung.kr`,
                     studentId,
                     imageId: 1,
                 };
-                dispatch(signupRequest(userInfo));
-                alert('가입을 축하합니다.');
-                navigate(`/home`);
+                signupApi(userInfo)
+                    .then(() => {
+                        dispatch(signupRequest(userInfo));
+                        navigate('/home');
+                    })
+                    .catch(err => {
+                        // 중복된 이메일
+                        alert(err.response.data.error.info);
+                        setCheckSend(false);
+                        setStudentId('');
+                        setAuthNum('');
+                    });
+                // dispatch(signupRequest(userInfo));
             })
             .catch(err => {
-                alert('올바른 인증번호가 아닙니다.');
+                // 잘못된 인증번호
+                alert(err.response.data.error.info);
+                setAuthNum('');
             });
     };
     return (
@@ -92,6 +108,18 @@ function SignUpPage() {
                         />
                         <Timer mm={5} ss={0} />
                     </div>
+                    <p
+                        className="info"
+                        onClick={() =>
+                            window.open(
+                                'https://outlook.office.com/mail/inbox',
+                                '_blank',
+                            )
+                        }
+                        aria-hidden
+                    >
+                        인증번호 확인하기
+                    </p>
                     <button
                         className="student-id-btn"
                         type="submit"

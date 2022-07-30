@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable no-unused-vars */
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,19 +21,23 @@ function TaxiToChatModal() {
         isTaxiPartyEnterDone,
     } = useSelector(state => state.taxi);
 
+    useEffect(() => {
+        document.body.style = `overflow: hidden`;
+        return () => (document.body.style = `overflow: auto`);
+    }, []);
     const onCancelClick = useCallback(() => {
         dispatch(taxiToChatModal());
     }, [dispatch]);
 
     const onAgreeClick = useCallback(async () => {
-        const result = await taxiPartyEnterApi(chattingRoomInfo.taxiPartyId);
-        dispatch(taxiPartyEnter());
-        if (result.data.status === 200) {
-            dispatch(taxiPartyEnter());
-            navigate(`/chatroom/${chattingRoomInfo.taxiPartyId}`);
-        } else {
-            dispatch(taxiPartyEnter(result.response.data.error.info));
-        }
+        taxiPartyEnterApi(chattingRoomInfo.taxiPartyId)
+            .then(res => {
+                navigate(`/chatroom/${chattingRoomInfo.taxiPartyId}`);
+                dispatch(taxiPartyEnter()); // 모달 닫기용
+            })
+            .catch(err => {
+                dispatch(taxiPartyEnter(err.response.data.error.info));
+            });
     }, []);
 
     return (

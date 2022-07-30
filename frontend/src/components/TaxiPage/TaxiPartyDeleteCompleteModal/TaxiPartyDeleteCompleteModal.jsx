@@ -1,11 +1,16 @@
-import React, { useCallback } from 'react';
+/* eslint-disable no-return-assign */
+import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { taxiSecondModalClose } from '../../../modules/reducers/taxi';
 import './TaxiPartyDeleteCompleteModal.scss';
 
 function TaxiPartyDeleteCompleteModal() {
     const dispatch = useDispatch();
-    const { chattingRoomInfo } = useSelector(state => state.taxi);
+    const { chatRoomHeaderInfo } = useSelector(state => state.chat);
+    useEffect(() => {
+        document.body.style = `overflow: hidden`;
+        return () => (document.body.style = `overflow: auto`);
+    }, []);
     const onModalClose = useCallback(() => {
         dispatch(taxiSecondModalClose());
     }, [dispatch]);
@@ -14,9 +19,9 @@ function TaxiPartyDeleteCompleteModal() {
             <div className="taxipartydeletecompletemodal">
                 <div className="main-text">
                     <p>
-                        {chattingRoomInfo.placeName}
+                        {chatRoomHeaderInfo.place}
                         &nbsp;
-                        {chattingRoomInfo.time}
+                        {chatRoomHeaderInfo.time}
                         &nbsp;
                     </p>
                     <p>채팅방에서 나가기 되었습니다.</p>

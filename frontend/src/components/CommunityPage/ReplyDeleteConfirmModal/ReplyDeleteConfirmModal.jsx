@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+/* eslint-disable no-return-assign */
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {
@@ -13,6 +14,10 @@ function ReplyDeleteConfirmModal() {
     const { id } = useParams();
     const { clickReplyContent } = useSelector(state => state.community);
     const dispatch = useDispatch();
+    useEffect(() => {
+        document.body.style = `overflow: hidden`;
+        return () => (document.body.style = `overflow: auto`);
+    }, []);
     const onCancelClick = useCallback(() => {
         dispatch(replyDeleteConfirmModal());
     }, []);

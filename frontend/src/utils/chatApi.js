@@ -19,6 +19,22 @@ export const getRoomMessage = async data => {
     );
 };
 
+export const getBusRoomMessageApi = async data => {
+    console.log(
+        data.date,
+        `${process.env.REACT_APP_API_URL}${API_CHAT}bus/room/${data.roomId}/messages`,
+    );
+    return await withAuthInstance.get(
+        `${process.env.REACT_APP_API_URL}${API_CHAT}bus/room/${data.roomId}/messages`,
+        {
+            params: {
+                size: data.size,
+                lastMessageDate: data.date,
+            },
+        },
+    );
+};
+
 // 택시 채팅방에 있는 유저 목록 조회
 export const getPeopleListApi = async id => {
     console.log(id);
@@ -43,5 +59,13 @@ export const updateChatRoomMaximunHeadApi = async dataObj => {
     return await withAuthInstance.put(
         `${process.env.REACT_APP_API_URL}${API_TAXI}party/${dataObj.id}`,
         data,
+    );
+};
+
+// 택시 채팅방에 나간 유저 목록 조회
+export const getChatRoomHeaderInfoApi = async id => {
+    console.log(id);
+    return await withAuthInstance.get(
+        `${process.env.REACT_APP_API_URL}${API_TAXI}party/${id}`,
     );
 };

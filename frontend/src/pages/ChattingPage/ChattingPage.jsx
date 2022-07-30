@@ -8,14 +8,13 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
-import axios from 'axios';
 import ChattingRoomHeader from '../../components/ChattingRoomPage/ChattingRoomHeader/ChattingRoomHeader';
-import Refusal from '../../assets/ChattingList/ChatInputArea/합승거부.png';
+import Block from '../../assets/ChattingPage/block-icon.png';
+import Send from '../../assets/ChattingPage/send-icon.png';
 import {
     deleteChatMessageList,
     getChatMessageList,
     denialModalClick,
-    changeMaximumModalClick,
 } from '../../modules/reducers/chat';
 import { firstEnterDateParser } from '../../constants/FirstEnterDateParser';
 import MeChatBox from '../../components/ChattingRoomPage/MeChatBox/MeChatBox';
@@ -86,7 +85,6 @@ function ChattingPage() {
         if (messageBottle.length < 11) scrollToBottom();
     }, [messageBottle]);
 
-    // 데이터 fetch 되면 메세지 배열 10개 앞에 추가하기
     useEffect(() => {
         if (chatMessageListDone) {
             const reverse = [...chatMessageList].reverse();
@@ -141,10 +139,10 @@ function ChattingPage() {
         <div className="chattingpage-wrapper">
             <ChattingRoomHeader />
             <div className="chattingroompage-wrapper" ref={scrollRef}>
-                <p className="notice">
-                    탑승 시각 기준 전후 30분 동안에는 <br /> 하나의 채팅방만
-                    입장할 수 있습니다.
-                </p>
+                {/* <p className="notice">
+                    탑승 시각 기준 전후 30분 동안에는 하나의 채팅방만 입장할 수
+                    있습니다.
+                </p> */}
                 {messageBottle ? (
                     messageBottle.map((message, index) => {
                         return message.senderStudentId ===
@@ -172,12 +170,12 @@ function ChattingPage() {
             </div>
             <div className="chatinputarea-wrapper">
                 <div onClick={denialModalClickHandler} aria-hidden>
-                    <img src={Refusal} alt="합승거부" />
+                    <img src={Block} alt="합승거부" />
                 </div>
                 <textarea value={myChat} onChange={myChatChange} required />
-                <button type="submit" onClick={onSendMyChatHandler}>
-                    전송
-                </button>
+                <div onClick={onSendMyChatHandler} aria-hidden>
+                    <img src={Send} alt="전송" />
+                </div>
             </div>
         </div>
     );

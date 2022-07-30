@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Arrow from '../../assets/MyPage/arrow.png';
 import './ProtestPage.scss';
@@ -10,10 +10,6 @@ function ProtestPage() {
     const homePage = () => {
         navigate(`/home`);
     };
-
-    const gotoProtestHomePage = useCallback(() => {
-        window.location.replace('https://www.smpa.go.kr/user/nd54882.do');
-    }, []);
 
     return (
         <div className="protestpage-wrapper">
@@ -30,7 +26,12 @@ function ProtestPage() {
                 <img
                     src={Police}
                     alt="서울경찰청"
-                    onClick={gotoProtestHomePage}
+                    onClick={() =>
+                        window.open(
+                            'https://www.smpa.go.kr/user/nd54882.do',
+                            '_blank',
+                        )
+                    }
                     aria-hidden
                 />
                 <p>
