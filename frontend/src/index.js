@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 /* eslint-disable no-shadow */
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable no-unused-vars */
