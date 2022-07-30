@@ -15,6 +15,9 @@
         border-radius: 1.2rem;
         background-color: #ffffff;
         padding: 1.1rem;
+        animation-name: modal;
+        animation-iteration-count: 1;
+        animation-duration: 0.3s;
         .cancel {
             float: right;
             display: block;
@@ -42,5 +45,14 @@
                 }
             }
         }
+    }
+}
+
+@keyframes modal {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }
