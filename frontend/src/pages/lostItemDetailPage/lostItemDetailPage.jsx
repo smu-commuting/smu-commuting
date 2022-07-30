@@ -44,81 +44,71 @@ const lostItemDetailPage = () => {
     }, [dispatch, replyPostDone]);
 
     return (
-        <>
-            {imgClick ? (
-                <ImgDownload img={lostItemInfo.image} imgZoom={imgZoom} />
-            ) : (
-                <div className="lostitemdetailpage-wrapper">
-                    <div className="lostitemdetailpage-header">
-                        <img
-                            className="arrow"
-                            src={Arrow}
-                            alt="화살표"
-                            onClick={lostItemPage}
-                            aria-hidden="true"
-                        />
-                        <div>분실물 - 상세 페이지</div>
-                        {lostItemInfo && lostItemInfo.isMine === true && (
-                            <img
-                                className="menu"
-                                src={Menu}
-                                alt="메뉴"
-                                aria-hidden="true"
-                                onClick={onPostModalClick}
-                            />
-                        )}
-                    </div>
-                    <div className="lostitemdetailpage-content">
-                        <div className="lostitemdetailpage-content">
-                            <div className="header">
-                                <p className="date">
-                                    {lostItemInfo &&
-                                        `${
-                                            lostItemInfo.createdDate
-                                                .split('T')[0]
-                                                .split('-')[1]
-                                        }월
+        <div className="lostitemdetailpage-wrapper">
+            <div className="lostitemdetailpage-header">
+                <img
+                    className="arrow"
+                    src={Arrow}
+                    alt="화살표"
+                    onClick={lostItemPage}
+                    aria-hidden="true"
+                />
+                <div>분실물 - 상세 페이지</div>
+                {lostItemInfo && lostItemInfo.isMine === true && (
+                    <img
+                        className="menu"
+                        src={Menu}
+                        alt="메뉴"
+                        aria-hidden="true"
+                        onClick={onPostModalClick}
+                    />
+                )}
+            </div>
+            <div className="lostitemdetailpage-content">
+                <div className="lostitemdetailpage-content">
+                    <div className="header">
+                        <p className="date">
+                            {lostItemInfo &&
+                                `${
+                                    lostItemInfo.createdDate
+                                        .split('T')[0]
+                                        .split('-')[1]
+                                }월
                             ${
                                 lostItemInfo.createdDate
                                     .split('T')[0]
                                     .split('-')[2]
                             }일`}
-                                </p>
-                                <p className="item">
-                                    {lostItemInfo && lostItemInfo.item}
-                                </p>
-                                <p className="place">
-                                    {lostItemInfo && lostItemInfo.place}
-                                </p>
-                            </div>
-                            <div className="content">
-                                {lostItemInfo && lostItemInfo.content}
-                            </div>
-                            <div
-                                className="item-picture"
-                                onClick={imgZoom}
-                                aria-hidden
-                            >
-                                <img
-                                    src={lostItemInfo && lostItemInfo.image}
-                                    alt="분실물 사진"
-                                />
-                            </div>
-                        </div>
+                        </p>
+                        <p className="item">
+                            {lostItemInfo && lostItemInfo.item}
+                        </p>
+                        <p className="place">
+                            {lostItemInfo && lostItemInfo.place}
+                        </p>
                     </div>
-                    {replyList &&
-                        replyList.map((reply, idx) => {
-                            console.log('부모노드', reply);
-                            return (
-                                <LostItemReplyBox
-                                    reply={reply}
-                                    key={reply.createdDate}
-                                />
-                            );
-                        })}
+                    <div className="content">
+                        {lostItemInfo && lostItemInfo.content}
+                    </div>
+                    <div className="item-picture" onClick={imgZoom} aria-hidden>
+                        <img
+                            src={lostItemInfo && lostItemInfo.image}
+                            alt="분실물 사진"
+                        />
+                    </div>
                 </div>
-            )}
-        </>
+            </div>
+            {replyList &&
+                replyList.map((reply, idx) => {
+                    console.log('부모노드', reply);
+                    return (
+                        <LostItemReplyBox
+                            reply={reply}
+                            key={reply.createdDate}
+                        />
+                    );
+                })}
+        </div>
     );
 };
 
