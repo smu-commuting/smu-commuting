@@ -49,9 +49,12 @@ public class TaxiPartyService {
     }
 
     @Transactional(readOnly = true)
-    public TaxiPartyResponse.GetOne getOne(Long taxiPartyId) {
+    public TaxiPartyResponse.GetOne getOne(Long taxiPartyId, User loginUser) {
         TaxiParty taxiParty = taxiPartyRepository.findByIdWithTaxiGroupAndPlace(taxiPartyId).orElseThrow(TaxiPartyNotFoundException::new);
-        return TaxiPartyResponse.GetOne.build(taxiParty);
+        List<Long> partyUserIdList = taxiParty.getTaxiGroupList().stream().map(TaxiGroup::getUserId).collect(Collectors.toList());
+        List<Long> blockedUserIdList = blockUsers.findAllByUserId(loginUser.getId()).stream().map(BlockedUser::getBlockedUserId).collect(Collectors.toList());
+
+        return TaxiPartyResponse.GetOne.build(taxiParty, partyUserIdList, blockedUserIdList);
     }
 
     @Transactional(readOnly = true)

@@ -92,9 +92,10 @@ class TaxiPartyControllerTest extends MvcTest {
                 .headcount(HEADCOUNT)
                 .place(PLACE_NAME)
                 .time(MEETING_DATE)
+                .hasBlockedUser(true)
                 .build();
 
-        given(taxiPartyService.getOne(any())).willReturn(response);
+        given(taxiPartyService.getOne(any(), any())).willReturn(response);
 
         ResultActions results = mvc.perform(RestDocumentationRequestBuilders
                 .get("/api/taxi/party/{taxiPartyId}", 1)
@@ -114,7 +115,8 @@ class TaxiPartyControllerTest extends MvcTest {
                                 fieldWithPath("data.maximum").type(JsonFieldType.NUMBER).description("최대 인원"),
                                 fieldWithPath("data.headcount").type(JsonFieldType.NUMBER).description("최대 인원"),
                                 fieldWithPath("data.date").type(JsonFieldType.STRING).description("택시 타는 시간"),
-                                fieldWithPath("data.time").type(JsonFieldType.STRING).description("택시 타는 시간")
+                                fieldWithPath("data.time").type(JsonFieldType.STRING).description("택시 타는 시간"),
+                                fieldWithPath("data.hasBlockedUser").type(JsonFieldType.BOOLEAN).description("차단한 유저가 있다면 true")
                         )
                 ));
     }

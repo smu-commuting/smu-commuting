@@ -38,8 +38,8 @@ public class TaxiPartyController {
     }
 
     @GetMapping("/party/{taxiPartyId}")
-    public ResponseEntity<ApiResult<TaxiPartyResponse.GetOne>> getOne(@PathVariable Long taxiPartyId) {
-        TaxiPartyResponse.GetOne response = taxiPartyService.getOne(taxiPartyId);
+    public ResponseEntity<ApiResult<TaxiPartyResponse.GetOne>> getOne(@PathVariable Long taxiPartyId, @CurrentUser CustomUserDetails customUserDetails) {
+        TaxiPartyResponse.GetOne response = taxiPartyService.getOne(taxiPartyId, customUserDetails.getUser());
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
     }
 
@@ -67,7 +67,7 @@ public class TaxiPartyController {
     @GetMapping("/party/{taxiPartyId}/exit/users")
     public ResponseEntity<ApiResult<List<TaxiPartyResponse.TaxiPartyUsers>>> getTaxiPartyExitUsers(@PathVariable Long taxiPartyId,
                                                                                                    @CurrentUser CustomUserDetails customUserDetails) {
-        List<TaxiPartyResponse.TaxiPartyUsers> response = taxiPartyService.getTaxiPartyExitUsers(taxiPartyId,customUserDetails.getUser());
+        List<TaxiPartyResponse.TaxiPartyUsers> response = taxiPartyService.getTaxiPartyExitUsers(taxiPartyId, customUserDetails.getUser());
         return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
     }
 

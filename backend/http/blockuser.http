@@ -3,7 +3,7 @@ Authorization: {{authorizationToken}}
 Content-Type: application/json;charset=UTF-8
 
 {
-  "blockUserId": 2
+  "blockUserId": 1
 }
 
 ###
