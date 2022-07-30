@@ -4,7 +4,7 @@ import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './ChattingListPage.scss';
-import getOut from '../../assets/ChattingList/ChattingListPage/첫줄.png';
+import getOut from '../../assets/ChattingList/ChattingListPage/exit.png';
 import nonchat from '../../assets/ChattingList/ChattingListPage/non-chat.png';
 import { prevent } from '../../constants';
 import { deleteModal, getMyTaxiParties } from '../../modules/reducers/taxi';
