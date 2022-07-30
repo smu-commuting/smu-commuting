@@ -49,6 +49,9 @@ import {
     CHAT_ROOM_CHANGE_MAXIMUM_REQUEST,
     CHAT_ROOM_CHANGE_MAXIMUM_SUCCESS,
     CHAT_ROOM_CHANGE_MAXIMUM_FAILURE,
+    TAXI_TO_CHAT_INFO_MODAL_CLOSE_REQUEST,
+    TAXI_TO_CHAT_INFO_MODAL_CLOSE_SUCCESS,
+    TAXI_TO_CHAT_INFO_MODAL_CLOSE_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -154,11 +157,10 @@ export const taxiPartyListRestart = () => {
     };
 };
 
-export const taxiToChatModal = data => {
-    console.log(data);
+export const taxiToChatModal = id => {
     return {
         type: TAXI_TO_CHAT_INFO_MODAL_REQUEST,
-        data,
+        id,
     };
 };
 
@@ -178,6 +180,12 @@ export const taxiSecondModalClose = () => {
 export const taxiPartyListDelete = () => {
     return {
         type: TAXI_PARTY_LIST_DELETE_REQUEST,
+    };
+};
+
+export const taxiToChatModalClose = () => {
+    return {
+        type: TAXI_TO_CHAT_INFO_MODAL_CLOSE_REQUEST,
     };
 };
 
@@ -306,6 +314,14 @@ const reducer = (state = initialState, action) => {
                 console.log('chattingRoomInfo', action.data);
                 break;
             case TAXI_TO_CHAT_INFO_MODAL_FAILURE:
+                break;
+            case TAXI_TO_CHAT_INFO_MODAL_CLOSE_REQUEST:
+                break;
+            case TAXI_TO_CHAT_INFO_MODAL_CLOSE_SUCCESS:
+                draft.isEnterChattingRoomModalOpen =
+                    !draft.isEnterChattingRoomModalOpen;
+                break;
+            case TAXI_TO_CHAT_INFO_MODAL_CLOSE_FAILURE:
                 break;
             case TAXI_ROOM_DELETE_MODAL_REQUEST:
                 break;

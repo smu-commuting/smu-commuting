@@ -16,7 +16,14 @@
         background-color: #ffffff;
         p {
             text-align: center;
-            @include font-face('NotoSansKR-Medium', 1.7rem, 3rem, #000000);
+            font-family: 'NotoSansKR-Medium';
+            font-size: 1.7rem;
+            line-height: 2.5rem;
+        }
+        .warning {
+            margin-top: -1rem;
+            font-size: 1.1rem;
+            line-height: 1.5rem;
         }
         .button-wrapper {
             display: flex;
