@@ -8,7 +8,10 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 function DatePick({ selectedDate, setSelectedDate }) {
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <Stack spacing={4} sx={{ backgroundColor: '#efecff' }}>
+            <Stack
+                spacing={4}
+                sx={{ backgroundColor: '#efecff', margin: '3rem 0' }}
+            >
                 <DatePicker
                     inputFormat="yyyy-MM-dd"
                     mask="____-__-__"

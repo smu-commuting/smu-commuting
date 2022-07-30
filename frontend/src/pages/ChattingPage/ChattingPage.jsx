@@ -85,7 +85,6 @@ function ChattingPage() {
         if (messageBottle.length < 11) scrollToBottom();
     }, [messageBottle]);
 
-    // 데이터 fetch 되면 메세지 배열 10개 앞에 추가하기
     useEffect(() => {
         if (chatMessageListDone) {
             const reverse = [...chatMessageList].reverse();

@@ -137,21 +137,11 @@ const reducer = (state = initialState, action) => {
                 break;
 
             case USER_SIGN_UP_REQUEST:
-                console.log('SIGN_UP_request', action.data);
-                draft.signupLoading = true;
-                draft.signupDone = false;
-                draft.signupError = null;
                 break;
             case USER_SIGN_UP_SUCCESS:
-                console.log(action.data);
-                draft.signupLoading = false;
-                draft.signupDone = true;
-                draft.signupError = null;
                 draft.me = action.data;
                 break;
             case USER_SIGN_UP_FAILURE:
-                draft.signupLoading = false;
-                draft.signupError = action.err;
                 break;
             case USER_BUS_MODAL:
                 break;

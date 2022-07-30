@@ -52,11 +52,9 @@ function* login(action) {
 
 function* signup(action) {
     try {
-        const result = yield call(signupApi, action.data);
-        console.log(result);
         yield put({
             type: USER_SIGN_UP_SUCCESS,
-            data: result.data,
+            data: action.data,
         });
     } catch (err) {
         yield put({

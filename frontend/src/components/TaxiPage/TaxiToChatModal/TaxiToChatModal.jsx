@@ -33,6 +33,7 @@ function TaxiToChatModal() {
         taxiPartyEnterApi(chattingRoomInfo.taxiPartyId)
             .then(res => {
                 navigate(`/chatroom/${chattingRoomInfo.taxiPartyId}`);
+                dispatch(taxiPartyEnter()); // 모달 닫기용
             })
             .catch(err => {
                 dispatch(taxiPartyEnter(err.response.data.error.info));
