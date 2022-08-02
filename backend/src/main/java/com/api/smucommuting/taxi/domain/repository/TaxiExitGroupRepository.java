@@ -11,5 +11,5 @@ public interface TaxiExitGroupRepository extends JpaRepository<TaxiExitGroup, Lo
 
     Optional<TaxiExitGroup> findByUserIdAndTaxiPartyId(Long userId, Long taxiPartyId);
 
-    void deleteByUserId(Long userId);
+    void deleteByUserIdAndTaxiPartyId(Long id, Long taxiPartyId);
 }
