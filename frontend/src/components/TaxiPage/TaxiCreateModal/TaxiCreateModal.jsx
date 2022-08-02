@@ -3,7 +3,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import dayjs from 'dayjs';
 import {
     taxiCreateModalClick,
     taxiPartyCreate,
@@ -14,7 +13,6 @@ import { hoursArr, minutesArr } from '../../../constants';
 
 function TaxiCreateModal() {
     const { taxiPageInfo } = useSelector(state => state.taxi);
-    const [selectedTime, setSelectedTime] = useState(null);
     const [ampm, setAmpm] = useState();
     const [hour, setHour] = useState(
         new Date().getHours() > 12
@@ -39,8 +37,6 @@ function TaxiCreateModal() {
     }, []);
 
     const onCreateTaxiParty = () => {
-        const time = dayjs(selectedTime).format('HH:mm');
-        console.log(time);
         let tempHour;
         if (ampm === 'PM') {
             tempHour = hour + 12;
@@ -48,13 +44,9 @@ function TaxiCreateModal() {
             if (hour === 12) tempHour = 0;
             else tempHour = hour;
         }
-
-        const when = `${taxiPageInfo.when}T${time}`;
-        console.log(when);
-        if (time === 'Invalid Date') {
-            alert('탑승 시간을 선택해주세요.');
-            return;
-        }
+        const when = `${taxiPageInfo.when}T${
+            tempHour >= 10 ? tempHour : `0${tempHour}`
+        }:${minute >= 10 ? minute : `0${minute}`}`;
         if (headCount === 0) {
             alert('인원수를 설정해주세요');
             return;
