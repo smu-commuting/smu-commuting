@@ -44,6 +44,9 @@ import {
     CHAT_ROOM_CHANGE_MAXIMUM_REQUEST,
     CHAT_ROOM_CHANGE_MAXIMUM_SUCCESS,
     CHAT_ROOM_CHANGE_MAXIMUM_FAILURE,
+    TAXI_TO_CHAT_INFO_MODAL_CLOSE_REQUEST,
+    TAXI_TO_CHAT_INFO_MODAL_CLOSE_SUCCESS,
+    TAXI_TO_CHAT_INFO_MODAL_CLOSE_FAILURE,
 } from '../../constants';
 import {
     getMyTaxiPartiesApi,
@@ -52,6 +55,7 @@ import {
     getTaxiPartyListApi,
     createTaxiPartyApi,
 } from '../../utils';
+import { getChatRoomHeaderInfoApi } from '../../utils/chatApi';
 import { taxiPartyEnterApi } from '../../utils/taxiApi';
 
 function* getTaxiParties() {
@@ -176,16 +180,17 @@ function* taxiPartyRestart() {
 }
 
 function* taxiToChatModal(action) {
-    console.log('saga', action);
+    const result = yield call(getChatRoomHeaderInfoApi, action.id);
+    console.log('택시 방 조회', result.data);
     try {
         yield put({
             type: TAXI_TO_CHAT_INFO_MODAL_SUCCESS,
-            data: action.data,
+            data: result.data.data,
         });
     } catch (err) {
         yield put({
             type: TAXI_TO_CHAT_INFO_MODAL_FAILURE,
-            error: err,
+            error: err.error,
         });
     }
 }
@@ -236,6 +241,17 @@ function* taxiPartyListDelete() {
     } catch (err) {
         yield put({
             type: TAXI_PARTY_LIST_DELETE_FAILURE,
+        });
+    }
+}
+function* taxiToChatModalClose() {
+    try {
+        yield put({
+            type: TAXI_TO_CHAT_INFO_MODAL_CLOSE_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: TAXI_TO_CHAT_INFO_MODAL_CLOSE_FAILURE,
         });
     }
 }
@@ -291,6 +307,12 @@ function* watchSecondModalClose() {
 function* watchTaxiPartyListDelete() {
     yield takeLatest(TAXI_PARTY_LIST_DELETE_REQUEST, taxiPartyListDelete);
 }
+function* watchTaxiToChatModalClose() {
+    yield takeLatest(
+        TAXI_TO_CHAT_INFO_MODAL_CLOSE_REQUEST,
+        taxiToChatModalClose,
+    );
+}
 export default function* taxiSaga() {
     yield all([
         fork(watchTaxiPartiesList),
@@ -306,5 +328,6 @@ export default function* taxiSaga() {
         fork(watchSecondModalClose),
         fork(watchTaxiRoomDeleteModal),
         fork(watchTaxiPartyListDelete),
+        fork(watchTaxiToChatModalClose),
     ]);
 }

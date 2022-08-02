@@ -29,13 +29,6 @@ function TaxiCard({ taxiPartyId, headcount, maximum, time }) {
     }, []);
 
     const onCardClick = () => {
-        const data = {
-            placeName: taxiPageInfo.placeName,
-            time,
-            taxiPartyId,
-            headcount,
-            maximum,
-        };
         // useSelector로 해당 클릭한 id(chatRoomId) 와 비교하여
         // 존재(taxiPartyId)한다면 바로 채팅방으로 이동, 없다면 모달 띄워준다.
         let alreadyEnter = myTaxiParties.find(myTaxiParty => {
@@ -43,7 +36,7 @@ function TaxiCard({ taxiPartyId, headcount, maximum, time }) {
         });
         alreadyEnter !== undefined
             ? navigate(`/chatroom/${taxiPartyId}`)
-            : dispatch(taxiToChatModal(data));
+            : dispatch(taxiToChatModal(taxiPartyId));
     };
     return (
         <div className={`${card} ${isEnter}`} onClick={onCardClick} aria-hidden>
