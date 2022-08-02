@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface TaxiExitGroupRepository extends JpaRepository<TaxiExitGroup, Long> {
     List<TaxiExitGroup> findAllByTaxiPartyId(Long taxiPartyId);
 
-    Optional<TaxiExitGroup> findByUserId(Long userId);
+    Optional<TaxiExitGroup> findByUserIdAndTaxiPartyId(Long userId, Long taxiPartyId);
 
     void deleteByUserId(Long userId);
 }
