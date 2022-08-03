@@ -87,6 +87,7 @@ getToken(messaging, {
 
 onMessage(messaging, payload => {
     toast(payload.notification.body);
+    console.log('another notepad test');
     console.log('Message received. ', payload);
     console.log('messaging. ', messaging);
 });
