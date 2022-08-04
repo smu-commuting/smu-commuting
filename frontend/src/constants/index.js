@@ -150,4 +150,4 @@ export {
     SeoulWomanNurseUniv,
 } from './BUS_NUM';
 
-export { hoursArr, minutesArr } from './dayData';
+export { hoursArr, minutesArr, monthDay } from './dayData';

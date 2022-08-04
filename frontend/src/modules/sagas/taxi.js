@@ -159,6 +159,7 @@ function* createTaxiParty(action) {
             data: result.data,
         });
     } catch (err) {
+        console.log('에러입니다.', err);
         yield put({
             type: TAXI_PARTY_CREATE_FAILURE,
             error: err.response.data.error.info,
