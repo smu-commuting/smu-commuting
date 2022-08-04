@@ -12,6 +12,7 @@ public class BusOpenChatRequest {
 
     public BusOpenChatMessage toEntity() {
         return BusOpenChatMessage.builder()
+                .busOpenChatId(roomId)
                 .senderId(senderId)
                 .senderStudentId(studentId)
                 .content(message)
