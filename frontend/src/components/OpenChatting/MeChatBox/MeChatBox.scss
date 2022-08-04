@@ -1,0 +1,25 @@
+@import '../../../styles/utils.scss';
+
+.open-mechatbox-wrapper {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.05);
+    color: black;
+    margin: 1rem 0;
+    padding: 0.7rem 1rem;
+    border-radius: 0.5rem;
+    header {
+        display: flex;
+        justify-content: space-between;
+        font-family: 'NotoSansKR-Regular';
+        font-size: 1rem;
+        p::nth-child(2) {
+            text-align: right;
+        }
+    }
+    .content {
+        font-family: 'NotoSansKR-Regular';
+        font-size: 1.5rem;
+        padding-bottom: 1rem;
+        word-break: break-all;
+    }
+}

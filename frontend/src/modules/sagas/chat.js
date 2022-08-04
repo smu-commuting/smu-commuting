@@ -29,6 +29,9 @@ import {
     CHAT_BUS_ROOM_MESSAGE_REQUEST,
     CHAT_BUS_ROOM_MESSAGE_SUCCESS,
     CHAT_BUS_ROOM_MESSAGE_FAILURE,
+    CHAT_BUS_ROOM_DELETE_MESSAGE_REQUEST,
+    CHAT_BUS_ROOM_DELETE_MESSAGE_SUCCESS,
+    CHAT_BUS_ROOM_DELETE_MESSAGE_FAILURE,
 } from '../../constants';
 import { getRoomMessage } from '../../utils';
 import {
@@ -167,6 +170,18 @@ function* getChatRoomHeaderInfo(action) {
         });
     }
 }
+function* deleteBusChatMessageList() {
+    try {
+        yield put({
+            type: CHAT_BUS_ROOM_DELETE_MESSAGE_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: CHAT_BUS_ROOM_DELETE_MESSAGE_FAILURE,
+            error: '채팅방 삭제 실패',
+        });
+    }
+}
 
 function* watchChatRoomMessage() {
     yield takeLatest(CHAT_ROOM_MESSAGE_REQUEST, chatMessageList);
@@ -198,6 +213,12 @@ function* watchGetChatRoomHeaderInfo() {
 function* watchGetBusMessageList() {
     yield takeLatest(CHAT_BUS_ROOM_MESSAGE_REQUEST, getBusMessageList);
 }
+function* watchDeleteBusMessageList() {
+    yield takeLatest(
+        CHAT_BUS_ROOM_DELETE_MESSAGE_REQUEST,
+        deleteBusChatMessageList,
+    );
+}
 
 export default function* chatSaga() {
     yield all([
@@ -210,5 +231,6 @@ export default function* chatSaga() {
         fork(watchChangeMaximum),
         fork(watchGetChatRoomHeaderInfo),
         fork(watchGetBusMessageList),
+        fork(watchDeleteBusMessageList),
     ]);
 }
