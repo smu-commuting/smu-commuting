@@ -9,14 +9,28 @@
         display: flex;
         margin-bottom: 2rem;
         textarea {
-            flex: 4;
-            resize: none;
-            border: 1px solid #eeee;
+            flex: 6;
+            resize: none; // 사이즈 resize X
+            border: none;
             font-family: 'NotoSansKR-Regular';
+            background-color: #e0e0e0;
+            border-radius: 1.2rem;
         }
         textarea:focus {
             // textarea 클릭 후, focusing 되는 현상 방지
             outline: none;
+            background-color: #f6f6f6;
+        }
+        div {
+            flex: 1;
+            margin-left: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+                display: block;
+                height: 100%;
+            }
         }
         button {
             margin-left: 1rem;
