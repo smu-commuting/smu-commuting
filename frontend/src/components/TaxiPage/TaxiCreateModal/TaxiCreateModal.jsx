@@ -39,7 +39,8 @@ function TaxiCreateModal() {
     const onCreateTaxiParty = () => {
         let tempHour;
         if (ampm === 'PM') {
-            tempHour = hour + 12;
+            if (hour === 12) tempHour = 12;
+            else tempHour = hour + 12;
         } else if (ampm === 'AM') {
             if (hour === 12) tempHour = 0;
             else tempHour = hour;

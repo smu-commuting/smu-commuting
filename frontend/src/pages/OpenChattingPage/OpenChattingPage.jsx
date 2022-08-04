@@ -13,7 +13,6 @@ function OpenChattingPage() {
     // id : 1 -> 7016 , id : 2 -> 서대문 08
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { me } = useSelector(state => state.user);
     const userId = useSelector(state => state.user.me.id);
     const studentId = useSelector(state => state.user.me.studentId);
     const [messageBottle, setMessageBottle] = useState([]);
@@ -25,6 +24,7 @@ function OpenChattingPage() {
 
     const pushMessage = useCallback(message => {
         const received = JSON.parse(message.body);
+        console.log('여기 와야함', received);
         setMessageBottle(prev => {
             return [...prev, received];
         });
@@ -60,16 +60,16 @@ function OpenChattingPage() {
             return;
         }
         ws.send(
-            '/chat/bus/message',
+            '/pub/chat/bus/message',
             {},
             JSON.stringify({
                 message: myChat,
-                roomId: parseInt(id, 10),
-                senderId: parseInt(userId, 10),
-                studentId: parseInt(studentId, 10),
+                roomId: id,
+                senderId: userId,
+                studentId,
             }),
         );
-        console.log(myChat);
+        // console.log(myChat);
         setMyChat('');
     };
 
