@@ -6,13 +6,6 @@ importScripts(
 );
 
 firebase.initializeApp({
-    apiKey: 'AIzaSyCqOQnx0fQH4Eat-XIKsEpCVDzi9T13g8k',
-    authDomain: 'smulo-6a935.firebaseapp.com',
-    projectId: 'smulo-6a935',
-    storageBucket: 'smulo-6a935.appspot.com',
-    messagingSenderId: '747757992302',
-    appId: '1:747757992302:web:ac8c1bffab51db63d1e97f',
-    measurementId: 'G-F8EJXLWY6S',
 });
 
 const messaging = firebase.messaging();

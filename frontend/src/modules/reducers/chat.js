@@ -30,6 +30,9 @@ import {
     CHAT_BUS_ROOM_MESSAGE_REQUEST,
     CHAT_BUS_ROOM_MESSAGE_SUCCESS,
     CHAT_BUS_ROOM_MESSAGE_FAILURE,
+    CHAT_BUS_ROOM_DELETE_MESSAGE_REQUEST,
+    CHAT_BUS_ROOM_DELETE_MESSAGE_SUCCESS,
+    CHAT_BUS_ROOM_DELETE_MESSAGE_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -133,6 +136,12 @@ export const getBusMessageList = data => {
     };
 };
 
+export const deleteBusMessageList = () => {
+    return {
+        type: CHAT_BUS_ROOM_DELETE_MESSAGE_REQUEST,
+    };
+};
+
 const reducer = (state = initialState, action) => {
     return produce(state, draft => {
         switch (action.type) {
@@ -165,8 +174,8 @@ const reducer = (state = initialState, action) => {
                 draft.busMessageListError = null;
                 draft.busMessageList = action.data.data;
                 draft.busLoadEnd = action.data.data.length === 0;
-                // console.log('success', action.data.data);
-                // console.log('draft', draft.chatMessageList);
+                console.log('success', action.data.data);
+                console.log('draft', draft.chatMessageList);
                 break;
             case CHAT_BUS_ROOM_MESSAGE_FAILURE:
                 draft.busMessageListLoading = false;
@@ -247,6 +256,13 @@ const reducer = (state = initialState, action) => {
             case CHAT_ROOM_HEADER_INFO_FAILURE:
                 draft.chatRoomHeaderInfoLoading = false;
                 draft.chatRoomHeaderInfoError = action.error;
+                break;
+            case CHAT_BUS_ROOM_DELETE_MESSAGE_REQUEST:
+                break;
+            case CHAT_BUS_ROOM_DELETE_MESSAGE_SUCCESS:
+                draft.busMessageList = [];
+                break;
+            case CHAT_BUS_ROOM_DELETE_MESSAGE_FAILURE:
                 break;
             default:
                 break;

@@ -5,7 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
-import { getBusMessageList } from '../../modules/reducers/chat';
+import {
+    deleteBusMessageList,
+    getBusMessageList,
+} from '../../modules/reducers/chat';
 import { firstEnterDateParser } from '../../constants/FirstEnterDateParser';
 import './OpenChattingPage.scss';
 import sendicon from '../../assets/OpenChatting/send-icon.png';
@@ -51,11 +54,12 @@ function OpenChattingPage() {
         dispatch(
             getBusMessageList({
                 roomId: id,
-                size: 10,
+                size: 15,
                 date: firstEnterDateParser(),
             }),
         );
         return () => {
+            dispatch(deleteBusMessageList());
             ws && ws.disconnect();
         };
     }, [dispatch, id]);
@@ -75,7 +79,7 @@ function OpenChattingPage() {
                     dispatch(
                         getBusMessageList({
                             roomId: id,
-                            size: 10,
+                            size: 15,
                             date: busMessageList[busMessageList.length - 1]
                                 .createdTime,
                         }),
@@ -107,7 +111,6 @@ function OpenChattingPage() {
                 studentId,
             }),
         );
-        // console.log(myChat);
         setMyChat('');
     };
 

@@ -7,7 +7,7 @@ export default function MeChatBox({ id, content, senderId, createdTime }) {
     return (
         <div className="open-mechatbox-wrapper">
             <header>
-                <p>{senderId}</p>
+                <p>{`${String(senderId).substring(0, 4)}*****`}</p>
                 <p>
                     {createdTime.split('.')[1]
                         ? `${createdTime.split('.')[0].split('T')[0]} ${
