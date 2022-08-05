@@ -134,7 +134,7 @@ function App() {
                     }
                 />
                 <Route
-                    path="/chatlist"
+                    path="/mychatlist"
                     element={
                         <>
                             {isDeleteTaxiPartyModal && <TaxiPartyDeleteModal />}
@@ -231,7 +231,7 @@ function App() {
                     }
                 />
                 <Route
-                    path="/chatroom/:id"
+                    path="/taxichat/:id"
                     element={
                         <>
                             {changeMaximumModal && <ChangeMaximumModal />}
