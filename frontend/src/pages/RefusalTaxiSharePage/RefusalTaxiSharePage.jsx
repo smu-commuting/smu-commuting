@@ -38,7 +38,7 @@ function RefusalTaxiSharePage() {
                 />
                 <div>택시 합승 거부 설정</div>
             </div>
-            {blockedUserList.length === 0 ? (
+            {blockedUserList && blockedUserList.length === 0 ? (
                 <div className="no-list-wrapper">
                     <div>
                         <img src={defaultImg} alt="no-list" />
