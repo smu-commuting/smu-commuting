@@ -54,7 +54,7 @@ function OpenChattingPage() {
         dispatch(
             getBusMessageList({
                 roomId: id,
-                size: 15,
+                size: 10,
                 date: firstEnterDateParser(),
             }),
         );
@@ -79,7 +79,7 @@ function OpenChattingPage() {
                     dispatch(
                         getBusMessageList({
                             roomId: id,
-                            size: 15,
+                            size: 10,
                             date: busMessageList[busMessageList.length - 1]
                                 .createdTime,
                         }),
@@ -91,7 +91,7 @@ function OpenChattingPage() {
         return () => {
             window.removeEventListener('scroll', onScroll);
         };
-    }, [window.screenY, busLoadEnd, busMessageListDone]);
+    }, [window.scrollY, busLoadEnd, busMessageListDone]);
 
     const myChatChange = e => {
         setMyChat(e.target.value);

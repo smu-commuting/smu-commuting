@@ -171,7 +171,6 @@ const reducer = (state = initialState, action) => {
             case CHAT_BUS_ROOM_MESSAGE_SUCCESS:
                 draft.busMessageListLoading = false;
                 draft.busMessageListDone = true;
-                draft.busMessageListError = null;
                 draft.busMessageList = action.data.data;
                 draft.busLoadEnd = action.data.data.length === 0;
                 console.log('success', action.data.data);
