@@ -26,7 +26,7 @@ function TaxiToChatModal() {
     const onAgreeClick = useCallback(() => {
         taxiPartyEnterApi(chattingRoomInfo.taxiPartyId)
             .then(res => {
-                navigate(`/chatroom/${chattingRoomInfo.taxiPartyId}`);
+                navigate(`/taxichat/${chattingRoomInfo.taxiPartyId}`);
                 dispatch(taxiToChatModalClose()); // 모달 닫기용
             })
             .catch(err => {

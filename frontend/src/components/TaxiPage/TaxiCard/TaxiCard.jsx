@@ -35,7 +35,7 @@ function TaxiCard({ taxiPartyId, headcount, maximum, time }) {
             return myTaxiParty.chatRoomId === taxiPartyId;
         });
         alreadyEnter !== undefined
-            ? navigate(`/chatroom/${taxiPartyId}`)
+            ? navigate(`/taxichat/${taxiPartyId}`)
             : dispatch(taxiToChatModal(taxiPartyId));
     };
     return (

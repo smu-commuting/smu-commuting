@@ -26,7 +26,6 @@ export function setInterceptors(instance) {
             ) {
                 return axios
                     .post(`${process.env.REACT_APP_API_URL}/api/auth/refresh`)
-
                     .then(res => {
                         axios.defaults.headers.common.Authorization =
                             res.data.data.accessToken;
@@ -36,6 +35,7 @@ export function setInterceptors(instance) {
                         return axios(originalRequest);
                     })
                     .catch(err => {
+                        alert('interceptor err', err);
                         // window.location.replace('/');
                         // localStorage.clear();
                     });

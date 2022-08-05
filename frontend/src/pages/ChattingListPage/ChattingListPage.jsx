@@ -22,7 +22,7 @@ function ChattingListPage() {
         dispatch(getProfileImgList());
     }, [dispatch, deleteTaxiPartyDone, isDeleteAllowModal]);
     const onChatRoomEnter = useCallback(id => {
-        navigate(`/chatroom/${id}`);
+        navigate(`/taxichat/${id}`);
     }, []);
     const onDeleteClick = useCallback(() => {
         dispatch(deleteModal());
