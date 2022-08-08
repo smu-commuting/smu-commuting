@@ -8,7 +8,7 @@ public class BusOpenChatRequest {
     private String message;
     private Long roomId;
     private Long senderId;
-    private int studentId;
+    private String studentId;
 
     public BusOpenChatMessage toEntity() {
         return BusOpenChatMessage.builder()

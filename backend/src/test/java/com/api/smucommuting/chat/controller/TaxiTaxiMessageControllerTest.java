@@ -36,8 +36,8 @@ class TaxiTaxiMessageControllerTest extends MvcTest {
     @Test
     @DisplayName("채팅 메시지 목록 조회 문서화")
     public void getMessages() throws Exception {
-        TaxiMessageResponse response1 = TaxiMessageResponse.builder().messageId(1L).roomId(1L).content("안녕하세요").createdTime(LocalDateTime.of(2022, 5, 24, 10, 0, 1, 11)).senderId(1L).senderStudentId(123456).build();
-        TaxiMessageResponse response2 = TaxiMessageResponse.builder().messageId(2L).roomId(1L).content("네 안녕하세요").createdTime(LocalDateTime.of(2022, 5, 24, 10, 0, 2, 22)).senderId(2L).senderStudentId(111111).build();
+        TaxiMessageResponse response1 = TaxiMessageResponse.builder().messageId(1L).roomId(1L).content("안녕하세요").createdTime(LocalDateTime.of(2022, 5, 24, 10, 0, 1, 11)).senderId(1L).senderStudentId("123456").build();
+        TaxiMessageResponse response2 = TaxiMessageResponse.builder().messageId(2L).roomId(1L).content("네 안녕하세요").createdTime(LocalDateTime.of(2022, 5, 24, 10, 0, 2, 22)).senderId(2L).senderStudentId("111111").build();
 
         given(taxiMessageService.getMessages(any(), eq(10), any())).willReturn(Arrays.asList(response1, response2));
 
@@ -62,7 +62,7 @@ class TaxiTaxiMessageControllerTest extends MvcTest {
                                 fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
                                 fieldWithPath("data.[].messageId").type(JsonFieldType.NUMBER).description("메시지 식별자"),
                                 fieldWithPath("data.[].senderId").type(JsonFieldType.NUMBER).description("메시지를 보낸 유저 식별자"),
-                                fieldWithPath("data.[].senderStudentId").type(JsonFieldType.NUMBER).description("메시지를 보낸 유저 학번"),
+                                fieldWithPath("data.[].senderStudentId").type(JsonFieldType.STRING).description("메시지를 보낸 유저 학번"),
                                 fieldWithPath("data.[].content").type(JsonFieldType.STRING).description("메시지 내용"),
                                 fieldWithPath("data.[].createdTime").type(JsonFieldType.STRING).description("메시지 생성 시간"),
                                 fieldWithPath("data.[].roomId").type(JsonFieldType.NUMBER).description("채팅방 식별자")

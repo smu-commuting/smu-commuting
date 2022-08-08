@@ -20,7 +20,7 @@ public class BusOpenChatMessage extends BaseTimeEntity {
     private Long senderId;
 
     @Column(name = "sender_student_id")
-    private Integer senderStudentId;
+    private String senderStudentId;
 
     @Column(name = "content")
     private String content;

@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class TaxiMessageResponse {
     private Long messageId;
     private Long senderId;
-    private Integer senderStudentId;
+    private String senderStudentId;
     private String content;
     private Long roomId;
     private LocalDateTime createdTime;

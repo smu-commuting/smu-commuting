@@ -13,7 +13,7 @@ public class TaxiMessageRequest {
     private String message;
     private Long roomId;
     private Long senderId;
-    private int studentId;
+    private String studentId;
 
     public TaxiMessage toEntity() {
         if (this.getMessageType().equals(TaxiMessageRequest.MessageType.ENTER)) {
