@@ -89,7 +89,11 @@ function BusInfoModal() {
                         {busData && busData[isUserClickStationNumber].arrmsg1}
                     </p>
                     <br />
-                    <p>{busData && cumCongest}</p>
+                    <p>
+                        {busData && cumCongest === '데이터 없음'
+                            ? ''
+                            : cumCongest}
+                    </p>
                 </div>
             )}
             <div className="bus-bottom">
