@@ -55,7 +55,7 @@ function SignUpPage() {
                 console.log('인증 성공', res);
                 const userInfo = {
                     // email: `${studentId}@sangmyung.kr`,
-                    // email: `${studentId}@${email}`,
+                    email: `${studentId}@${email}`,
                     studentId,
                     imageId: 1,
                 };
