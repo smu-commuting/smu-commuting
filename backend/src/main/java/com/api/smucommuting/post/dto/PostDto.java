@@ -9,7 +9,7 @@ public class PostDto {
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Writer {
-        private Integer studentId;
+        private String studentId;
         private String profileImageUrl;
 
         public static PostDto.Writer build(User user) {

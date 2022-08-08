@@ -74,7 +74,7 @@ class PostReplyControllerTest extends MvcTest {
                 .replyId(1L)
                 .content("감사합니다!")
                 .isMine(false)
-                .writer(PostDto.Writer.builder().studentId(123).profileImageUrl("image").build())
+                .writer(PostDto.Writer.builder().studentId("123").profileImageUrl("image").build())
                 .createdDate(LocalDateTime.of(2022, 6, 8, 9, 30))
                 .build();
 
@@ -82,7 +82,7 @@ class PostReplyControllerTest extends MvcTest {
                 .replyId(2L)
                 .content("네!")
                 .isMine(true)
-                .writer(PostDto.Writer.builder().studentId(12345).profileImageUrl("image").build())
+                .writer(PostDto.Writer.builder().studentId("12345").profileImageUrl("image").build())
                 .createdDate(LocalDateTime.of(2022, 6, 8, 9, 40))
                 .build();
 
@@ -103,7 +103,7 @@ class PostReplyControllerTest extends MvcTest {
                                 fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
                                 fieldWithPath("data.[].replyId").type(JsonFieldType.NUMBER).description("댓글 식별자"),
                                 fieldWithPath("data.[].content").type(JsonFieldType.STRING).description("내용"),
-                                fieldWithPath("data.[].writer.studentId").type(JsonFieldType.NUMBER).description("댓쓴이 학번"),
+                                fieldWithPath("data.[].writer.studentId").type(JsonFieldType.STRING).description("댓쓴이 학번"),
                                 fieldWithPath("data.[].writer.profileImageUrl").type(JsonFieldType.STRING).description("댓쓴이 프로필 이미지"),
                                 fieldWithPath("data.[].isMine").type(JsonFieldType.BOOLEAN).description("자신의 댓글이라면 true"),
                                 fieldWithPath("data.[].createdDate").type(JsonFieldType.STRING).description("댓글 생성 날짜")

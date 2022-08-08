@@ -28,7 +28,7 @@ class UserControllerTest extends MvcTest {
 
     private static final Long USER_ID = 1L;
     private static final String EMAIL = "test@test.com";
-    private static final Integer STUDENT_ID = 123456;
+    private static final String STUDENT_ID = "123456";
     private static final String EMAIL_VERIFICATION_CDE = "CODE";
     private static final Long PROFILE_IMAGE_ID = 1L;
     private static final String PROFILE_IMAGE_URL = "image url";
@@ -55,14 +55,14 @@ class UserControllerTest extends MvcTest {
                 .andDo(document("user_signup",
                         requestFields(
                                 fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
-                                fieldWithPath("studentId").type(JsonFieldType.NUMBER).description("학번"),
+                                fieldWithPath("studentId").type(JsonFieldType.STRING).description("학번"),
                                 fieldWithPath("imageId").type(JsonFieldType.NUMBER).description("프로필 이미지 식별자")
                         ),
                         responseFields(
                                 fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
                                 fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
                                 fieldWithPath("data.userId").type(JsonFieldType.NUMBER).description("유저 식별자"),
-                                fieldWithPath("data.studentId").type(JsonFieldType.NUMBER).description("학번"),
+                                fieldWithPath("data.studentId").type(JsonFieldType.STRING).description("학번"),
                                 fieldWithPath("data.email").type(JsonFieldType.STRING).description("이메일")
                         )
                 ));
@@ -163,7 +163,7 @@ class UserControllerTest extends MvcTest {
                                 fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
                                 fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
                                 fieldWithPath("data.userId").type(JsonFieldType.NUMBER).description("유저 식별자"),
-                                fieldWithPath("data.studentId").type(JsonFieldType.NUMBER).description("학번"),
+                                fieldWithPath("data.studentId").type(JsonFieldType.STRING).description("학번"),
                                 fieldWithPath("data.imageUrl").type(JsonFieldType.STRING).description("이미지 url")
 
                         )

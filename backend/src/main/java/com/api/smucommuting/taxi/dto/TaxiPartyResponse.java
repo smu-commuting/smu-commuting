@@ -92,7 +92,7 @@ public class TaxiPartyResponse {
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class TaxiPartyUsers {
         private Long userId;
-        private Integer studentId;
+        private String studentId;
         private Boolean isBlocked;
 
         public static TaxiPartyUsers build(User user, List<Long> blockedUserIdList) {

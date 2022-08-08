@@ -9,7 +9,7 @@ public class UserRequest {
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Signup {
         private String email;
-        private int studentId;
+        private String studentId;
         private Long imageId;
     }
 

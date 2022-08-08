@@ -26,7 +26,7 @@ public class User extends BaseTimeEntity {
     private String email;
 
     @Column(name = "student_id")
-    private Integer studentId;
+    private String studentId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "social_login_provider")
@@ -40,7 +40,7 @@ public class User extends BaseTimeEntity {
     @JoinColumn(name = "profile_image_id")
     private ProfileImage profileImage;
 
-    public User signup(String email, int studentId, ProfileImage profileImage, UserValidator userValidator) {
+    public User signup(String email, String studentId, ProfileImage profileImage, UserValidator userValidator) {
         userValidator.emailValidate(email);
         this.email = email;
         this.studentId = studentId;

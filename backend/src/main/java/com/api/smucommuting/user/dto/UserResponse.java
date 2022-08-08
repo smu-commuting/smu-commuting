@@ -11,7 +11,7 @@ public class UserResponse {
     public static class Signup {
         private Long userId;
         private String email;
-        private Integer studentId;
+        private String studentId;
 
         public static UserResponse.Signup build(User user) {
             return Signup.builder()
@@ -28,7 +28,7 @@ public class UserResponse {
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class GetOne {
         private Long userId;
-        private Integer studentId;
+        private String studentId;
         private String imageUrl;
 
         public static UserResponse.GetOne build(User user) {

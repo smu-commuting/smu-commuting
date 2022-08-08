@@ -24,7 +24,7 @@ public class DataLoader implements CommandLineRunner {
             List<User> users = new ArrayList<>();
             for (int i = 1; i < 100; i++) {
                 User user = User.builder().oauthId(String.valueOf(i))
-                        .studentId(i + 1000)
+                        .studentId(String.valueOf(i))
                         .email("test@test.com")
                         .role(Role.USER)
                         .socialLoginProvider(SocialLoginProvider.KAKAO)

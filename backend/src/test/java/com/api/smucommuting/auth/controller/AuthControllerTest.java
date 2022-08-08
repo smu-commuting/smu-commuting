@@ -36,7 +36,7 @@ class AuthControllerTest extends MvcTest {
     private TokenProvider tokenProvider;
     private User user;
     private static final String EMAIL = "test@test.com";
-    private static final Integer STUDENT_ID = 123456;
+    private static final String STUDENT_ID = "123456";
 
     @BeforeEach
     public void setup() {

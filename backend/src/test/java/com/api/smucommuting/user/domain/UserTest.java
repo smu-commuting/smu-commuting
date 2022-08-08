@@ -25,9 +25,9 @@ class UserTest {
                 .profileImage(profileImage)
                 .build();
 
-        user.signup("email", 123, profileImage, userValidator);
+        user.signup("email", "123", profileImage, userValidator);
         assertEquals(user.getEmail(), "email");
-        assertEquals(user.getStudentId(), 123);
+        assertEquals(user.getStudentId(), "123");
         verify(userValidator).emailValidate(any());
     }
 }

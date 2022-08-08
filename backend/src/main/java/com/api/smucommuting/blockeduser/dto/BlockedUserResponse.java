@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class BlockedUserResponse {
     private Long userId;
-    private Integer studentId;
+    private String studentId;
 
     public static BlockedUserResponse build(User user) {
         return BlockedUserResponse.builder()

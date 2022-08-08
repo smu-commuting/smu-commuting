@@ -59,8 +59,8 @@ class BlockedUserControllerTest extends MvcTest {
     @Test
     @DisplayName("합승 거부 목록 조회 문서화")
     public void getList() throws Exception {
-        BlockedUserResponse response1 = BlockedUserResponse.builder().userId(1L).studentId(1234).build();
-        BlockedUserResponse response2 = BlockedUserResponse.builder().userId(2L).studentId(1111).build();
+        BlockedUserResponse response1 = BlockedUserResponse.builder().userId(1L).studentId("1234").build();
+        BlockedUserResponse response2 = BlockedUserResponse.builder().userId(2L).studentId("1111").build();
 
         given(blockedUserService.getList(any())).willReturn(Arrays.asList(response1, response2));
 
@@ -75,7 +75,7 @@ class BlockedUserControllerTest extends MvcTest {
                                 fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
                                 fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
                                 fieldWithPath("data.[].userId").type(JsonFieldType.NUMBER).description("차단당한 유저 식별자"),
-                                fieldWithPath("data.[].studentId").type(JsonFieldType.NUMBER).description("차단 당한 유저 학번")
+                                fieldWithPath("data.[].studentId").type(JsonFieldType.STRING).description("차단 당한 유저 학번")
                         )
                 ));
     }
