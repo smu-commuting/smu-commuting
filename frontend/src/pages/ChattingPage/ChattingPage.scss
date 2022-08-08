@@ -4,17 +4,20 @@
     .chattingroompage-wrapper {
         padding-top: 7rem;
         padding-bottom: 4.5rem;
-        .notice {
-            width: 90%;
-            padding: 0.5rem 1rem;
-            margin-top: 2rem;
-            margin: auto;
-            text-align: center;
-            background-color: #efecff;
-            color: #000000;
-            font-family: 'NotoSansKR-Medium';
-            font-size: 1.1rem;
-            border-radius: 2rem;
+        .notice-wrapper {
+            display: flex;
+            justify-content: center;
+            .notice {
+                width: 90%;
+                padding: 0.5rem 1rem;
+                margin-top: 1rem;
+                text-align: center;
+                background-color: #efecff;
+                color: #000000;
+                font-family: 'NotoSansKR-Medium';
+                font-size: 1.1rem;
+                border-radius: 2rem;
+            }
         }
     }
     .chatinputarea-wrapper {

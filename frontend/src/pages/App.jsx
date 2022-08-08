@@ -6,7 +6,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster, toast } from 'react-hot-toast';
