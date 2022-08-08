@@ -25,11 +25,18 @@
             display: flex;
             align-items: center;
             input {
+                flex: 1;
                 width: 50%;
                 height: 2.8rem;
                 border: 1px solid #a19fad;
             }
             p {
+                margin-left: 0.6rem;
+                @include font-face(NotoSansKR-Regular, 1.6rem, 1.6rem, #000000);
+            }
+            select {
+                flex: 1;
+                height: 3.2rem;
                 margin-left: 0.6rem;
                 @include font-face(NotoSansKR-Regular, 1.6rem, 1.6rem, #000000);
             }
@@ -68,7 +75,8 @@
             }
         }
         .student-id-btn {
-            margin-top: 1rem;
+            margin-top: 2.4rem;
+            // margin-top: 1rem;
             width: 100%;
             height: 4rem;
             background: #7b88f2;

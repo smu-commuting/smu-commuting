@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -65,7 +66,7 @@ function MyPage() {
                         <br /> 상명대학교 서울캠퍼스
                     </div>
                 </div>
-                <div className="notification-setting">
+                {/* <div className="notification-setting">
                     <p>알림 설정</p>
                     <div className="toggleSwitch">
                         <label className="label" htmlFor="toggleSwitch">
@@ -78,7 +79,7 @@ function MyPage() {
                             <span className="switch" />
                         </label>
                     </div>
-                </div>
+                </div> */}
                 <button
                     className="refusal-taxi-share-btn"
                     type="submit"

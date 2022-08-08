@@ -2,7 +2,6 @@ import React, { useCallback } from 'react';
 import './ChattingListHeader.scss';
 import { useNavigate } from 'react-router-dom';
 import Back from '../../../assets/ChattingList/ChattingListHeader/Back.png';
-import Talk from '../../../assets/ChattingList/ChattingListHeader/talk1.png';
 
 function ChattingListHeader() {
     const navigate = useNavigate();
@@ -21,11 +20,13 @@ function ChattingListHeader() {
                     />
                 </div>
                 <div>
-                    <img src={Talk} alt="Talk Logo" />
+                    <p>나의 채팅방</p>
                 </div>
+                {/* <div>
+                    <img src={Talk} alt="Talk Logo" />
+                </div> */}
                 <div />
             </div>
-            <p>합승 Talk</p>
         </div>
     );
 }
