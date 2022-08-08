@@ -94,7 +94,7 @@ function DenialModal() {
                         getPeopleList.length === 0 ? (
                             <div className="no-data">
                                 <img src={denial} alt="없음" />
-                                <p>아직 들어온 슴우가 없어요😥</p>
+                                <p>아직 들어온 슴우가 없어요</p>
                             </div>
                         ) : (
                             <>
