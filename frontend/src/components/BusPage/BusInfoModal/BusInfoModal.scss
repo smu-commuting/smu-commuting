@@ -3,8 +3,7 @@
     position: absolute;
     width: 100%;
     top: 4rem;
-    height: 30rem;
-    padding: 1.5rem 1.3rem;
+    padding: 1.5rem 1.3rem 10rem 1.3rem;
     background-color: #efecff;
     z-index: 1;
     .cancel {
@@ -31,15 +30,20 @@
         text-align: center;
     }
     .arr-info {
-        width: 100%;
-        padding: 5rem 0 0 5.5rem;
+        padding: 5rem 0 0 0;
+        position: relative;
+        text-align: center;
     }
     .bus-bottom {
-        width: 100%;
+        position: absolute;
+        bottom: 1rem;
+        right: -1rem;
+        display: flex;
+        justify-content: flex-end;
         img {
-            width: 35%;
-            float: right;
+            opacity: 0.1;
             display: block;
         }
     }
+    // position: relative;
 }
