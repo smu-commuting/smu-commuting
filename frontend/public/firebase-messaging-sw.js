@@ -5,7 +5,8 @@ importScripts(
     'https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js',
 );
 
-firebase.initializeApp({});
+firebase.initializeApp({
+});
 
 const messaging = firebase.messaging();
 
@@ -18,7 +19,7 @@ messaging.onBackgroundMessage(payload => {
     const notificationTitle = payload.notification.title;
     const notificationOptions = {
         body: payload.notification.body,
-        icon: '%PUBLIC_URL%/스뮤로.png',
+        icon: '/스뮤로.png',
     };
     self.registration.showNotification(notificationTitle, notificationOptions);
 });

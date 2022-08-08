@@ -7,7 +7,7 @@ function OpenChattingHeader() {
     const { id } = useParams();
     const navigate = useNavigate();
     const goBack = () => {
-        navigate('/chatlist');
+        navigate('/mychatlist');
     };
     return (
         <div className="openchattingheader-wrapper">

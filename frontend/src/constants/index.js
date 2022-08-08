@@ -133,6 +133,9 @@ export {
     TAXI_TO_CHAT_INFO_MODAL_CLOSE_REQUEST,
     TAXI_TO_CHAT_INFO_MODAL_CLOSE_SUCCESS,
     TAXI_TO_CHAT_INFO_MODAL_CLOSE_FAILURE,
+    CHAT_BUS_ROOM_DELETE_MESSAGE_REQUEST,
+    CHAT_BUS_ROOM_DELETE_MESSAGE_SUCCESS,
+    CHAT_BUS_ROOM_DELETE_MESSAGE_FAILURE,
 } from './actions';
 
 export { default as prevent } from './prevent';
@@ -150,4 +153,4 @@ export {
     SeoulWomanNurseUniv,
 } from './BUS_NUM';
 
-export { hoursArr, minutesArr } from './dayData';
+export { hoursArr, minutesArr, monthDay } from './dayData';

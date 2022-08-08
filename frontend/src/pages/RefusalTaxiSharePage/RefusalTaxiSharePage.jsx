@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Arrow from '../../assets/MyPage/arrow.png';
@@ -38,7 +38,7 @@ function RefusalTaxiSharePage() {
                 />
                 <div>택시 합승 거부 설정</div>
             </div>
-            {blockedUserList.length === 0 ? (
+            {blockedUserList && blockedUserList.length === 0 ? (
                 <div className="no-list-wrapper">
                     <div>
                         <img src={defaultImg} alt="no-list" />
@@ -48,23 +48,26 @@ function RefusalTaxiSharePage() {
             ) : (
                 <>
                     <div className="headcount-text">
-                        총 {blockedUserList.length}명의 학우를 탑승
-                        거부하였습니다.
+                        총 {blockedUserList && blockedUserList.length}명의
+                        학우를 탑승 거부하였습니다.
                     </div>
                     <ul className="refusaltaxisharepage-content">
-                        {blockedUserList.map(blockedUser => (
-                            <li className="refusal-list">
-                                <p>{blockedUser.studentId}</p>
-                                <button
-                                    type="button"
-                                    onClick={() =>
-                                        unBlockUserHandler(blockedUser.userId)
-                                    }
-                                >
-                                    해제
-                                </button>
-                            </li>
-                        ))}
+                        {blockedUserList &&
+                            blockedUserList.map(blockedUser => (
+                                <li className="refusal-list">
+                                    <p>{blockedUser.studentId}</p>
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            unBlockUserHandler(
+                                                blockedUser.userId,
+                                            )
+                                        }
+                                    >
+                                        해제
+                                    </button>
+                                </li>
+                            ))}
                     </ul>
                 </>
             )}

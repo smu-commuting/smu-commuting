@@ -11,7 +11,7 @@ function Header() {
         navigate('/home');
     }, []);
     const onChattingClick = useCallback(() => {
-        navigate('/chatlist');
+        navigate('/mychatlist');
     }, []);
     const onMyPageClick = useCallback(() => {
         navigate('/mypage');

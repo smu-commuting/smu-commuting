@@ -13,6 +13,7 @@
         -moz-border-radius: 1rem;
         border-radius: 1rem;
         @include font-face('NotoSansKR-Medium', 1.3rem, 0, black);
+        word-break: break-all;
     }
     .time {
         font-family: 'NotoSansKR-Medium';
