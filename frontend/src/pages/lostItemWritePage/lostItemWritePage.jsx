@@ -100,7 +100,7 @@ const lostItemWritePage = () => {
                     <input
                         name="item"
                         className="item-hash"
-                        placeholder="# 습득 물품명을 간단한 해시태그로 입력해주세요."
+                        placeholder="습득 물품명을 입력해주세요."
                         defaultValue={info.item && info.item}
                         onChange={onInfoChange}
                         required
@@ -108,7 +108,7 @@ const lostItemWritePage = () => {
                     <input
                         name="place"
                         className="place-hash"
-                        placeholder="# 습득 장소명을 간단한 해시태그로 입력해주세요."
+                        placeholder="습득 장소명을 입력해주세요."
                         defaultValue={info.place && info.place}
                         onChange={onInfoChange}
                         required
