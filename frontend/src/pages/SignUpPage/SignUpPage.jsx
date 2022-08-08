@@ -42,6 +42,7 @@ function SignUpPage() {
     // 인증번호 요청 API
     const sendNumber = async () => {
         // if (studentId.length < 8) return;
+        if (studentId.length === 0) return;
         console.log(`${studentId}@${email}`);
         const response = await sendNumberApi(studentId, email);
         if (response.data.success) setCheckSend(true);
@@ -55,9 +56,10 @@ function SignUpPage() {
                 const userInfo = {
                     // email: `${studentId}@sangmyung.kr`,
                     email: `${studentId}@${email}`,
-                    studentId: 201710746,
+                    studentId,
                     imageId: 1,
                 };
+                console.log(userInfo);
                 signupApi(userInfo)
                     .then(() => {
                         dispatch(signupRequest(userInfo));

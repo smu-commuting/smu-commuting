@@ -21,7 +21,7 @@ function LogInProcess() {
             .catch(err => console.log(err));
         if (studentId !== 'null') {
             const userInfo = {
-                email: `${studentId}@sangmyung.kr`,
+                // email: `${studentId}@`${}`,
                 studentId,
                 id,
             };

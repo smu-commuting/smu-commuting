@@ -130,8 +130,7 @@ function OpenChattingPage() {
             <div className="openchatting-list">
                 {messageBottle ? (
                     messageBottle.map((message, index) => {
-                        return message.senderStudentId ===
-                            parseInt(studentId, 10) ? (
+                        return message.senderStudentId === studentId ? (
                             <MeChatBox
                                 key={message.messageId}
                                 id={message.messageId}
