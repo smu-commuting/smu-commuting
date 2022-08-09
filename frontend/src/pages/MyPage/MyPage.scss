@@ -126,6 +126,13 @@
             text-align: left;
             @include font-face(NotoSansKR-Regular, 1.5rem, 2.5rem, #292733);
         }
+        .logout-btn {
+            display: block;
+            padding: 2rem;
+            border-bottom: 0.063rem solid #a19fad;
+            text-align: left;
+            @include font-face(NotoSansKR-Regular, 1.5rem, 2.5rem, #292733);
+        }
         .membership-withdrawal-btn {
             display: block;
             padding: 2rem;

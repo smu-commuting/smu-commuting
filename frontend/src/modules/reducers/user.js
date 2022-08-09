@@ -26,6 +26,9 @@ import {
     USER_GET_BLOCKED_LIST_REQUEST,
     USER_GET_BLOCKED_LIST_SUCCESS,
     USER_GET_BLOCKED_LIST_FAILURE,
+    USER_LOGOUT_REQUEST,
+    USER_LOGOUT_SUCCESS,
+    USER_LOGOUT_FAILURE,
 } from '../../constants';
 
 export const initialState = {
@@ -112,6 +115,12 @@ export const getBlockedUserList = () => {
     };
 };
 
+export const logOut = () => {
+    return {
+        type: USER_LOGOUT_REQUEST,
+    };
+};
+
 const reducer = (state = initialState, action) => {
     return produce(state, draft => {
         switch (action.type) {
@@ -135,7 +144,13 @@ const reducer = (state = initialState, action) => {
                 draft.loginLoading = false;
                 draft.loginError = action.err;
                 break;
-
+            case USER_LOGOUT_REQUEST:
+                break;
+            case USER_LOGOUT_SUCCESS:
+                draft.me = null;
+                break;
+            case USER_LOGOUT_FAILURE:
+                break;
             case USER_SIGN_UP_REQUEST:
                 break;
             case USER_SIGN_UP_SUCCESS:

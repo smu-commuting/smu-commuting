@@ -1,10 +1,12 @@
+/* eslint-disable dot-notation */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useCallback } from 'react';
+import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Arrow from '../../assets/MyPage/arrow.png';
 import './MyPage.scss';
-import { getUserInfo } from '../../modules/reducers/user';
+import { getUserInfo, logOut } from '../../modules/reducers/user';
 
 function MyPage() {
     const navigate = useNavigate();
@@ -38,6 +40,11 @@ function MyPage() {
     const goUpdatePage = useCallback(() => {
         navigate('/updateprofile');
     }, []);
+    const logOutHandler = () => {
+        axios.defaults.headers.common['Authorization'] = null;
+        dispatch(logOut());
+        navigate('/');
+    };
 
     return (
         <div className="mypage-wrapper">
@@ -87,8 +94,15 @@ function MyPage() {
                 >
                     택시 합승 거부 설정
                 </button>
-                <button className="inquiry-btn" type="submit" onClick={inquiry}>
+                {/* <button className="inquiry-btn" type="submit" onClick={inquiry}>
                     문의하기
+                </button> */}
+                <button
+                    type="button"
+                    className="logout-btn"
+                    onClick={logOutHandler}
+                >
+                    로그아웃
                 </button>
                 <button
                     className="membership-withdrawal-btn"
