@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types */
 /* eslint-disable dot-notation */
@@ -19,28 +20,21 @@ function LogInProcess() {
         fcmApi(localStorage.getItem('FBToken'))
             .then(() => {})
             .catch(err => console.log(err));
-        if (studentId !== 'null') {
-            const userInfo = {
-                // email: `${studentId}@`${}`,
-                studentId,
-                id,
-            };
-            dispatch(loginRequest(userInfo));
-            navigate('/home');
-        } else {
-            navigate('/signup');
-        }
+        setTimeout(() => {
+            if (studentId !== 'null') {
+                const userInfo = {
+                    // email: `${studentId}@`${}`,
+                    studentId,
+                    id,
+                };
+                dispatch(loginRequest(userInfo));
+                navigate('/home');
+            } else {
+                navigate('/signup');
+            }
+        }, 2000);
     }, []);
-    return (
-        <>
-            <LoadingPage />
-            {/* {studentId !== 'null' ? (
-                <Navigate to="/home" />
-            ) : (
-                <Navigate to="/signup" />
-            )} */}
-        </>
-    );
+    return <LoadingPage />;
 }
 
 export default LogInProcess;
