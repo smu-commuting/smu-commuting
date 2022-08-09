@@ -87,15 +87,15 @@ function MyPage() {
                 >
                     택시 합승 거부 설정
                 </button>
+                <button className="inquiry-btn" type="submit" onClick={inquiry}>
+                    문의하기
+                </button>
                 <button
                     className="membership-withdrawal-btn"
                     type="submit"
                     onClick={membershipWithdrawal}
                 >
                     회원 탈퇴
-                </button>
-                <button className="inquiry-btn" type="submit" onClick={inquiry}>
-                    문의하기
                 </button>
             </div>
         </div>
