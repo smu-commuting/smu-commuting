@@ -20,19 +20,17 @@ function LogInProcess() {
         fcmApi(localStorage.getItem('FBToken'))
             .then(() => {})
             .catch(err => console.log(err));
-        setTimeout(() => {
-            if (studentId !== 'null') {
-                const userInfo = {
-                    // email: `${studentId}@`${}`,
-                    studentId,
-                    id,
-                };
-                dispatch(loginRequest(userInfo));
-                navigate('/home');
-            } else {
-                navigate('/signup');
-            }
-        }, 2000);
+        if (studentId !== 'null') {
+            const userInfo = {
+                // email: `${studentId}@`${}`,
+                studentId,
+                id,
+            };
+            dispatch(loginRequest(userInfo));
+            navigate('/home');
+        } else {
+            navigate('/signup');
+        }
     }, []);
     return <LoadingPage />;
 }
