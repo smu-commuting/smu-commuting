@@ -12,7 +12,10 @@
         -webkit-border-radius: 1rem;
         -moz-border-radius: 1rem;
         border-radius: 1rem;
-        @include font-face('NotoSansKR-Medium', 1.3rem, 0, black);
+        font-family: 'NotoSansKR-Medium';
+        font-size: 1.3rem;
+        color: black;
+        line-height: 1.6rem;
         word-break: break-all;
     }
     .time {
