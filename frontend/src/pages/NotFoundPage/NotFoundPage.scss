@@ -1,0 +1,17 @@
+@import '../../styles/utils.scss';
+.notfoundpage-wrapper {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .inner-wrapper {
+        height: 30vh;
+        img {
+            display: block;
+            margin: auto;
+            height: 100%;
+        }
+        text-align: center;
+        @include font-face('NotoSansKR-Bold', 1.3rem, 0, #a19fad);
+    }
+}

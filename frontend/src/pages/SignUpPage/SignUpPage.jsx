@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable no-unused-vars */
@@ -61,7 +62,12 @@ function SignUpPage() {
                 };
                 console.log(userInfo);
                 signupApi(userInfo)
-                    .then(() => {
+                    .then(response => {
+                        console.log('응답 data', response);
+                        const userInfo = {
+                            studentId: response.data.data.studentId,
+                            id: response.data.data.userId,
+                        };
                         dispatch(signupRequest(userInfo));
                         navigate('/home');
                     })

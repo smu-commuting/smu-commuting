@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types */
 /* eslint-disable dot-notation */
@@ -31,16 +32,7 @@ function LogInProcess() {
             navigate('/signup');
         }
     }, []);
-    return (
-        <>
-            <LoadingPage />
-            {/* {studentId !== 'null' ? (
-                <Navigate to="/home" />
-            ) : (
-                <Navigate to="/signup" />
-            )} */}
-        </>
-    );
+    return <LoadingPage />;
 }
 
 export default LogInProcess;

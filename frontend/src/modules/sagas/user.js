@@ -26,6 +26,9 @@ import {
     USER_GET_BLOCKED_LIST_REQUEST,
     USER_GET_BLOCKED_LIST_SUCCESS,
     USER_GET_BLOCKED_LIST_FAILURE,
+    USER_LOGOUT_REQUEST,
+    USER_LOGOUT_SUCCESS,
+    USER_LOGOUT_FAILURE,
 } from '../../constants';
 import {
     userInfoReadApi,
@@ -45,6 +48,19 @@ function* login(action) {
     } catch (err) {
         yield put({
             type: USER_LOG_IN_FAILURE,
+            err,
+        });
+    }
+}
+
+function* logout() {
+    try {
+        yield put({
+            type: USER_LOGOUT_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: USER_LOGOUT_FAILURE,
             err,
         });
     }
@@ -181,6 +197,9 @@ function* watchGetProfileImgList() {
 function* watchGetBlockedUserList() {
     yield takeLatest(USER_GET_BLOCKED_LIST_REQUEST, getBlockedUserList);
 }
+function* watchLogout() {
+    yield takeLatest(USER_LOGOUT_REQUEST, logout);
+}
 
 export default function* userSaga() {
     yield all([
@@ -192,5 +211,6 @@ export default function* userSaga() {
         fork(watchGetUserInfo),
         fork(watchGetProfileImgList),
         fork(watchGetBlockedUserList),
+        fork(watchLogout),
     ]);
 }

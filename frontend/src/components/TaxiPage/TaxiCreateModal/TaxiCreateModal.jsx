@@ -57,6 +57,10 @@ function TaxiCreateModal() {
             headCount,
             meetingDate: when,
         };
+        // console.log(data);
+        // console.log(typeof data.placeId);
+        // console.log(typeof data.headCount);
+        // console.log(typeof data.meetingDate);
         dispatch(taxiPartyCreate(data));
         dispatch(taxiCreateModalClick());
     };
