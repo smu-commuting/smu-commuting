@@ -34,15 +34,21 @@ class BusInfoControllerTest extends MvcTest {
     public void getBusInfo() throws Exception {
         BusInfoResponse.MessageBody.Item item1 = BusInfoResponse.MessageBody.Item.builder()
                 .arrmsg1("8분11초후[5번째 전]")
+                .arrmsg2("19분12초후[11번째 전]")
                 .plainNo1("서울70사7781")
+                .plainNo2("서울70사7753")
                 .reride_Num1("3")
+                .reride_Num2("3")
                 .stNm("덕은교.은평차고지앞")
                 .build();
 
         BusInfoResponse.MessageBody.Item item2 = BusInfoResponse.MessageBody.Item.builder()
                 .arrmsg1("5분51초후[4번째 전]")
-                .plainNo1("서울70사7781")
+                .arrmsg2("19분12초후[11번째 전]")
+                .plainNo1("서울74사7237")
+                .plainNo2("서울70사7753")
                 .reride_Num1("3")
+                .reride_Num2("3")
                 .stNm("DMC첨단산업센터")
                 .build();
 
@@ -66,9 +72,12 @@ class BusInfoControllerTest extends MvcTest {
                         ),
                         responseFields(
                                 fieldWithPath("msgBody.itemList[].reride_Num1").type(JsonFieldType.STRING).description("(0: 데이터없음, 3: 여유, 4: 보통, 5: 혼잡)"),
-                                fieldWithPath("msgBody.itemList[].plainNo1").type(JsonFieldType.STRING).description("도착예정차량번호"),
+                                fieldWithPath("msgBody.itemList[].reride_Num2").type(JsonFieldType.STRING).description("(0: 데이터없음, 3: 여유, 4: 보통, 5: 혼잡)"),
+                                fieldWithPath("msgBody.itemList[].plainNo1").type(JsonFieldType.STRING).description("첫번째 도착예정차량번호"),
+                                fieldWithPath("msgBody.itemList[].plainNo2").type(JsonFieldType.STRING).description("두번째 도착예정차량번호"),
                                 fieldWithPath("msgBody.itemList[].stNm").type(JsonFieldType.STRING).description("정류소명"),
-                                fieldWithPath("msgBody.itemList[].arrmsg1").type(JsonFieldType.STRING).description("첫번째 도착예정 버스의 도착정보메시지")
+                                fieldWithPath("msgBody.itemList[].arrmsg1").type(JsonFieldType.STRING).description("첫번째 도착예정 버스의 도착정보메시지"),
+                                fieldWithPath("msgBody.itemList[].arrmsg2").type(JsonFieldType.STRING).description("두번째 도착예정 버스의 도착정보메시지")
                         )
                 ));
     }
