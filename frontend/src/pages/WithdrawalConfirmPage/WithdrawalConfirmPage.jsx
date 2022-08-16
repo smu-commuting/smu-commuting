@@ -21,13 +21,14 @@ function WithdrawalConfirmPage() {
     );
     const onSubmit = useCallback(() => {
         if (!id) return;
-        if (parseInt(me.studentId, 10) === parseInt(id, 10)) {
+        if (me.studentId === id) {
             deleteUserApi().then(res => {
                 axios.defaults.headers.common['Authorization'] = null;
                 navigate('/');
+                alert('서비스를 이용해주셔서 감사합니다.');
             });
         } else {
-            alert('본인의 학번과 일치하지 않습니다.');
+            alert('본인의 아이디와 일치하지 않습니다.');
         }
     }, [id]);
     const myPage = () => {
@@ -46,13 +47,9 @@ function WithdrawalConfirmPage() {
                 <div>회원 탈퇴</div>
             </div>
             <div className="wthdrawalconfirmpage-content">
-                <p>학번을 입력해주세요.</p>
+                <p>아이디를 입력해주세요.</p>
                 <div className="studentid-input">
-                    <input
-                        type="number"
-                        onChange={onIdChange}
-                        placeholder="*********"
-                    />
+                    <input onChange={onIdChange} placeholder={me.studentId} />
                     <button
                         className="confirm-btn"
                         type="submit"

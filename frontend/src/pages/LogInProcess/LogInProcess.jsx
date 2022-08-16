@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types */
 /* eslint-disable dot-notation */
@@ -21,7 +22,7 @@ function LogInProcess() {
             .catch(err => console.log(err));
         if (studentId !== 'null') {
             const userInfo = {
-                email: `${studentId}@sangmyung.kr`,
+                // email: `${studentId}@`${}`,
                 studentId,
                 id,
             };
@@ -31,16 +32,7 @@ function LogInProcess() {
             navigate('/signup');
         }
     }, []);
-    return (
-        <>
-            <LoadingPage />
-            {/* {studentId !== 'null' ? (
-                <Navigate to="/home" />
-            ) : (
-                <Navigate to="/signup" />
-            )} */}
-        </>
-    );
+    return <LoadingPage />;
 }
 
 export default LogInProcess;

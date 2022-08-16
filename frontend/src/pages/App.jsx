@@ -6,7 +6,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster, toast } from 'react-hot-toast';
@@ -56,6 +56,7 @@ import OpenChattingPage from './OpenChattingPage/OpenChattingPage';
 import OpenChattingHeader from '../components/OpenChatting/OpenChattingHeader/OpenChattingHeader';
 import DenialModal from '../components/ChattingRoomPage/DenialModal/DenialModal';
 import ChangeMaximumModal from '../components/ChattingRoomPage/ChangeMaximumModal/ChangeMaximumModal';
+import NotFoundPage from './NotFoundPage/NotFoundPage';
 
 function App() {
     const { isBusModalOpen, isTaxiModalOpen, isCommunityModalOpen } =
@@ -314,6 +315,7 @@ function App() {
                     }
                 />
                 {/* </Route> */}
+                <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </Router>
     );

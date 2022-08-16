@@ -139,14 +139,15 @@ function ChattingPage() {
         <div className="chattingpage-wrapper">
             <ChattingRoomHeader />
             <div className="chattingroompage-wrapper" ref={scrollRef}>
-                {/* <p className="notice">
-                    탑승 시각 기준 전후 30분 동안에는 하나의 채팅방만 입장할 수
-                    있습니다.
-                </p> */}
+                <div className="notice-wrapper">
+                    <p className="notice">
+                        탑승 시각 기준 전후 30분 동안에는 하나의 채팅방만 입장할
+                        수 있습니다.
+                    </p>
+                </div>
                 {messageBottle ? (
                     messageBottle.map((message, index) => {
-                        return message.senderStudentId ===
-                            parseInt(studentId, 10) ? (
+                        return message.senderStudentId === studentId ? (
                             <MeChatBox
                                 key={index}
                                 id={message.messageId}

@@ -7,7 +7,7 @@
 }
 
 .lostitempage-wrapper {
-    padding: 1.9rem 2rem;
+    padding: 2rem 2rem 1.9rem 2rem;
     .lostitempage-header {
         @extend %center;
         .arrow-wrapper {
@@ -41,7 +41,7 @@
     }
 
     .lostitempage-content {
-        padding-top: 2.5rem;
+        padding-top: 2rem;
         li:first-child {
             position: sticky;
             top: 9.8rem;

@@ -94,7 +94,7 @@ function DenialModal() {
                         getPeopleList.length === 0 ? (
                             <div className="no-data">
                                 <img src={denial} alt="없음" />
-                                <p>아직 들어온 슴우가 없어요😥</p>
+                                <p>아직 들어온 슴우가 없어요.</p>
                             </div>
                         ) : (
                             <>
@@ -103,7 +103,7 @@ function DenialModal() {
                                         <li key={people.studentId}>
                                             <p>{people.studentId}</p>
                                             {people.studentId ===
-                                            parseInt(me.studentId, 10) ? (
+                                            me.studentId ? (
                                                 <div />
                                             ) : people.isBlocked ? (
                                                 <div>
@@ -149,7 +149,7 @@ function DenialModal() {
                     ) : getOutPeopleList.length === 0 ? (
                         <div className="no-data">
                             <img src={denial} alt="없음" />
-                            <p>아직 나간 슴우가 없어요😥</p>
+                            <p>아직 나간 슴우가 없어요.</p>
                         </div>
                     ) : (
                         <>
@@ -157,8 +157,7 @@ function DenialModal() {
                                 return (
                                     <li key={people.studentId}>
                                         <p>{people.studentId}</p>
-                                        {people.studentId ===
-                                        parseInt(me.studentId, 10) ? (
+                                        {people.studentId === me.studentId ? (
                                             <div />
                                         ) : people.isBlocked ? (
                                             <div>

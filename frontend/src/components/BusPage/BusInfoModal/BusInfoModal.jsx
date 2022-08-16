@@ -27,7 +27,6 @@ function BusInfoModal() {
     }, []);
 
     useEffect(() => {
-        console.log(busData);
         let target = 0;
         for (let i = 0; i < isUserClickStationNumber; i++) {
             if (
@@ -89,7 +88,11 @@ function BusInfoModal() {
                         {busData && busData[isUserClickStationNumber].arrmsg1}
                     </p>
                     <br />
-                    <p>{busData && cumCongest}</p>
+                    <p>
+                        {busData && cumCongest === '데이터 없음'
+                            ? ''
+                            : cumCongest}
+                    </p>
                 </div>
             )}
             <div className="bus-bottom">

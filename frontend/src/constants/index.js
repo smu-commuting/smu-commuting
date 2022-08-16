@@ -136,6 +136,9 @@ export {
     CHAT_BUS_ROOM_DELETE_MESSAGE_REQUEST,
     CHAT_BUS_ROOM_DELETE_MESSAGE_SUCCESS,
     CHAT_BUS_ROOM_DELETE_MESSAGE_FAILURE,
+    USER_LOGOUT_REQUEST,
+    USER_LOGOUT_SUCCESS,
+    USER_LOGOUT_FAILURE,
 } from './actions';
 
 export { default as prevent } from './prevent';

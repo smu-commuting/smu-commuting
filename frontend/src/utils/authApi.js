@@ -19,9 +19,9 @@ export const fcmApi = async token => {
 };
 
 // 인증번호 요청 API
-export const sendNumberApi = async studentId => {
+export const sendNumberApi = async (studentId, email) => {
     const data = {
-        email: `${studentId}@sangmyung.kr`,
+        email: `${studentId}@${email}`,
     };
     return await withAuthInstance.post(
         `${process.env.REACT_APP_API_URL}${API_USER}email`,
@@ -41,7 +41,7 @@ export const verificationNumApi = async authNum => {
 };
 
 // 회원가입 API -> saga
-export const signupApi = data => {
+export const signupApi = async data => {
     console.log(data, 'signupApi 통과');
     return withAuthInstance.post(
         `${process.env.REACT_APP_API_URL}${API_USER}signup`,

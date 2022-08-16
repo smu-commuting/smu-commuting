@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable no-unused-vars */
@@ -18,23 +19,33 @@ function SignUpPage() {
     const [studentId, setStudentId] = useState(''); // 학번
     const [authNum, setAuthNum] = useState(''); // 인증번호
 
+    const [email, setEmail] = useState('naver.com');
+
     const onStudentIdChange = e => {
-        if (studentId.length > 8) {
-            alert('학번은 9자리 이내로 입력 가능합니다.');
-            setStudentId('');
-        } else {
-            setStudentId(e.target.value);
-        }
+        setStudentId(e.target.value);
+        // if (studentId.length > 8) {
+        //     alert('학번은 9자리 이내로 입력 가능합니다.');
+        //     setStudentId('');
+        // } else {
+        //     setStudentId(e.target.value);
+        // }
     };
 
     const onAuthNumChange = e => {
         setAuthNum(e.target.value);
     };
 
+    const onEmailChange = e => {
+        console.log(e.target.value);
+        setEmail(e.target.value);
+    };
+
     // 인증번호 요청 API
     const sendNumber = async () => {
-        if (studentId.length < 8) return;
-        const response = await sendNumberApi(studentId);
+        // if (studentId.length < 8) return;
+        if (studentId.length === 0) return;
+        console.log(`${studentId}@${email}`);
+        const response = await sendNumberApi(studentId, email);
         if (response.data.success) setCheckSend(true);
     };
 
@@ -42,18 +53,26 @@ function SignUpPage() {
     const postAuthNum = async () => {
         verificationNumApi(authNum)
             .then(res => {
-                console.log(res);
+                console.log('인증 성공', res);
                 const userInfo = {
-                    email: `${studentId}@sangmyung.kr`,
+                    // email: `${studentId}@sangmyung.kr`,
+                    email: `${studentId}@${email}`,
                     studentId,
                     imageId: 1,
                 };
+                console.log(userInfo);
                 signupApi(userInfo)
-                    .then(() => {
+                    .then(response => {
+                        console.log('응답 data', response);
+                        const userInfo = {
+                            studentId: response.data.data.studentId,
+                            id: response.data.data.userId,
+                        };
                         dispatch(signupRequest(userInfo));
                         navigate('/home');
                     })
                     .catch(err => {
+                        console.log(err);
                         // 중복된 이메일
                         alert(err.response.data.error.info);
                         setCheckSend(false);
@@ -73,20 +92,25 @@ function SignUpPage() {
             <div className="signup-header">
                 <img src={Search} alt="검색" />
                 <div>
-                    우리학교
+                    {/* 우리학교 */}
                     <br /> 인증이 필요해요:)
                 </div>
             </div>
             <div className="signup-middle">
-                <p>학번을 입력해 주세요</p>
+                <p>이메일을 입력해 주세요</p>
                 <div>
                     <input
-                        type="number"
+                        // type="number"
                         value={studentId}
                         onChange={onStudentIdChange}
                         required
                     />
-                    <p>@ sangmyung.kr</p>
+                    <p>@</p>
+                    <select onChange={onEmailChange}>
+                        <option selected>naver.com</option>
+                        <option>gmail.com</option>
+                    </select>
+                    {/* <p>@ sangmyung.kr</p> */}
                 </div>
                 <button
                     className="student-id-btn"
@@ -108,7 +132,7 @@ function SignUpPage() {
                         />
                         <Timer mm={5} ss={0} />
                     </div>
-                    <p
+                    {/* <p
                         className="info"
                         onClick={() =>
                             window.open(
@@ -119,7 +143,7 @@ function SignUpPage() {
                         aria-hidden
                     >
                         인증번호 확인하기
-                    </p>
+                    </p> */}
                     <button
                         className="student-id-btn"
                         type="submit"
