@@ -52,9 +52,10 @@ public class TaxiPartyService {
     public TaxiPartyResponse.GetOne getOne(Long taxiPartyId, User loginUser) {
         TaxiParty taxiParty = taxiPartyRepository.findByIdWithTaxiGroupAndPlace(taxiPartyId).orElseThrow(TaxiPartyNotFoundException::new);
         List<Long> partyUserIdList = taxiParty.getTaxiGroupList().stream().map(TaxiGroup::getUserId).collect(Collectors.toList());
+        List<User> findPartyUserList = users.findAllByUserIdInWithProfile(partyUserIdList);
         List<Long> blockedUserIdList = blockUsers.findAllByUserId(loginUser.getId()).stream().map(BlockedUser::getBlockedUserId).collect(Collectors.toList());
 
-        return TaxiPartyResponse.GetOne.build(taxiParty, partyUserIdList, blockedUserIdList);
+        return TaxiPartyResponse.GetOne.build(taxiParty, findPartyUserList, blockedUserIdList);
     }
 
     @Transactional(readOnly = true)

@@ -16,4 +16,9 @@ class UserFinder implements Users {
     public List<User> findAllByUserIdIn(List<Long> userIdList) {
         return userRepository.findAllByIdIn(userIdList);
     }
+
+    @Override
+    public List<User> findAllByUserIdInWithProfile(List<Long> userIdList) {
+        return userRepository.findAllByIdInWithProfile(userIdList);
+    }
 }

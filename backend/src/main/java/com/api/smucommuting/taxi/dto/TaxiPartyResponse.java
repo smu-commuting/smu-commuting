@@ -25,8 +25,9 @@ public class TaxiPartyResponse {
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "Asia/Seoul")
         private LocalDateTime time;
         private Boolean hasBlockedUser;
+        private List<TaxiPartyDto.PartyUser> users;
 
-        public static TaxiPartyResponse.GetOne build(TaxiParty taxiParty, List<Long> partyUserIdList, List<Long> blockedUserIdList) {
+        public static TaxiPartyResponse.GetOne build(TaxiParty taxiParty, List<User> partyUserList, List<Long> blockedUserIdList) {
             return GetOne.builder()
                     .taxiPartyId(taxiParty.getId())
                     .headcount(taxiParty.getTaxiGroupList().size())
@@ -34,7 +35,8 @@ public class TaxiPartyResponse {
                     .date(taxiParty.getMeetingTime())
                     .time(taxiParty.getMeetingTime())
                     .place(taxiParty.getTaxiPlace().getName())
-                    .hasBlockedUser(partyUserIdList.stream().anyMatch(blockedUserIdList::contains))
+                    .hasBlockedUser(partyUserList.stream().anyMatch(partyUser -> blockedUserIdList.contains(partyUser.getId())))
+                    .users(partyUserList.stream().map(TaxiPartyDto.PartyUser::build).collect(Collectors.toList()))
                     .build();
         }
     }

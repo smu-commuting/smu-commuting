@@ -1,6 +1,7 @@
 package com.api.smucommuting.taxi.controller;
 
 import com.api.smucommuting.MvcTest;
+import com.api.smucommuting.taxi.dto.TaxiPartyDto;
 import com.api.smucommuting.taxi.dto.TaxiPartyRequest;
 import com.api.smucommuting.taxi.dto.TaxiPartyResponse;
 import com.api.smucommuting.taxi.service.TaxiPartyService;
@@ -15,6 +16,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -93,6 +95,7 @@ class TaxiPartyControllerTest extends MvcTest {
                 .place(PLACE_NAME)
                 .time(MEETING_DATE)
                 .hasBlockedUser(true)
+                .users(Collections.singletonList(TaxiPartyDto.PartyUser.builder().userId(1L).profileUrl("profileUrl").build()))
                 .build();
 
         given(taxiPartyService.getOne(any(), any())).willReturn(response);
@@ -116,7 +119,9 @@ class TaxiPartyControllerTest extends MvcTest {
                                 fieldWithPath("data.headcount").type(JsonFieldType.NUMBER).description("최대 인원"),
                                 fieldWithPath("data.date").type(JsonFieldType.STRING).description("택시 타는 시간"),
                                 fieldWithPath("data.time").type(JsonFieldType.STRING).description("택시 타는 시간"),
-                                fieldWithPath("data.hasBlockedUser").type(JsonFieldType.BOOLEAN).description("차단한 유저가 있다면 true")
+                                fieldWithPath("data.hasBlockedUser").type(JsonFieldType.BOOLEAN).description("차단한 유저가 있다면 true"),
+                                fieldWithPath("data.users[].userId").type(JsonFieldType.NUMBER).description("택시방에 있는 유저 식별자"),
+                                fieldWithPath("data.users[].profileUrl").type(JsonFieldType.STRING).description("택시방에 있는 유저 프로필 url 없다면 null")
                         )
                 ));
     }
