@@ -21,7 +21,9 @@
             }
             .number {
                 padding-left: 1rem;
-                @include font-face(NotoSansKR-Regular, 1.3rem, 0rem, darkgray);
+                font-family: 'NotoSansKR-Regular';
+                font-size: 1.3rem;
+                color: darkgray;
             }
         }
         .right {
@@ -31,7 +33,9 @@
             align-items: center;
             .write-date {
                 text-align: right;
-                @include font-face(NotoSansKR-Regular, 1rem, 0rem, darkgray);
+                font-family: 'NotoSansKR-Regular';
+                font-size: 1rem;
+                color: darkgray;
             }
             .menu {
                 padding-left: 1rem;
@@ -42,7 +46,10 @@
     .lostitemreply-box-content {
         padding-left: 0.5rem;
         .content {
-            @include font-face(NotoSansKR-Medium, 1.5rem, 0rem, #292733);
+            font-family: 'NotoSansKR-Medium';
+            font-size: 1.5rem;
+            color: #292733;
+            line-height: 1.6rem;
         }
     }
 }

@@ -33,6 +33,7 @@ function ChattingPage() {
     const { chatMessageList } = useSelector(state => state.chat);
     const { chatMessageListLoading, chatLoadEnd, chatMessageListDone } =
         useSelector(state => state.chat);
+    const { chatRoomHeaderInfo } = useSelector(state => state.chat);
     const [prevHeight, setPrevHeight] = useState();
     const [messageBottle, setMessageBottle] = useState([]);
     const [myChat, setMyChat] = useState();
@@ -162,6 +163,9 @@ function ChattingPage() {
                                 content={message.content}
                                 senderId={message.senderStudentId}
                                 createdTime={message.createdTime}
+                                user={chatRoomHeaderInfo.users.filter(
+                                    user => user.userId === message.senderId,
+                                )}
                             />
                         );
                     })
