@@ -7,16 +7,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { isBusInfoModalClick } from '../../../modules/reducers/bus';
 import './BusInfoModal.scss';
 import Cancel from '../../../assets/BusPage/cancel.png';
-import Normal from '../../../assets/BusPage/rest_normal.png';
-import Confuse from '../../../assets/BusPage/confuse.png';
+import frontBus from '../../../assets/BusPage/front-bus.png';
+import { busCongestSelector } from '../../../constants/busCongestSelector';
 
 function BusInfoModal() {
     const { isUserClickStationNumber, busData } = useSelector(
         state => state.bus,
     );
     const dispatch = useDispatch();
-    const [cumCongest, setCumCongest] = useState();
-    const [sumung, setSumung] = useState();
     const onModalClick = useCallback(() => {
         dispatch(isBusInfoModalClick());
     }, [dispatch]);
@@ -26,56 +24,67 @@ function BusInfoModal() {
         return () => (document.body.style = `overflow: auto`);
     }, []);
 
-    useEffect(() => {
-        let target = 0;
-        for (let i = 0; i < isUserClickStationNumber; i++) {
-            if (
-                busData[i].reride_Num1 === '5' &&
-                busData[i].plainNo1 ===
-                    busData[isUserClickStationNumber].plainNo1
-            ) {
-                target = i;
-                break;
-            }
-        }
-        if (target === 0) {
-            switch (busData[isUserClickStationNumber].reride_Num1) {
-                case '0':
-                    setCumCongest('데이터 없음');
-                    setSumung(Normal);
-                    break;
-                case '3':
-                    setCumCongest(`현재 '여유' 상태에요 :)`);
-                    setSumung(Normal);
-                    break;
-                case '4':
-                    setCumCongest(`현재 '보통' 상태에요!`);
-                    setSumung(Normal);
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            const congest =
-                parseInt(isUserClickStationNumber, 10) - parseInt(target, 10);
-            setCumCongest(`${congest} 이전부터 혼잡`);
-            setSumung(Confuse);
-        }
-    }, []);
     return (
-        <div
-            className="businfomodal-wrapper"
-            onClick={onModalClick}
-            aria-hidden
-        >
-            <div className="cancel">
+        <div className="businfomodal-wrapper">
+            <div className="cancel" onClick={onModalClick} aria-hidden>
                 <img src={Cancel} alt="cancel" />
             </div>
             <div className="station">
                 {busData[isUserClickStationNumber].stNm &&
                     busData[isUserClickStationNumber].stNm}
             </div>
-            {busData[isUserClickStationNumber].arrmsg1 === '운행종료' ? (
+            <main className="info-wrapper">
+                <div className="info-bus">
+                    <div className="img-wrapper">
+                        <img src={frontBus} alt="첫번째 도착 버스" />
+                        <p>
+                            {busData &&
+                                busData[isUserClickStationNumber].plainNo1}
+                        </p>
+                    </div>
+                    {busData[isUserClickStationNumber].arrmsg1 ===
+                    '운행종료' ? (
+                        <p className="end">운행종료</p>
+                    ) : (
+                        <div className="info">
+                            <p>
+                                {busData &&
+                                    busData[isUserClickStationNumber].arrmsg1}
+                            </p>
+                            <p>
+                                {busData &&
+                                    busCongestSelector(
+                                        busData[isUserClickStationNumber]
+                                            .reride_Num1,
+                                    )}
+                            </p>
+                        </div>
+                    )}
+                </div>
+                <div className="info-bus second">
+                    <div className="img-wrapper">
+                        <img src={frontBus} alt="두번째 도착 버스" />
+                        <p>
+                            {busData &&
+                                busData[isUserClickStationNumber].plainNo2}
+                        </p>
+                    </div>
+                    <div className="info">
+                        <p>
+                            {busData &&
+                                busData[isUserClickStationNumber].arrmsg2}
+                        </p>
+                        <p>
+                            {busData &&
+                                busCongestSelector(
+                                    busData[isUserClickStationNumber]
+                                        .reride_Num2,
+                                )}
+                        </p>
+                    </div>
+                </div>
+            </main>
+            {/* {busData[isUserClickStationNumber].arrmsg1 === '운행종료' ? (
                 <p className="end">운행종료</p>
             ) : (
                 <div className="arr-info">
@@ -89,15 +98,13 @@ function BusInfoModal() {
                     </p>
                     <br />
                     <p>
-                        {busData && cumCongest === '데이터 없음'
-                            ? ''
-                            : cumCongest}
+                        {busData &&
+                            busCongestSelector(
+                                busData[isUserClickStationNumber].reride_Num1,
+                            )}
                     </p>
                 </div>
-            )}
-            <div className="bus-bottom">
-                <img src={sumung} alt="sumung" />
-            </div>
+            )} */}
         </div>
     );
 }
