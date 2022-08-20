@@ -3,7 +3,16 @@
     width: 100%;
     display: flex;
     justify-content: start;
+    align-items: center;
     padding-left: 2.5rem;
+    .img-wrapper {
+        margin-right: 2rem;
+        img {
+            display: block;
+            width: 5rem;
+            height: 6rem;
+        }
+    }
     .content {
         position: relative;
         max-width: 70%;

@@ -1,15 +1,22 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import './SenderChatBox.scss';
 
-function SenderChatBox({ id, content, senderId, createdTime }) {
+function SenderChatBox({ id, content, senderId, createdTime, user }) {
     const [showDate, setShowDate] = useState();
     const showDateChange = () => {
         setShowDate(prev => !prev);
     };
+    useEffect(() => {
+        console.log(user);
+    }, [user]);
     return (
         <div className="senderchatbox-wrapper">
+            <div className="img-wrapper">
+                <img src={user && user[0].profileUrl} alt="이미지" />
+            </div>
             <p className="content" onClick={showDateChange} aria-hidden>
                 {content}
             </p>
