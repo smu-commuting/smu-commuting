@@ -44,7 +44,9 @@ function BusInfoModal() {
                     </div>
                     {busData[isUserClickStationNumber].arrmsg1 ===
                     '운행종료' ? (
-                        <p className="end">운행종료</p>
+                        <div className="end">
+                            <p>운행종료</p>
+                        </div>
                     ) : (
                         <div className="info">
                             <p>
@@ -69,19 +71,24 @@ function BusInfoModal() {
                                 busData[isUserClickStationNumber].plainNo2}
                         </p>
                     </div>
-                    <div className="info">
-                        <p>
-                            {busData &&
-                                busData[isUserClickStationNumber].arrmsg2}
-                        </p>
-                        <p>
-                            {busData &&
-                                busCongestSelector(
-                                    busData[isUserClickStationNumber]
-                                        .reride_Num2,
-                                )}
-                        </p>
-                    </div>
+                    {busData[isUserClickStationNumber].arrmsg1 ===
+                    '운행종료' ? (
+                        <p className="end">운행종료</p>
+                    ) : (
+                        <div className="info">
+                            <p>
+                                {busData &&
+                                    busData[isUserClickStationNumber].arrmsg2}
+                            </p>
+                            <p>
+                                {busData &&
+                                    busCongestSelector(
+                                        busData[isUserClickStationNumber]
+                                            .reride_Num2,
+                                    )}
+                            </p>
+                        </div>
+                    )}
                 </div>
             </main>
             {/* {busData[isUserClickStationNumber].arrmsg1 === '운행종료' ? (
