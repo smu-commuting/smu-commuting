@@ -3,7 +3,7 @@
     position: absolute;
     width: 100%;
     top: 4rem;
-    padding: 1.5rem 1.3rem 10rem 1.3rem;
+    padding: 1.5rem 1.3rem 5rem 1.3rem;
     background-color: #efecff;
     z-index: 1;
     .cancel {
@@ -41,9 +41,10 @@
             }
             .info {
                 flex: 3;
-                margin-left: 1rem;
+                margin-left: 0rem;
                 p {
-                    font-size: 1.5rem;
+                    font-size: 1.3rem;
+                    margin: 2.2rem 0;
                 }
             }
             .end {
@@ -55,7 +56,7 @@
             }
         }
         .second {
-            margin-top: 3rem;
+            margin-top: 5rem;
         }
     }
 }
