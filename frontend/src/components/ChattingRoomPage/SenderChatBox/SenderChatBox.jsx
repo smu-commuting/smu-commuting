@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import outpeople from '../../../assets/ChattingPage/outpeople.png';
 import './SenderChatBox.scss';
 
 function SenderChatBox({ id, content, senderId, createdTime, user }) {
@@ -15,11 +15,17 @@ function SenderChatBox({ id, content, senderId, createdTime, user }) {
     return (
         <div className="senderchatbox-wrapper">
             <div className="img-wrapper">
-                <img src={user && user[0].profileUrl} alt="이미지" />
+                <img
+                    src={user.length !== 0 ? user[0].profileUrl : outpeople}
+                    alt="이미지"
+                />
             </div>
-            <p className="content" onClick={showDateChange} aria-hidden>
-                {content}
-            </p>
+            <div className="middle">
+                <p className="sender-id">{senderId}</p>
+                <p className="content" onClick={showDateChange} aria-hidden>
+                    {content}
+                </p>
+            </div>
             <div className="time">
                 <p>
                     {showDate ? (

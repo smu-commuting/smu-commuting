@@ -35,7 +35,7 @@ export function setInterceptors(instance) {
                         return axios(originalRequest);
                     })
                     .catch(err => {
-                        alert('interceptor err', err);
+                        // alert('interceptor err', err);
                         // window.location.replace('/');
                         // localStorage.clear();
                     });
