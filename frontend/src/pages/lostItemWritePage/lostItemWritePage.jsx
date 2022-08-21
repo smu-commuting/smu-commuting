@@ -116,7 +116,7 @@ const lostItemWritePage = () => {
                     <textarea
                         name="content"
                         className="content"
-                        placeholder="내용을 입력해주세요."
+                        placeholder="내용을 입력해주세요. ex) 분실물 맡길 장소"
                         defaultValue={info.content && info.content}
                         onChange={onInfoChange}
                         required

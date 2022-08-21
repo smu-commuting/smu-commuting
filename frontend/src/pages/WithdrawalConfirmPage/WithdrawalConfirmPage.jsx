@@ -26,6 +26,7 @@ function WithdrawalConfirmPage() {
                 axios.defaults.headers.common['Authorization'] = null;
                 navigate('/');
                 alert('서비스를 이용해주셔서 감사합니다.');
+                localStorage.setItem('loggedIn', false);
             });
         } else {
             alert('본인의 아이디와 일치하지 않습니다.');

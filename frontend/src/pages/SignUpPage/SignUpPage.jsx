@@ -70,6 +70,7 @@ function SignUpPage() {
                         };
                         dispatch(signupRequest(userInfo));
                         navigate('/home');
+                        localStorage.setItem('loggedIn', true);
                     })
                     .catch(err => {
                         console.log(err);
