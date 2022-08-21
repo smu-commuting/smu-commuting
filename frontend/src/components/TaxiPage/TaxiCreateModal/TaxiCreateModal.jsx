@@ -48,12 +48,20 @@ function TaxiCreateModal() {
         const when = `${taxiPageInfo.when}T${
             tempHour >= 10 ? tempHour : `0${tempHour}`
         }:${minute >= 10 ? minute : `0${minute}`}`;
-        if (
-            new Date(`${taxiPageInfo.when}T${tempHour}:${minute}`) >=
+        console.log(new Date(`${taxiPageInfo.when},${tempHour}:${minute}`));
+        console.log(
             new Date(
                 `${
                     taxiPageInfo.when
-                }T${new Date().getHours()}:${new Date().getMinutes()}`,
+                },${new Date().getHours()}:${new Date().getMinutes()}`,
+            ),
+        );
+        if (
+            new Date(`${taxiPageInfo.when},${tempHour}:${minute}`) >=
+            new Date(
+                `${
+                    taxiPageInfo.when
+                },${new Date().getHours()}:${new Date().getMinutes()}`,
             )
         ) {
             if (headCount === 0) {
