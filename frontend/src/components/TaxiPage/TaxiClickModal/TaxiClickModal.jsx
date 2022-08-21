@@ -48,13 +48,26 @@ function TaxiClickModal() {
         const when = `${year}-${month >= 10 ? month : `0${month}`}-${
             date >= 10 ? date : `0${date}`
         }`;
-        if (placeId === 0) {
-            alert('장소를 선택해주세요');
-            return;
+        const now = new Date();
+        const today = `${now.getFullYear()}-${
+            now.getMonth() + 1 >= 10
+                ? now.getMonth() + 1
+                : `0${now.getMonth() + 1}`
+        }-${now.getDate()}`;
+        if (new Date(when) >= new Date(today)) {
+            if (placeId === 0) {
+                alert('장소를 선택해주세요');
+                return;
+            }
+            navigate(`/taxi/${placeId}/${when}/${placeName}`);
+            dispatch(taxiPageInfo({ when, placeId, placeName }));
+            dispatch(taxiModalClick());
+        } else {
+            alert('이전 날짜는 선택할 수 없습니다');
+            setYear(now.getFullYear());
+            setMonth(now.getMonth() + 1);
+            setDate(now.getDate());
         }
-        navigate(`/taxi/${placeId}/${when}/${placeName}`);
-        dispatch(taxiPageInfo({ when, placeId, placeName }));
-        dispatch(taxiModalClick());
     });
 
     return (
