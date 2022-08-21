@@ -48,21 +48,28 @@ function TaxiCreateModal() {
         const when = `${taxiPageInfo.when}T${
             tempHour >= 10 ? tempHour : `0${tempHour}`
         }:${minute >= 10 ? minute : `0${minute}`}`;
-        if (headCount === 0) {
-            alert('인원수를 설정해주세요');
-            return;
+        if (
+            new Date(`${taxiPageInfo.when}T${tempHour}:${minute}`) >=
+            new Date(
+                `${
+                    taxiPageInfo.when
+                }T${new Date().getHours()}:${new Date().getMinutes()}`,
+            )
+        ) {
+            if (headCount === 0) {
+                alert('인원수를 설정해주세요');
+                return;
+            }
+            const data = {
+                placeId: taxiPageInfo.placeId,
+                headCount,
+                meetingDate: when,
+            };
+            dispatch(taxiPartyCreate(data));
+            dispatch(taxiCreateModalClick());
+        } else {
+            alert('이전 시간의 택시 파티를 생성할 수 없습니다');
         }
-        const data = {
-            placeId: taxiPageInfo.placeId,
-            headCount,
-            meetingDate: when,
-        };
-        // console.log(data);
-        // console.log(typeof data.placeId);
-        // console.log(typeof data.headCount);
-        // console.log(typeof data.meetingDate);
-        dispatch(taxiPartyCreate(data));
-        dispatch(taxiCreateModalClick());
     };
 
     return (
