@@ -33,11 +33,7 @@ function TaxiClickModal() {
         setYear(now.getFullYear());
         setMonth(now.getMonth() + 1);
         setDate(now.getDate());
-        setYearLists([
-            now.getFullYear() - 1,
-            now.getFullYear(),
-            now.getFullYear() + 1,
-        ]);
+        setYearLists([now.getFullYear(), now.getFullYear() + 1]);
     }, []);
 
     const onCancelClick = useCallback(() => {
