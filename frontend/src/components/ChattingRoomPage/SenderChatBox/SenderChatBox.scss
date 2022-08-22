@@ -1,53 +1,59 @@
 @import '../../../styles/utils.scss';
 .senderchatbox-wrapper {
-    width: 100%;
+    width: 90%;
     display: flex;
     justify-content: start;
-    padding-left: 2rem;
-    .img-wrapper {
-        margin-right: 2rem;
+    padding-left: 1rem;
+    .left {
         display: flex;
         align-items: center;
-        img {
-            display: block;
-            width: 4rem;
-            height: 5rem;
+        justify-content: center;
+        .inner-wrapper {
+            .img-wrapper {
+                margin-ight: 2rem;
+                img {
+                    display: block;
+                    margin: auto;
+                    width: 4rem;
+                    height: 5rem;
+                }
+            }
+            .sender-id {
+                margin-top: 0.3rem;
+                font-family: 'NotoSansKR-Medium';
+                font-size: 0.01rem;
+                color: rgba(0, 0, 0, 0.5);
+            }
         }
     }
-    .middle {
-        .sender-id {
-            font-family: 'NotoSansKR-Medium';
-            font-size: 1.3rem;
-            color: rgba(0, 0, 0, 0.5);
-        }
-        .content {
-            margin-top: -0.5rem;
-            position: relative;
-            max-width: 70%;
-            padding: 2rem;
-            background: #efecff;
-            -webkit-border-radius: 1rem;
-            -moz-border-radius: 1rem;
-            border-radius: 1rem;
-            font-family: 'NotoSansKR-Medium';
-            font-size: 1.3rem;
-            color: black;
-            line-height: 1.6rem;
-            word-break: break-all;
-        }
-        .content:after {
-            content: '';
-            position: absolute;
-            border-style: solid;
-            border-width: 5px 10px 5px 0;
-            border-color: transparent #efecff;
-            display: block;
-            width: 0;
-            z-index: 1;
-            left: -1rem;
-            top: 20%;
-        }
+    .content {
+        margin-left: 1rem;
+        position: relative;
+        max-width: 70%;
+        padding: 1.1rem;
+        background: #efecff;
+        -webkit-border-radius: 1rem;
+        -moz-border-radius: 1rem;
+        border-radius: 1rem;
+        font-family: 'NotoSansKR-Medium';
+        font-size: 1.3rem;
+        color: black;
+        line-height: 1.6rem;
+        word-break: break-all;
     }
+    .content:after {
+        content: '';
+        position: absolute;
+        border-style: solid;
+        border-width: 5px 10px 5px 0;
+        border-color: transparent #efecff;
+        display: block;
+        width: 0;
+        z-index: 1;
+        left: -1rem;
+        top: 20%;
+    }
+
     .time {
         font-family: 'NotoSansKR-Medium';
         font-size: 1rem;

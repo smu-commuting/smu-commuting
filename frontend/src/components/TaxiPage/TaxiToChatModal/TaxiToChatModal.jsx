@@ -3,6 +3,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import SockJS from 'sockjs-client';
+import Stomp from 'stompjs';
 import {
     taxiPartyEnter,
     taxiToChatModalClose,
@@ -13,7 +15,14 @@ import './TaxiToChatModal.scss';
 function TaxiToChatModal() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const sock = new SockJS(`${process.env.REACT_APP_API_URL}/chat`);
+    const ws = Stomp.over(sock);
     const { chattingRoomInfo } = useSelector(state => state.taxi);
+    const { me } = useSelector(state => state.user);
+
+    const pushMessage = useCallback(message => {
+        const received = JSON.parse(message.body);
+    }, []);
 
     useEffect(() => {
         document.body.style = `overflow: hidden`;
@@ -26,6 +35,28 @@ function TaxiToChatModal() {
     const onAgreeClick = useCallback(() => {
         taxiPartyEnterApi(chattingRoomInfo.taxiPartyId)
             .then(res => {
+                ws.connect(
+                    {},
+                    () => {
+                        ws.subscribe(
+                            `/sub/chat/room/${chattingRoomInfo.taxiPartyId}`,
+                            pushMessage,
+                            {},
+                        );
+                    },
+                    {},
+                );
+                ws.send(
+                    '/pub/chat/message',
+                    {},
+                    JSON.stringify({
+                        messageType: 'ENTER',
+                        message: `${me.studentId}님이 입장하셨습니다.`,
+                        roomId: chattingRoomInfo.taxiPartyId,
+                        senderId: me.id,
+                        studentId: me.studentId,
+                    }),
+                );
                 navigate(`/taxichat/${chattingRoomInfo.taxiPartyId}`);
                 dispatch(taxiToChatModalClose()); // 모달 닫기용
             })

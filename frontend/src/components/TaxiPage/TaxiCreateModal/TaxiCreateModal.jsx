@@ -48,14 +48,6 @@ function TaxiCreateModal() {
         const when = `${taxiPageInfo.when}T${
             tempHour >= 10 ? tempHour : `0${tempHour}`
         }:${minute >= 10 ? minute : `0${minute}`}`;
-        console.log(new Date(`${taxiPageInfo.when},${tempHour}:${minute}`));
-        console.log(
-            new Date(
-                `${
-                    taxiPageInfo.when
-                },${new Date().getHours()}:${new Date().getMinutes()}`,
-            ),
-        );
         if (
             new Date(`${taxiPageInfo.when},${tempHour}:${minute}`) >=
             new Date(

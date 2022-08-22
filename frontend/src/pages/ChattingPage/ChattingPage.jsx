@@ -19,6 +19,7 @@ import {
 import { firstEnterDateParser } from '../../constants/FirstEnterDateParser';
 import MeChatBox from '../../components/ChattingRoomPage/MeChatBox/MeChatBox';
 import SenderChatBox from '../../components/ChattingRoomPage/SenderChatBox/SenderChatBox';
+import outpeople from '../../assets/ChattingPage/outpeople.png';
 
 function ChattingPage() {
     const scrollRef = useRef();
@@ -136,6 +137,16 @@ function ChattingPage() {
         setMyChat('');
     };
 
+    const userImgSelector = senderId => {
+        const userInfo = chatRoomHeaderInfo.users.find(
+            user => user.userId === senderId,
+        );
+        if (!userInfo) {
+            return 'https://s3.ap-northeast-2.amazonaws.com/s3.smulo.site.postfile/%EA%B2%80%EC%83%89.png';
+        }
+        return userInfo.profileUrl;
+    };
+
     return (
         <div className="chattingpage-wrapper">
             <ChattingRoomHeader />
@@ -163,9 +174,7 @@ function ChattingPage() {
                                 content={message.content}
                                 senderId={message.senderStudentId}
                                 createdTime={message.createdTime}
-                                user={chatRoomHeaderInfo.users.filter(
-                                    user => user.userId === message.senderId,
-                                )}
+                                userImg={userImgSelector(message.senderId)}
                             />
                         );
                     })
