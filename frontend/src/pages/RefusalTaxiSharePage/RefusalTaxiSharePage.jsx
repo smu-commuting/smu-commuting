@@ -21,7 +21,6 @@ function RefusalTaxiSharePage() {
     }, [dispatch]);
 
     const unBlockUserHandler = id => {
-        console.log('거부', id);
         unBlockUserApi(id).then(() => {
             dispatch(getBlockedUserList());
         });

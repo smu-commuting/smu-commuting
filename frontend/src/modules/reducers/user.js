@@ -72,7 +72,6 @@ export const loginRequest = data => {
 };
 
 export const signupRequest = data => {
-    console.log(data);
     return {
         type: USER_SIGN_UP_REQUEST,
         data,
@@ -125,19 +124,16 @@ const reducer = (state = initialState, action) => {
     return produce(state, draft => {
         switch (action.type) {
             case USER_LOG_IN_REQUEST:
-                // console.log('Reducer LOG_IN_request', action.data);
                 draft.loginLoading = true;
                 draft.loginDone = false;
                 draft.loginError = null;
                 break;
 
             case USER_LOG_IN_SUCCESS:
-                console.log('LOG_IN_SUCCESS', action.data);
                 draft.loginLoading = false;
                 draft.loginDone = true;
                 draft.loginError = null;
                 draft.me = action.data.data;
-                console.log(draft.me);
                 break;
 
             case USER_LOG_IN_FAILURE:
@@ -191,7 +187,6 @@ const reducer = (state = initialState, action) => {
                 draft.userProfileLoading = false;
                 draft.userProfileDone = true;
                 draft.userProfile = action.data;
-                console.log('프로필 조회 성공 데이터', action.data);
                 break;
             case USER_INFO_GET_FAILURE:
                 draft.userProfileLoading = false;
@@ -206,7 +201,6 @@ const reducer = (state = initialState, action) => {
                 draft.profileImgListLoading = false;
                 draft.profileImgListDone = true;
                 draft.profileImgList = action.data.data;
-                console.log('로딩된 이미지 리스트입니다.', action.data.data);
                 break;
             case USER_GET_PROFILE_IMG_LIST_FAILURE:
                 draft.profileImgListLoading = false;
@@ -221,7 +215,6 @@ const reducer = (state = initialState, action) => {
                 draft.blockedUserListLoading = false;
                 draft.blockedUserListDone = true;
                 draft.blockedUserList = action.data;
-                console.log('차단 리스트', action.data);
                 break;
             case USER_GET_BLOCKED_LIST_FAILURE:
                 draft.blockedUserListLoading = false;

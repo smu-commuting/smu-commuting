@@ -45,7 +45,6 @@ import {
 function* chatMessageList(action) {
     try {
         const result = yield call(getRoomMessage, action.data);
-        console.log('채팅 요청 이후 result', result);
         yield put({
             type: CHAT_ROOM_MESSAGE_SUCCESS,
             data: result.data,
@@ -61,7 +60,6 @@ function* chatMessageList(action) {
 function* getBusMessageList(action) {
     try {
         const result = yield call(getBusRoomMessageApi, action.data);
-        console.log('채팅 요청 이후 result', result);
         yield put({
             type: CHAT_BUS_ROOM_MESSAGE_SUCCESS,
             data: result.data,
@@ -102,7 +100,6 @@ function* denialModalClick() {
 function* getPeopleList(action) {
     try {
         const result = yield call(getPeopleListApi, action.id);
-        console.log('채팅 요청 이후 result', result);
         yield put({
             type: CHAT_ROOM_GET_PEOPLE_LIST_SUCCESS,
             data: result.data.data,
@@ -118,7 +115,6 @@ function* getPeopleList(action) {
 function* getOutPeopleList(action) {
     try {
         const result = yield call(getOutPeopleListApi, action.id);
-        console.log('채팅 요청 이후 result', result);
         yield put({
             type: CHAT_ROOM_GET_OUT_PEOPLE_LIST_SUCCESS,
             data: result.data.data,
@@ -143,9 +139,7 @@ function* changeMaximumModalClick() {
 }
 function* changeMaximum(action) {
     try {
-        console.log(action);
         const result = yield call(updateChatRoomMaximunHeadApi, action.data);
-        console.log('변경 요청 result', result);
         yield put({
             type: CHAT_ROOM_CHANGE_MAXIMUM_SUCCESS,
         });
@@ -157,9 +151,7 @@ function* changeMaximum(action) {
 }
 function* getChatRoomHeaderInfo(action) {
     try {
-        console.log(action);
         const result = yield call(getChatRoomHeaderInfoApi, action.id);
-        console.log('채팅방 헤더 result', result);
         yield put({
             type: CHAT_ROOM_HEADER_INFO_SUCCESS,
             data: result.data.data,

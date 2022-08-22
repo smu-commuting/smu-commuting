@@ -52,7 +52,6 @@ function LostItemEditPage() {
         const reader = new FileReader();
         setImage(e.target.files[0]);
         setImageChanged(true);
-        console.log(e.target.files[0]);
         reader.readAsDataURL(e.target.files[0]);
         reader.onloadend = finished => {
             setPreviewImg(finished.target.result);
@@ -76,7 +75,6 @@ function LostItemEditPage() {
                 return;
             }
             const temp = { ...info, imageChanged };
-            console.log(temp);
             formData.append(
                 'info',
                 new Blob([JSON.stringify(temp)], { type: 'application/json' }),

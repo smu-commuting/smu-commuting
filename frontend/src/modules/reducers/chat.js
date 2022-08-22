@@ -156,8 +156,6 @@ const reducer = (state = initialState, action) => {
                 draft.chatMessageListError = null;
                 draft.chatMessageList = action.data.data;
                 draft.chatLoadEnd = action.data.data.length === 0;
-                // console.log('success', action.data.data);
-                // console.log('draft', draft.chatMessageList);
                 break;
             case CHAT_ROOM_MESSAGE_FAILURE:
                 draft.chatMessageListLoading = false;
@@ -173,8 +171,6 @@ const reducer = (state = initialState, action) => {
                 draft.busMessageListDone = true;
                 draft.busMessageList = action.data.data;
                 draft.busLoadEnd = action.data.data.length === 0;
-                console.log('success', action.data.data);
-                console.log('draft', draft.chatMessageList);
                 break;
             case CHAT_BUS_ROOM_MESSAGE_FAILURE:
                 draft.busMessageListLoading = false;
@@ -250,7 +246,6 @@ const reducer = (state = initialState, action) => {
                 draft.chatRoomHeaderInfoLoading = false;
                 draft.chatRoomHeaderInfoDone = true;
                 draft.chatRoomHeaderInfo = action.data;
-                console.log('채팅방 헤더 정보 로드 성공', action.data);
                 break;
             case CHAT_ROOM_HEADER_INFO_FAILURE:
                 draft.chatRoomHeaderInfoLoading = false;

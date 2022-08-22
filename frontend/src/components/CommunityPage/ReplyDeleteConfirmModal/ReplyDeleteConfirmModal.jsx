@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-return-assign */
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,7 +29,7 @@ function ReplyDeleteConfirmModal() {
                 dispatch(replyDeleteConfirmModal());
                 dispatch(getReplyList(id));
             })
-            .catch(e => console.log(e));
+            .catch(e => {});
     }, []);
     return (
         <div className="replydeleteconfirmmodal-wrapper">

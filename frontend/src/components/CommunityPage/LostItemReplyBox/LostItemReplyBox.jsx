@@ -20,7 +20,6 @@ function LostItemReplyBox({ reply }) {
     }, [dispatch, reply.replyId, reply.content]);
 
     useEffect(() => {
-        console.log('reply', reply);
         const today = new Date();
 
         const todayDate = `${today.getFullYear()}-${

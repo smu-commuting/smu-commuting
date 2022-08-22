@@ -71,9 +71,7 @@ function* deleteLostItemList() {
 
 function* getLostItemDetailInfo(action) {
     try {
-        console.log('요청 이전', action);
         const result = yield call(getDetailInfoApi, action.id);
-        console.log('요청 이후', result.data.data);
         yield put({
             type: COMMUNITY_GET_DETAIL_INFO_SUCCESS,
             data: result.data.data,
@@ -112,9 +110,7 @@ function* isDeleteConfirmModal() {
 
 function* deleteLostItemDetailInfo(action) {
     try {
-        console.log('이전', action.id);
         const result = yield call(deleteDetailInfoApi, action.id);
-        console.log('요청 이후', result.data);
         yield put({
             type: COMMINITY_DETAIL_PAGE_DELETE_SUCCESS,
         });
@@ -128,10 +124,7 @@ function* deleteLostItemDetailInfo(action) {
 
 function* postReply(action) {
     try {
-        console.log('saga', action);
-        console.log('댓글 생성 요청 이전', action.id);
         const result = yield call(postReplyApi, action);
-        console.log('댓글 생성 요청 이후', result.data);
         yield put({
             type: COMMUNITY_REPLY_POST_SUCCESS,
         });
@@ -145,10 +138,7 @@ function* postReply(action) {
 
 function* getReplyList(action) {
     try {
-        console.log('saga', action);
-        console.log('댓글 조회 요청 이전', action.id);
         const result = yield call(getReplyListApi, action.id);
-        console.log('댓글 조회 요청 이후', result.data);
         yield put({
             type: COMMUNITY_GET_REPLY_LIST_SUCCESS,
             data: result.data.data,
@@ -161,7 +151,6 @@ function* getReplyList(action) {
     }
 }
 function* replyDetailUpdateDeleteModal(action) {
-    console.log('모달데이터', action.data);
     try {
         yield put({
             type: COMMUNITY_REPLY_UPDATE_DELETE_MODAL_SUCCESS,

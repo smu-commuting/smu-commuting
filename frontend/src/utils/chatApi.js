@@ -20,10 +20,6 @@ export const getRoomMessage = async data => {
 };
 
 export const getBusRoomMessageApi = async data => {
-    console.log(
-        data.date,
-        `${process.env.REACT_APP_API_URL}${API_CHAT}bus/room/${data.roomId}/messages`,
-    );
     return await withAuthInstance.get(
         `${process.env.REACT_APP_API_URL}${API_CHAT}bus/room/${data.roomId}/messages`,
         {
@@ -37,14 +33,12 @@ export const getBusRoomMessageApi = async data => {
 
 // 택시 채팅방에 있는 유저 목록 조회
 export const getPeopleListApi = async id => {
-    console.log(id);
     return await withAuthInstance.get(
         `${process.env.REACT_APP_API_URL}${API_TAXI}party/${id}/users`,
     );
 };
 // 택시 채팅방에 나간 유저 목록 조회
 export const getOutPeopleListApi = async id => {
-    console.log(id);
     return await withAuthInstance.get(
         `${process.env.REACT_APP_API_URL}${API_TAXI}party/${id}/exit/users`,
     );
@@ -52,7 +46,6 @@ export const getOutPeopleListApi = async id => {
 
 // 최대 인원수 변경 API
 export const updateChatRoomMaximunHeadApi = async dataObj => {
-    console.log(dataObj);
     const data = {
         maximum: dataObj.maximum,
     };
@@ -64,7 +57,6 @@ export const updateChatRoomMaximunHeadApi = async dataObj => {
 
 // 택시 채팅방에 나간 유저 목록 조회
 export const getChatRoomHeaderInfoApi = async id => {
-    console.log(id);
     return await withAuthInstance.get(
         `${process.env.REACT_APP_API_URL}${API_TAXI}party/${id}`,
     );

@@ -145,7 +145,6 @@ export const taxiCreateModalClick = () => {
 };
 
 export const taxiPartyCreate = data => {
-    console.log('액션함수 진입', data);
     return {
         type: TAXI_PARTY_CREATE_REQUEST,
         data,
@@ -232,7 +231,6 @@ const reducer = (state = initialState, action) => {
                 draft.taxiPartyListLoading = false;
                 draft.taxiPartyListDone = true;
                 draft.taxiPartyListError = null;
-                console.log(action.data.data);
                 draft.taxiPartyList = action.data.data;
                 draft.taxiPartyEnd = action.data.data.length !== 10; // 요청 사이즈 바꾸면 이것도 반드시 바꿔야 할 것
                 break;
@@ -285,7 +283,6 @@ const reducer = (state = initialState, action) => {
                 draft.isEnterChattingRoomModalOpen = false;
                 draft.isTaxiPartyEnterError = action.data && action.data;
                 draft.showErrorModal = action.data !== undefined;
-                console.log('reducer', action.data);
                 break;
             case TAXI_PARTY_ENTER_FAILURE:
                 break;
@@ -313,7 +310,6 @@ const reducer = (state = initialState, action) => {
                 draft.isEnterChattingRoomModalOpen =
                     !draft.isEnterChattingRoomModalOpen;
                 draft.chattingRoomInfo = action.data;
-                console.log('chattingRoomInfo', action.data);
                 break;
             case TAXI_TO_CHAT_INFO_MODAL_FAILURE:
                 break;

@@ -15,23 +15,16 @@ getToken(messaging, {
 })
     .then(currentToken => {
         if (currentToken) {
-            console.log('파베토큰', currentToken);
             localStorage.setItem('FBToken', currentToken);
         } else {
             // Show permission request UI
-            console.log(
-                'No registration token available. Request permission to generate one.',
-            );
             // ...
         }
     })
     .catch(err => {
-        console.log('An error occurred while retrieving token. ', err);
         // ...
     });
 
 onMessage(messaging, payload => {
-    // toast(payload.notification.body);
-    console.log('Message received. ', payload);
-    console.log('messaging. ', messaging);
+    toast(payload.notification.body);
 });

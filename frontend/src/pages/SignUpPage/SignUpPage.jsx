@@ -23,12 +23,6 @@ function SignUpPage() {
 
     const onStudentIdChange = e => {
         setStudentId(e.target.value);
-        // if (studentId.length > 8) {
-        //     alert('학번은 9자리 이내로 입력 가능합니다.');
-        //     setStudentId('');
-        // } else {
-        //     setStudentId(e.target.value);
-        // }
     };
 
     const onAuthNumChange = e => {
@@ -36,7 +30,6 @@ function SignUpPage() {
     };
 
     const onEmailChange = e => {
-        console.log(e.target.value);
         setEmail(e.target.value);
     };
 
@@ -44,7 +37,6 @@ function SignUpPage() {
     const sendNumber = async () => {
         // if (studentId.length < 8) return;
         if (studentId.length === 0) return;
-        console.log(`${studentId}@${email}`);
         const response = await sendNumberApi(studentId, email);
         if (response.data.success) setCheckSend(true);
     };
@@ -53,17 +45,13 @@ function SignUpPage() {
     const postAuthNum = async () => {
         verificationNumApi(authNum)
             .then(res => {
-                console.log('인증 성공', res);
                 const userInfo = {
-                    // email: `${studentId}@sangmyung.kr`,
                     email: `${studentId}@${email}`,
                     studentId,
                     imageId: 1,
                 };
-                console.log(userInfo);
                 signupApi(userInfo)
                     .then(response => {
-                        console.log('응답 data', response);
                         const userInfo = {
                             studentId: response.data.data.studentId,
                             id: response.data.data.userId,
@@ -73,7 +61,6 @@ function SignUpPage() {
                         localStorage.setItem('loggedIn', true);
                     })
                     .catch(err => {
-                        console.log(err);
                         // 중복된 이메일
                         alert(err.response.data.error.info);
                         setCheckSend(false);
@@ -93,7 +80,6 @@ function SignUpPage() {
             <div className="signup-header">
                 <img src={Search} alt="검색" />
                 <div>
-                    {/* 우리학교 */}
                     <br /> 인증이 필요해요:)
                 </div>
             </div>
@@ -101,7 +87,6 @@ function SignUpPage() {
                 <p>이메일을 입력해 주세요</p>
                 <div>
                     <input
-                        // type="number"
                         value={studentId}
                         onChange={onStudentIdChange}
                         required
@@ -111,7 +96,6 @@ function SignUpPage() {
                         <option selected>naver.com</option>
                         <option>gmail.com</option>
                     </select>
-                    {/* <p>@ sangmyung.kr</p> */}
                 </div>
                 <button
                     className="student-id-btn"
@@ -133,18 +117,6 @@ function SignUpPage() {
                         />
                         <Timer mm={5} ss={0} />
                     </div>
-                    {/* <p
-                        className="info"
-                        onClick={() =>
-                            window.open(
-                                'https://outlook.office.com/mail/inbox',
-                                '_blank',
-                            )
-                        }
-                        aria-hidden
-                    >
-                        인증번호 확인하기
-                    </p> */}
                     <button
                         className="student-id-btn"
                         type="submit"
