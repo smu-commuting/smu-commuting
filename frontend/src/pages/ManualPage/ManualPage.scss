@@ -4,29 +4,40 @@
     .manualpage-header {
         display: flex;
         flex-direction: row;
-        padding-top: 1rem;
         align-items: center;
         text-align: center;
         justify-content: space-around;
-        p {
+        padding: 0 2rem;
+        .layout {
             flex: 1;
+        }
+        p {
+            flex: 2;
             font-weight: bold;
             @include font-face(NotoSansKR-Regular, 2.5rem, 2.5rem, #292733);
         }
-        img {
-            padding-right: 3rem;
-            width: 2.3rem;
-            height: 2.3em;
+        .img-wrapper {
+            flex: 1;
+            img {
+                display: block;
+                float: right;
+                width: 2.3rem;
+                height: 2.3em;
+            }
         }
+    }
+    .player-wrapper {
+        padding: 2rem;
+    }
+    .main-info {
+        text-align: center;
+        font-weight: bold;
+        @include font-face(NotoSansKR-Regular, 1.8rem, 2.5rem, #292733);
+        margin-bottom: 2rem;
     }
     .manualpage-content {
         display: flex;
         flex-direction: column;
-        .main-info {
-            text-align: center;
-            font-weight: bold;
-            @include font-face(NotoSansKR-Regular, 1.8rem, 2.5rem, #292733);
-        }
         .function-info {
             h4 {
                 font-weight: bold;

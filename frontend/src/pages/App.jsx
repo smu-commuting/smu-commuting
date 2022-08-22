@@ -98,7 +98,6 @@ function App() {
                                 {isCommunityModalOpen && <CommunityModal />}
                                 <Header />
                                 <HomePage />
-                                <Toaster />
                             </>
                         }
                     />
@@ -110,7 +109,6 @@ function App() {
                                 {isTaxiModalOpen && <TaxiModal />}
                                 <Header />
                                 <BusPage />
-                                <Toaster />
                             </>
                         }
                     />
@@ -130,7 +128,6 @@ function App() {
                                 {showCreateErrorModal && <TaxiNotCreateModal />}
                                 <Header />
                                 <TaxiPage />
-                                <Toaster />
                             </>
                         }
                     />
@@ -148,90 +145,26 @@ function App() {
                                 <ChattingListBusBtn />
                                 <ChattingListPage />
                                 <ChattingListFooter />
-                                <Toaster />
                             </>
                         }
                     />
-                    <Route
-                        path="/refusal"
-                        element={
-                            <>
-                                <RefusalTaxiSharePage />
-                                <Toaster />
-                            </>
-                        }
-                    />
-                    <Route
-                        path="/mypage"
-                        element={
-                            <>
-                                <MyPage />
-                                <Toaster />
-                            </>
-                        }
-                    />
-                    <Route
-                        path="/updateprofile"
-                        element={
-                            <>
-                                <UpdateProfile />
-                                <Toaster />
-                            </>
-                        }
-                    />
-                    <Route
-                        path="/inquiry"
-                        element={
-                            <>
-                                <InquiryPage />
-                                <Toaster />
-                            </>
-                        }
-                    />
-                    <Route
-                        path="/withdrawal"
-                        element={
-                            <>
-                                <WithdrawalPage />
-                                <Toaster />
-                            </>
-                        }
-                    />
+                    <Route path="/refusal" element={<RefusalTaxiSharePage />} />
+                    <Route path="/mypage" element={<MyPage />} />
+                    <Route path="/updateprofile" element={<UpdateProfile />} />
+                    <Route path="/inquiry" element={<InquiryPage />} />
+                    <Route path="/withdrawal" element={<WithdrawalPage />} />
                     <Route
                         path="/confirm"
-                        element={
-                            <>
-                                <WithdrawalConfirmPage />
-                                <Toaster />
-                            </>
-                        }
+                        element={<WithdrawalConfirmPage />}
                     />
-                    <Route
-                        path="/manual"
-                        element={
-                            <>
-                                <ManualPage />
-                                <Toaster />
-                            </>
-                        }
-                    />
+                    <Route path="/manual" element={<ManualPage />} />
                     <Route
                         path="/inquirydetail"
-                        element={
-                            <>
-                                <InquiryDetailPage />
-                                <Toaster />
-                            </>
-                        }
+                        element={<InquiryDetailPage />}
                     />
                     <Route
                         path="/inquirywrite"
-                        element={
-                            <>
-                                <InquiryWritePage />
-                                <Toaster />
-                            </>
-                        }
+                        element={<InquiryWritePage />}
                     />
                     <Route
                         path="/taxichat/:id"
@@ -255,7 +188,6 @@ function App() {
                             <>
                                 <OpenChattingHeader />
                                 <OpenChattingPage />
-                                <Toaster />
                             </>
                         }
                     />
@@ -264,8 +196,7 @@ function App() {
                         element={
                             <>
                                 {isCommunityModalOpen && <CommunityModal />}
-                                <LostItemPage />
-                                <Toaster />
+                                <LostItemPage />\
                             </>
                         }
                     />
@@ -286,8 +217,7 @@ function App() {
                                     <ReplyDeleteConfirmModal />
                                 )}
                                 <LostItemDetailPage />
-                                <ReplyInputBox />
-                                <Toaster />
+                                <ReplyInputBox />\
                             </>
                         }
                     />
@@ -295,8 +225,7 @@ function App() {
                         path="/lostitemwrite"
                         element={
                             <>
-                                <LostItemWritePage />
-                                <Toaster />
+                                <LostItemWritePage />\
                             </>
                         }
                     />
@@ -304,8 +233,7 @@ function App() {
                         path="/lostitemedit/:id"
                         element={
                             <>
-                                <LostItemEditPage />
-                                <Toaster />
+                                <LostItemEditPage />\
                             </>
                         }
                     />
@@ -313,8 +241,7 @@ function App() {
                         path="/protest"
                         element={
                             <>
-                                <ProtestPage />
-                                <Toaster />
+                                <ProtestPage />\
                             </>
                         }
                     />
