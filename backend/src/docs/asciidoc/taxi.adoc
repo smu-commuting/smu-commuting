@@ -32,6 +32,7 @@ include::{snippets}/taxi_party_create/request-fields.adoc[]
 
 성공 응답 HTTP
 include::{snippets}/taxi_party_create/http-response.adoc[]
+include::{snippets}/taxi_party_create/response-fields.adoc[]
 
 === 파티 참여
 

@@ -45,6 +45,8 @@ class TaxiPartyControllerTest extends MvcTest {
                 .headcount(HEADCOUNT)
                 .meetingDate(MEETING_DATE)
                 .build();
+        TaxiPartyResponse.OnlyId response = TaxiPartyResponse.OnlyId.builder().taxiPartyId(1L).build();
+        given(taxiPartyService.create(any(), any())).willReturn(response);
 
         ResultActions results = mvc.perform(RestDocumentationRequestBuilders
                 .post("/api/taxi/party")
@@ -60,6 +62,11 @@ class TaxiPartyControllerTest extends MvcTest {
                                 fieldWithPath("placeId").type(JsonFieldType.NUMBER).description("택시합승장소 식별자"),
                                 fieldWithPath("headcount").type(JsonFieldType.NUMBER).description("최대 인원"),
                                 fieldWithPath("meetingDate").type(JsonFieldType.STRING).description("택시합승 시간")
+                        ),
+                        responseFields(
+                                fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태 코드"),
+                                fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("api 응답이 성공했다면 true"),
+                                fieldWithPath("data.taxiPartyId").description("생성된 택시방 식별자")
                         )
                 ));
     }
