@@ -3,20 +3,20 @@
 /* eslint-disable no-unused-vars */
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import SockJS from 'sockjs-client';
-// import Stomp from 'stompjs';
-import {
-    taxiCreateModalClick,
-    taxiPartyCreate,
-} from '../../../modules/reducers/taxi';
+import { useNavigate } from 'react-router-dom';
+import SockJS from 'sockjs-client';
+import Stomp from 'stompjs';
+import { taxiCreateModalClick } from '../../../modules/reducers/taxi';
 import './TaxiCreateModal.scss';
 import cancel from '../../../assets/TaxiPage/cancel.png';
 import { hoursArr, minutesArr } from '../../../constants';
+import { createTaxiPartyApi } from '../../../utils';
 
 function TaxiCreateModal() {
-    // const sock = new SockJS(`${process.env.REACT_APP_API_URL}/chat`);
-    // const ws = Stomp.over(sock);
-
+    const sock = new SockJS(`${process.env.REACT_APP_API_URL}/chat`);
+    const ws = Stomp.over(sock);
+    const navigate = useNavigate();
+    const { me } = useSelector(state => state.user);
     const { taxiPageInfo } = useSelector(state => state.taxi);
     const [ampm, setAmpm] = useState();
     const [hour, setHour] = useState(
@@ -35,9 +35,9 @@ function TaxiCreateModal() {
         dispatch(taxiCreateModalClick());
     }, [dispatch]);
 
-    // const pushMessage = useCallback(message => {
-    //     const received = JSON.parse(message.body);
-    // }, []);
+    const pushMessage = useCallback(message => {
+        const received = JSON.parse(message.body);
+    }, []);
 
     useEffect(() => {
         const now = new Date();
@@ -75,7 +75,33 @@ function TaxiCreateModal() {
                 headCount,
                 meetingDate: when,
             };
-            dispatch(taxiPartyCreate(data));
+            createTaxiPartyApi(data)
+                .then(res => {
+                    ws.connect(
+                        {},
+                        () => {
+                            ws.subscribe(
+                                `/sub/chat/room/${res.data.data.taxiPartyId}`,
+                                pushMessage,
+                                {},
+                            );
+                        },
+                        {},
+                    );
+                    ws.send(
+                        '/pub/chat/message',
+                        {},
+                        JSON.stringify({
+                            messageType: 'ENTER',
+                            message: `${me.studentId}님이 방을 생성하셨습니다.`,
+                            roomId: res.data.data.taxiPartyId,
+                            senderId: me.id,
+                            studentId: me.studentId,
+                        }),
+                    );
+                    navigate(`/taxichat/${res.data.data.taxiPartyId}`);
+                })
+                .catch(err => alert(err.response.data.error.info));
             dispatch(taxiCreateModalClick());
         } else {
             alert('이전 시간의 택시 파티를 생성할 수 없습니다');

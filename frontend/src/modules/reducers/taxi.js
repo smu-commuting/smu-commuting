@@ -85,6 +85,7 @@ export const initialState = {
     isDeleteTaxiPartyModal: false,
     isDeleteAllowModal: false,
     // 택시 파티 생성
+    createTaxiPartyId: null,
     createTaxiPartyLoading: false,
     createTaxiPartyDone: false,
     createTaxiPartyError: null,
@@ -271,6 +272,7 @@ const reducer = (state = initialState, action) => {
                 draft.createTaxiPartyLoading = false;
                 draft.createTaxiPartyDone = true;
                 draft.createTaxiPartyError = null;
+                draft.createTaxiPartyId = action.data;
                 break;
             case TAXI_PARTY_CREATE_FAILURE:
                 draft.createTaxiPartyLoading = false;

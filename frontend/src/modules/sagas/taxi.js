@@ -156,7 +156,7 @@ function* createTaxiParty(action) {
         console.log('saga 결과', result);
         yield put({
             type: TAXI_PARTY_CREATE_SUCCESS,
-            data: result.data,
+            data: result.data.data.taxiPartyId,
         });
     } catch (err) {
         console.log('에러입니다.', err);
