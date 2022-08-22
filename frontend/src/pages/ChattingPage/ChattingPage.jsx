@@ -139,13 +139,16 @@ function ChattingPage() {
     };
 
     const userImgSelector = senderId => {
-        const userInfo = chatRoomHeaderInfo.users.find(
-            user => user.userId === senderId,
-        );
-        if (!userInfo) {
-            return 'https://s3.ap-northeast-2.amazonaws.com/s3.smulo.site.postfile/%EA%B2%80%EC%83%89.png';
+        if (chatRoomHeaderInfo.users) {
+            const userInfo = chatRoomHeaderInfo.users.find(
+                user => user.userId === senderId,
+            );
+            if (!userInfo) {
+                return 'https://s3.ap-northeast-2.amazonaws.com/s3.smulo.site.postfile/%EA%B2%80%EC%83%89.png';
+            }
+            return userInfo.profileUrl;
         }
-        return userInfo.profileUrl;
+        return 'https://s3.ap-northeast-2.amazonaws.com/s3.smulo.site.postfile/%EA%B2%80%EC%83%89.png';
     };
 
     return (
