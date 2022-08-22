@@ -1,5 +1,6 @@
 @import '../../../styles/utils.scss';
 .senderchatbox-wrapper {
+    margin-top: 1rem;
     width: 90%;
     display: flex;
     justify-content: start;
@@ -10,7 +11,6 @@
         justify-content: center;
         .inner-wrapper {
             .img-wrapper {
-                margin-ight: 2rem;
                 img {
                     display: block;
                     margin: auto;

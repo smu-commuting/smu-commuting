@@ -3,6 +3,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+// import SockJS from 'sockjs-client';
+// import Stomp from 'stompjs';
 import {
     taxiCreateModalClick,
     taxiPartyCreate,
@@ -12,6 +14,9 @@ import cancel from '../../../assets/TaxiPage/cancel.png';
 import { hoursArr, minutesArr } from '../../../constants';
 
 function TaxiCreateModal() {
+    // const sock = new SockJS(`${process.env.REACT_APP_API_URL}/chat`);
+    // const ws = Stomp.over(sock);
+
     const { taxiPageInfo } = useSelector(state => state.taxi);
     const [ampm, setAmpm] = useState();
     const [hour, setHour] = useState(
@@ -29,6 +34,11 @@ function TaxiCreateModal() {
     const onCancelClick = useCallback(() => {
         dispatch(taxiCreateModalClick());
     }, [dispatch]);
+
+    // const pushMessage = useCallback(message => {
+    //     const received = JSON.parse(message.body);
+    // }, []);
+
     useEffect(() => {
         const now = new Date();
         if (now.getHours() < 12) setAmpm('AM');
