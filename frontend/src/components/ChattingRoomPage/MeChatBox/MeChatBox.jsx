@@ -14,9 +14,9 @@ function MeChatBox({ id, content, senderId, createdTime }) {
                 <p>
                     {showDate ? (
                         <span className="date">
-                            {` ${createdTime.split('T')[0].split('-')[1]}월 ${
+                            {` ${createdTime.split('T')[0].split('-')[1]}/${
                                 createdTime.split('T')[0].split('-')[2]
-                            }일`}
+                            }`}
                         </span>
                     ) : (
                         <span className="clock">

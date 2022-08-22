@@ -19,7 +19,7 @@ function LogInProcess() {
         axios.defaults.headers.common['Authorization'] = accessToken;
         fcmApi(localStorage.getItem('FBToken'))
             .then(() => {})
-            .catch(err => console.log(err));
+            .catch(err => {});
         if (studentId !== 'null') {
             const userInfo = {
                 studentId,

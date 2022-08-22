@@ -46,7 +46,6 @@ const lostItemWritePage = () => {
     const onFileChange = e => {
         const reader = new FileReader();
         setImage(e.target.files[0]);
-        console.log(e.target.files[0]);
         reader.readAsDataURL(e.target.files[0]);
         reader.onloadend = finished => {
             setPreviewImg(finished.target.result);
@@ -63,7 +62,6 @@ const lostItemWritePage = () => {
         e => {
             e.preventDefault();
             const formData = new FormData();
-            console.log(info.obtainDate);
             if (image) {
                 formData.append('image', image);
             } else {

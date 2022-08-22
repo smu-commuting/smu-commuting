@@ -45,7 +45,6 @@ export const getTaxiPartyListApi = async data => {
 
 // 택시 파티 생성 API
 export const createTaxiPartyApi = async paramsData => {
-    console.log('여기까진 오나', paramsData);
     const data = {
         placeId: paramsData.placeId,
         headcount: paramsData.headCount,

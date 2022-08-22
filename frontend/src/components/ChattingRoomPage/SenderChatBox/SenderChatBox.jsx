@@ -1,38 +1,34 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
-import outpeople from '../../../assets/ChattingPage/outpeople.png';
+
 import './SenderChatBox.scss';
 
-function SenderChatBox({ id, content, senderId, createdTime, user }) {
+function SenderChatBox({ id, content, senderId, createdTime, userImg }) {
     const [showDate, setShowDate] = useState();
     const showDateChange = () => {
         setShowDate(prev => !prev);
     };
-    useEffect(() => {
-        console.log(user);
-    }, [user]);
     return (
         <div className="senderchatbox-wrapper">
-            <div className="img-wrapper">
-                <img
-                    src={user.length !== 0 ? user[0].profileUrl : outpeople}
-                    alt="이미지"
-                />
+            <div className="left">
+                <div className="inner-wrapper">
+                    <div className="img-wrapper">
+                        <img src={userImg} alt="이미지" />
+                    </div>
+                    <p className="sender-id">{senderId}</p>
+                </div>
             </div>
-            <div className="middle">
-                <p className="sender-id">{senderId}</p>
-                <p className="content" onClick={showDateChange} aria-hidden>
-                    {content}
-                </p>
-            </div>
+            <p className="content" onClick={showDateChange} aria-hidden>
+                {content}
+            </p>
             <div className="time">
                 <p>
                     {showDate ? (
                         <span className="date">
-                            {` ${createdTime.split('T')[0].split('-')[1]}월 ${
+                            {` ${createdTime.split('T')[0].split('-')[1]}/${
                                 createdTime.split('T')[0].split('-')[2]
-                            }일`}
+                            }`}
                         </span>
                     ) : (
                         <span className="clock">

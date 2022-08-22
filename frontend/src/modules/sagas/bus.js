@@ -12,7 +12,6 @@ import {
 import { busApi } from '../../utils';
 
 function* businfomodal(action) {
-    console.log(action.data);
     try {
         yield put({
             type: BUS_INFO_MODAL_OPEN_SUCCESS,
@@ -27,7 +26,6 @@ function* businfomodal(action) {
 }
 
 function* businfofetch(action) {
-    console.log('action', action.data);
     try {
         const result = yield call(busApi, action.data);
         yield put({

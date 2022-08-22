@@ -27,9 +27,7 @@ function UpdateProfile() {
             .then(res => {
                 navigate('/mypage');
             })
-            .catch(err => {
-                console.log(err);
-            });
+            .catch(err => {});
     }, [selectPicId]);
     return (
         <div className="updateprofile-wrapper">

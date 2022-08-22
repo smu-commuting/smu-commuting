@@ -110,7 +110,6 @@ export const deleteLostItemDetailInfo = id => {
 };
 
 export const postReply = dataObject => {
-    console.log('action', dataObject.id, dataObject.reply);
     return {
         type: COMMUNITY_REPLY_POST_REQUEST,
         id: dataObject.id,
@@ -171,7 +170,6 @@ const reducer = (state = initialState, action) => {
             case COMMUNITY_GET_DETAIL_INFO_SUCCESS:
                 draft.lostItemInfoLoading = false;
                 draft.lostItemInfoDone = true;
-                console.log('여기', action.data);
                 draft.lostItemInfo = action.data;
                 break;
             case COMMUNITY_GET_DETAIL_INFO_FAILURE:
@@ -229,7 +227,6 @@ const reducer = (state = initialState, action) => {
                 draft.replyListLoading = false;
                 draft.replyListDone = true;
                 draft.replyList = action.data;
-                console.log('댓글 조회', action.data);
                 break;
             case COMMUNITY_GET_REPLY_LIST_FAILURE:
                 draft.replyListLoading = false;

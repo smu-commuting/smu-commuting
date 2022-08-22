@@ -42,7 +42,6 @@ export const verificationNumApi = async authNum => {
 
 // 회원가입 API -> saga
 export const signupApi = async data => {
-    console.log(data, 'signupApi 통과');
     return withAuthInstance.post(
         `${process.env.REACT_APP_API_URL}${API_USER}signup`,
         data,
@@ -51,10 +50,6 @@ export const signupApi = async data => {
 
 // 탈퇴 API
 export const deleteUserApi = () => {
-    console.log(
-        '탈퇴 API 연동 테스트',
-        `${process.env.REACT_APP_API_URL}${API_USER}`,
-    );
     return withAuthInstance.delete(
         `${process.env.REACT_APP_API_URL}${API_USER}`,
     );
@@ -62,20 +57,11 @@ export const deleteUserApi = () => {
 
 // 내 정보 조회 API
 export const userInfoReadApi = () => {
-    console.log(
-        '유저 정보 조회 API ',
-        `${process.env.REACT_APP_API_URL}${API_USER}`,
-    );
     return withAuthInstance.get(`${process.env.REACT_APP_API_URL}${API_USER}`);
 };
 
 // 내 정보 수정 API
 export const userInfoUpdateApi = async id => {
-    console.log(
-        '유저 정보 수정 API의 수정될 사진 id',
-        id,
-        `${process.env.REACT_APP_API_URL}${API_USER}`,
-    );
     const data = {
         imageId: id,
     };

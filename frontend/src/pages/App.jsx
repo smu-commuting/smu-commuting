@@ -83,12 +83,12 @@ function App() {
         <Router>
             <Routes>
                 <Route path="/" element={<LogInPage />} />
+                <Route path="/signup" element={<SignUpPage />} />
                 <Route
                     path="/callback/:id/:accessToken/:studentId"
                     element={<LogInProcess />}
                 />
                 <Route element={<ProtectedRoutes />}>
-                    <Route path="/signup" element={<SignUpPage />} />
                     <Route
                         path="/home"
                         element={

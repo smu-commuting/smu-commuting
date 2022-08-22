@@ -39,7 +39,6 @@ import {
 import { getBlockedUserApi } from '../../utils/authApi';
 
 function* login(action) {
-    console.log('saga In action', action);
     try {
         yield put({
             type: USER_LOG_IN_SUCCESS,
@@ -122,7 +121,6 @@ function* communitymodal() {
 function* getUserInfo() {
     try {
         const result = yield call(userInfoReadApi);
-        console.log('saga profile', result);
         yield put({
             type: USER_INFO_GET_SUCCESS,
             data: result.data.data,
@@ -138,7 +136,6 @@ function* getUserInfo() {
 function* getProfileImgList() {
     try {
         const result = yield call(getProfileListApi);
-        console.log('saga - profile Img List result', result);
         yield put({
             type: USER_GET_PROFILE_IMG_LIST_SUCCESS,
             data: result.data,
@@ -154,7 +151,6 @@ function* getProfileImgList() {
 function* getBlockedUserList() {
     try {
         const result = yield call(getBlockedUserApi);
-        console.log('saga - Blocked User List', result);
         yield put({
             type: USER_GET_BLOCKED_LIST_SUCCESS,
             data: result.data.data,

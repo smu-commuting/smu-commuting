@@ -35,7 +35,6 @@ const lostItemDetailPage = () => {
     };
 
     useEffect(() => {
-        console.log(id, '번째 게시글의 상세 조회');
         dispatch(getLostItemDetailInfo(id));
     }, [dispatch]);
 
@@ -100,7 +99,6 @@ const lostItemDetailPage = () => {
             </div>
             {replyList &&
                 replyList.map((reply, idx) => {
-                    console.log('부모노드', reply);
                     return (
                         <LostItemReplyBox
                             reply={reply}

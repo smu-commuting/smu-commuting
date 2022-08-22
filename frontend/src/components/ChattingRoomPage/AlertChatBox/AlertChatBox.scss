@@ -1,0 +1,16 @@
+.alertchatbox-wrapper {
+    margin: 0.25rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .alertchatbox {
+        background-color: #a392ff;
+        opacity: 0.5;
+        color: white;
+        font-family: 'NotoSansKR-Medium';
+        font-size: 1.1rem;
+        border-radius: 2rem;
+        padding: 0.5rem 1rem;
+        text-align: center;
+    }
+}

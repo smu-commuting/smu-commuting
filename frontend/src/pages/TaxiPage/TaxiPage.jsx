@@ -28,7 +28,6 @@ function TaxiPage() {
         taxiPartyListLoading,
         taxiPartyEnd,
         taxiPartyListDone,
-        createTaxiPartyDone,
         isDeleteAllowModal,
         isTaxiPartyEnterDone,
     } = useSelector(state => state.taxi);
@@ -69,7 +68,6 @@ function TaxiPage() {
         placeId,
         date,
         placeName,
-        createTaxiPartyDone,
         isDeleteAllowModal,
         isTaxiPartyEnterDone,
     ]);

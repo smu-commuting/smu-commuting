@@ -5,16 +5,11 @@ importScripts(
     'https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js',
 );
 
-firebase.initializeApp({
-});
+firebase.initializeApp({});
 
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage(payload => {
-    console.log(
-        '[firebase-messaging-sw.js] Received background message 뒷단',
-        payload,
-    );
     // Customize notification here
     const notificationTitle = payload.notification.title;
     const notificationOptions = {

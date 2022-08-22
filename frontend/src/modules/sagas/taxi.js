@@ -61,7 +61,6 @@ import { taxiPartyEnterApi } from '../../utils/taxiApi';
 function* getTaxiParties() {
     try {
         const result = yield call(getMyTaxiPartiesApi);
-        console.log('요청 이후 result', result);
         yield put({
             type: TAXI_LIST_FETCH_SUCCESS,
             data: result.data,
@@ -76,9 +75,7 @@ function* getTaxiParties() {
 
 function* deleteTaxiParty(action) {
     try {
-        console.log('saga', action);
         const result = yield call(deleteTaxiPartyApi, action.id);
-        console.log('요청 이후 result', result);
         yield put({
             type: TAXI_ROOM_DELETE_SUCCESS,
         });
@@ -93,7 +90,6 @@ function* deleteTaxiParty(action) {
 function* getTaxiPlaceList() {
     try {
         const result = yield call(getTaxiPlaceListApi);
-        console.log('요청 이후 result', result);
         yield put({
             type: TAXI_PLACE_LIST_SUCCESS,
             data: result.data,
@@ -135,7 +131,6 @@ function* taxiCreateModal() {
 }
 
 function* taxiPageDate(action) {
-    console.log('saga', action);
     try {
         yield put({
             type: TAXI_PAGE_DATE_SUCCESS,
@@ -151,15 +146,12 @@ function* taxiPageDate(action) {
 
 function* createTaxiParty(action) {
     try {
-        console.log('saga 진입 이전', action.data);
         const result = yield call(createTaxiPartyApi, action.data);
-        console.log('saga 결과', result);
         yield put({
             type: TAXI_PARTY_CREATE_SUCCESS,
-            data: result.data,
+            data: result.data.data.taxiPartyId,
         });
     } catch (err) {
-        console.log('에러입니다.', err);
         yield put({
             type: TAXI_PARTY_CREATE_FAILURE,
             error: err.response.data.error.info,
@@ -182,7 +174,6 @@ function* taxiPartyRestart() {
 
 function* taxiToChatModal(action) {
     const result = yield call(getChatRoomHeaderInfoApi, action.id);
-    console.log('택시 방 조회', result.data);
     try {
         yield put({
             type: TAXI_TO_CHAT_INFO_MODAL_SUCCESS,

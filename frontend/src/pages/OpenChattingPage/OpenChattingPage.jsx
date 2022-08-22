@@ -36,7 +36,6 @@ function OpenChattingPage() {
 
     const pushMessage = useCallback(message => {
         const received = JSON.parse(message.body);
-        console.log('여기 와야함', received);
         setMessageBottle(prev => {
             return [received, ...prev];
         });
