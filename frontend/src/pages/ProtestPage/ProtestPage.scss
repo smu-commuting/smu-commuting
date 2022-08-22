@@ -20,23 +20,63 @@
             @include font-face(NotoSansKR-Regular, 2.5rem, 2.5rem, #292733);
         }
     }
-    .protestpage-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        img {
-            flex: 1;
-            align-items: center;
-            margin-top: 10rem;
-            width: 20rem;
-        }
-        p {
-            margin-top: 10rem;
-            flex: 1;
-            display: block;
+    .content-wrapper {
+        .main-content {
+            margin-top: 3rem;
             text-align: center;
             @include font-face(NotoSansKR-Regular, 1.5rem, 2.5rem, #292733);
         }
+        .inner-wrapper {
+            margin-top: 40%;
+            display: flex;
+            align-items: end;
+            justify-content: space-evenly;
+            .protest {
+                // margin-right: 1rem;
+                .logo-wrapper {
+                    img {
+                        display: block;
+                        width: 12.4rem;
+                        height: 12.4rem;
+                    }
+                }
+                p {
+                    @include font-face(
+                        NotoSansKR-Regular,
+                        1.5rem,
+                        2.5rem,
+                        #292733
+                    );
+                }
+            }
+            .detour {
+                // margin-left: 1rem;
+                .logo-wrapper {
+                    img {
+                    }
+                }
+                p {
+                    @include font-face(
+                        NotoSansKR-Regular,
+                        1.5rem,
+                        2.5rem,
+                        #292733
+                    );
+                }
+            }
+        }
+        // img {
+        //     flex: 1;
+        //     align-items: center;
+        //     margin-top: 10rem;
+        //     width: 20rem;
+        // }
+        // p {
+        //     margin-top: 10rem;
+        //     flex: 1;
+        //     display: block;
+        //     text-align: center;
+        //     @include font-face(NotoSansKR-Regular, 1.5rem, 2.5rem, #292733);
+        // }
     }
 }

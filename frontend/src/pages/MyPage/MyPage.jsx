@@ -43,6 +43,7 @@ function MyPage() {
     const logOutHandler = () => {
         axios.defaults.headers.common['Authorization'] = null;
         dispatch(logOut());
+        localStorage.setItem('loggedIn', false);
         navigate('/');
     };
 
@@ -73,20 +74,6 @@ function MyPage() {
                         <br /> 상명대학교 서울캠퍼스
                     </div>
                 </div>
-                {/* <div className="notification-setting">
-                    <p>알림 설정</p>
-                    <div className="toggleSwitch">
-                        <label className="label" htmlFor="toggleSwitch">
-                            <input
-                                type="checkbox"
-                                className="checkbox"
-                                id="toggleSwitch"
-                                onClick={onChangeText}
-                            />
-                            <span className="switch" />
-                        </label>
-                    </div>
-                </div> */}
                 <button
                     className="refusal-taxi-share-btn"
                     type="submit"

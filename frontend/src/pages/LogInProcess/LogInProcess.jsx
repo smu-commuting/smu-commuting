@@ -22,10 +22,10 @@ function LogInProcess() {
             .catch(err => console.log(err));
         if (studentId !== 'null') {
             const userInfo = {
-                // email: `${studentId}@`${}`,
                 studentId,
                 id,
             };
+            localStorage.setItem('loggedIn', true);
             dispatch(loginRequest(userInfo));
             navigate('/home');
         } else {

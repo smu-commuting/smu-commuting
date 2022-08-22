@@ -57,7 +57,7 @@ function CommunityModal() {
                             aria-hidden
                         >
                             <img src={seewe} alt="시위정보" />
-                            <p>시위정보</p>
+                            <p>시위 및 우회정보</p>
                         </div>
                     </div>
                 </div>

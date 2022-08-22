@@ -7,6 +7,9 @@ import Google from '../../assets/LogInPage/Google.png';
 import Kakao from '../../assets/LogInPage/Kakao.png';
 
 function LogInPage() {
+    useEffect(() => {
+        localStorage.setItem('loggedIn', false);
+    }, []);
     const onGoogleLogIn = useCallback(() => {
         window.location.replace(
             `${process.env.REACT_APP_API_URL}/oauth2/authorization/google`,

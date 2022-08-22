@@ -3,20 +3,50 @@
     width: 100%;
     display: flex;
     justify-content: start;
-    padding-left: 2.5rem;
-    .content {
-        position: relative;
-        max-width: 70%;
-        padding: 2rem;
-        background: #efecff;
-        -webkit-border-radius: 1rem;
-        -moz-border-radius: 1rem;
-        border-radius: 1rem;
-        font-family: 'NotoSansKR-Medium';
-        font-size: 1.3rem;
-        color: black;
-        line-height: 1.6rem;
-        word-break: break-all;
+    padding-left: 2rem;
+    .img-wrapper {
+        margin-right: 2rem;
+        display: flex;
+        align-items: center;
+        img {
+            display: block;
+            width: 4rem;
+            height: 5rem;
+        }
+    }
+    .middle {
+        .sender-id {
+            font-family: 'NotoSansKR-Medium';
+            font-size: 1.3rem;
+            color: rgba(0, 0, 0, 0.5);
+        }
+        .content {
+            margin-top: -0.5rem;
+            position: relative;
+            max-width: 70%;
+            padding: 2rem;
+            background: #efecff;
+            -webkit-border-radius: 1rem;
+            -moz-border-radius: 1rem;
+            border-radius: 1rem;
+            font-family: 'NotoSansKR-Medium';
+            font-size: 1.3rem;
+            color: black;
+            line-height: 1.6rem;
+            word-break: break-all;
+        }
+        .content:after {
+            content: '';
+            position: absolute;
+            border-style: solid;
+            border-width: 5px 10px 5px 0;
+            border-color: transparent #efecff;
+            display: block;
+            width: 0;
+            z-index: 1;
+            left: -1rem;
+            top: 20%;
+        }
     }
     .time {
         font-family: 'NotoSansKR-Medium';
@@ -25,18 +55,5 @@
         align-items: flex-end;
         margin-bottom: 1rem;
         margin-left: 1rem;
-    }
-
-    .content:after {
-        content: '';
-        position: absolute;
-        border-style: solid;
-        border-width: 5px 10px 5px 0;
-        border-color: transparent #efecff;
-        display: block;
-        width: 0;
-        z-index: 1;
-        left: -1rem;
-        top: 20%;
     }
 }

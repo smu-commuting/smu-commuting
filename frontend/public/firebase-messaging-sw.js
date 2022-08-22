@@ -19,7 +19,7 @@ messaging.onBackgroundMessage(payload => {
     const notificationTitle = payload.notification.title;
     const notificationOptions = {
         body: payload.notification.body,
-        icon: '/스뮤로.png',
+        icon: '%PUBLIC_URL%/스뮤로.png',
     };
     self.registration.showNotification(notificationTitle, notificationOptions);
 });
