@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 public class TaxiMessageRequest {
     public enum MessageType {
-        ENTER, TALK
+        ENTER, TALK, EXIT
     }
 
     private MessageType messageType;
@@ -18,7 +18,10 @@ public class TaxiMessageRequest {
     public TaxiMessage toEntity() {
         if (this.getMessageType().equals(TaxiMessageRequest.MessageType.ENTER)) {
             this.message = this.studentId + "님이 입장하셨습니다.";
+        } else if (this.getMessageType().equals(TaxiMessageRequest.MessageType.EXIT)) {
+            this.message = this.studentId + "님이 퇴장하셨습니다.";
         }
+
         return TaxiMessage.builder()
                 .taxiPartyId(roomId)
                 .senderId(senderId)
