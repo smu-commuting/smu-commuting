@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import ReactPlayer from 'react-player';
 import Close from '../../assets/BusPage/cancel.png';
 import './ManualPage.scss';
 
@@ -13,20 +14,34 @@ function ManualPage() {
     return (
         <div className="manualpage-wrapper">
             <div className="manualpage-header">
+                <div className="layout" />
                 <p>SMU로 매뉴얼</p>
-                <img
-                    src={Close}
-                    alt="닫기"
-                    onClick={homePage}
-                    aria-hidden="true"
+                <div className="img-wrapper">
+                    <img
+                        src={Close}
+                        alt="닫기"
+                        onClick={homePage}
+                        aria-hidden="true"
+                    />
+                </div>
+            </div>
+            <p className="main-info">
+                SMU로는 상명대학교 서울캠퍼스 학생들의
+                <br />
+                등&#183;하교를 돕기 위한 애플리케이션입니다.
+            </p>
+            <div className="player-wrapper">
+                <ReactPlayer
+                    className="react-player fixed-bottom"
+                    url="videos/매뉴얼영상.MP4"
+                    width="100%"
+                    height="100%"
+                    controls
+                    pip
+                    playing
                 />
             </div>
             <div className="manualpage-content">
-                <p className="main-info">
-                    SMU로는 상명대학교 서울캠퍼스 학생들의
-                    <br />
-                    등&#183;하교를 돕기 위한 애플리케이션입니다.
-                </p>
                 <div className="function-info">
                     <p className="bus-info">
                         <h3>&#91;버스 정보 이용안내&#93;</h3>

@@ -58,13 +58,9 @@ function TaxiCreateModal() {
         const when = `${taxiPageInfo.when}T${
             tempHour >= 10 ? tempHour : `0${tempHour}`
         }:${minute >= 10 ? minute : `0${minute}`}`;
+
         if (
-            new Date(`${taxiPageInfo.when},${tempHour}:${minute}`) >=
-            new Date(
-                `${
-                    taxiPageInfo.when
-                },${new Date().getHours()}:${new Date().getMinutes()}`,
-            )
+            new Date(`${taxiPageInfo.when},${tempHour}:${minute}`) >= new Date()
         ) {
             if (headCount === 0) {
                 alert('인원수를 설정해주세요');

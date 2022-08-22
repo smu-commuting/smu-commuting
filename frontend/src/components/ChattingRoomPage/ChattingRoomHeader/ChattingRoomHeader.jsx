@@ -10,6 +10,7 @@ import {
     changeMaximumModalClick,
     getChatRoomHeaderInfo,
 } from '../../../modules/reducers/chat';
+import Back from '../../../assets/ChattingList/ChattingListHeader/Back.png';
 
 function ChattingRoomHeader() {
     const { id } = useParams();
@@ -43,12 +44,7 @@ function ChattingRoomHeader() {
     return (
         <div className="chattingroomheader-wrapper">
             <div className="back-icon">
-                <img
-                    src={TalkIcon}
-                    alt="talk"
-                    onClick={gotoBackPage}
-                    aria-hidden
-                />
+                <img src={Back} alt="talk" onClick={gotoBackPage} aria-hidden />
             </div>
             <div
                 className="room-info"
