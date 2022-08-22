@@ -20,6 +20,7 @@ import { firstEnterDateParser } from '../../constants/FirstEnterDateParser';
 import MeChatBox from '../../components/ChattingRoomPage/MeChatBox/MeChatBox';
 import SenderChatBox from '../../components/ChattingRoomPage/SenderChatBox/SenderChatBox';
 import outpeople from '../../assets/ChattingPage/outpeople.png';
+import AlertChatBox from '../../components/ChattingRoomPage/AlertChatBox/AlertChatBox';
 
 function ChattingPage() {
     const scrollRef = useRef();
@@ -159,6 +160,12 @@ function ChattingPage() {
                 </div>
                 {messageBottle ? (
                     messageBottle.map((message, index) => {
+                        if (
+                            message.content.includes('입장') ||
+                            message.content.includes('퇴장')
+                        ) {
+                            return <AlertChatBox content={message.content} />;
+                        }
                         return message.senderStudentId === studentId ? (
                             <MeChatBox
                                 key={index}
