@@ -196,7 +196,7 @@ function App() {
                         element={
                             <>
                                 {isCommunityModalOpen && <CommunityModal />}
-                                <LostItemPage />\
+                                <LostItemPage />
                             </>
                         }
                     />
@@ -217,34 +217,19 @@ function App() {
                                     <ReplyDeleteConfirmModal />
                                 )}
                                 <LostItemDetailPage />
-                                <ReplyInputBox />\
+                                <ReplyInputBox />
                             </>
                         }
                     />
                     <Route
                         path="/lostitemwrite"
-                        element={
-                            <>
-                                <LostItemWritePage />\
-                            </>
-                        }
+                        element={<LostItemWritePage />}
                     />
                     <Route
                         path="/lostitemedit/:id"
-                        element={
-                            <>
-                                <LostItemEditPage />\
-                            </>
-                        }
+                        element={<LostItemEditPage />}
                     />
-                    <Route
-                        path="/protest"
-                        element={
-                            <>
-                                <ProtestPage />\
-                            </>
-                        }
-                    />
+                    <Route path="/protest" element={<ProtestPage />} />
                 </Route>
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
