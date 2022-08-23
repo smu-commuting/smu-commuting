@@ -96,7 +96,6 @@ const lostItemPage = () => {
                 <div className="title">분실물</div>
                 <div />
             </div>
-            {/* <LostItemSearch /> */}
             <div className="lost-icon-wrapper">
                 <img
                     className="lost-icon"
