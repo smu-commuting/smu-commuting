@@ -33,7 +33,7 @@ function ManualPage() {
             <div className="player-wrapper">
                 <ReactPlayer
                     className="react-player fixed-bottom"
-                    url="videos/매뉴얼영상.MP4"
+                    url="videos/홍보영상.MP4"
                     width="100%"
                     height="100%"
                     controls
