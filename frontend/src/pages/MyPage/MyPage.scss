@@ -34,11 +34,15 @@
             align-items: center;
             justify-content: space-around;
             height: 13rem;
-            .sumung {
-                flex: 1;
-                height: 100%;
-                display: block;
-                max-width: 8rem;
+            .sumung-wrapper {
+                border: 5px solid #f6f6f6;
+                border-radius: 1.2rem;
+                .sumung {
+                    flex: 1;
+                    height: 100%;
+                    display: block;
+                    max-width: 8rem;
+                }
             }
             .student-info {
                 flex: 3;
