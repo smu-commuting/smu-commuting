@@ -15,6 +15,20 @@ public class TaxiPartyResponse {
     @Builder
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
+    public static class OnlyId {
+        private Long taxiPartyId;
+
+        public static TaxiPartyResponse.OnlyId build(TaxiParty taxiParty) {
+            return OnlyId.builder()
+                    .taxiPartyId(taxiParty.getId())
+                    .build();
+        }
+    }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class GetOne {
         private Long taxiPartyId;
         private int headcount;

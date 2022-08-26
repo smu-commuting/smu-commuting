@@ -24,10 +24,10 @@ public class TaxiPartyController {
     private final TaxiPartyService taxiPartyService;
 
     @PostMapping("/party")
-    public ResponseEntity<ApiResult<Void>> create(@RequestBody TaxiPartyRequest.Create request,
-                                                  @CurrentUser CustomUserDetails customUserDetails) {
-        taxiPartyService.create(request, customUserDetails.getUser());
-        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value()));
+    public ResponseEntity<ApiResult<TaxiPartyResponse.OnlyId>> create(@RequestBody TaxiPartyRequest.Create request,
+                                                                      @CurrentUser CustomUserDetails customUserDetails) {
+        TaxiPartyResponse.OnlyId response = taxiPartyService.create(request, customUserDetails.getUser());
+        return ResponseEntity.ok().body(ApiResult.build(HttpStatus.OK.value(), response));
     }
 
     @PostMapping("/party/{taxiPartyId}")

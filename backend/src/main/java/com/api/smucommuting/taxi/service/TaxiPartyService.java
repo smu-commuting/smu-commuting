@@ -34,10 +34,11 @@ public class TaxiPartyService {
     private final Users users;
     private final BlockUsers blockUsers;
 
-    public void create(TaxiPartyRequest.Create request, User loginUser) {
+    public TaxiPartyResponse.OnlyId create(TaxiPartyRequest.Create request, User loginUser) {
         TaxiPlace taxiPlace = taxiPartyInfo.getTaxiPlace(request.getPlaceId());
         TaxiParty createdParty = TaxiParty.create(taxiPlace, request.getHeadcount(), request.getMeetingDate(), loginUser.getId(), taxiPartyValidator);
-        taxiPartyRepository.save(createdParty);
+        TaxiParty savedTaxiParty = taxiPartyRepository.save(createdParty);
+        return TaxiPartyResponse.OnlyId.build(savedTaxiParty);
     }
 
     public void join(Long taxiPartyId, User loginUser) {
