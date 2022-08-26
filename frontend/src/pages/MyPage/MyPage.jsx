@@ -62,13 +62,15 @@ function MyPage() {
             </div>
             <div className="mypage-content">
                 <div className="std-profile">
-                    <img
-                        className="sumung"
-                        src={userProfile && userProfile.imageUrl}
-                        alt="프로필사진"
-                        onClick={goUpdatePage}
-                        aria-hidden
-                    />
+                    <div className="sumung-wrapper">
+                        <img
+                            className="sumung"
+                            src={userProfile && userProfile.imageUrl}
+                            alt="프로필사진"
+                            onClick={goUpdatePage}
+                            aria-hidden
+                        />
+                    </div>
                     <div className="student-info">
                         {userProfile && userProfile.studentId}
                         <br /> 상명대학교 서울캠퍼스
