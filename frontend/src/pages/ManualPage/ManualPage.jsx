@@ -3,6 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Close from '../../assets/BusPage/cancel.png';
 import './ManualPage.scss';
+import Movie from '../../assets/ManualPage/매뉴얼및홍보영상.mp4';
 
 function ManualPage() {
     const navigate = useNavigate();
@@ -32,7 +33,7 @@ function ManualPage() {
             </p>
             <div className="player-wrapper">
                 <video controls autoPlay width="100%">
-                    <source src="videos/매뉴얼및홍보영상.MP4" />
+                    <source src={Movie} />
                 </video>
             </div>
             <div className="manualpage-content">
