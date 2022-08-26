@@ -1,6 +1,6 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ReactPlayer from 'react-player';
 import Close from '../../assets/BusPage/cancel.png';
 import './ManualPage.scss';
 
@@ -31,15 +31,9 @@ function ManualPage() {
                 등&#183;하교를 돕기 위한 애플리케이션입니다.
             </p>
             <div className="player-wrapper">
-                <ReactPlayer
-                    className="react-player fixed-bottom"
-                    url="videos/홍보영상.MP4"
-                    width="100%"
-                    height="100%"
-                    controls
-                    pip
-                    playing
-                />
+                <video controls autoPlay width="100%">
+                    <source src="videos/매뉴얼및홍보영상.MP4" />
+                </video>
             </div>
             <div className="manualpage-content">
                 <div className="function-info">
