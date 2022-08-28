@@ -27,38 +27,39 @@
             @include font-face(NotoSansKR-Regular, 1.5rem, 2.5rem, #292733);
         }
         .inner-wrapper {
-            margin-top: 40%;
-            display: flex;
-            align-items: end;
-            justify-content: space-evenly;
+            margin-top: 30%;
             .protest {
-                // margin-right: 1rem;
                 .logo-wrapper {
                     img {
                         display: block;
+                        margin: auto;
                         width: 12.4rem;
                         height: 12.4rem;
                     }
                 }
                 p {
+                    text-align: center;
                     @include font-face(
                         NotoSansKR-Regular,
-                        1.5rem,
+                        1.7rem,
                         2.5rem,
                         #292733
                     );
                 }
             }
             .detour {
-                // margin-left: 1rem;
+                margin-top: 20%;
                 .logo-wrapper {
                     img {
+                        display: block;
+                        margin: auto;
                     }
                 }
                 p {
+                    text-align: center;
                     @include font-face(
                         NotoSansKR-Regular,
-                        1.5rem,
+                        1.7rem,
                         2.5rem,
                         #292733
                     );
