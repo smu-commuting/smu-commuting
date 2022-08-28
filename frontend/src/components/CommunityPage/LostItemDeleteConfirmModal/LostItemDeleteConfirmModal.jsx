@@ -18,10 +18,12 @@ function LostItemDeleteConfirmModal() {
     }, [dispatch]);
     const onAgreeClick = useCallback(async () => {
         // 동적 id 받아서 이후에 다시 처리할 것
-        const result = await deleteDetailInfoApi(id);
-        if (result.data.status === 200) {
-            navigate(`/lostitem`);
-        }
+        deleteDetailInfoApi(id)
+            .then(res => {
+                dispatch(deleteConfirmModal());
+                navigate(`/lostitem`);
+            })
+            .catch(err => {});
     }, []);
     return (
         <div className="lostitemdeleteconfirmmodal-wrapper">
