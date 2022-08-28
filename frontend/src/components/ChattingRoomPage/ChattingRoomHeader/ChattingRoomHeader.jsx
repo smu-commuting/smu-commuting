@@ -41,6 +41,12 @@ function ChattingRoomHeader() {
         dispatch(changeMaximumModalClick());
     }, [dispatch]);
 
+    const placeNameSelector = place => {
+        if (place === '서울여자간호대학교') return '간호대';
+        if (place === 'KT 광화문지사') return '광화문';
+        return place;
+    };
+
     return (
         <div className="chattingroomheader-wrapper">
             <div className="back-icon">
@@ -56,11 +62,7 @@ function ChattingRoomHeader() {
                 </div>
                 <div className="meet-place">
                     {chatRoomHeaderInfo && (
-                        <p>
-                            {chatRoomHeaderInfo.place === '서울여자간호대학교'
-                                ? '간호대'
-                                : chatRoomHeaderInfo.place}
-                        </p>
+                        <p>{placeNameSelector(chatRoomHeaderInfo.place)}</p>
                     )}
                 </div>
                 <div className="meet-people">
