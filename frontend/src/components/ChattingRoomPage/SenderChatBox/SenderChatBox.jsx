@@ -16,12 +16,15 @@ function SenderChatBox({ id, content, senderId, createdTime, userImg }) {
                     <div className="img-wrapper">
                         <img src={userImg} alt="이미지" />
                     </div>
-                    <p className="sender-id">{senderId}</p>
+                    {/* <p className="sender-id">{senderId}</p> */}
                 </div>
             </div>
-            <p className="content" onClick={showDateChange} aria-hidden>
-                {content}
-            </p>
+            <div className="content-wrapper">
+                <p className="sender-name">{senderId}</p>
+                <p className="content" onClick={showDateChange} aria-hidden>
+                    {content}
+                </p>
+            </div>
             <div className="time">
                 <p>
                     {showDate ? (

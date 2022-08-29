@@ -43,8 +43,8 @@ function ManualPage() {
             </div>
             <div className="manualpage-content">
                 <div className="function-info">
+                    <h3>&#91;버스 정보 이용안내&#93;</h3>
                     <p className="bus-info">
-                        <h3>&#91;버스 정보 이용안내&#93;</h3>
                         ‘버스정보조회’는 학교 버스 정류장을 경유하는 버스 노선의
                         특정 정류장 도착정보와 혼잡도를 제공합니다.
                         <br />
@@ -63,14 +63,14 @@ function ManualPage() {
                         <br />
                     </p>
                     <br />
+                    <h3>&#91;택시 합승 이용안내&#93;</h3>
                     <p className="taxi-info">
-                        <h3>&#91;택시 합승 이용안내&#93;</h3>
                         ‘택시합승구하기’는 특정 역을 기준으로 택시 동승자를
                         구하는 서비스를 제공합니다.
                         <br />
                         <br />
+                        <h4>1&#41; 예약</h4>
                         <p>
-                            <h4>1&#41; 예약</h4>
                             원하는 택시 합승 날짜와 장소를 선택하고 해당 옵션에
                             생성된 채팅방 중 원하는 시간을 선택하여 입장하면
                             택시 합승이 완료됩니다.
@@ -99,8 +99,8 @@ function ManualPage() {
                             입장하려고 한다면 채팅방 입장 전 주의 메시지가
                             표시됩니다.
                         </p>
+                        <h4>2&#41; 채팅방</h4>
                         <p>
-                            <h4>2&#41; 채팅방</h4>
                             채팅방은 탑승 시각 기준 전후 1시간 동안 하나만 입장
                             가능합니다.
                             <br />
@@ -114,8 +114,8 @@ function ManualPage() {
                             <br />
                             자세한 채팅방 이용 규칙은 금지 행위 항목 참고하세요.
                         </p>
+                        <h4>3&#41; 승차 거부</h4>
                         <p>
-                            <h4>3&#41; 승차 거부</h4>
                             동승자 중 승차 거부를 설정하고 싶은 인원이 있다면
                             채팅방 왼쪽 하단의 승차 거부 아이콘을 통해 설정할 수
                             있습니다.
@@ -129,18 +129,18 @@ function ManualPage() {
                         </p>
                     </p>
                     <br />
+                    <h3 className="community-header">
+                        &#91;커뮤니티 이용안내&#93;
+                    </h3>
                     <p className="community-info">
-                        <h3 className="community-header">
-                            &#91;커뮤니티 이용안내&#93;
-                        </h3>
                         커뮤니티에서는 분실물에 대한 정보와 시위 정보를
                         제공합니다.
                         <br />
                         &#42;분실물 게시판에 글 작성 시 습득 장소 외에 분실물을
                         맡긴 장소도 적어주세요!
                     </p>
+                    <h3 className="ban-header">금지 행위</h3>
                     <p className="ban-info">
-                        <h3 className="ban-header">금지 행위</h3>
                         채팅방, 글쓰기 및 댓글 작성 시 다음과 같은 행위
                         금지합니다.
                         <br />

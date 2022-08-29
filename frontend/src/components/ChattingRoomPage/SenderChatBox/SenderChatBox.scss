@@ -6,6 +6,7 @@
     justify-content: start;
     padding-left: 1rem;
     .left {
+        width: 5rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -18,15 +19,22 @@
                     height: 5rem;
                 }
             }
-            .sender-id {
-                margin-top: 0.3rem;
-                font-family: 'NotoSansKR-Medium';
-                font-size: 0.01rem;
-                color: rgba(0, 0, 0, 0.5);
-            }
+            // .sender-id {
+            //     margin-top: 0.3rem;
+            //     font-family: 'NotoSansKR-Medium';
+            //     font-size: 0.01rem;
+            //     color: rgba(0, 0, 0, 0.5);
+            // }
         }
     }
+    .sender-name {
+        margin-bottom: -0.5rem;
+        padding-left: 1.2rem;
+        font-family: 'NotoSansKR-Medium';
+        color: rgba(0, 0, 0, 0.5);
+    }
     .content {
+        display: inline-block;
         margin-left: 1rem;
         position: relative;
         max-width: 70%;
