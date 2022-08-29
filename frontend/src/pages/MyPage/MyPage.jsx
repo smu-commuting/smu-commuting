@@ -40,6 +40,7 @@ function MyPage() {
     const goUpdatePage = useCallback(() => {
         navigate('/updateprofile');
     }, []);
+
     const logOutHandler = () => {
         axios.defaults.headers.common['Authorization'] = null;
         dispatch(logOut());
